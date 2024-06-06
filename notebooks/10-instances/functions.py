@@ -36,7 +36,19 @@ def cleanNumFolio(cell,symbols):
         #traiter les évènements spéciaux
         cell_split = [cell]
     elements = [re.sub(r'²', r'↑2↓', str(c)) for c in cell_split]
-    elements_str=';'.join(elements)
+
+    if len(elements) > 1:
+        print(elements)
+        elements_str=';'.join(elements)
+    else:
+        elements_str = elements[0]
+    
+    if elements_str[-1] == ';':
+        elements_str = elements_str[:-1]
+    if elements_str[0] == ';':
+        elements_str = elements_str[1:]
+    if ';;' in elements_str:
+        elements_str = elements_str.replace(';;',';')
     
     return elements_str
 
@@ -49,3 +61,36 @@ def find_uuid(df, search_str):
         return result['uuid'].values[0]
     else:
         return 'No match found'
+    
+import re
+
+def separate_stripped_strings(s):
+    """
+    This function separates a string into two lists of strings:
+    - one containing the strings outside of the double tildes ~~
+    - one containing the strings inside the double tildes
+    """
+    matches = re.findall(r'~~(.*?)~~', s)
+    if matches:
+        parts = re.split(r'~~(.*?)~~', s)
+        outside_tildes = []
+        inside_tildes = []
+        for i in range(len(parts)):
+            if i % 2 == 0:
+                stripped_part = parts[i].strip()
+                if stripped_part:
+                    outside_tildes.append([stripped_part, i])
+            else:
+                match = matches.pop(0)
+                if match:
+                    inside_tildes.append([match, i])
+        for o in outside_tildes:
+            if o[0][0] == ';':
+                o[0] = o[0][1:]
+        for i in inside_tildes:
+            if i[0][0] == ';':
+                i[0] = i[0][1:]
+        return outside_tildes, inside_tildes
+    else:
+        return [s], []
+
