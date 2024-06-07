@@ -14,3 +14,11 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 ollama serve
 ```
+* Télécharger un modèle
+```
+ollama pull MODEL
+```
+* Liste des modèles téléchargés
+```
+ollama list
+```
