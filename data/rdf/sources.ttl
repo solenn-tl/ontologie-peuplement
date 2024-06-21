@@ -1,0 +1,196 @@
+@prefix add: <http://rdf.geohistoricaldata.org/def/address#> .
+@prefix cad: <http://data.ign.fr/def/cadastre#> .
+@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
+@prefix source: <http://data.ign.fr/id/source/> .
+@prefix srctype: <http://data.ign.fr/id/codes/cadastre/sourceType/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+source:94_Gentilly_3P255 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000255_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P255" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_B_NB_1813 .
+
+source:94_Gentilly_3P256 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000256_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P256" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1836 .
+
+source:94_Gentilly_3P257 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000257_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P257" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1836 .
+
+source:94_Gentilly_3P258 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000258_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P258" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1836 .
+
+source:94_Gentilly_3P259 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000259_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P259" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_3P263 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000263_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P263" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_3P264 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000264_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P264" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_3P265 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000265_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P265" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_3P266 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000266_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P266" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_3P267 a rico:Instantiation ;
+    rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000267_01 ;
+    rico:hasOrHadPhysicalLocation "Archives Départementales du Val-de-Marne (94)" ;
+    rico:identifier "3P267" ;
+    rico:isOrWasInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_CAD2 a rico:RecordSet ;
+    cad:hasSourceType srctype:Cadastre ;
+    add:hasTime [ a time:Interval ;
+            add:hasBeginning [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1941"^^xsd:dateTimeStamp ] ] ;
+    rico:hasCreationDate [ a add:CrispTimeInstant ;
+            add:timeCalendar time:Gregorian ;
+            add:timePrecision time:Year ;
+            add:timeStamp "1845"^^xsd:dateTimeStamp ] ;
+    rico:identifier "CAD2" ;
+    rico:location "Gentilly" ;
+    rico:name "Second cadastre de Gentilly" .
+
+source:94_Gentilly_FRAD094_3P_000255_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000255_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_B_NB_1813 .
+
+source:94_Gentilly_FRAD094_3P_000256_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000256_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1836 .
+
+source:94_Gentilly_FRAD094_3P_000257_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000257_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1836 .
+
+source:94_Gentilly_FRAD094_3P_000258_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000258_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1836 .
+
+source:94_Gentilly_FRAD094_3P_000259_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000259_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_FRAD094_3P_000263_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000263_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_FRAD094_3P_000264_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000264_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_FRAD094_3P_000265_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000265_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_FRAD094_3P_000266_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000266_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_FRAD094_3P_000267_01 a rico:Instantiation ;
+    rico:identifier "FRAD094_3P_000267_01" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_MAT_NB_1848 .
+
+source:94_Gentilly_CAD1 a rico:RecordSet ;
+    cad:hasSourceType srctype:Cadastre ;
+    add:hasTime [ a time:Interval ;
+            add:hasBeginning [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1811"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1848"^^xsd:dateTimeStamp ] ] ;
+    rico:hasCreationDate [ a add:CrispTimeInstant ;
+            add:timeCalendar time:Gregorian ;
+            add:timePrecision time:Year ;
+            add:timeStamp "1811"^^xsd:dateTimeStamp ] ;
+    rico:identifier "CAD1" ;
+    rico:location "Gentilly" ;
+    rico:name "Premier cadastre de Gentilly" .
+
+source:94_Gentilly_MAT_B_NB_1813 a rico:RecordSet ;
+    cad:hasSourceType srctype:MatriceCadastrale1807_1822_Bati_NonBati ;
+    add:hasTime [ a time:Interval ;
+            add:hasBeginning [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1813"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1836"^^xsd:dateTimeStamp ] ] ;
+    rico:hasCreationDate [ a add:CrispTimeInstant ;
+            add:timeCalendar time:Gregorian ;
+            add:timePrecision time:Year ;
+            add:timeStamp "1813"^^xsd:dateTimeStamp ] ;
+    rico:identifier "MAT_B_NB_1813" ;
+    rico:isOrWasIncludedIn source:94_Gentilly_CAD1 ;
+    rico:location "Gentilly" ;
+    rico:name "Matrices des propriétés bâties et non bâties" .
+
+source:94_Gentilly_MAT_NB_1836 a rico:RecordSet ;
+    cad:hasSourceType srctype:MatriceCadastrale1822_1914_NonBati ;
+    add:hasTime [ a time:Interval ;
+            add:hasBeginning [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1836"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1848"^^xsd:dateTimeStamp ] ] ;
+    rico:hasCreationDate [ a add:CrispTimeInstant ;
+            add:timeCalendar time:Gregorian ;
+            add:timePrecision time:Year ;
+            add:timeStamp "1836"^^xsd:dateTimeStamp ] ;
+    rico:identifier "MAT_NB_1836" ;
+    rico:isOrWasIncludedIn source:94_Gentilly_CAD1 ;
+    rico:location "Gentilly" ;
+    rico:name "Matrice des propriétés foncières (1836-1848)" .
+
+source:94_Gentilly_MAT_NB_1848 a rico:RecordSet ;
+    cad:hasSourceType srctype:MatriceCadastrale1822_1914_NonBati ;
+    add:hasTime [ a time:Interval ;
+            add:hasBeginning [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1848"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1860"^^xsd:dateTimeStamp ] ] ;
+    rico:hasCreationDate [ a add:CrispTimeInstant ;
+            add:timeCalendar time:Gregorian ;
+            add:timePrecision time:Year ;
+            add:timeStamp "1848"^^xsd:dateTimeStamp ] ;
+    rico:identifier "MAT_NB_1848" ;
+    rico:isOrWasIncludedIn source:94_Gentilly_CAD2 ;
+    rico:location "Gentilly" ;
+    rico:name "Matrice des propriétés foncières (1848-1860)" .
+

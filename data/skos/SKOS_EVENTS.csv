@@ -1,0 +1,24 @@
+skos:Concept,rdf:type,skos:inScheme,skos:broader,skos:prefLabel@fr,skos:prefLabel@en,skos:altLabel@fr,skos:altLabel@en,skos:hiddenLabel,skos:definition@fr
+EventMentionnedinFoliosColumns,Event,CadastreEventList,,Evènement mentionné dans les colonnes dédiées aux folios,,,,,Evènement mentionné explicitement dans les colonnes 'Tiré de' et 'Porté à' des matrices cadastrales
+OwnerMutation,Event,CadastreEventList,,Mutation de propriétaire,,,,,
+Sale,Event,CadastreEventList,OwnerMutation,Vente,,,,,
+Sucession,Event,CadastreEventList,OwnerMutation,Sucession,,,,,
+PlotNatureEvent,Event,CadastreEventList,,Evènement impliquant la nature d'une parcelle,,,,,Evènement impliquant la nature de la parcelle ou les objets qu'elle contient
+ChangeWithoutConstruction,Event,CadastreEventList,PlotNatureEvent,Evolution de nature n'impliquant pas de bâtiment,,,,,
+Construction,Event,CadastreEventList,PlotNatureChange,Construction d'un bâtiment,,,,,
+Demotion,Event,CadastreEventList,PlotNatureChange,Démolition d'un bâtiment,,,,,
+BuiltPlotEvent,Event,CadastreEventList,PlotNatureChange,Evènement impliquant un bâtiment existant,,,,,
+Addition,Event,CadastreEventList,BuiltPlotEvent,Augmentation,,,,,
+Reduction,Event,CadastreEventList,BuiltPlotEvent,Diminution,,,,,
+ConsideredAsRuined,Event,CadastreEventList,BuiltPlotEvent,Considéré comme en ruines,,,,"En ruines,Ruines",
+CadastreAdminEvent,Event,CadastreEventList,,Evènement concernant le cadastre et ses documents,,,,,
+CadastreCreation,Event,CadastreEventList,CadastreAdminEvent,Initialisation d'un cadastre,,,,,Création d'un cadastre (= une numérotation)
+CadastreOutdated,Event,CadastreEventList,CadastreAdminEvent,Cadastre archivé,,,,,Archivage d'un cadastre
+DocumentCreation,Event,CadastreEventList,CadastreAdminEvent,Création d'un document,,,,,Ouverture d'une matrice
+DocumentOutdated,Event,CadastreEventList,CadastreAdminEvent,Archivage d'un document,,,,,Clôture d'une matrice
+Omission,Event,CadastreEventList,CadastreAdminEvent,Omission de déclaration qui entraine une réintégration a posteriori de l'article de classement dans un folio,,,,,
+LandmarkEvent,Event,CadastreEventList,,Evènement impliquant un landmark (identité),,,,,
+Merge,Event,CadastreEventList,LandmarkEvent,Fusion d'objets entiers,,,,,
+PartialMerge,Event,CadastreEventList,LandmarkEvent,Fusion impliquant la fusion d'objets entiers ou subdivisés,,,,,
+Division,Event,CadastreEventList,LandmarkEvent,Division d'un objet,,,,,
+DivisionWithStay,Event,CadastreEventList,CadastralEvent,Subdivision d'une parcelle qui reste dans le compte foncier initial,,,,,

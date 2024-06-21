@@ -1,0 +1,19 @@
+skos:Concept,rdf:type,skos:inScheme,skos:broader,skos:closeMatch,skos:prefLabel@fr,skos:prefLabel@en,skos:altLabel@fr,skos:altLabel@en,skos:hiddenLabel,skos:definition@fr
+ConstructionNouvelleSV,SpecialValue,SpecialCellValuesList,,,Construction nouvelle,,,,"Construction nouvelle,Nouvelle construction,CN,CN, Con nvelle, Cn nvelle,Conston nouvelle",Destruction d'un bâtiment qui est donc imposable au titre de propriété bâtie
+DemolitionSV,SpecialValue,SpecialCellValuesList,,,Démolition,,,,"Détruite,Destruction,Démolie,Démolition",Destruction d'un bâtiment qui n'est donc plus imposable au titre de propriété bâtie
+RuinesSV,SpecialValue,SpecialCellValuesList,,,En ruines,,,,"En ruine,Ruines,En ruines","Construction enruine, n'est généralement plus imposable au titre de propriété bâtie"
+AugmentationSV,SpecialValue,SpecialCellValuesList,,,Augmentation,,,,"Augmentation,Augtion,Augton,Augon",Modification d'un bâtiment qui entraine une augmentation du montant de l'impôt
+AdditionConstructionSV,SpecialValue,SpecialCellValuesList,,,Addition à une construction,,,,"addition, add C,add",Addition à une contruction existente
+EvaluationSV,SpecialValue,SpecialCellValuesList,,,Evaluation,,,,"Evaluation,Eval",Evaluation ou réévaluation fiscale d'une parcelle
+DiminutionSV,SpecialValue,SpecialCellValuesList,,,Diminution,,,,"Diminution,Dim,Dton",Modification d'un bâtiment qui entraine une diminution du montant de l'impôt
+OmissionSV,SpecialValue,SpecialCellValuesList,,,Omission,,OmissionSV{{date}},,"Omission,Omission depuis,OmissionSV{{date}}",Déclaration omise depuis une date donnée réintégrée au compte foncier d'un propriétaire
+ResteSV,SpecialValue,SpecialCellValuesList,,,Reste,,,,Reste,Reste d'une parcelle modifiée (divisée ou partiellement bâtie) à un état antérieur
+VoiePubliqueSV,SpecialValue,SpecialCellValuesList,,,Passé à la voie publique,,,,"Voie publique,Vp",Indique d'une partie de la parcelle est passée à la voie publique
+PartieSV,SpecialValue,SpecialCellValuesList,,,Partie,,,,"Partie,Ptie,p",Partie d'une parcelle initiale (cartographiée sur le plan)
+DoubleEmploiSV,SpecialValue,SpecialCellValuesList,,,Double emploi,,,,Double emploi,A définir
+CelluleVide,SpecialValue,SpecialCellValuesList,,,Cellule vide,,EMPTY,,,Cellule vide (sens différent de idem)
+IdemSV,SpecialValue,SpecialCellValuesList,,,Idem,,,,"Id,idem,§,"",/,Le même,Les mêmes",Idem
+IdemPrecedentSV,SpecialValue,SpecialCellValuesList,IdemSV,,Idem au précédent,,,,"Id,idem,§,"",/,Le même,Les mêmes,Ø",Valeur de cellule reprenant le contenu de la cellule précédente
+IdemPrecedentSV,SpecialValue,SpecialCellValuesList,IdemSV,,Idem au précédent,,,,"Id,idem,§,"",/,Le même,Les mêmes,☼",Valeur de cellule reprenant le contenu de la cellule suivante
+ValeurBarreeSV,SpecialValue,SpecialCellValuesList,,,Valeur barrée,,~~TEXT~~,,~~~~,Indique que le texte entre double tilde est rayé dans le document
+InconnuSV,SpecialValue,SpecialCellValuesList,,,Valeur inconnue,,,,,Valeur de cellule dont le sens n'a pas été explicité

@@ -1,0 +1,14 @@
+skos:Concept,rdf:type,skos:inScheme,skos:prefLabel@fr,skos:altLabel@fr,skos:prefLabel@en,skos:altLabel@en,skos:definition@fr,skos:broader
+PlotAttribute,add:AttributeType,CadastreAttributeList,Attribut de parcelle,,Plot attribute,,Attribut de parcelle,
+PlotTaxpayer,add:AttributeType,CadastreAttributeList,Contribuable,Propriétaire ou usufruitier,Taxpayer,,Propriétaire(s) ou usufruitier(s) d'une parcelle (contribuable),PlotAttribute
+PlotNature,add:AttributeType,CadastreAttributeList,Nature,,Nature,,Nature d'une parcelle,PlotAttribute
+PlotAddress,add:AttributeType,CadastreAttributeList,Adresse de la parcelle,Localisation de la parcelle,Address,Location,,PlotAttribute
+PlotMention,add:AttributeType,CadastreAttributeList,Mention,,Mention,,Mention d'une personne/d'une parcelle dans un document,
+TaxpayerAttribute,cad:TaxpayerAttributeType,CadastreAttributeList,Attribut de personne,,Taxpayer attribute,,Attribut de personne (propriétaire ou usufruitier),
+TaxpayerFullLabel,cad:TaxpayerAttributeType,CadastreAttributeList,Identité complète,,Full identity,,"Identité complète (nom-prénoms attachés, raison sociale) d'une personne",TaxpayerAttribute
+TaxpayerAddress,cad:TaxpayerAttributeType,CadastreAttributeList,Adresse du propriétaire,,Address,,Adresse d'une personne,TaxpayerAttribute
+TaxpayerActivity,cad:TaxpayerAttributeType,CadastreAttributeList,Activité,Profession,Activity,,Profession ou activité d'une personne,TaxpayerAttribute
+TaxpayerName,cad:TaxpayerAttributeType,CadastreAttributeList,Nom,"Nom de famille,Raison sociale,Expression référentielle",Last name,,Nom de famille d'une personne,TaxpayerFullLabel
+TaxpayerFirstName,cad:TaxpayerAttributeType,CadastreAttributeList,Prénom,,First name,,Prénom(s) d'une personne,TaxpayerFullLabel
+TaxpayerStatus,cad:TaxpayerAttributeType,CadastreAttributeList,Statut familial,,Status,,"Statut familial d'une personne (Demoiselle, Veuve, Père, Fils, Fille, Mineur)",TaxpayerFullLabel
+TaxpayerTitle,cad:TaxpayerAttributeType,CadastreAttributeList,Titre de civilité,Civilité,Title,,"Civilité (Monsieur, Madame, Mademoiselle)",TaxpayerFullLabel

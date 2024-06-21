@@ -1,0 +1,483 @@
+@prefix add: <http://rdf.geohistoricaldata.org/def/address#> .
+@prefix cad_ltype: <http://data.ign.fr/def/cadastre/landmarkType/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix landmark: <http://data.ign.fr/id/landmark/> .
+@prefix lrtype: <http://rdf.geohistoricaldata.org/def/address/landmarkRelationType/> .
+@prefix ltype: <http://rdf.geohistoricaldata.org/def/address/landmarkType/> .
+@prefix pwikidata: <http://www.wikidata.org/wiki/Property:> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+landmark:5ec66ee4-1bb2-456b-bafc-02bf3c88e770 a add:Landmark ;
+    rdfs:label "Val-de-Marne"^^xsd:string ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1967-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Departement ;
+    add:numInsee "94"^^xsd:string .
+
+landmark:0dbf586a-7f6b-4cc1-a873-522a1bd44265 a add:Landmark ;
+    rdfs:label "Section M du Moulin de la Roche"^^xsd:string ;
+    dcterms:identifier "M"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:0dbf586a-7f6b-4cc1-a873-522a1bd44265 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:0dbf586a-7f6b-4cc1-a873-522a1bd44265 .
+
+landmark:13b823a3-a9fe-40d1-b121-b6930d7b2c03 a add:Landmark ;
+    rdfs:label "Section I de Bicêtre"^^xsd:string ;
+    dcterms:identifier "I"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:13b823a3-a9fe-40d1-b121-b6930d7b2c03 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:13b823a3-a9fe-40d1-b121-b6930d7b2c03 .
+
+landmark:21dace9f-5178-4cc4-9588-b3a3e4283272 a add:Landmark ;
+    rdfs:label "Section A dite de la Santé"^^xsd:string ;
+    dcterms:identifier "A"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:21dace9f-5178-4cc4-9588-b3a3e4283272 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:21dace9f-5178-4cc4-9588-b3a3e4283272 .
+
+landmark:23f82e12-bcad-49b8-bb09-6a538496b72f a add:Landmark ;
+    rdfs:label "Section H des Petits Jardins"^^xsd:string ;
+    dcterms:identifier "H"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:23f82e12-bcad-49b8-bb09-6a538496b72f ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:23f82e12-bcad-49b8-bb09-6a538496b72f .
+
+landmark:2f202433-cded-4857-a609-a1e0c548cb27 a add:Landmark ;
+    rdfs:label "Section P du Bourg"^^xsd:string ;
+    dcterms:identifier "P"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:2f202433-cded-4857-a609-a1e0c548cb27 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:2f202433-cded-4857-a609-a1e0c548cb27 .
+
+landmark:3904c8d6-366e-4d92-a960-3d9ea46d4912 a add:Landmark ;
+    rdfs:label "Section K du Fort"^^xsd:string ;
+    dcterms:identifier "K"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:3904c8d6-366e-4d92-a960-3d9ea46d4912 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:3904c8d6-366e-4d92-a960-3d9ea46d4912 .
+
+landmark:393aa8b1-e60f-43b7-9c9e-9737ad804edd a add:Landmark ;
+    rdfs:label "Section L des Martinets"^^xsd:string ;
+    dcterms:identifier "L"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:393aa8b1-e60f-43b7-9c9e-9737ad804edd ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:393aa8b1-e60f-43b7-9c9e-9737ad804edd .
+
+landmark:3ea38f40-82cf-48f9-8ded-53d3c5e92125 a add:Landmark ;
+    rdfs:label "Section A de la Santé"^^xsd:string ;
+    dcterms:identifier "A"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:3ea38f40-82cf-48f9-8ded-53d3c5e92125 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:3ea38f40-82cf-48f9-8ded-53d3c5e92125 .
+
+landmark:49e2cb25-9f61-4740-a09c-c307e1f3874f a add:Landmark ;
+    rdfs:label "Section N du Chaperon Vert"^^xsd:string ;
+    dcterms:identifier "N"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:49e2cb25-9f61-4740-a09c-c307e1f3874f ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:49e2cb25-9f61-4740-a09c-c307e1f3874f .
+
+landmark:54db0315-d4bf-4505-a5c1-cba6ef681c8c a add:Landmark ;
+    rdfs:label "Archives Départementales du Val-de-Marne"^^xsd:string ;
+    dcterms:identifier "AD94"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:IsPartOf ;
+            add:locatum landmark:54db0315-d4bf-4505-a5c1-cba6ef681c8c ;
+            add:relatum landmark:fc109bfa-345c-4ee6-83a0-b2f084d4230b ] ;
+    add:isLandmarkType ltype:Structure ;
+    add:targets landmark:54db0315-d4bf-4505-a5c1-cba6ef681c8c .
+
+landmark:56897a8f-3fb1-4ff8-8992-883214285f10 a add:Landmark ;
+    rdfs:label "Section C de la Maison Blanche"^^xsd:string ;
+    dcterms:identifier "C"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:56897a8f-3fb1-4ff8-8992-883214285f10 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:56897a8f-3fb1-4ff8-8992-883214285f10 .
+
+landmark:5d0cd9fe-6b99-416d-a1a3-d532d2d6d6fc a add:Landmark ;
+    rdfs:label "Section O des Hautes Bornes"^^xsd:string ;
+    dcterms:identifier "O"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:5d0cd9fe-6b99-416d-a1a3-d532d2d6d6fc ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:5d0cd9fe-6b99-416d-a1a3-d532d2d6d6fc .
+
+landmark:5fec0a47-aa74-4e02-aa66-77f156ea5327 a add:Landmark ;
+    rdfs:label "Section F dite des Maisons"^^xsd:string ;
+    dcterms:identifier "F"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:5fec0a47-aa74-4e02-aa66-77f156ea5327 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:5fec0a47-aa74-4e02-aa66-77f156ea5327 .
+
+landmark:648b7831-50ab-43ac-9396-12529056dc4f a add:Landmark ;
+    rdfs:label "Paris"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:648b7831-50ab-43ac-9396-12529056dc4f ;
+            add:relatum landmark:fc109bfa-345c-4ee6-83a0-b2f084d4230b ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1789-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType ltype:Commune ;
+    add:numInsee "75056"^^xsd:string ;
+    add:targets landmark:648b7831-50ab-43ac-9396-12529056dc4f ;
+    pwikidata:P8422 "26207"^^xsd:string .
+
+landmark:72d1afeb-b46b-466f-a4cb-96753897f5ce a add:Landmark ;
+    rdfs:label "Section D de Bicêtre"^^xsd:string ;
+    dcterms:identifier "D"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:72d1afeb-b46b-466f-a4cb-96753897f5ce ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:72d1afeb-b46b-466f-a4cb-96753897f5ce .
+
+landmark:8177082a-ed8d-417b-a60f-3e929cd1e97a a add:Landmark ;
+    rdfs:label "Créteil"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:8177082a-ed8d-417b-a60f-3e929cd1e97a ;
+            add:relatum landmark:5ec66ee4-1bb2-456b-bafc-02bf3c88e770 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1789-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType ltype:Commune ;
+    add:numInsee "94028"^^xsd:string ;
+    add:targets landmark:8177082a-ed8d-417b-a60f-3e929cd1e97a ;
+    pwikidata:P8422 "11051"^^xsd:string .
+
+landmark:87d7c2f6-306b-45a1-a833-5e17821c3102 a add:Landmark ;
+    rdfs:label "Section B du Petit Gentilly"^^xsd:string ;
+    dcterms:identifier "B"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:87d7c2f6-306b-45a1-a833-5e17821c3102 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:87d7c2f6-306b-45a1-a833-5e17821c3102 .
+
+landmark:8aeca660-ee93-4fef-b98a-026735807d82 a add:Landmark ;
+    rdfs:label "Section C dite de la Glacière"^^xsd:string ;
+    dcterms:identifier "C"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:8aeca660-ee93-4fef-b98a-026735807d82 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:8aeca660-ee93-4fef-b98a-026735807d82 .
+
+landmark:9a31660f-44c6-47dd-8cf4-17b08110f525 a add:Landmark ;
+    rdfs:label "10 Rue des Archives"^^xsd:string ;
+    dcterms:identifier "10"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Along ;
+            add:locatum landmark:9a31660f-44c6-47dd-8cf4-17b08110f525 ;
+            add:relatum landmark:2dae5e93-2c68-41c0-b736-e8b290b778c0 ] ;
+    add:isLandmarkType ltype:HouseNumber ;
+    add:targets landmark:9a31660f-44c6-47dd-8cf4-17b08110f525 .
+
+landmark:ae9d96bb-1170-4522-998d-b66c7d8c3775 a add:Landmark ;
+    rdfs:label "Section R du Bas du Bourg"^^xsd:string ;
+    dcterms:identifier "R"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:ae9d96bb-1170-4522-998d-b66c7d8c3775 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:ae9d96bb-1170-4522-998d-b66c7d8c3775 .
+
+landmark:aea3f2d9-4bc0-4176-ba88-a115a4ed76cc a add:Landmark ;
+    rdfs:label "Section G des Sablons"^^xsd:string ;
+    dcterms:identifier "G"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:aea3f2d9-4bc0-4176-ba88-a115a4ed76cc ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:aea3f2d9-4bc0-4176-ba88-a115a4ed76cc .
+
+landmark:af64c1e7-5780-4937-a35e-f18cabfafec6 a add:Landmark ;
+    rdfs:label "Section Q de la Rue Frileuse"^^xsd:string ;
+    dcterms:identifier "Q"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:af64c1e7-5780-4937-a35e-f18cabfafec6 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:af64c1e7-5780-4937-a35e-f18cabfafec6 .
+
+landmark:d3299a59-4982-4f6f-bf1d-a2f692c219c4 a add:Landmark ;
+    rdfs:label "Section E de Gentilly"^^xsd:string ;
+    dcterms:identifier "E"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:d3299a59-4982-4f6f-bf1d-a2f692c219c4 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:d3299a59-4982-4f6f-bf1d-a2f692c219c4 .
+
+landmark:da6a5c2c-e86d-43bb-8950-7169bd0df60a a add:Landmark ;
+    rdfs:label "Section D dite de la Barrière de Fontainebleau"^^xsd:string ;
+    dcterms:identifier "D"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:da6a5c2c-e86d-43bb-8950-7169bd0df60a ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:da6a5c2c-e86d-43bb-8950-7169bd0df60a .
+
+landmark:dc71e0dd-c531-4556-b433-4c79769c088b a add:Landmark ;
+    rdfs:label "Section E dite du Bel Air"^^xsd:string ;
+    dcterms:identifier "E"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:dc71e0dd-c531-4556-b433-4c79769c088b ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Section ;
+    add:targets landmark:dc71e0dd-c531-4556-b433-4c79769c088b .
+
+landmark:0b23b428-909d-42c0-bd76-dad84d061cb4 a add:Landmark ;
+    rdfs:label "Villejuif"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:0b23b428-909d-42c0-bd76-dad84d061cb4 ;
+            add:relatum landmark:a46424cb-2601-46db-a159-8545c4607ab2 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1800-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1967-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Canton ;
+    add:targets landmark:0b23b428-909d-42c0-bd76-dad84d061cb4 .
+
+landmark:2dae5e93-2c68-41c0-b736-e8b290b778c0 a add:Landmark ;
+    rdfs:label "Rue des Archives"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:2dae5e93-2c68-41c0-b736-e8b290b778c0 ;
+            add:relatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ] ;
+    add:isLandmarkType ltype:Thoroughfare ;
+    add:targets landmark:2dae5e93-2c68-41c0-b736-e8b290b778c0 .
+
+landmark:a46424cb-2601-46db-a159-8545c4607ab2 a add:Landmark ;
+    rdfs:label "Sceaux"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:a46424cb-2601-46db-a159-8545c4607ab2 ;
+            add:relatum landmark:fc109bfa-345c-4ee6-83a0-b2f084d4230b ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1800-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1967-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType ltype:Arrondisement ;
+    add:targets landmark:a46424cb-2601-46db-a159-8545c4607ab2 .
+
+landmark:fc109bfa-345c-4ee6-83a0-b2f084d4230b a add:Landmark ;
+    rdfs:label "Seine"^^xsd:string ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1795-01-01T00:00:00"^^xsd:dateTimeStamp ] ;
+            add:hasEnd [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1967-12-31T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType cad_ltype:Departement ;
+    add:numInsee "75"^^xsd:string .
+
+landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 a add:Landmark ;
+    rdfs:label "Gentilly"^^xsd:string ;
+    add:firstStep [ a add:AddressSegment ;
+            add:isLandmarkRelationType lrtype:Within ;
+            add:locatum landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ;
+            add:relatum landmark:0b23b428-909d-42c0-bd76-dad84d061cb4 ] ;
+    add:hasTime [ a add:TimeInterval ;
+            add:hasBeginning [ a add:TimeInstant ;
+                    add:timeCalendar time:Gregorian ;
+                    add:timePrecision time:Year ;
+                    add:timeStamp "1789-01-01T00:00:00"^^xsd:dateTimeStamp ] ] ;
+    add:isLandmarkType ltype:Commune ;
+    add:numInsee "94037"^^xsd:string ;
+    add:targets landmark:45f1621b-f88e-4800-9bba-55d8dd1087f4 ;
+    pwikidata:P8422 "15323"^^xsd:string .
+
