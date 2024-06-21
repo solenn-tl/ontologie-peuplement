@@ -22,7 +22,10 @@ cad_ltype = Namespace("http://data.ign.fr/id/codes/cadastre/landmarkType/")
 srctype = Namespace("http://data.ign.fr/id/codes/cadastre/sourceType/")
 cad_act = Namespace("http://data.ign.fr/id/codes/cadastre/activity/")
 mlclasse = Namespace("http://data.ign.fr/id/codes/cadastre/mlClasse/")
+pnature = Namespace("http://data.ign.fr/id/codes/cadastre/plotNature/")
+
 ## address
 atype = Namespace("http://rdf.geohistoricaldata.org/id/codes/address/attributeType/")
 ltype = Namespace("http://rdf.geohistoricaldata.org/id/codes/address/landmarkType/")
 lrtype = Namespace("http://rdf.geohistoricaldata.org/id/codes/address/landmarkRelationType/")
+ctype = Namespace("http://rdf.geohistoricaldata.org/id/codes/address/changeType/")
