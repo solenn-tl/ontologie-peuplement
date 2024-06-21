@@ -9,6 +9,8 @@ add = Namespace("http://rdf.geohistoricaldata.org/def/address#")
 rico = Namespace("https://www.ica.org/standards/RiC/ontology#")
 fpo = Namespace("https://github.com/johnBradley501/FPO/raw/master/fpo.owl#")
 time = Namespace("http://www.w3.org/2006/time#")
+geo = Namespace("http://www.opengis.net/ont/geosparql#")
+ogc = Namespace("http://www.opengis.net/def/crs/OGC/1.3/")
 
 #Objet URI
 landmarkuri = Namespace("http://data.ign.fr/id/landmark/")
