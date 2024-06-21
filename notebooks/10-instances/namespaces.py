@@ -17,9 +17,9 @@ owneruri = Namespace("http://data.ign.fr/id/owner/")
 
 #SKOS URIs
 ## cadastre
-cad_ltype = Namespace("http://data.ign.fr/id/codes/cadastre/landmarkType/")
 cad_atype = Namespace("http://data.ign.fr/id/codes/cadastre/attributeType/")
-srctypeuri = Namespace("http://data.ign.fr/id/codes/cadastre/sourceType/")
+cad_ltype = Namespace("http://data.ign.fr/id/codes/cadastre/landmarkType/")
+srctype = Namespace("http://data.ign.fr/id/codes/cadastre/sourceType/")
 cad_act = Namespace("http://data.ign.fr/id/codes/cadastre/activity/")
 mlclasse = Namespace("http://data.ign.fr/id/codes/cadastre/mlClasse/")
 ## address
