@@ -1,0 +1,4607 @@
+[
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Bâti",
+         "folio": "108",
+         "groupe_cf": 1,
+         "transcription": "Legendre H↑re↓ de →Fontainebleau"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Legendre",
+            "owner-status":"H↑re↓",
+            "owner-address": "Fontainebleau",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Bâti",
+         "folio": "114",
+         "groupe_cf": 1,
+         "transcription": "Louves",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Louves",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Bâti",
+         "folio": "82",
+         "groupe_cf": 1,
+         "transcription": "Hardon, Bourgeois ~~nourisseur~~→à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Hardon",
+            "owner-firstname": "Bourgeois",
+            "owner-activity": "nourisseur",
+            "owner-address": "à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Bâti",
+         "folio": "64",
+         "groupe_cf": 1,
+         "transcription": "Faipot François→m↑d↓ de vin b↑re↓ de fontainebleau",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Faipot",
+               "owner-firstname": "François",
+               "owner-activity": "m↑d↓ de vin",
+               "owner-address": "b↑re↓ de fontainebleau",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "11",
+         "groupe_cf": 1,
+         "transcription": "Bacot→(david) couverturier→à Paris",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Bacot",
+               "owner-firstname": "david",
+               "owner-activity": "couverturier",
+               "owner-address": "à Paris",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "23bis",
+         "groupe_cf": 1,
+         "transcription": "~~Besson Jard↑e↓→Fleuriste 1832→Lecoq Jean b↑te↓, Cabaretier~~"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Besson",
+            "owner-activity": "Jard↑e↓ Fleuriste",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Lecoq",
+            "owner-firstname": "Jean b↑te↓",
+            "owner-activity": "Cabaretier",
+            "is-stripped": "yes"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1832
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non Bâtî",
+         "folio": "34ter",
+         "groupe_cf": 1,
+         "transcription": "Benoist→md de vin en gros"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Benoist",
+            "owner-activity": "md de vin en gros",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non Bâti",
+         "folio": "46bis",
+         "groupe_cf": 1,
+         "transcription": "Bizouard",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Bizouard",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "107bis",
+         "groupe_cf": 1,
+         "transcription": "~~Cornillon→vin primeur en caractère~~→1832→Cosson notaire→à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Cornillon",
+            "owner-activity": "vin primeur en caractère",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Cosson",
+            "owner-activity": "notaire",
+            "owner-address": "à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1832
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "122bis",
+         "groupe_cf": 1,
+         "transcription": "Decornois→Edme Jean"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Decornois",
+            "owner-firstname": "Edme Jean",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "124bis",
+         "groupe_cf": 1,
+         "transcription": "~~Deaubonne→rue tiers~~→à Gentilly→Allard→m° des 4 saisons Rue Thiers 1er (1836)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Deaubonne",
+            "owner-address": "rue tiers à Gentilly",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Allard",
+            "owner-activity": "m° des 4 saisons",
+            "owner-address": "Rue Thiers 1er",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1836
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "138",
+         "groupe_cf": 1,
+         "transcription": "Delaunay Elisabeth→Rue de la monnaie 17 à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delaunay",
+            "owner-firstname": "Elisabeth",
+            "owner-address": "Rue de la monnaie 17 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "156",
+         "groupe_cf": 1,
+         "transcription": "Dumoutier→Veuve à Paris→Rue hauteville",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Dumoutier",
+               "owner-status": "Veuve",
+               "owner-address": "à Paris Rue hauteville",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "163",
+         "groupe_cf": 1,
+         "transcription": "Faipot→F↑ois↓ M↑d↓ de vin B↑re↓→de Fontainebleau→Delong à Essonne (fontainebleau)→(1836)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Faipot",
+            "owner-firstname": "F↑ois↓",
+            "owner-activity": "M↑d↓ de vin",
+            "owner-address": "B↑re↓ de Fontainebleau",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Delong",
+            "owner-address": "Essonne (fontainebleau)",
+            "is-stripped": "yes"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1836
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "166",
+         "groupe_cf": 1,
+         "transcription": "fauvel antoine",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Fauvel",
+               "owner-firstname": "Antoine",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non Bati",
+         "folio": "192bis",
+         "groupe_cf": 1,
+         "transcription": "Gérard→M de Bois à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Gérard",
+            "owner-address": "M de Bois à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "211",
+         "groupe_cf": 1,
+         "transcription": "Hardon→nourrisseur→à Paris→(1817",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Hardon",
+               "owner-activity": "nourrisseur",
+               "owner-address": "à Paris",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "211bis",
+         "groupe_cf": 1,
+         "transcription": "hardon→Bourgeois"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "hardon",
+            "owner-activity": "Bourgeois",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "220",
+         "groupe_cf": 1,
+         "transcription": "Suite des hospices de Paris"
+      },
+      "owners": [
+        {
+            "owner-id": 1,
+            "owner-lastname": "hospices de Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "228ter",
+         "groupe_cf": 1,
+         "transcription": "~~Jacquelin→m↑d↓ de vin→Joindy, Pierre françois→(1830)~~"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Jacquelin",
+            "owner-activity": "m↑d↓ de vin",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Joindy",
+            "owner-firstname": "Pierre françois",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1830
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "235bis",
+         "groupe_cf": 1,
+         "transcription": "Legrand→Edme Guillaume"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Legrand",
+            "owner-firstname": "Edme Guillaume",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "236",
+         "groupe_cf": 1,
+         "transcription": "Lafolleville→à paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Lafolleville",
+            "owner-address": "à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "236ter",
+         "groupe_cf": 1,
+         "transcription": "Leauté→Nourrisseur à Paris→(1827)→Lafond, nég↑t↓ en vins→sinvie de la saittier Thiphaine→(1830)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Leauté",
+            "owner-activity": "Nourrisseur",
+            "owner-address": "à Paris",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Lafond",
+            "owner-activity": "nég↑t↓ en vins",
+            "is-stripped": "no"
+         },
+         {
+            "owner-lastname": "Thiphaine",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1827
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1830
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "236",
+         "groupe_cf": 1,
+         "transcription": "La Commune"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "La Commune",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non Bâti",
+         "folio": "247",
+         "groupe_cf": 1,
+         "transcription": "Leautey",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Leautey",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "251bis",
+         "groupe_cf": 1,
+         "transcription": "Lauvergnat→françois",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lauvergnat",
+               "owner-firstname": "françois",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "258",
+         "groupe_cf": 1,
+         "transcription": "Lefebvre→héritiers→au grand Salon→1815.",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lefebvre",
+               "owner-status": "héritiers",
+               "owner-address": "au grand Salon",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bati",
+         "folio": "258",
+         "groupe_cf": 1,
+         "transcription": "Lemaître→Alexandre",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lemaître",
+               "owner-firstname": "Alexandre",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non Bâti",
+         "folio": "260",
+         "groupe_cf": 1,
+         "transcription": "Legendre→B↑re↓ fontainebleau",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Legendre",
+               "owner-address": "B↑re↓ fontainebleau",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "268",
+         "groupe_cf": 1,
+         "transcription": "Leroy→autome fets ne Charles→à Villejuif",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Leroy",
+               "owner-firstname": "Charles",
+               "owner-address": "à Villejuif",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "269²",
+         "groupe_cf": 1,
+         "transcription": "Lecomte Jean François→Rue Cerrier 17 à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Lecomte",
+            "owner-firstname": "Jean François",
+            "owner-address": "Rue Cerrier 17 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "280bis",
+         "groupe_cf": 1,
+         "transcription": "Lecoq JB↑te↓",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lecoq",
+               "owner-firstname": "JB↑te↓",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "281",
+         "groupe_cf": 1,
+         "transcription": "Levé→nicolas à Paris",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Levè",
+               "owner-firstname": "Nicolas",
+               "owner-address": "à Paris",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "293",
+         "groupe_cf": 1,
+         "transcription": "Mériot→Charles f↑ois↓→Claudet (1834)→rue tiers n°03"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mériot",
+            "owner-firstname": "Charles f↑ois↓",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Claudet",
+            "owner-address": "rue tiers n°03",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1834
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "295",
+         "groupe_cf": 1,
+         "transcription": "Mailly→à paris→Michaux, fils m↑tre↓→Carrier à Paris (1829)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mailly",
+            "is-stripped": "no",
+            "owner-address": "à paris"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Michaux",
+            "owner-activity": "fils m↑tre↓ Carrier",
+            "owner-address": "à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1829
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "298bis",
+         "groupe_cf": 1,
+         "transcription": "Mongin, Rue ~~du Petit→Banquier (1829)~~→De l'Ourdine n°80 à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mongin",
+            "owner-address": "Rue du Petit Banquier",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Mongin",
+            "owner-address": "De l'Ourdine n°80 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1829
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bati",
+         "folio": "302",
+         "groupe_cf": 1,
+         "transcription": "Meunier→Jean Charles",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Meunier",
+               "owner-firstname": "Jean Charles",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "3514",
+         "groupe_cf": 1,
+         "transcription": "Ollivier→m↑d↓ de vin Route d'Ivry"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Ollivier",
+            "owner-activity": "m↑d↓ de vin",
+            "owner-address": "Route d'Ivry",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "357",
+         "groupe_cf": 1,
+         "transcription": "Passeraux hovir→rue maçon",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Passeraux",
+               "owner-firstname": "hovir",
+               "owner-activity": "maçon",
+               "owner-address": "rue",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "361",
+         "groupe_cf": 1,
+         "transcription": "Patte dubuc→Propriétaire",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Patte",
+               "owner-firstname": "dubuc",
+               "owner-activity": "Propriétaire",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "373bis",
+         "groupe_cf": 1,
+         "transcription": "Poulin→Paris Brossier"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Poulin",
+            "owner-address": "Paris",
+            "owner-activity":"Brossier",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "383",
+         "groupe_cf": 1,
+         "transcription": "Rambure, Rue→mouffetard n°48 (1829)",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Rambure",
+               "owner-address": "Rue→mouffetard n°48 à Paris",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "397ter",
+         "groupe_cf": 1,
+         "transcription": "Robichon→Etienne",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Robichon",
+               "owner-firstname": "Etienne",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bati",
+         "folio": "440",
+         "groupe_cf": 1,
+         "transcription": "Thiersse à paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Thiersse",
+            "owner-address": "à paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "446",
+         "groupe_cf": 1,
+         "transcription": "Thomsain→Jacques Joseph"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Thomsain",
+            "owner-firstname": "Jacques Joseph",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1813",
+         "type_folio": "Non bâti",
+         "folio": "455",
+         "groupe_cf": 1,
+         "transcription": "~~Vincent, menuisier→(1829)→Desnet alexandre→rue de Vaugirard n°106→à Paris→(substitué en 1833)→~~(1835)→Deruelle→Pierre adrien m↑d↓ seaussier→rue mandar à Paris",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Vincent",
+               "owner-activity": "menuisier",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "Desnet",
+               "owner-firstname": "alexandre",
+               "owner-address": "rue de Vaugirard n°106→à Paris",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 3,
+               "owner-lastname": "Deruelle",
+               "owner-firstname": "Pierre adrien",
+               "owner-activity": "m↑d↓ seaussier",
+               "owner-address": "rue mandar à Paris",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1829
+            },
+            {
+               "change-order": 2,
+               "owner-before": 2,
+               "owner-after": 3,
+               "date": 1833
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "240",
+         "groupe_cf": 3,
+         "transcription": "~~Poulet claude→françois, boulanger→à la maison blanche~~"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Poulet",
+            "owner-firstname": "claude françois",
+            "owner-activity": "boulanger",
+            "owner-address": "à la maison blanche",
+            "is-stripped": "yes"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "247",
+         "groupe_cf": 2,
+         "transcription": "Buyer F↑ois↓"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Buyer",
+            "owner-firstname": "F↑ois↓",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "247",
+         "groupe_cf": 3,
+         "transcription": "La société des eaux de Seine"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "La société des eaux de Seine",
+            "is-stripped": "yes"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "248",
+         "groupe_cf": 5,
+         "transcription": "Perrin→Joseph Charles"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Perrin",
+            "owner-firstname": "Joseph Charles",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "249",
+         "groupe_cf": 1,
+         "transcription": "Cosson→(louis auguste)→ancien notaire→à Choisy"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Cosson",
+            "owner-firstname": "Louis Auguste",
+            "owner-activity": "ancien notaire",
+            "owner-address": "à Choisy",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "249",
+         "groupe_cf": 2,
+         "transcription": "Boissel→(arnable) à Sceaux",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Boissel",
+               "owner-firstname": "arnable",
+               "owner-address": "à Sceaux",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "249",
+         "groupe_cf": 3,
+         "transcription": "Léger→Jacques maçon→en 1841 passsé à→Froment charp↑tier↓→à Vitry"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Léger",
+            "owner-firstname": "Jacques",
+            "owner-activity": "maçon",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Froment",
+            "owner-activity": "charp↑tier↓",
+            "owner-address": "à Vitry",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1841
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "249",
+         "groupe_cf": 4,
+         "transcription": "Poulet→Claude françois→Boulanger→à la maison blanche"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Poulet",
+            "owner-firstname": "Claude françois",
+            "owner-activity": "Boulanger",
+            "owner-address": "à la maison blanche",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 250,
+         "groupe_cf": 3,
+         "transcription": "Silvain→Bouhème→Charpentier"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Silvain",
+            "owner-firstname": "Bouhème",
+            "owner-activity": "Charpentier",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 286,
+         "groupe_cf": 1,
+         "transcription": "Lecoq→Jean Baptiste→La Croix→Gendre gagnon→(Pour 1839)→en 1841 LacroixJean Louis Guillaume",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lecoq",
+               "owner-firstname": "Jean Baptiste",
+               "is-stripped": "no"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "La Croix",
+               "owner-status": "Gendre gagnon",
+               "is-stripped": "no"
+            },
+            {
+               "owner-id": 3,
+               "owner-lastname": "Lacroix",
+               "owner-firstname": "Jean Louis Guillaume",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1839
+            },
+            {
+               "change-order": 2,
+               "owner-before": 2,
+               "owner-after": 3,
+               "date": 1841
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 287,
+         "groupe_cf": 1,
+         "transcription": "~~Legendre→propriétaire→Gagnon→Guillaume Gabriel→(Pour 1839)~~→Lacroi Jean→Louis Guillaume→(1846)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Legendre",
+            "owner-activity": "propriétaire",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Gagnon",
+            "owner-firstname": "Guillaume Gabriel",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Lacroi",
+            "owner-firstname": "Jean",
+            "owner-activity": "Louis Guillaume",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1839
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1846
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "288",
+         "groupe_cf": 1,
+         "transcription": "hardon→à paris, rue→contrescarpe→en 1840 à→Nicole→Jean françois paul"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "hardon",
+            "owner-address": "à paris, rue contrescarpe",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Nicole",
+            "owner-firstname": "Jean francois paul",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1840
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 289,
+         "groupe_cf": 1,
+         "transcription": "~~Lecoq→Jean Bap↑te↓→traiteur pour→un magasin~~→en 1840 passé à→Delong→~~veuve~~ à Essonne",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lecoq",
+               "owner-firstname": "Jean Bap↑te↓",
+               "owner-activity": "traiteur pour un magasin",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "Delong",
+               "owner-address": "à Essonne",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1840
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "289",
+         "groupe_cf": 2,
+         "transcription": "Delong"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delong",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "290",
+         "groupe_cf": 1,
+         "transcription": "Delong à Essonne"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delong",
+            "owner-address": "à Essonne",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "291",
+         "groupe_cf": 1,
+         "transcription": "Benoit→prop↑re↓"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Benoit",
+            "owner-activity": "prop↑re↓",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 292,
+         "groupe_cf": 1,
+         "transcription": "~~Bizouard→D↑e↓ V↑e↓ à paris~~→en 1840 passé à→DEsmarets→rue de la corderie 13→quartier du temple→à Paris→~~et autres la prop~~seul en→(1841)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Bizouard",
+            "owner-firstname": "D↑e↓",
+            "owner-status": "V↑e↓",
+            "owner-address": "à paris",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Desmarets et cie",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Desmarets",
+            "owner-address": "rue de la corderie 13 quartier du temple à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1840
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1841
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "319",
+         "groupe_cf": 1,
+         "transcription": "Delong à Essonnes"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delong",
+            "owner-address": "à Essonnes",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 432,
+         "groupe_cf": 1,
+         "transcription": "Deruelle→pierre adrien→à paris rue→mandard→Meunier→Jean→(Pour 1839)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Deruelle",
+            "owner-firstname": "pierre adrien",
+            "owner-address": "à paris rue mandard",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Meunier",
+            "owner-firstname": "Jean",
+            "is-stripped": "yes"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1839
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 432,
+         "groupe_cf": 5,
+         "transcription": "~~Glaunot~~→Jean→en 1844 à Goinbart→Jean françois boulevard→d'Italie n°3"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Glaunot",
+            "owner-firstname": "Jean",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Goinbart",
+            "owner-firstname": "Jean",
+            "owner-address": "boulevard d'Italie n°3",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1844
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 433,
+         "groupe_cf": 1,
+         "transcription": "~~Allard~~→M↑d↓ des 4 saisons~~→en 1840 à→Meunier→Jean"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Allard",
+            "owner-activity": "M↑d↓ des 4 saisons",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Meunier",
+            "owner-firstname": "Jean",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1840
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "434",
+         "groupe_cf": 1,
+         "transcription": "Delaunay→Elisabeth à paris→rue de la monnaie→17"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delaunay",
+            "owner-firstname": "Elisabeth",
+            "owner-address": "à paris rue de la monnaie 17",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "435",
+         "groupe_cf": 1,
+         "transcription": "Meunier→Jean charles→du molleux rue→des gobelins 18",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Meunier",
+               "owner-firstname": "Jean charles",
+               "owner-address": "rue des gobelins 18",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 436,
+         "groupe_cf": 1,
+         "transcription": "~~Legrand edme Guillaume~~→en 1840 à Houssais→Michel Antoine"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Legrand",
+            "owner-firstname": "edme Guillaume",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Houssais",
+            "owner-firstname": "Michel Antoine",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1840
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "437",
+         "groupe_cf": 1,
+         "transcription": "Lemaitre alexandre",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lemaitre",
+               "owner-firstname": "alexandre",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "439",
+         "groupe_cf": 1,
+         "transcription": "Mussen→pierre louis"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mussen",
+            "owner-firstname": "pierre louis",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "440",
+         "groupe_cf": 1,
+         "transcription": "~~Salle→dubuc prop↑re↓~~",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Salle dubuc",
+               "owner-activity": "prop↑re↓",
+               "is-stripped": "yes"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "440",
+         "groupe_cf": 2,
+         "transcription": "Toloze→pierre françois→Desguerinelles→Corro~~u~~yeur",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Toloze",
+               "owner-firstname": "pierre françois",
+               "owner-address": "Corro~~u~~yeur",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "441",
+         "groupe_cf": 1,
+         "transcription": "Sauvel→antoine",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Sauvel",
+               "owner-firstname": "antoine",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 1,
+         "transcription": "Lauvergnat→françois",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Lauvergnat",
+               "owner-firstname": "françois",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 2,
+         "transcription": "Barromet→Etienne"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Barromet",
+            "owner-firstname": "Etienne",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 3,
+         "transcription": "Barré→(ainé)",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Barré",
+               "owner-status": "ainé",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 4,
+         "transcription": "Mabire→Michel antoine→Rue du temple 107"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mabire",
+            "owner-firstname": "Michel antoine",
+            "owner-address": "Rue du temple 107",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 442,
+         "groupe_cf": 5,
+         "transcription": "Auget→Jean Baptiste",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Auget",
+               "owner-firstname": "Jean Baptiste",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 6,
+         "transcription": "marie adam→Piétri",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Piétri",
+               "owner-firstname": "marie adam",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 7,
+         "transcription": "Roussin→claude→Cordelier→~~Layetier~~ à Paris",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Roussin",
+               "owner-firstname": "claude",
+               "owner-activity": "Cordelier Layetier",
+                "owner-address": "à Paris",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 8,
+         "transcription": "Vernot Jean"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Vernot",
+            "owner-firstname": "Jean",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "442",
+         "groupe_cf": 9,
+         "transcription": "Bestit→Jean"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Bestit",
+            "owner-firstname": "Jean",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "443",
+         "groupe_cf": 1,
+         "transcription": "Auger Jean→marie adrien rue→de l'oursine 89 à→Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Auger",
+            "owner-firstname": "Jean marie adrien",
+            "owner-address": "rue de l'oursine 89 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "443",
+         "groupe_cf": 2,
+         "transcription": "Janicot→Jean"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Janicot",
+            "owner-firstname": "Jean",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "444",
+         "groupe_cf": 1,
+         "transcription": "Rambure→Claude andré→rue mouffetard→48"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Rambure",
+            "owner-firstname": "Claude andré",
+            "owner-address": "rue mouffetard 48",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 445,
+         "groupe_cf": 1,
+         "transcription": "~~Thomassin→Jacques Joseph→représenté par Guillot~~→en 1845 à Piquet→f↑ois↓ Gilbert rue Tiers 20"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Thomassin",
+            "owner-firstname": "Jacques Joseph",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Piquet",
+            "owner-firstname": "f↑ois↓ Gilbert",
+            "owner-address": "rue Tiers 20",
+            "is-stripped": "yes"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1845
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "446",
+         "groupe_cf": 1,
+         "transcription": "Rabichon→Etienne→Cesar→louis auguste→(Pour 1839)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Rabichon",
+            "owner-firstname": "Etienne",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Cesar",
+            "owner-firstname": "Louis Auguste",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date":1839
+        }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "446",
+         "groupe_cf": 2,
+         "transcription": "César Louis auguste→(1841)",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "César",
+               "owner-firstname": "Louis Auguste",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "447",
+         "groupe_cf": 1,
+         "transcription": "Descormois→edme Jean→18X7 Clopt→rue Thiers N°10"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Descormois",
+            "owner-firstname": "edme Jean",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Clopt",
+            "owner-address": "rue Thiers N°10",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2
+        }
+    ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 448,
+         "groupe_cf": 1,
+         "transcription": "~~Mongin→pierre nicolas→rue de loursine→8 à Paris~~→Bresie rue de→Camivel 2 près→St Sulpice→(1837)",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Mongin",
+               "owner-firstname": "pierre nicolas",
+               "owner-address": "rue de loursine 8 à Paris",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "Bresie",
+               "owner-address": "rue de Camivel 2 près St Sulpice",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1837
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "449",
+         "groupe_cf": 1,
+         "transcription": "~~Olivier→m↑d↓ de vin route→d'Ivry~~→Demay denis→adrien Cab↑er↓ 1837"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Olivier",
+            "owner-activity": "m↑d↓ de vin",
+            "owner-address": "route d'Ivry",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "adrien",
+            "owner-firstname": "denis",
+            "owner-activity": "Cab↑er↓",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1837
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "449",
+         "groupe_cf": 2,
+         "transcription": "Mulier our→Louis Jean Guill→Sapeur"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mulier",
+            "owner-firstname": "our Louis Jean Guill",
+            "owner-activity": "Sapeur",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "449",
+         "groupe_cf": 3,
+         "transcription": "Marche"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Marche",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "449",
+         "groupe_cf": 4,
+         "transcription": "~~Passereau→Etienne Theodore~~→Simon Jean marie→rue Godefroy,3, à→paris (1846)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Passereau",
+            "owner-firstname": "Etienne Theodore",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Simon",
+            "owner-firstname": "Jean Marie",
+            "owner-address": "rue Godefroy 3 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1846
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 449,
+         "groupe_cf": 5,
+         "transcription": "Desavoye→V.↑ve↓ née Fontaine→rue Thiers"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Desavoye",
+            "owner-status": "V.↑ve↓",
+            "owner-address": "rue Thiers",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 450,
+         "groupe_cf": 1,
+         "transcription": "~~Passerot→edme louis→amable maçon→route de fontainebleau~~→~~Pignet→cloitre S↑t↓ marcel N°10→(Pour 1839)~~→~~en 1840 à:→Vénéque→Jean françois manier~~→en 1841 à Piquet→françois Gilbert"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Passerot",
+            "owner-firstname": "edme louis amable",
+            "owner-activity": "maçon",
+            "owner-address": "route de fontainebleau",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Pignet",
+            "owner-address": "cloitre S↑t↓ marcel N°10",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Vénéque",
+            "owner-firstname": "Jean françois",
+            "owner-activity": "manier",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 4,
+            "owner-lastname": "Piquet",
+            "owner-firstname": "françois gilbert",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1839
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1840
+         },
+         {
+            "change-order": 3,
+            "owner-before": 3,
+            "owner-after": 4,
+            "date": 1841
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 450,
+         "groupe_cf": 2,
+         "transcription": "Passerot→(amable)→maçon",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Passerot",
+                "owner-firstname": "amable",
+               "owner-activity": "maçon",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 450,
+         "groupe_cf": 3,
+         "transcription": "Gaignault→Marie anne",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Gaignault",
+               "owner-firstname": "Marie anne",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 450,
+         "groupe_cf": 4,
+         "transcription": "Jousy Jean→pierre maçon",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Jousy",
+               "owner-firstname": "Jean pierre",
+               "owner-activity": "maçon",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "450",
+         "groupe_cf": 5,
+         "transcription": "Aouet→rue des grands degrés à paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Aouet",
+            "owner-address": "rue des grands degrés à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 450,
+         "groupe_cf": 6,
+         "transcription": "Bélugeon Louis"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Bélugeon",
+            "owner-firstname": "Louis",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "451",
+         "groupe_cf": 1,
+         "transcription": "Scheld J↑n↓ pierre→rue mouffetard 134→à paris",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Scheld",
+               "owner-firstname": "J↑n↓ pierre",
+               "owner-address": "rue mouffetard 134 à Paris",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "451",
+         "groupe_cf": 2,
+         "transcription": "Charpentier→Louis antoine",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Charpentier",
+               "owner-firstname": "Louis antoine",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "451",
+         "groupe_cf": 3,
+         "transcription": "Ménier antoine→cordonnier",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Ménier",
+               "owner-firstname": "antoine",
+               "owner-activity": "cordonnier",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "451",
+         "groupe_cf": 4,
+         "transcription": "Duvézin"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Duvézin",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 452,
+         "groupe_cf": 1,
+         "transcription": "Meunier"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Meunier",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": "452",
+         "groupe_cf": 2,
+         "transcription": "Noblet→Alexandre"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Noblet",
+            "owner-firstname": "Alexandre",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Bâti",
+         "folio": 453,
+         "groupe_cf": 1,
+         "transcription": "~~Mathey Joseph→Gertrude rue du→saule S↑t↓ honoré 88→à Paris~~→~~Desavoye→Veuve Rue Tiers→(1838)~~",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Mathey",
+               "owner-firstname": "Joseph Gertrude",
+               "owner-address": "rue du saule S↑t↓ honoré 88 à Paris",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "Desavoye",
+               "owner-status": "Veuve",
+               "owner-address": "Rue Tiers",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1838
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Non Bâti",
+         "folio": 617,
+         "groupe_cf": 2,
+         "transcription": "Glomod→Jean→maçon à Paris rue→du murier 4",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Glomod",
+               "owner-firstname": "Jean",
+               "owner-activity": "maçon",
+               "owner-address": "à Paris rue du murier 4",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Non Bâti",
+         "folio": "669",
+         "groupe_cf": 1,
+         "transcription": "Dumoutier→V↑e↓ à Paris→rue hauteville",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Dumoutier",
+               "owner-status":"V↑e↓",
+               "owner-address": "à Paris rue hauteville",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Non Bâti",
+         "folio": "707",
+         "groupe_cf": 1,
+         "transcription": "Gentilly→(La Commune)",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "La Commune de Gentilly",
+               "owner-address": "Gentilly",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Non Bâti",
+         "folio": "708",
+         "groupe_cf": 1,
+         "transcription": "Gérard→route de paris 11"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Gérard",
+            "owner-address": "route de paris 11",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Non Bâti",
+         "folio": "777",
+         "groupe_cf": 1,
+         "transcription": "Lautry→à Paris, rue→Mouffetard"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Lautry",
+            "owner-address": "à Paris, rue Mouffetard",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Non Bâti",
+         "folio": "788",
+         "groupe_cf": 1,
+         "transcription": "Lecomte→Jean François rue→courrier, à Paris 17"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Lecomte",
+            "owner-firstname": "Jean François",
+            "owner-activity": "rue courrier à Paris 17",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1836",
+         "type_folio": "Non Bâti",
+         "folio": "968",
+         "groupe_cf": 1,
+         "transcription": "Thierse père→rue mouffetard"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Thierse",
+            "owner-status": "père",
+            "is-stripped": "no",
+            "owner-address": "rue mouffetard"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "392",
+         "groupe_cf": 1,
+         "transcription": "Lacroix J↑n↓ Louis"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Lacroix",
+            "owner-firstname": "J↑n↓ Louis",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "393",
+         "groupe_cf": 1,
+         "transcription": "~~Oudan (Paul)~~→1853 Vigier, Jean veuve rue du Kremlin 1"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Oudan",
+            "owner-firstname": "Paul",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Vigier",
+            "owner-firstname": "Jean",
+            "owner-status": "veuve",
+            "owner-address": "rue du Kremlin 1",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "394",
+         "groupe_cf": 1,
+         "transcription": "~~Léger~~ Pour 1859 Grouillet Eugène"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Léger",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Grouillet",
+            "owner-firstname": "Eugène",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1859
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "395",
+         "groupe_cf": 1,
+         "transcription": "~~Boisset Aimable~~ 1856 Viviano Joseph, m↑d↓ de vins à Gentilly Barrière d'Italie 9.",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Boisset",
+               "owner-firstname": "Aimable",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "Viviano",
+               "owner-firstname": "Joseph",
+               "owner-activity": "m↑d↓ de vins",
+               "owner-address": "à Gentilly Barrière d'Italie 9.",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1856
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "396",
+         "groupe_cf": 1,
+         "transcription": "Adnet"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Adnet",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "397",
+         "groupe_cf": 1,
+         "transcription": "~~Dhuy~~ Clerc→1853 Chalvet Jean Boulevard d'Italie n°3"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Dhuy",
+            "owner-firstname": "Clerc",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Chalvet",
+            "owner-firstname": "Jean",
+            "owner-address": "Boulevard d'Italie n°3",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "398",
+         "groupe_cf": 1,
+         "transcription": "~~Dhuy~~ pour 1854 ~~Grass rue du petit champs S↑t↓ marcel 4 à Paris→p.1855 Saulety mani antoine alexandre y demeurant"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Dhuy",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Grass",
+            "owner-address": "rue du petit champs S↑t↓ marcel 4 à Paris",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Saulety",
+            "owner-firstname": "mani antoine alexandre",
+            "owner-address":"y demeurant",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1854
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1855
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 399,
+         "groupe_cf": 1,
+         "transcription": "~~Dhuy Clerc p.1854 Chambelland, Victoire Constance rue de Tournan 13 à Paris~~→1858 Messidor J↑d↓ Baptiste B↑re↓ d'Italie 21"
+      },
+      "owners": [
+        {
+            "owner-id": 1,
+            "owner-lastname": "Dhuy",
+            "owner-firstname": "Clerc",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Chambelland",
+            "owner-firstname": "Victoire Constance",
+            "owner-address": "rue de Tournan 13 à Paris",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Messidor",
+            "owner-firstname": "J↑d↓ Baptiste",
+            "owner-activity": "B↑re↓ d'Italie 21",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1854
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1858
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 400,
+         "groupe_cf": 1,
+         "transcription": "~~Chapelain Pierre françois~~→~~1853 Viviano, Joseph Boul↑d↓ d'Italie n°9~~ 1856 M Messidor, Jean B↑te↓ au Petit Issy, route de Paris N°58"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Chapelain",
+            "owner-firstname": "Pierre françois",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Viviano",
+            "owner-firstname": "Joseph",
+            "owner-activity": "Boul↑d↓ d'Italie n°9",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Messidor",
+            "owner-firstname": "Jean B↑te↓",
+            "owner-activity": "au Petit Issy, route de Paris N°58",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1856
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "401",
+         "groupe_cf": 1,
+         "transcription": "Société des Eaux de Seine (la)",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Société des Eaux de Seine",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "402",
+         "groupe_cf": 1,
+         "transcription": "~~Buyer françois~~ 1860 . M↑m↓ Moreau Jean baptisteà Ivry, rue Ouand N°2"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Buyer",
+            "owner-firstname": "françois",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-title": "M↑m↓",
+            "owner-lastname": "Moreau",
+            "owner-firstname": "Jean baptiste",
+            "owner-address": "à Ivry, rue Ouand N°2",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1860
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 403,
+         "groupe_cf": 1,
+         "transcription": "~~Vergnaud Pour 1859 Tavernier à Arzac (Bosses poXXXXXX)~~→1860 M Moreau Jean baptiste rue gérard 18"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Vergnaud",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Tavernier",
+            "owner-address": "à Arzac",
+            "is-stripped": "no"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Moreau",
+            "owner-firstname": "Jean baptiste",
+            "owner-activity": "rue gérard 18",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1859
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1860
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "465",
+         "groupe_cf": 1,
+         "transcription": "Stricker Veuve"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Stricker",
+            "owner-activity": "Veuve",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "513",
+         "groupe_cf": 3,
+         "transcription": "Balthazard Louis Xavier, Rue Thiers"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Balthazard",
+            "owner-firstname": "Louis Xavier",
+            "owner-address": "Rue Thiers",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 827,
+         "groupe_cf": 1,
+         "transcription": "~~Belugeon Louis~~ ~~1856 M. Bertrand, Régis Jean françois propriétaire à Gentilly route de fontainebleau 62~~→Pour 1859 Sarazin Louis Rue d'Austerlitz 48"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Belugeon",
+            "owner-firstname": "Louis",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Bertrand",
+            "owner-firstname": "Régis Jean françois",
+            "owner-activity": "propriétaire",
+            "owner-address": "à Gentilly route de fontainebleau 62",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Sarazin",
+            "owner-firstname": "Louis",
+            "owner-activity": "Pour Rue d'Austerlitz 48",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1856
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1859
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 828,
+         "groupe_cf": 1,
+         "transcription": "~~Papillon En 1850 Cordier Jean pierre à Villabré~~→Pour 1860 M Guillaumot ferdinand Joseph albert, rue du moulin des prés 50"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Papillon",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Cordier",
+            "owner-firstname": "Jean pierre",
+            "owner-address": "à Villabré",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Guillaumot",
+            "owner-firstname": "ferdinand Joseph albert",
+            "owner-address": "rue du moulin des prés 50",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1850
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1860
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "829",
+         "groupe_cf": 1,
+         "transcription": "~~Sheld J↑n↓ Pierre~~ (Rectif↑on↓ 1853 Schild Jean pierre ~~à Paris rue mouffetard 212~~→B.↑re d'Italie 90↑bis↓"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Sheld",
+            "owner-firstname": "J↑n↓ Pierre",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Schild",
+            "owner-firstname": "Jean pierre",
+            "owner-address": "à Paris rue mouffetard 212→B.↑re d'Italie 90↑bis↓",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "829",
+         "groupe_cf": 2,
+         "transcription": "M.~~Ney Pierre Jean Nez~~ dit Ney pierre Joseph ébéniste passage Dubuis 19"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Ney",
+            "owner-firstname": "Pierre Jean",
+            "owner-activity": "ébéniste",
+            "owner-address": "passage Dubuis 19",
+            "is-stripped": "yes"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "830",
+         "groupe_cf": 1,
+         "transcription": "Charpentier Louis"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Charpentier",
+            "owner-firstname": "Louis",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "831",
+         "groupe_cf": 1,
+         "transcription": "~~Oudin Denis~~ 1857. Grouillet Lazare Victor, boulanger, Barrière d'Italie 3 à Gentilly"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Oudin",
+            "owner-firstname": "Denis",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Grouillet",
+            "owner-firstname": "Lazare Victor",
+            "owner-activity": "boulanger",
+            "owner-address": "Barrière d'Italie 3 à Gentilly",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1857
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "832",
+         "groupe_cf": 1,
+         "transcription": "~~Devezin~~ p°1854 Saigne Grainetier quai aux fleurs 5 à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Devezin",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Saigne",
+            "owner-activity": "Grainetier",
+            "owner-address": "quai aux fleurs 5 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1854
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "833",
+         "groupe_cf": 1,
+         "transcription": "~~Alliesse J↑n↓ baptiste~~ 1851, 1852 Jeanne franvier louis rue Guezaris 17"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Alliesse",
+            "owner-firstname": "J↑n↓ baptiste",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Jeanne",
+            "owner-firstname": "franvier louis",
+            "owner-address": "rue Guezaris 17",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1851
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "834",
+         "groupe_cf": 1,
+         "transcription": "~~Roussin, Claude~~ Gaspard henry 189 faub↑g↓ S↑t↓ Martin"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Roussin",
+            "owner-firstname": "Claude",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Gaspard",
+            "owner-firstname": "henry",
+            "owner-address": "189 faub↑g↓ S↑t↓ Martin",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "836",
+         "groupe_cf": 1,
+         "transcription": "Biermann, Corroyeur à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Biermann",
+            "owner-firstname": "Corroyeur",
+            "is-stripped": "no",
+            "owner-address": "à Paris"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "837",
+         "groupe_cf": 1,
+         "transcription": "~~Beirmann~~ françois Ruton Corryeur, rue Gérard ~~23~~ 25→Biermann",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Biermann",
+               "owner-firstname": "françois Ruton",
+               "owner-activity": "Corryeur",
+               "owner-address": "rue Gérard 25",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "843",
+         "groupe_cf": 1,
+         "transcription": "Granit pierre m↑d↓ de vins à Gentilly"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Granit",
+            "owner-firstname": "pierre",
+            "owner-activity": "m↑d↓ de vins",
+            "owner-address": "à Gentilly",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "844",
+         "groupe_cf": 1,
+         "transcription": "Cuny Jean éloi à Gentilly",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Cuny",
+               "owner-firstname": "Jean éloi",
+               "owner-address": "à Gentilly",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 845,
+         "groupe_cf": 1,
+         "transcription": "Trivat, françoise ↑dite Dieu↓ ~~rue Gérard 8~~ Imp de la butte aux cailles"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Trivat",
+            "owner-firstname": "françoise",
+            "is-stripped": "no",
+            "owner-address": "rue Gérard 8, Imp de la butte aux cailles"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "846",
+         "groupe_cf": 1,
+         "transcription": "~~Meunier Antoine~~ ~~Pour 1859 Grouillet Eugène Boulevard d'Italie 3~~→Pour 1860 M. Bagnio Etienne, y demeurant"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Meunier",
+            "owner-firstname": "Antoine",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Grouillet",
+            "owner-firstname": "Eugène",
+            "owner-address": "Boulevard d'Italie 3",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Bagnio",
+            "owner-firstname": "Etienne",
+            "owner-address": "y demeurant",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1859
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1860
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "847",
+         "groupe_cf": 1,
+         "transcription": "Gaignaud Marie Annie",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Gaignaud",
+               "owner-firstname": "Marie Annie",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": []
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "848",
+         "groupe_cf": 1,
+         "transcription": "Odhemet françois"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Odhemet",
+            "owner-firstname": "françois",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "849",
+         "groupe_cf": 1,
+         "transcription": "Odhemet françois"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Odhemet",
+            "owner-firstname": "françois",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "851",
+         "groupe_cf": 1,
+         "transcription": "Brosset"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Brosset",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "852",
+         "groupe_cf": 1,
+         "transcription": "~~Meunier J↑n↓ Charles~~→1856. M↑m↓ V↑e↓ Dormant, Pierre Joseph, née Fricot Sophie adélaïde rue Thiers 5"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Meunier",
+            "owner-firstname": "J↑n↓ Charles",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Dormant",
+            "owner-firstname": "Pierre Joseph",
+            "owner-status": "V↑e↓",
+            "owner-address": "rue Thiers 5",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1856
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâtis",
+         "folio": "853",
+         "groupe_cf": 1,
+         "transcription": "Houssais Michel à Paris (Rodeix Locataire)"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Houssais",
+            "owner-firstname": "Michel",
+            "owner-address": "à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 854,
+         "groupe_cf": 1,
+         "transcription": "~~Larousse Veuve (1853 Rectif↑on↓)~~ ~~Lezaude veuve~~→p↑r↓ 1854 Lemaître Jules antoine"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Larousse",
+            "owner-status": "Veuve",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Lezaude",
+            "owner-status": "veuve",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Lemaître",
+            "owner-firstname": "Jules antoine",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1854
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "855",
+         "groupe_cf": 1,
+         "transcription": "~~NEussard P↑re↓ Louis~~ 1855 V↑ve↓ Tissot né à Bondy, y demeurant"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Neussard",
+            "owner-firstname": "P↑re↓ Louis",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Tissot",
+            "owner-firstname": "V↑ve↓",
+            "owner-address": "Bondy",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1855
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 856,
+         "groupe_cf": 1,
+         "transcription": "~~Tolosé françois~~ ~~1853 Devery, françois hypolite 15 rue S↑t↓ Germain des prés~~→p 1854 Grossot Devessy antoine Germain hypolite r mazarine 19 à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Tolosé",
+            "owner-firstname": "françois",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Devery",
+            "owner-firstname": "françois hypolite",
+            "owner-address": "15 rue S↑t↓ Germain des prés",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Grossot Devessy",
+            "owner-firstname": "antoine Germain hypolite",
+            "owner-activity": "r mazarine 19 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1854
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 857,
+         "groupe_cf": "1",
+         "transcription": "~~Tolosé françois~~ 1853 ~~Cavet, pierre Louis rue du Ponceau 6~~→p. 1855 Tavet pierre louis, rue du Ponceau 6",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Tolosé",
+               "owner-firstname": "françois",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "Cavet",
+               "owner-firstname": "pierre Louis",
+               "owner-address": "rue du Ponceau 6",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 3,
+               "owner-lastname": "Tavet",
+               "owner-firstname": "pierre louis",
+               "owner-address": "rue du Ponceau 6",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1853
+            },
+            {
+               "change-order": 2,
+               "owner-before": 2,
+               "owner-after": 3,
+               "date": 1855
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "858",
+         "groupe_cf": 1,
+         "transcription": "Fauvelle Antoine"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Fauvelle",
+            "owner-firstname": "Antoine",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 859,
+         "groupe_cf": 1,
+         "transcription": "~~Lauvergnat françois~~ 1853 Duchaussoy félix à Doulens"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Lauvergnat",
+            "owner-firstname": "françois",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Duchaussoy",
+            "owner-firstname": "félix",
+            "owner-address": "à Doulens",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "860",
+         "groupe_cf": 1,
+         "transcription": "Baronnet Etienne"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Baronnet",
+            "owner-firstname": "Etienne",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "861",
+         "groupe_cf": 1,
+         "transcription": "Barré Aimé"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Barré",
+            "owner-firstname": "Aimé",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "862",
+         "groupe_cf": 1,
+         "transcription": "Roussin Claude"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Roussin",
+            "owner-firstname": "Claude",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "863",
+         "groupe_cf": 1,
+         "transcription": "~~Mabire Michel Antoine~~ 1853 Roussel, pierre Jean"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mabire",
+            "owner-firstname": "Michel Antoine",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Roussel",
+            "owner-firstname": "pierre Jean",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "864",
+         "groupe_cf": 1,
+         "transcription": "Bestit Jean"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Bestit",
+            "owner-firstname": "Jean",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "865",
+         "groupe_cf": 1,
+         "transcription": "~~Boucheron~~ En 1850 Vernot",
+         "owners": [
+            {
+               "owner-id": 1,
+               "owner-lastname": "Boucheron",
+               "is-stripped": "yes"
+            },
+            {
+               "owner-id": 2,
+               "owner-lastname": "Vernot",
+               "is-stripped": "no"
+            }
+         ],
+         "changes": [
+            {
+               "change-order": 1,
+               "owner-before": 1,
+               "owner-after": 2,
+               "date": 1850
+            }
+         ]
+      }
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "866",
+         "groupe_cf": 1,
+         "transcription": "~~Auger J↑n↓ Marie Olivier~~ 1853 Balthazar, Xavier"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Auger",
+            "owner-firstname": "J↑n↓ Marie Olivier",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Balthazar",
+            "owner-firstname": "Xavier",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1853
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "867",
+         "groupe_cf": 1,
+         "transcription": "Balthazard Xavier"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Balthazard",
+            "owner-firstname": "Xavier",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 868,
+         "groupe_cf": 1,
+         "transcription": "~~Joursy J↑n↓ Pierre~~ p 1855 Jourcy Joury Pierre"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Joursy",
+            "owner-firstname": "J↑n↓ Pierre",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Jourcy",
+            "owner-firstname": "Pierre",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1855
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 869,
+         "groupe_cf": 1,
+         "transcription": "Passerot Aimable"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Passerot",
+            "owner-firstname": "Aimable",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 870,
+         "groupe_cf": 1,
+         "transcription": "~~Piquet f↑ois↓ Gilbert~~ ~~p1855 Marlin charles louis concierge, 31 rue~~ du martyr à Paris→Pour 1859 Renous Pierre à Paris rue du Coll_ge 48"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Piquet",
+            "owner-firstname": "f↑ois↓ Gilbert",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Marlin",
+            "owner-firstname": "charles louis",
+            "owner-activity": "concierge",
+            "owner-address": "31 rue du martyr à Paris",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Renous",
+            "owner-firstname": "Pierre",
+            "owner-address": "rue du Collège 48 à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1855
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1859
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "871",
+         "groupe_cf": 1,
+         "transcription": "Toutay Guillaume Laurent"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Toutay",
+            "owner-firstname": "Guillaume Laurent",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "872",
+         "groupe_cf": 1,
+         "transcription": "Roussin Claude"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Roussin",
+            "owner-firstname": "Claude",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 873,
+         "groupe_cf": 1,
+         "transcription": "~~Mulier Louis J↑n↓ Guillaume~~ (1849) ~~Alliès Jean B↑te↓ rue Gérard~~ 17→1851,1852 Roussin claude rue thiers 23"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mulier",
+            "owner-firstname": "Louis J↑n↓ Guillaume",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Alliès",
+            "owner-firstname": "Jean B↑te↓",
+            "owner-address": "rue Gérard 17",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Roussin",
+            "owner-firstname": "claude",
+            "owner-address": "rue thiers 23",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1849
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1851
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "874",
+         "groupe_cf": 1,
+         "transcription": "~~Demay Denis Adrien~~1856 D↑me↓ Dampon↑antoine Jeune↓,D↑me↓ Demay rue de la Glacière 1er"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Demay",
+            "owner-firstname": "Denis Adrien",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Dampon",
+            "owner-firstname": "antoine Jeune",
+            "owner-address": "rue de la Glacière 1er",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1856
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "875",
+         "groupe_cf": 1,
+         "transcription": "~~Bresil Nicolas Tranquile~~ Pour 1859 Desjardin joseph veuve Rue Thiers 12"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Bresil",
+            "owner-firstname": "Nicolas Tranquile",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Desjardin",
+            "owner-firstname": "joseph",
+            "owner-status": "veuve",
+            "owner-address": "Rue Thiers 12",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1859
+        }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "876",
+         "groupe_cf": 1,
+         "transcription": "~~Clopt françois~~ p↑r↓ 1854 Puech"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Clopt",
+            "owner-firstname": "françois",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Puech",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1854
+        }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 877,
+         "groupe_cf": 1,
+         "transcription": "~~César Louis Auguste~~ En 1850 ~~Nide ferdinand à Paris~~→p. 1852 ~~Nez pierre Joseph y d↑ne↓~~ (Rectif↑on↓ 1853) ~~Ney~~ Pierre ~~Joseph Jean~~ Joseph passage Dubois 19→~~Nez dit Ney~~"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "César Louis Auguste",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Nide",
+            "owner-firstname": "ferdinand",
+            "owner-address": "à Paris",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 3,
+            "owner-lastname": "Nez",
+            "owner-activity": "pierre Joseph",
+            "owner-address": "passage Dubois 19",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1850
+         },
+         {
+            "change-order": 2,
+            "owner-before": 2,
+            "owner-after": 3,
+            "date": 1852
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "878",
+         "groupe_cf": 1,
+         "transcription": "~~Piquet françois Gilbert~~ p.1855 Piquet louis françois, 140 rue mouffetard à Paris"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Piquet",
+            "owner-firstname": "françois Gilbert",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Piquet",
+            "owner-firstname": "louis françois",
+            "owner-address": "140 rue mouffetard à Paris",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1855
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "879",
+         "groupe_cf": 1,
+         "transcription": "Mansard"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mansard",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "880",
+         "groupe_cf": 1,
+         "transcription": "Mansard"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mansard",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": 1213,
+         "groupe_cf": 1,
+         "transcription": "Mercier"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Mercier",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1214",
+         "groupe_cf": 1,
+         "transcription": "Delon à Essonnes Seine et Oise"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delon",
+            "owner-address": "à Essonnes Seine et Oise",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1215",
+         "groupe_cf": 1,
+         "transcription": "~~Delon~~ Pour 1859 Robquin félix jules Rue du palais de justice 1↑r↓"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delon",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Robquin",
+            "owner-firstname": "félix jules",
+            "owner-address": "Rue du palais de justice 1↑r↓",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1859
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1216",
+         "groupe_cf": 1,
+         "transcription": "~~Delon~~ Pour 1859 Robquin félix jules Rue du palais de justice 1↑r↓"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delon",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Robquin",
+            "owner-firstname": "félix jules",
+            "owner-address": "Rue du palais de justice 1↑r↓",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [
+         {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1859
+         }
+      ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1217",
+         "groupe_cf": 1,
+         "transcription": "Delon à Essonnes, Seine et Oise"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delon",
+            "owner-address": "à Essonnes, Seine et Oise",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1217",
+         "groupe_cf": 2,
+         "transcription": "M. Leloup sur le sol de M. Delon"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Leloup",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1218",
+         "groupe_cf": 1,
+         "transcription": "~~Delon~~ 1858 Sevestre Clément boulanger Bar↑re↓ d'Italie 8↑bis↓"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delon",
+            "is-stripped": "yes"
+         },
+         {
+            "owner-id": 2,
+            "owner-lastname": "Sevestre",
+            "owner-firstname": "Clément",
+            "owner-activity": "boulanger",
+            "owner-address": "Bar↑re↓ d'Italie 8↑bis↓",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": [         
+        {
+            "change-order": 1,
+            "owner-before": 1,
+            "owner-after": 2,
+            "date": 1858
+        }
+    ]
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1219",
+         "groupe_cf": 1,
+         "transcription": "Delon"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Delon",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1220",
+         "groupe_cf": 1,
+         "transcription": "Dufresne"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Dufresne",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1221",
+         "groupe_cf": 1,
+         "transcription": "Nicolle J↑n↓ f↑ois↓ Paul"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Nicolle",
+            "owner-firstname": "J↑n↓ f↑ois↓ Paul",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   },
+   {
+      "cell": {
+         "registre": "MAT_1848",
+         "type_folio": "Non Bâti",
+         "folio": "1222",
+         "groupe_cf": 1,
+         "transcription": "Lacroix J↑n↓ Louis"
+      },
+      "owners": [
+         {
+            "owner-id": 1,
+            "owner-lastname": "Lacroix",
+            "owner-firstname": "J↑n↓ Louis",
+            "is-stripped": "no"
+         }
+      ],
+      "changes": []
+   }
+]
