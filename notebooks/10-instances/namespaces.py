@@ -21,8 +21,9 @@ owneruri = Namespace("http://data.ign.fr/id/owner/")
 ## cadastre
 cad_atype = Namespace("http://data.ign.fr/id/codes/cadastre/attributeType/")
 cad_ltype = Namespace("http://data.ign.fr/id/codes/cadastre/landmarkType/")
-srctype = Namespace("http://data.ign.fr/id/codes/cadastre/sourceType/")
 cad_act = Namespace("http://data.ign.fr/id/codes/cadastre/activity/")
+cad_etype = Namespace("http://data.ign.fr/id/codes/cadastre/eventType/")
+srctype = Namespace("http://data.ign.fr/id/codes/cadastre/sourceType/")
 mlclasse = Namespace("http://data.ign.fr/id/codes/cadastre/mlClasse/")
 pnature = Namespace("http://data.ign.fr/id/codes/cadastre/plotNature/")
 
