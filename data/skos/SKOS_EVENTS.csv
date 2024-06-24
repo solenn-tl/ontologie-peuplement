@@ -1,8 +1,8 @@
 skos:Concept,rdf:type,skos:inScheme,skos:broader,skos:prefLabel@fr,skos:prefLabel@en,skos:altLabel@fr,skos:altLabel@en,skos:hiddenLabel,skos:definition@fr
 EventMentionnedinFoliosColumns,Event,CadastreEventList,,Evènement mentionné dans les colonnes dédiées aux folios,,,,,Evènement mentionné explicitement dans les colonnes 'Tiré de' et 'Porté à' des matrices cadastrales
-OwnerMutation,Event,CadastreEventList,,Mutation de propriétaire,,,,,
-Sale,Event,CadastreEventList,OwnerMutation,Vente,,,,,
-Sucession,Event,CadastreEventList,OwnerMutation,Sucession,,,,,
+TaxpayerMutation,Event,CadastreEventList,,Mutation de propriétaire,,,,,
+Sale,Event,CadastreEventList,TaxpayerMutation,Vente,,,,,
+Sucession,Event,CadastreEventList,TaxpayerMutation,Sucession,,,,,
 PlotNatureEvent,Event,CadastreEventList,,Evènement impliquant la nature d'une parcelle,,,,,Evènement impliquant la nature de la parcelle ou les objets qu'elle contient
 ChangeWithoutConstruction,Event,CadastreEventList,PlotNatureEvent,Evolution de nature n'impliquant pas de bâtiment,,,,,
 Construction,Event,CadastreEventList,PlotNatureChange,Construction d'un bâtiment,,,,,

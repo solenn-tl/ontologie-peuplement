@@ -15,14 +15,16 @@ ogc = Namespace("http://www.opengis.net/def/crs/OGC/1.3/")
 #Objet URI
 landmarkuri = Namespace("http://data.ign.fr/id/landmark/")
 srcuri = Namespace("http://data.ign.fr/id/source/")
-owneruri = Namespace("http://data.ign.fr/id/owner/")
+owneruri = Namespace("http://data.ign.fr/id/taxpayer/")
+eventuri = Namespace("http://data.ign.fr/id/event/")
 
 #SKOS URIs
 ## cadastre
 cad_atype = Namespace("http://data.ign.fr/id/codes/cadastre/attributeType/")
 cad_ltype = Namespace("http://data.ign.fr/id/codes/cadastre/landmarkType/")
-cad_act = Namespace("http://data.ign.fr/id/codes/cadastre/activity/")
 cad_etype = Namespace("http://data.ign.fr/id/codes/cadastre/eventType/")
+cad_act = Namespace("http://data.ign.fr/id/codes/cadastre/activity/")
+cad_spval = Namespace("http://data.ign.fr/id/codes/cadastrenap/specialCellValue/")
 srctype = Namespace("http://data.ign.fr/id/codes/cadastre/sourceType/")
 mlclasse = Namespace("http://data.ign.fr/id/codes/cadastre/mlClasse/")
 pnature = Namespace("http://data.ign.fr/id/codes/cadastre/plotNature/")
