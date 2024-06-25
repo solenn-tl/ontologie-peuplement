@@ -46,3 +46,25 @@ select ?id where { GRAPH <http://data.ign.fr/coreplots/>{
 }
 order by ?id
 ```
+
+## Test en cours
+PREFIX cad: <http://data.ign.fr/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX atype: <http://rdf.geohistoricaldata.org/id/codes/address/attributeType/>
+
+select ?id ?geom ?attrV ?changeStart
+where { 
+	GRAPH <http://data.ign.fr/coreplots/>{
+	?s a add:Landmark .
+    ?s add:isLandmarkType cad_ltype:Plot.
+    ?s dcterms:identifier ?id .
+    ?s add:hasAttribute ?attr .
+    ?attr add:isAttributeType atype:Geometry.
+    ?attr add:hasAttributeVersion ?attrV .
+    ?attrV add:versionValue ?geom .
+    ?attrV add:isMadeEffectiveBy ?changeStart .
+	}
+}
+order by ?id
