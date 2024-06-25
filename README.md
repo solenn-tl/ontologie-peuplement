@@ -5,8 +5,6 @@ Création et peuplement de l'ontologie Pégazus, partie dédiée au cadastre
 Données : [Google Sheet](https://docs.google.com/spreadsheets/d/1I5Iy_sSkPHP_hcMSNP5uNXh6lLaVKuJtE3nlpzjQRqs/edit#gid=1716512529)
 
 ## URI
-
-## Graphes nommés
 * Ontologie
 ```sparql
 http://data.ign.fr/def/cadastre#
@@ -41,7 +39,25 @@ http://data.ign.fr/id/codes/cadastre/sourceType/
 # Classes de machine learning
 http://data.ign.fr/id/codes/cadastre/mlClasse/
 ```
-## Ollama
+## Graphes nommés
+* Ontologie
+```sparql
+http://data.ign.fr/ontology/
+``` 
+* Parcelles (main)
+```sparql
+http://data.ign.fr/coreplots/
+``` 
+* Parcelles (articles de classement)
+```sparql
+http://data.ign.fr/plotsstates/
+``` 
+* Sources et propriétaires
+```sparql
+http://data.ign.fr/sources_and_owners/
+``` 
+## Installations
+### Ollama
 * Installation
 ```
 curl -fsSL https://ollama.com/install.sh | sh
