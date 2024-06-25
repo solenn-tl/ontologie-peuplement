@@ -52,6 +52,10 @@ http://data.ign.fr/coreplots/
 ```sparql
 http://data.ign.fr/plotsstates/
 ``` 
+* Autres landmarks
+```sparql
+http://data.ign.fr/otherslandmarks/
+``` 
 * Sources et propriétaires
 ```sparql
 http://data.ign.fr/sources_and_owners/
