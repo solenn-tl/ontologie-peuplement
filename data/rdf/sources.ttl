@@ -16,7 +16,20 @@ source:75_Gentilly_CN80 a rico:Instantiation ;
 
 source:75_Gentilly_digit_CN80 a rico:Instantiation ;
     rico:identifier "digit_CN80" ;
-    rico:isOrWasDigitalInstantiationOf source:75_Gentilly_PLAN_SD_1845 .
+    rico:isOrWasDigitalInstantiationOf source:75_Gentilly_PLAN_SD_1845 ;
+    rico:name "Plan révisé - Section D dite de la Barrière de Fontainebleau (numérisé)" .
+
+source:75_Gentilly_digit_CN80_georef a rico:Instantiation ;
+    cad:isSourceType srctype:PlanGeoreference ;
+    rico:identifier "digit_CN80_georef" ;
+    rico:isOrWasDigitalInstantiationOf source:75_Gentilly_nan ;
+    rico:name "Plan révisé - Section D dite de la Barrière de Fontainebleau (georéférencé)" .
+
+source:75_Gentilly_digit_CN80_vecto a rico:Instantiation ;
+    cad:isSourceType srctype:PlanVectorise ;
+    rico:identifier "digit_CN80_vecto" ;
+    rico:isOrWasDigitalInstantiationOf source:75_Gentilly_nan ;
+    rico:name "Plan révisé - Section D dite de la Barrière de Fontainebleau (vectorisé)" .
 
 source:94_Gentilly_3P255 a rico:Instantiation ;
     rico:hasOrHadDerivedInstanciation source:94_Gentilly_FRAD094_3P_000255_01 ;
@@ -80,133 +93,146 @@ source:94_Gentilly_3P267 a rico:Instantiation ;
 
 source:94_Gentilly_FRAD094_3P_001041 a rico:Instantiation ;
     rico:identifier "FRAD094_3P_001041" ;
-    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_PLAN_SB_1811 .
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_PLAN_SB_1811 ;
+    rico:name "Plan dérelié d'un atlas - Section B du Petit Gentilly (numérisé)" .
 
-<_:N04acec0352f44ca7a4cb8eff07d53473> a add:TimeInstant ;
+source:94_Gentilly_FRAD094_3P_001041_georef a rico:Instantiation ;
+    cad:isSourceType srctype:PlanGeoreference ;
+    rico:identifier "FRAD094_3P_001041_georef" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_nan ;
+    rico:name "Plan dérelié d'un atlas - Section B du Petit Gentilly (géoréférencé)" .
+
+source:94_Gentilly_FRAD094_3P_001041_vecto a rico:Instantiation ;
+    cad:isSourceType srctype:PlanVectorise ;
+    rico:identifier "FRAD094_3P_001041_vecto" ;
+    rico:isOrWasDigitalInstantiationOf source:94_Gentilly_nan ;
+    rico:name "Plan dérelié d'un atlas - Section B du Petit Gentilly (vectorisé)" .
+
+<_:N025d1a449e214f66b7706c17ac5a7fcc> a time:Interval ;
+    add:hasBeginning <_:N2c7b46be33b04644b718104a99c94800> ;
+    add:hasEnd <_:Nfa47007bdc6241cebfc4aa39ba9f3b25> .
+
+<_:N129689fc04e547b287f8d198352b738d> a add:CrispTimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N256e8348798c4ed584613560c1277a67> a time:Interval ;
+    add:hasBeginning <_:Nf0e85016531f46c4b784520628bbef9a> ;
+    add:hasEnd <_:N3de420c2b8374a5a8ee1ed7b59340b34> .
+
+<_:N263eeb72524e4db7812ab7a2382f02b5> a time:Interval ;
+    add:hasBeginning <_:N60c807ccca7e4f5ab45f3b97794150ca> ;
+    add:hasEnd <_:Ncd96a6302c3146edb1eac9e437e7c333> .
+
+<_:N2c7b46be33b04644b718104a99c94800> a add:TimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1813-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N3215a1ae68a94d86b9ab87eb03123e03> a add:CrispTimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N35bbb0960d6343cfb561099481ed11c6> a add:CrispTimeInstant ;
     add:timeCalendar time:Gregorian ;
     add:timePrecision time:Year ;
     add:timeStamp "1848-01-01T00:00:00"^^xsd:dateTimeStamp .
 
-<_:N0686681fe35b42ecbdd4ee9ef3ed29b6> a add:CrispTimeInstant ;
+<_:N3de420c2b8374a5a8ee1ed7b59340b34> add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1941-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N48827e78b7f24bc88cb3796a79e8d78f> a time:Interval ;
+    add:hasBeginning <_:Nbc4f5121e2ff4b3398f2bb85824041e9> ;
+    add:hasEnd <_:Nc48a21839bdc45fbb43f63462f7d82ce> .
+
+<_:N4f99885397db46ef85363a8e286c7a5f> a add:CrispTimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N5fd1e2f1bc0244f3b5cf60efa02f026f> a add:CrispTimeInstant ;
     add:timeCalendar time:Gregorian ;
     add:timePrecision time:Year ;
     add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp .
 
-<_:N0f6a9135784d4c9da0e2d16b1bb56221> a add:TimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N19b2f88b94ae4ea3a27cf5d48d09433f> a time:Interval ;
-    add:hasBeginning <_:Ne8336a651c9840a496980c5d4a8459da> ;
-    add:hasEnd <_:N3cfd9a221f88476ca276f1eb52225524> .
-
-<_:N3cfd9a221f88476ca276f1eb52225524> add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1835-12-31T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N503c52a541294ae18ad97ae6cc5c11b6> add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1835-12-31T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N50a89b271e7740fa9a3639246f27f7a1> a add:TimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N51165f1bc0034904a238b4d7e85d77d5> add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1941-12-31T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N51cf3dd4781e4410ada1fd68c6d8d3fb> a add:CrispTimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N539088d0b73f45509cb6320a59aa1fa9> a add:CrispTimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N57cb82eec06642378501bfb0372c6e22> a add:CrispTimeInstant ;
+<_:N60c807ccca7e4f5ab45f3b97794150ca> a add:TimeInstant ;
     add:timeCalendar time:Gregorian ;
     add:timePrecision time:Year ;
     add:timeStamp "1836-01-01T00:00:00"^^xsd:dateTimeStamp .
 
-<_:N69414edf8a7e4f75bc7be9df7245158f> a add:TimeInstant ;
+<_:N6750110019b44c84bae595ed24739304> a time:Interval ;
+    add:hasBeginning <_:N8a06de6a49014d9ab80d98a4aea9d7c3> ;
+    add:hasEnd <_:N88f60e4c48de4d4fbf5c216bcace8807> .
+
+<_:N88f60e4c48de4d4fbf5c216bcace8807> add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N8a06de6a49014d9ab80d98a4aea9d7c3> a add:TimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N905eb27bc8fe45c88a3a7beb27503037> a time:Interval ;
+    add:hasBeginning <_:Nc07f0a922b3e40ddbcac987fd78cf1d5> ;
+    add:hasEnd <_:Ne590cb4edc2f487fb6fd42bee47b8640> .
+
+<_:N946f8b5e0ca44524b993dbe49054107f> a add:CrispTimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1836-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:N9522ce11be8d499eb64ad7e11d94e8eb> a add:CrispTimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1813-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:Na3d34289fc72428f9d5c6c99f41d9596> a add:TimeInstant ;
     add:timeCalendar time:Gregorian ;
     add:timePrecision time:Year ;
     add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp .
 
-<_:N76fd3daf046a4643a0e7ddc1ff22339f> add:timeCalendar time:Gregorian ;
+<_:Nbc4f5121e2ff4b3398f2bb85824041e9> a add:TimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1811-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:Nc07f0a922b3e40ddbcac987fd78cf1d5> a add:TimeInstant ;
+    add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1848-01-01T00:00:00"^^xsd:dateTimeStamp .
+
+<_:Nc48a21839bdc45fbb43f63462f7d82ce> add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<_:Ncd96a6302c3146edb1eac9e437e7c333> add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1835-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<_:Ne590cb4edc2f487fb6fd42bee47b8640> add:timeCalendar time:Gregorian ;
     add:timePrecision time:Year ;
     add:timeStamp "1859-12-31T00:00:00"^^xsd:dateTimeStamp .
 
-<_:N7a48121eb58a412f9d2d0443234bac0e> a time:Interval ;
-    add:hasBeginning <_:N69414edf8a7e4f75bc7be9df7245158f> ;
-    add:hasEnd <_:Nd9ecf42472694f1eb15bddca590d3098> .
-
-<_:N7ebf3263e907411da0b8dc1208f6fc7e> add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp .
-
-<_:N9635236747454679b8cc89bef7b5ba81> a time:Interval ;
-    add:hasBeginning <_:Ne245513653b341e18a94279ac4ab5b16> ;
-    add:hasEnd <_:N503c52a541294ae18ad97ae6cc5c11b6> .
-
-<_:N971f1b1b06ca4e8aaf7085ddc2207d4b> a add:CrispTimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:Na9db2a5f7c4946b7b4e88db3e2c5cb33> a time:Interval ;
-    add:hasBeginning <_:N0f6a9135784d4c9da0e2d16b1bb56221> ;
-    add:hasEnd <_:Nca7fadcd15154666b8ff4ff6d233e720> .
-
-<_:Nb5a2c9b47309418681b4a58222510ae4> a time:Interval ;
-    add:hasBeginning <_:N04acec0352f44ca7a4cb8eff07d53473> ;
-    add:hasEnd <_:N76fd3daf046a4643a0e7ddc1ff22339f> .
-
-<_:Nc2118e5ee02d4928b5442f16038fd92e> a add:CrispTimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1848-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:Nc91937861533406cb6d42d76c284a17b> a time:Interval ;
-    add:hasBeginning <_:N50a89b271e7740fa9a3639246f27f7a1> ;
-    add:hasEnd <_:N7ebf3263e907411da0b8dc1208f6fc7e> .
-
-<_:Nca7fadcd15154666b8ff4ff6d233e720> add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1847-12-31T00:00:00"^^xsd:dateTimeStamp .
-
-<_:Nd9ecf42472694f1eb15bddca590d3098> add:timeCalendar time:Gregorian ;
+<_:Ne69ab48627874a3c84b225c96c629b34> add:timeCalendar time:Gregorian ;
     add:timePrecision time:Year ;
     add:timeStamp "1941-12-31T00:00:00"^^xsd:dateTimeStamp .
 
-<_:Ne245513653b341e18a94279ac4ab5b16> a add:TimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1836-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:Ne8336a651c9840a496980c5d4a8459da> a add:TimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1813-01-01T00:00:00"^^xsd:dateTimeStamp .
-
-<_:Nf4f065e076e7407884a6906cfb1d9def> a add:TimeInstant ;
+<_:Nf0e85016531f46c4b784520628bbef9a> a add:TimeInstant ;
     add:timeCalendar time:Gregorian ;
     add:timePrecision time:Year ;
     add:timeStamp "1845-01-01T00:00:00"^^xsd:dateTimeStamp .
 
-<_:Nf97eb70253be4abdab000514b3de3cfa> a add:CrispTimeInstant ;
-    add:timeCalendar time:Gregorian ;
-    add:timePrecision time:Year ;
-    add:timeStamp "1813-01-01T00:00:00"^^xsd:dateTimeStamp .
+<_:Nf469f2c76d5f41c097bddc58ef6fa8be> a time:Interval ;
+    add:hasBeginning <_:Na3d34289fc72428f9d5c6c99f41d9596> ;
+    add:hasEnd <_:Ne69ab48627874a3c84b225c96c629b34> .
 
-<_:Nfe850224bdaf4887b19694781fe0ce2c> a time:Interval ;
-    add:hasBeginning <_:Nf4f065e076e7407884a6906cfb1d9def> ;
-    add:hasEnd <_:N51165f1bc0034904a238b4d7e85d77d5> .
+<_:Nfa47007bdc6241cebfc4aa39ba9f3b25> add:timeCalendar time:Gregorian ;
+    add:timePrecision time:Year ;
+    add:timeStamp "1835-12-31T00:00:00"^^xsd:dateTimeStamp .
 
 source:94_Gentilly_3P1041 a rico:Instantiation ;
     cad:isSourceType srctype:PlanParcellaireIssuDAtlas ;
@@ -218,8 +244,8 @@ source:94_Gentilly_3P1041 a rico:Instantiation ;
 
 source:94_Gentilly_CAD2 a rico:RecordSet ;
     cad:isSourceType srctype:Cadastre ;
-    add:hasTime <_:N7a48121eb58a412f9d2d0443234bac0e> ;
-    rico:hasCreationDate <_:N0686681fe35b42ecbdd4ee9ef3ed29b6> ;
+    add:hasTime <_:Nf469f2c76d5f41c097bddc58ef6fa8be> ;
+    rico:hasCreationDate <_:N5fd1e2f1bc0244f3b5cf60efa02f026f> ;
     rico:identifier "CAD2" ;
     rico:location "Gentilly" ;
     rico:name "Second cadastre de Gentilly" .
@@ -266,8 +292,8 @@ source:94_Gentilly_FRAD094_3P_000267_01 a rico:Instantiation ;
 
 source:75_Gentilly_PLAN_SD_1845 a rico:RecordSet ;
     cad:isSourceType srctype:PlanParcellaire ;
-    add:hasTime <_:Nfe850224bdaf4887b19694781fe0ce2c> ;
-    rico:hasCreationDate <_:N971f1b1b06ca4e8aaf7085ddc2207d4b> ;
+    add:hasTime <_:N256e8348798c4ed584613560c1277a67> ;
+    rico:hasCreationDate <_:N129689fc04e547b287f8d198352b738d> ;
     rico:identifier "PLAN_SD_1845" ;
     rico:isOrWasIncludedIn source:75_Gentilly_CAD2 ;
     rico:location "Gentilly" ;
@@ -275,8 +301,8 @@ source:75_Gentilly_PLAN_SD_1845 a rico:RecordSet ;
 
 source:94_Gentilly_MAT_B_NB_1813 a rico:RecordSet ;
     cad:isSourceType srctype:MatriceCadastrale1807_1822_Bati_NonBati ;
-    add:hasTime <_:N19b2f88b94ae4ea3a27cf5d48d09433f> ;
-    rico:hasCreationDate <_:Nf97eb70253be4abdab000514b3de3cfa> ;
+    add:hasTime <_:N025d1a449e214f66b7706c17ac5a7fcc> ;
+    rico:hasCreationDate <_:N9522ce11be8d499eb64ad7e11d94e8eb> ;
     rico:identifier "MAT_B_NB_1813" ;
     rico:isOrWasIncludedIn source:94_Gentilly_CAD1 ;
     rico:location "Gentilly" ;
@@ -284,8 +310,8 @@ source:94_Gentilly_MAT_B_NB_1813 a rico:RecordSet ;
 
 source:94_Gentilly_PLAN_SB_1811 a rico:RecordSet ;
     cad:isSourceType srctype:PlanParcellaire ;
-    add:hasTime <_:Na9db2a5f7c4946b7b4e88db3e2c5cb33> ;
-    rico:hasCreationDate <_:N539088d0b73f45509cb6320a59aa1fa9> ;
+    add:hasTime <_:N6750110019b44c84bae595ed24739304> ;
+    rico:hasCreationDate <_:N3215a1ae68a94d86b9ab87eb03123e03> ;
     rico:identifier "PLAN_SB_1811" ;
     rico:isOrWasIncludedIn source:94_Gentilly_CAD1 ;
     rico:location "Gentilly" ;
@@ -293,16 +319,16 @@ source:94_Gentilly_PLAN_SB_1811 a rico:RecordSet ;
 
 source:94_Gentilly_CAD1 a rico:RecordSet ;
     cad:isSourceType srctype:Cadastre ;
-    add:hasTime <_:Nc91937861533406cb6d42d76c284a17b> ;
-    rico:hasCreationDate <_:N51cf3dd4781e4410ada1fd68c6d8d3fb> ;
+    add:hasTime <_:N48827e78b7f24bc88cb3796a79e8d78f> ;
+    rico:hasCreationDate <_:N4f99885397db46ef85363a8e286c7a5f> ;
     rico:identifier "CAD1" ;
     rico:location "Gentilly" ;
     rico:name "Premier cadastre de Gentilly" .
 
 source:94_Gentilly_MAT_NB_1836 a rico:RecordSet ;
     cad:isSourceType srctype:MatriceCadastrale1822_1914_NonBati ;
-    add:hasTime <_:N9635236747454679b8cc89bef7b5ba81> ;
-    rico:hasCreationDate <_:N57cb82eec06642378501bfb0372c6e22> ;
+    add:hasTime <_:N263eeb72524e4db7812ab7a2382f02b5> ;
+    rico:hasCreationDate <_:N946f8b5e0ca44524b993dbe49054107f> ;
     rico:identifier "MAT_NB_1836" ;
     rico:isOrWasIncludedIn source:94_Gentilly_CAD1 ;
     rico:location "Gentilly" ;
@@ -310,8 +336,8 @@ source:94_Gentilly_MAT_NB_1836 a rico:RecordSet ;
 
 source:94_Gentilly_MAT_NB_1848 a rico:RecordSet ;
     cad:isSourceType srctype:MatriceCadastrale1822_1914_NonBati ;
-    add:hasTime <_:Nb5a2c9b47309418681b4a58222510ae4> ;
-    rico:hasCreationDate <_:Nc2118e5ee02d4928b5442f16038fd92e> ;
+    add:hasTime <_:N905eb27bc8fe45c88a3a7beb27503037> ;
+    rico:hasCreationDate <_:N35bbb0960d6343cfb561099481ed11c6> ;
     rico:identifier "MAT_NB_1848" ;
     rico:isOrWasIncludedIn source:94_Gentilly_CAD2 ;
     rico:location "Gentilly" ;

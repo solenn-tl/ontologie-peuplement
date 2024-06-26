@@ -19,6 +19,7 @@ landmarkuri = Namespace("http://data.ign.fr/id/landmark/")
 srcuri = Namespace("http://data.ign.fr/id/source/")
 owneruri = Namespace("http://data.ign.fr/id/taxpayer/")
 eventuri = Namespace("http://data.ign.fr/id/event/")
+changeuri = Namespace("http://data.ign.fr/id/change/")
 
 #SKOS URIs
 ## cadastre

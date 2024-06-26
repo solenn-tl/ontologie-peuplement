@@ -19,6 +19,8 @@ http://data.ign.fr/id/source/
 http://data.ign.fr/id/taxpayer/
 # Evenement (Event)
 http://data.ign.fr/id/event/
+# Change
+http://data.ign.fr/id/change/
 ```
 * Codes 
 ```sparql

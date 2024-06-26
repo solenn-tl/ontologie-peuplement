@@ -34,3 +34,15 @@ activity:0003 a prov:Activity ;
             foaf:familyName "Tual"^^xsd:string ;
             foaf:firstName "Solenn"^^xsd:string ] .
 
+activity:0004 a prov:Activity ;
+    rdfs:label "Géoréférencement des plans du cadastre napoléonien du 94"^^xsd:string ;
+    prov:endedAtTime "2015-03-17T00:00:00"^^xsd:dateTimeStamp ;
+    prov:wasAssociatedWith [ a prov:Agent ;
+            rdfs:label "Service départemental d'Archéologie du Val-de-Marne"^^xsd:string ] .
+
+activity:0005 a prov:Activity ;
+    rdfs:label "Géoréférencement des plans du cadastre napoléonien des communes annexées"^^xsd:string ;
+    prov:endedAtTime "2023-05-16T00:00:00"^^xsd:dateTimeStamp ;
+    prov:wasAssociatedWith [ a prov:Agent ;
+            rdfs:label "Pairs Time Machine"^^xsd:string ] .
+

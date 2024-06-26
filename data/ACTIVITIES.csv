@@ -1,7 +1,11 @@
 ID,rdf:type,rdfs:label,rdfs:comment,prov:wasAssociatedWith,foaf:firstName,foaf:familyName,prov:startedAtTime,prov:endedAtTime
-0001,prov:Activity,Vectorisation manuelle des plans parcellaires,,e66d803d-3a08-46e1-bc00-6e0959d08881,,,2024-06-19,2024-06-19
-0002,prov:Activity,Transcription manuelle des registres,,e66d803d-3a08-46e1-bc00-6e0959d08881,,,2024-03-04,2024-03-29
-0003,prov:Activity,Recallage de plans parcellaires géoréférencés,,e66d803d-3a08-46e1-bc00-6e0959d08881,,,2024-04-15,2024-04-15
-e66d803d-3a08-46e1-bc00-6e0959d08881,prov:Agent;foaf:Person,Solenn Tual,,,Solenn,Tual,,
-53197a39-8ab7-45a9-a56c-e712b4811f06,prov:SoftwareAgent,DAN,"Document Attention Network (proposé par Denis Coquenet et al., développé par TEKLIA)",,,,,
-fde42e1b-a46d-4efa-aaf6-f673360bb7d1,prov:SoftwareAgent,Classifieur,Modèle de deep learning de détection et classification de zones,,,,,
+0001,prov:Activity,Vectorisation manuelle des plans parcellaires,,7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,,,2024-06-19,2024-06-19
+0002,prov:Activity,Transcription manuelle des registres,,7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,,,2024-03-04,2024-03-29
+0003,prov:Activity,Recallage de plans parcellaires géoréférencés,,7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,,,2024-04-15,2024-04-15
+0004,prov:Activity,Géoréférencement des plans du cadastre napoléonien du 94,,c1ca7fba-aa36-45e4-af19-f699ed001e05,,,,2015-03-17
+0005,prov:Activity,Géoréférencement des plans du cadastre napoléonien des communes annexées,,9222844c-1bfb-4096-bad5-cfa79542ab90,,,,2023-05-16
+7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,prov:Agent;foaf:Person,Solenn Tual,,,Solenn,Tual,,
+a00cf3be-fcd8-47fb-8f62-1107ca771965,prov:SoftwareAgent,DAN,"Document Attention Network (proposé par Denis Coquenet et al., développé par TEKLIA)",,,,,
+35e02783-5811-4625-b56b-92e5cb30d7ec,prov:SoftwareAgent,Classifieur,Modèle de deep learning de détection et classification de zones,,,,,
+c1ca7fba-aa36-45e4-af19-f699ed001e05,prov:Agent,Service départemental d'Archéologie du Val-de-Marne,,,,,,
+9222844c-1bfb-4096-bad5-cfa79542ab90,prov:Agent,Pairs Time Machine,,,,,,
