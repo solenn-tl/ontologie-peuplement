@@ -15,12 +15,20 @@ ETSIntermediateSummary,MLClassesList,PageClasses,Page,"Récapitulatif intermédi
 ETSSummary,MLClassesList,PageClasses,Page,Résumé final d'une section,Résumé final d'une section,,,,ets_resume,Page de résumé situé à la fin d'une partie (section) d'un registre d'états de sections
 ETSBlankTab,MLClassesList,PageClasses,Page,Page vide,Page vide,,,,ets_blank,Classe additionnelle. Désigne une page blanche (avec structure pré-imprimée ou non)
 MATMainTable,MLClassesList,PageClasses,Page,Page de tableau principal,Page de tableau principal,,,,mat_main_tab,Page contenant un tableau principal dans une matrice
-EntityTypes,MLClassesList,,,Types d'entités,Types d'entités,,,,,Correspond aux classes des éléments textuels transcrits dans les documents (champs du formulaire d'annotation)
-ETSEntityTypes,MLClassesList,EntityTypes,,Types d'entités présentes dans les états de sections,Types d'entités présentes dans les états de sections,,,,,Entités spécifiques aux états de sections
-PreviousNature,MLClassesList,ets_EntityTypes,,Ancienne nature de la parcelle,Ancienne nature de la parcelle,,,,ancienne_nature,"Entité spécifique aux états de sections du cadastre rénové de la Seine (1835-1845), décrit la nature de la parcelle dans l'état de sections précédent"
-PreviousPlotNumber,MLClassesList,ets_EntityTypes,,Ancien numéro de parcelle,Ancien numéro de parcelle,,,,ancien_numero_parcelle,"Entité spécifique aux états de sections du cadastre rénové de la Seine (1835-1845), indique le numéro de la parcelle dans l'état de sections précédent"
-Owner,MLClassesList,ets_EntityTypes,,Propriétaire,Propriétaire,,,,identite,Localisation de la parcelle à l'échelle d'un lieu-dit ou d'une adresse
-NamedPlace,MLClassesList,ets_EntityTypes,,Lieu-dit ou adresse,Lieu-dit ou adresse,,,,lieu_dit,Propriétaire ou usufruitier de la parcelle
-Nature,MLClassesList,ets_EntityTypes,,Nature,Nature,,,,nature,Nature de la parcelle
-PlotNumber,MLClassesList,ets_EntityTypes,,Numéro de parcelle,Numéro de parcelle,,,,numero_parcelle,Numéro de la parcelle
-OwnerNumber,MLClassesList,ets_EntityTypes,,Numéro de folio du propriétaire,Numéro de folio du propriétaire,,,,numero_proprietaire,Numéro de folio du propriétaire dans la matrice suivant immédiatement l'état de sections
+NamedEntityTypes,MLClassesList,,,Types d'entités,Types d'entités,,,,,Correspond aux classes des éléments textuels transcrits dans les documents (champs du formulaire d'annotation)
+ETSEntityTypes,MLClassesList,NamedEntityTypes,,Types d'entités présentes dans les états de sections,Types d'entités présentes dans les états de sections,,,,,Entités spécifiques aux états de sections
+MATEntityTypes,MLClassesList,NamedEntityTypes,,Types d'entités présentes dans les matrices,Types d'entités présentes dans les matrices,,,,,
+PreviousNature,MLClassesList,NamedEntityTypes,,Ancienne nature de la parcelle,Ancienne nature de la parcelle,,,,ancienne_nature,"Entité spécifique aux états de sections du cadastre rénové de la Seine (1835-1845), décrit la nature de la parcelle dans l'état de sections précédent"
+PreviousPlotNumber,MLClassesList,NamedEntityTypes,,Ancien numéro de parcelle,Ancien numéro de parcelle,,,,ancien_numero_parcelle,"Entité spécifique aux états de sections du cadastre rénové de la Seine (1835-1845), indique le numéro de la parcelle dans l'état de sections précédent"
+Owner,MLClassesList,NamedEntityTypes,,Propriétaire,Propriétaire,,,,identite,Localisation de la parcelle à l'échelle d'un lieu-dit ou d'une adresse
+NamedPlace,MLClassesList,NamedEntityTypes,,Lieu-dit ou adresse,Lieu-dit ou adresse,,,,lieu_dit,Propriétaire ou usufruitier de la parcelle
+Nature,MLClassesList,NamedEntityTypes,,Nature,Nature,,,,nature,Nature de la parcelle
+PlotNumber,MLClassesList,NamedEntityTypes,,Numéro de parcelle,Numéro de parcelle,,,,numero_parcelle,Numéro de la parcelle
+OwnerNumber,MLClassesList,NamedEntityTypes,,Numéro de folio du propriétaire,Numéro de folio du propriétaire,,,,numero_proprietaire,Numéro de folio du propriétaire dans la matrice suivant immédiatement l'état de sections
+SectionIdentifier,MLClassesList,NamedEntityTypes,,Identifiant de section,Identifiant de section,,,,section,Indentifiant de la section dans laquelle se trouve la parcelle
+TakenFrom,MLClassesList,NamedEntityTypes,,Tiré de,Tiré de,,,,tire_de,
+PassedTo,MLClassesList,NamedEntityTypes,,Porté à,Porté à,,,,porte_a,
+StartTime,MLClassesList,NamedEntityTypes,,Date d'entrée,Date d'entrée,,,,date_entree,
+EndTime,MLClassesList,NamedEntityTypes,,Date de sortie,Date de sortie,,,,date_sortie,
+TextStyles,MLClassesList,,,Style du texte,,,,,,
+CrossedOut,MLClassesList,TextStyles,,Texte barré/rayé,Texte barré/rayé,,,,~~~~,
