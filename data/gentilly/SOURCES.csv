@@ -1,36 +1,37 @@
-CODE_ARCHIVES,rdf:type,rico:name,rico:location,rico:identifier,rsfs:comment,isSourceType,hasCreationDate,hasValidTime/hasBeginning,hasValidTime/hasEnd,rico:isOrWasIncludedIn,rico:isOrWasInstantiationOf,rico:isOrWasDigitalInstantiationOf,rico:hasOrHadDerivedInstanciation,rico:hasOrHadPhysicalLocation
-94,RecordSet,Matrices des propriétés bâties et non bâties,Gentilly,MAT_B_NB_1813,,MatriceCadastrale1807_1822_Bati_NonBati,1813,1813,1835,CAD1,,,,
-94,Instanciation,,Gentilly,3P255,Contient les folios NB : 1-542 ; B : 1-166,,,,,,MAT_B_NB_1813,,FRAD094_3P_000255_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,FRAD094_3P_000255_01,,,,,,,,MAT_B_NB_1813,,
-94,RecordSet,Matrice des propriétés foncières (1836-1848),Gentilly,MAT_NB_1836,,MatriceCadastrale1822_1914_NonBati,1836,1836,1835,CAD1,,,,
-94,Instanciation,,Gentilly,3P256,Contient les folios 1-480,,,,,,MAT_NB_1836,,FRAD094_3P_000256_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,3P257,Contient les folios 481-980,,,,,,MAT_NB_1836,,FRAD094_3P_000257_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,3P258,Contient les folios 981-1150,,,,,,MAT_NB_1836,,FRAD094_3P_000258_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,FRAD094_3P_000256_01,,,,,,,,MAT_NB_1836,,
-94,Instanciation,,Gentilly,FRAD094_3P_000257_01,,,,,,,,MAT_NB_1836,,
-94,Instanciation,,Gentilly,FRAD094_3P_000258_01,,,,,,,,MAT_NB_1836,,
-94,RecordSet,Matrice des propriétés foncières (1848-1860),Gentilly,MAT_NB_1848,,MatriceCadastrale1822_1914_NonBati,1848,1848,1859,CAD2,,,,
-94,Instanciation,,Gentilly,3P259,Contient les folios 1-500,,,,,,MAT_NB_1848,,FRAD094_3P_000259_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,3P263,,,,,,,MAT_NB_1848,,FRAD094_3P_000263_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,3P264,,,,,,,MAT_NB_1848,,FRAD094_3P_000264_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,3P265,,,,,,,MAT_NB_1848,,FRAD094_3P_000265_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,3P266,,,,,,,MAT_NB_1848,,FRAD094_3P_000266_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,3P267,,,,,,,MAT_NB_1848,,FRAD094_3P_000267_01,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,,Gentilly,FRAD094_3P_000259_01,,,,,,,,MAT_NB_1848,,
-94,Instanciation,,Gentilly,FRAD094_3P_000263_01,,,,,,,,MAT_NB_1848,,
-94,Instanciation,,Gentilly,FRAD094_3P_000264_01,,,,,,,,MAT_NB_1848,,
-94,Instanciation,,Gentilly,FRAD094_3P_000265_01,,,,,,,,MAT_NB_1848,,
-94,Instanciation,,Gentilly,FRAD094_3P_000266_01,,,,,,,,MAT_NB_1848,,
-94,Instanciation,,Gentilly,FRAD094_3P_000267_01,,,,,,,,MAT_NB_1848,,
-94,RecordSet,Premier cadastre de Gentilly,Gentilly,CAD1,Premier cadastre de Gentilly,Cadastre,1811,1811,1847,,,,,
-94,RecordSet,Second cadastre de Gentilly,Gentilly,CAD2,Second cadastre de Gentilly,Cadastre,1845,1845,1941,,,,,
-94,Record,Plan parcellaire de la section B du Petit Gentilly,Gentilly,PLAN_SB_1811,Le tableau d'assemblage de la commune a été achevé le 26 juin 1811,PlanParcellaire,1811,1811,1847,CAD1,,,,
-94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly,Gentilly,3P1041,,PlanParcellaireIssuDAtlas,,,,,PLAN_SB_1811,,3P1041,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly (numérisé),Gentilly,FRAD094_3P_001041,,,,,,,,PLAN_SB_1811,FRAD094_3P_001041_georef;FRAD094_3P_001041_vecto,Archives Départementales du Val-de-Marne (94)
-94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly (géoréférencé),Gentilly,FRAD094_3P_001041_georef,PlanGeoreference,PlanGeoreference,,,,,,,,
-94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly (vectorisé),Gentilly,FRAD094_3P_001041_vecto,PlanVectorise,PlanVectorise,,,,,,,,
-75,Record,Plan parcellaire de la section D dite de la Barrière de Fontainebleau,Gentilly,PLAN_SD_1845,,PlanParcellaire,1845,1845,1941,CAD2,,,,
-75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau,Gentilly,CN80,,PlanParcellaireFinal,,,,,PLAN_SD_1845,,CN80_digit,Archives de Paris
-75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau (numérisé),Gentilly,digit_CN80,,,,,,,,PLAN_SD_1845,digit_CN80_georef;digit_CN80_vecto,Archives de Paris
-75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau (georéférencé),Gentilly,digit_CN80_georef,,PlanGeoreference,,,,,,,,
-75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau (vectorisé),Gentilly,digit_CN80_vecto,,PlanVectorise,,,,,,,,
+CODE_ARCHIVES,rdf:type,rico:name,rico:location,rico:identifier,rsfs:comment,isSourceType,hasCreationDate,hasValidTime/hasBeginning,hasValidTime/hasEnd,rico:isOrWasIncludedIn,rico:isOrWasInstantiationOf,rico:isOrWasDigitalInstantiationOf,rico:hasOrHadDerivedInstanciation,rico:hasOrHadPhysicalLocation,prov:wasGeneratedBy
+94,RecordSet,Matrices des propriétés bâties et non bâties,Gentilly,MAT_B_NB_1813,,MatriceCadastrale1807_1822_Bati_NonBati,1813,1813,1835,CAD1,,,,,
+94,Instanciation,,Gentilly,3P255,Contient les folios NB : 1-542 ; B : 1-166,,,,,,MAT_B_NB_1813,,FRAD094_3P_000255_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,FRAD094_3P_000255_01,,,,,,,,MAT_B_NB_1813,,,
+94,RecordSet,Matrice des propriétés foncières (1836-1848),Gentilly,MAT_NB_1836,,MatriceCadastrale1822_1914_NonBati,1836,1836,1835,CAD1,,,,,
+94,Instanciation,,Gentilly,3P256,Contient les folios 1-480,,,,,,MAT_NB_1836,,FRAD094_3P_000256_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,3P257,Contient les folios 481-980,,,,,,MAT_NB_1836,,FRAD094_3P_000257_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,3P258,Contient les folios 981-1150,,,,,,MAT_NB_1836,,FRAD094_3P_000258_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,FRAD094_3P_000256_01,,,,,,,,MAT_NB_1836,,,
+94,Instanciation,,Gentilly,FRAD094_3P_000257_01,,,,,,,,MAT_NB_1836,,,
+94,Instanciation,,Gentilly,FRAD094_3P_000258_01,,,,,,,,MAT_NB_1836,,,
+94,RecordSet,Matrice des propriétés foncières (1848-1860),Gentilly,MAT_NB_1848,,MatriceCadastrale1822_1914_NonBati,1848,1848,1859,CAD2,,,,,
+94,Instanciation,,Gentilly,3P259,Contient les folios 1-500,,,,,,MAT_NB_1848,,FRAD094_3P_000259_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,3P263,,,,,,,MAT_NB_1848,,FRAD094_3P_000263_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,3P264,,,,,,,MAT_NB_1848,,FRAD094_3P_000264_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,3P265,,,,,,,MAT_NB_1848,,FRAD094_3P_000265_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,3P266,,,,,,,MAT_NB_1848,,FRAD094_3P_000266_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,3P267,,,,,,,MAT_NB_1848,,FRAD094_3P_000267_01,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,,Gentilly,FRAD094_3P_000259_01,,,,,,,,MAT_NB_1848,,,
+94,Instanciation,,Gentilly,FRAD094_3P_000263_01,,,,,,,,MAT_NB_1848,,,
+94,Instanciation,,Gentilly,FRAD094_3P_000264_01,,,,,,,,MAT_NB_1848,,,
+94,Instanciation,,Gentilly,FRAD094_3P_000265_01,,,,,,,,MAT_NB_1848,,,
+94,Instanciation,,Gentilly,FRAD094_3P_000266_01,,,,,,,,MAT_NB_1848,,,
+94,Instanciation,,Gentilly,FRAD094_3P_000267_01,,,,,,,,MAT_NB_1848,,,
+94,RecordSet,Premier cadastre de Gentilly,Gentilly,CAD1,Premier cadastre de Gentilly,Cadastre,1811,1811,1847,,,,,,
+94,RecordSet,Second cadastre de Gentilly,Gentilly,CAD2,Second cadastre de Gentilly,Cadastre,1845,1845,1941,,,,,,
+94,Record,Plan parcellaire de la section B du Petit Gentilly,Gentilly,PLAN_SB_1811,Le tableau d'assemblage de la commune a été achevé le 26 juin 1811,PlanParcellaire,1811,1811,1847,CAD1,,,,,
+94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly,Gentilly,3P1041,,PlanParcellaireIssuDAtlas,,,,,PLAN_SB_1811,,3P1041,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly (numérisé),Gentilly,FRAD094_3P_001041,,,,,,,,PLAN_SB_1811,FRAD094_3P_001041_georef;FRAD094_3P_001041_vecto,Archives Départementales du Val-de-Marne (94),
+94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly (géoréférencé),Gentilly,FRAD094_3P_001041_georef,,PlanGeoreference,,,,,,,,Service départementale d'Archéologie du Val-de-Marne (94),0004
+94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly (géoréférencé + recallé),Gentilly,FRAD094_3P_001041_georef_2,,PlanGeoreference,,,,,,,,,0003
+94,Instanciation,Plan dérelié d'un atlas - Section B du Petit Gentilly (vectorisé),Gentilly,FRAD094_3P_001041_vecto,,PlanVectorise,,,,,,,,,0006
+75,Record,Plan parcellaire de la section D dite de la Barrière de Fontainebleau,Gentilly,PLAN_SD_1845,,PlanParcellaire,1845,1845,1941,CAD2,,,,,
+75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau,Gentilly,CN80,,PlanParcellaireFinal,,,,,PLAN_SD_1845,,CN80_digit,Archives de Paris,
+75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau (numérisé),Gentilly,digit_CN80,,,,,,,,PLAN_SD_1845,digit_CN80_georef;digit_CN80_vecto,Archives de Paris,
+75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau (georéférencé),Gentilly,digit_CN80_georef,,PlanGeoreference,,,,,,,,Fabrique Numérique du Passé,0005
+75,Instanciation,Plan révisé - Section D dite de la Barrière de Fontainebleau (vectorisé),Gentilly,digit_CN80_vecto,,PlanVectorise,,,,,,,,,0006
