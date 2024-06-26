@@ -42,19 +42,23 @@ http://data.ign.fr/id/codes/cadastre/sourceType/
 http://data.ign.fr/id/codes/cadastre/mlClasse/
 ```
 ## Graphes nommés
-* Ontologie
+* Ontologie (+ activités)
 ```sparql
 http://data.ign.fr/ontology/
 ``` 
-* Parcelles (main)
+* Parcelles (versionnées = graphe noyau)
 ```sparql
-http://data.ign.fr/coreplots/
+http://data.ign.fr/plots/
 ``` 
-* Parcelles (articles de classement)
+* Parcelles (états initiaux créés à partir des plans)
 ```sparql
-http://data.ign.fr/plotsstates/
+http://data.ign.fr/plots/frommaps/
 ``` 
-* Autres landmarks
+* Parcelles (états issus des articles de classement)
+```sparql
+http://data.ign.fr/plots/fromregisters/
+``` 
+* Autres landmarks (communes, sections, lieux-dits, etc.)
 ```sparql
 http://data.ign.fr/otherslandmarks/
 ``` 
