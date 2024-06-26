@@ -5,9 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 activity:0001 a prov:Activity ;
-    rdfs:label "Vectorisation manuelle des plans parcellaires"^^xsd:string ;
-    prov:endedAtTime "2024-06-19T00:00:00"^^xsd:dateTimeStamp ;
-    prov:startedAtTime "2024-06-19T00:00:00"^^xsd:dateTimeStamp ;
+    rdfs:label "Classification manuelle des pages de registres"^^xsd:string ;
     prov:wasAssociatedWith [ a prov:Agent,
                 foaf:Person ;
             rdfs:label "Solenn Tual"^^xsd:string ;
@@ -44,5 +42,15 @@ activity:0005 a prov:Activity ;
     rdfs:label "Géoréférencement des plans du cadastre napoléonien des communes annexées"^^xsd:string ;
     prov:endedAtTime "2023-05-16T00:00:00"^^xsd:dateTimeStamp ;
     prov:wasAssociatedWith [ a prov:Agent ;
-            rdfs:label "Pairs Time Machine"^^xsd:string ] .
+            rdfs:label "Paris Time Machine"^^xsd:string ] .
+
+activity:0006 a prov:Activity ;
+    rdfs:label "Vectorisation manuelle des plans parcellaires"^^xsd:string ;
+    prov:endedAtTime "2024-06-19T00:00:00"^^xsd:dateTimeStamp ;
+    prov:startedAtTime "2024-06-19T00:00:00"^^xsd:dateTimeStamp ;
+    prov:wasAssociatedWith [ a prov:Agent,
+                foaf:Person ;
+            rdfs:label "Solenn Tual"^^xsd:string ;
+            foaf:familyName "Tual"^^xsd:string ;
+            foaf:firstName "Solenn"^^xsd:string ] .
 

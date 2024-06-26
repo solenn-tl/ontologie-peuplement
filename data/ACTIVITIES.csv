@@ -1,11 +1,12 @@
 ID,rdf:type,rdfs:label,rdfs:comment,prov:wasAssociatedWith,foaf:firstName,foaf:familyName,prov:startedAtTime,prov:endedAtTime
-0001,prov:Activity,Vectorisation manuelle des plans parcellaires,,7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,,,2024-06-19,2024-06-19
-0002,prov:Activity,Transcription manuelle des registres,,7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,,,2024-03-04,2024-03-29
-0003,prov:Activity,Recallage de plans parcellaires géoréférencés,,7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,,,2024-04-15,2024-04-15
-0004,prov:Activity,Géoréférencement des plans du cadastre napoléonien du 94,,c1ca7fba-aa36-45e4-af19-f699ed001e05,,,,2015-03-17
-0005,prov:Activity,Géoréférencement des plans du cadastre napoléonien des communes annexées,,9222844c-1bfb-4096-bad5-cfa79542ab90,,,,2023-05-16
-7da2fd27-7dff-4a00-b3e4-6eb9f972d7e9,prov:Agent;foaf:Person,Solenn Tual,,,Solenn,Tual,,
-a00cf3be-fcd8-47fb-8f62-1107ca771965,prov:SoftwareAgent,DAN,"Document Attention Network (proposé par Denis Coquenet et al., développé par TEKLIA)",,,,,
-35e02783-5811-4625-b56b-92e5cb30d7ec,prov:SoftwareAgent,Classifieur,Modèle de deep learning de détection et classification de zones,,,,,
-c1ca7fba-aa36-45e4-af19-f699ed001e05,prov:Agent,Service départemental d'Archéologie du Val-de-Marne,,,,,,
-9222844c-1bfb-4096-bad5-cfa79542ab90,prov:Agent,Pairs Time Machine,,,,,,
+0001,prov:Activity,Classification manuelle des pages de registres,,cf6c4e2f-bcdd-440c-81ac-379cdad50a05,,,,
+0002,prov:Activity,Transcription manuelle des registres,,cf6c4e2f-bcdd-440c-81ac-379cdad50a05,,,2024-03-04,2024-03-29
+0003,prov:Activity,Recallage de plans parcellaires géoréférencés,,cf6c4e2f-bcdd-440c-81ac-379cdad50a05,,,2024-04-15,2024-04-15
+0004,prov:Activity,Géoréférencement des plans du cadastre napoléonien du 94,,026db102-3789-43cf-b357-d24115b2e9d1,,,,2015-03-17
+0005,prov:Activity,Géoréférencement des plans du cadastre napoléonien des communes annexées,,7a7f65af-7bf4-4c75-8200-1633d952e647,,,,2023-05-16
+0006,prov:Activity,Vectorisation manuelle des plans parcellaires,,cf6c4e2f-bcdd-440c-81ac-379cdad50a05,,,2024-06-19,2024-06-19
+cf6c4e2f-bcdd-440c-81ac-379cdad50a05,prov:Agent;foaf:Person,Solenn Tual,,,Solenn,Tual,,
+14ac6f3c-b44d-49fc-af54-dc41e41323f8,prov:SoftwareAgent,DAN,"Document Attention Network (proposé par Denis Coquenet et al., développé par TEKLIA)",,,,,
+14ffecf3-f064-4ac1-82fc-c4ae543381c7,prov:SoftwareAgent,Classifieur,Modèle de deep learning de détection et classification de zones,,,,,
+026db102-3789-43cf-b357-d24115b2e9d1,prov:Agent,Service départemental d'Archéologie du Val-de-Marne,,,,,,
+7a7f65af-7bf4-4c75-8200-1633d952e647,prov:Agent,Paris Time Machine,,,,,,
