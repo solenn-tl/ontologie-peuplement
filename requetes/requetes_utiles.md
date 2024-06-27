@@ -170,7 +170,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX cad: <http://data.ign.fr/def/cadastre#>
 PREFIX mlclasse: <http://data.ign.fr/id/codes/cadastre/mlClasse/>
 
-select ?plot ?id ?nature ?classement ?textstyle ?folio ?numfolio ?cf ?num_cf_in_folio ?tirede ?portea ?crispbegin ?earliest ?crispend ?latest
+select ?plot ?id ?nature ?line_order_in_cf ?textstyle ?folio ?numfolio ?cf ?num_cf_in_folio ?tirede ?portea ?crispbegin ?earliest ?crispend ?latest
 from <http://data.ign.fr/plots/fromregisters/>
 from <http://data.ign.fr/otherslandmarks>
 from <http://data.ign.fr/sources_and_owners/>
@@ -191,6 +191,7 @@ where {
     OPTIONAL{?attrV add:hasLatestTimeInstant/add:timeStamp ?latest}
     #Source
     ?classement cad:isSourceType srctype:ArticleDeClassement .
+    ?classement dcterms:identifier ?line_order_in_cf .
     ?iclassement rico:isOrWasDigitalInstantiationOf ?classement.
     ## Style
     OPTIONAL{?iclassement cad:hasClasse/cad:hasClasseValue ?textstyle}
@@ -209,7 +210,7 @@ where {
     ?attrNat add:hasAttributeVersion ?attrNatV .
     ?attrNatV cad:hasPlotNature ?nature .
     #Filtre
-    filter(?id = "D-1")
+    filter(?id = "D-21")
 }
-order by ?id
+order by ?id ?line_order_in_cf
 ```
