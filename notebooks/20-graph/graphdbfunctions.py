@@ -55,6 +55,8 @@ def load_ttl_into_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,TTL_PATH):
         named_graph = ""
         if 'source' in elem:
             named_graph = "http://data.ign.fr/sources_and_owners/"
+        elif 'owner' in elem:
+            named_graph = "http://data.ign.fr/sources_and_owners/"
         elif 'initial' in elem:
             named_graph = "http://data.ign.fr/plots/frommaps/"
         elif 'mentions' in elem:
@@ -73,7 +75,9 @@ def load_ttl_into_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,TTL_PATH):
         response = requests.post(final_url, headers=headers, data=data)
         response
 
-def remove_named_graph(GRAPHDB_HOST,GRAPHDB_REPO,NAMED_GRAPHS):
+def remove_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,NAMED_GRAPHS):
+    #Delete all named graphs from a NAMED_GRAPHS list in a given GRAPHDB_REPO
+    
     headers = {
         'Content-Type': 'application/x-turtle',
     }
@@ -83,4 +87,4 @@ def remove_named_graph(GRAPHDB_HOST,GRAPHDB_REPO,NAMED_GRAPHS):
     for g in NAMED_GRAPHS:
         final_url = url + "?context=" + up.quote(URIRef(g).n3())
         response = requests.request("DELETE", final_url, headers=headers)
-        reponse
+        response

@@ -24,7 +24,11 @@ PageDeRegistre,CadastreSourceList,RegistreCadastral,Page de registre cadastral,P
 ZoneDePage,CadastreSourceList,PageDeRegistre,Zone située dans une page de registre cadastral,Zone située dans une page de registre cadastral,,,,Zone située dans une page de registre
 LigneEtatDeSection,CadastreSourceList,ZoneDePage,Ligne de tableau d'états de sections,Ligne de tableau d'états de sections,,,,Ligne du tableau principal d'un registre d'état de sections décrivant une parcelle à l'initialisation du cadastre
 Folio,CadastreSourceList,ZoneDePage,Folio,Folio,,"Article,Case",,Zone située dans une page de registre qui est caractérisée à un numéro (identifiant). Peut contenir des éléments d'un ou plusieurs comptes fonciers sous la forme de subdivisions du folios.
+FolioNonBati,CadastreSourceList,Folio,Folio (Non Bâti),Folio (Non Bâti),,,,Folio dédié à des parcelles imposées au titre des propriétés non bâties/foncières
+FolioBati,CadastreSourceList,Folio,Folio (Bâti),Folio (Bâti),,,,Folio dédié à des parcelles imposées au titre des propriétés bâties
 CompteFoncier,CadastreSourceList,ZoneDePage,Zone située dans une page de matrice correspondant à un compte foncier,Zone située dans une page de matrice correspondant à un compte foncier,,,,Ensemble de lignes et de cellules qui décrivent les parcelles d'un ou plusieurs propriétaires conjoints ou sucessifs. Peut correspondre à un ou plusieurs comptes fonciers
 ArticleDeClassement,CadastreSourceList,ZoneDePage,Ligne de matrice décrivant un état de parcelle,Ligne de matrice décrivant un état de parcelle,,Numéro d'article,,Ligne de tableau de matrice qui décrit un état de parcelle
 ArticleDeMutation,CadastreSourceList,ZoneDePage,Zone d'une page dédiée à la liste des propriétaires du compte foncier,,,,,Zone ou cellule d'un folio ou sous-folio qui liste les propriétaires d'un ensemble de parcelles et indique leurs dates de mutations*
 Ouvrage,CadastreSourceList,,Ouvrage,Ouvrage,,,,"Ouvrage (livre, article)"
+PlanGeoreference,CadastreSourceList,Plan,Plan vectorisé,Plan vectorisé,,,,Plan georéférencé (manuellement ou automatiquement)
+PlanVectorise,CadastreSourceList,Plan,Plan géoréférencé,Plan géoréférencé,,,,Plan vectorisé (manuellement ou automatiquement)
