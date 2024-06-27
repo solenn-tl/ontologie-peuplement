@@ -44,6 +44,10 @@ PREFIX cad: <http://data.ign.fr/def/cadastre#>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX cad_atype: <http://data.ign.fr/id/codes/cadastre/attributeType/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX srctype: <http://data.ign.fr/id/codes/cadastre/sourceType/>
+PREFIX source: <http://data.ign.fr/id/source/>
 
 select ?plot ?id 
 from <http://data.ign.fr/plots/fromregisters/>
@@ -53,6 +57,16 @@ where {
 	?plot a add:Landmark .
     ?plot add:isLandmarkType cad_ltype:Plot.
     ?plot dcterms:identifier ?id .
+    ?plot add:hasAttribute ?attr .
+    ?attr add:isAttributeType cad_atype:PlotMention .
+    ?attr add:hasAttributeVersion ?attrV .
+    ?attrV cad:isMentionnedIn ?classement .
+    ?classement cad:isSourceType srctype:ArticleDeClassement .
+    ?record rico:hasOrHadConstituent* ?classement.
+    ?record rico:isOrWasConstituentOf ?folio.
+    ?folio cad:isSourceType srctype:FolioNonBati.
+    ?folio rico:isOrWasConstituentOf ?page .
+    ?page rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
 }
 order by ?id
 ```
