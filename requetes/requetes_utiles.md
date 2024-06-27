@@ -157,3 +157,59 @@ where {
 }
 order by ?id
 ```
+
+##Synthèse
+```sparql
+PREFIX cad_atype: <http://data.ign.fr/id/codes/cadastre/attributeType/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX srctype: <http://data.ign.fr/id/codes/cadastre/sourceType/>
+PREFIX source: <http://data.ign.fr/id/source/>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX cad: <http://data.ign.fr/def/cadastre#>
+PREFIX mlclasse: <http://data.ign.fr/id/codes/cadastre/mlClasse/>
+
+select ?plot ?id ?nature ?classement ?textstyle ?folio ?numfolio ?cf ?num_cf_in_folio ?tirede ?portea ?crispbegin ?earliest ?crispend ?latest
+from <http://data.ign.fr/plots/fromregisters/>
+from <http://data.ign.fr/otherslandmarks>
+from <http://data.ign.fr/sources_and_owners/>
+where { 
+	?plot a add:Landmark .
+    ?plot add:isLandmarkType cad_ltype:Plot.
+    ?plot dcterms:identifier ?id .
+    #Etat de parcelle
+    ?plot add:hasAttribute ?attr .
+    ?attr add:isAttributeType cad_atype:PlotMention .
+    ?attr add:hasAttributeVersion ?attrV .
+    ?attrV cad:isMentionnedIn ?classement .
+    OPTIONAL{?attrV cad:takenFrom ?tirede} .
+    OPTIONAL{?attrV cad:passedTo ?portea} .
+    OPTIONAL{?attrV add:hasTime/add:hasBeginning/add:timeStamp ?crispbegin}
+    OPTIONAL{?attrV add:hasEarliestTimeInstant/add:timeStamp ?earliest}
+    OPTIONAL{?attrV add:hasTime/add:hasEnd/add:timeStamp ?crispend}
+    OPTIONAL{?attrV add:hasLatestTimeInstant/add:timeStamp ?latest}
+    #Source
+    ?classement cad:isSourceType srctype:ArticleDeClassement .
+    ?iclassement rico:isOrWasDigitalInstantiationOf ?classement.
+    ## Style
+    OPTIONAL{?iclassement cad:hasClasse/cad:hasClasseValue ?textstyle}
+    #Documents
+    ?cf rico:hasOrHadConstituent ?classement .
+    ?cf cad:isSourceType srctype:CompteFoncier .
+    ?cf rico:isOrWasConstituentOf ?folio .
+    ?cf dcterms:identifier ?num_cf_in_folio .
+    ?folio cad:isSourceType srctype:FolioNonBati .
+    ?folio rico:isOrWasConstituentOf ?page .
+    ?folio cad:hasNumFolio ?numfolio .
+    ?page rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
+    #Nature
+    ?plot add:hasAttribute ?attrNat .
+    ?attrNat add:isAttributeType cad_atype:PlotNature .
+    ?attrNat add:hasAttributeVersion ?attrNatV .
+    ?attrNatV cad:hasPlotNature ?nature .
+    #Filtre
+    filter(?id = "D-1")
+}
+order by ?id
+```
