@@ -112,6 +112,7 @@ WHERE {
 | Porté à = VoiePubliqueSV                              | Event End          | Split (+ ? Création nouveau landmark ?)             |
 | Tiré de = AdditionConstructionSV + 1 folio (= actuel) | Event Start        | BuiltPlotEvent                                      |
 | Tiré de = AdditionConstructionSV                      | Event Start        | BuiltPlotEvent                                      |
+| Porté à = AdditionConstructionSV + 1 folio (= actuel) | Event End        | BuiltPlotEvent                                      |
+| Porté à = AdditionConstructionSV                      | Event End        | BuiltPlotEvent                                      |
 | Tiré de = AugmentationSV                              | Event Start        | BuiltPlotEvent                                      |
 | Tiré de = Omission{{date}}                            | Event Start     |  Omission (? impacte sur les dates de validité ?)            |
-|
