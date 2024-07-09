@@ -18,87 +18,35 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX source: <http://data.ign.fr/id/source/>
 
-INSERT{GRAPH <http://data.ign.fr/plots/cad2/> {
-        ?attr1 add:isSimilarTo ?attr2.
-        ?attr2 add:isSimilarTo ?attr1.
-    }}
-WHERE {
-    GRAPH <http://data.ign.fr/plots/frommaps/> {
-        ?mapsLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-    }
-    	
-        ?registersLandmark1 a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-        #récupérer des attributs de la même matrice
-        ?registersLandmark1 add:hasAttribute ?attrs.
-        ?attrs add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrsv1.
-        ?attrsv1 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
-    
-        ?registersLandmark2 a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-        #récupérer des attributs de la même matrice
-        ?registersLandmark2 add:hasAttribute ?attrss.
-        ?attrss add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrssv1.
-        ?attrssv1 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
-		
-        ?registersLandmark1 add:isSimilarTo ?mapsLandmark.
-        ?registersLandmark2 add:isSimilarTo ?mapsLandmark.
-        ?registersLandmark1 add:hasAttribute ?attr1.
-        ?registersLandmark2 add:hasAttribute ?attr2.
-        ?mapsLandmark add:hasAttribute ?attr3.
-        ?attr1 add:isAttributeType ?t.
-        ?attr2 add:isAttributeType ?t.
-        ?attr3 add:isAttributeType ?t.
-}
-```
-
-## 2. Si deux attributs de même type : créer un lien same As entre eux
-!! Attention, on ne parle pas des versions, seulement des attributs
-```sparql
-PREFIX ltype: <http://rdf.geohistoricaldata.org/id/codes/address/landmarkType/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
-PREFIX cad: <http://data.ign.fr/def/cadastre#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-PREFIX cad_atype: <http://data.ign.fr/id/codes/cadastre/attributeType/>
-PREFIX cad_spval: <http://data.ign.fr/id/codes/cadastrenap/specialCellValue/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX source: <http://data.ign.fr/id/source/>
-
-INSERT{GRAPH <http://data.ign.fr/plots/cad2/> {
-        ?attr1 add:isSimilarTo ?attr2.
-        ?attr2 add:isSimilarTo ?attr1.
+INSERT {
+        GRAPH <http://data.ign.fr/plots/cad2/> {
+            ?registersLandmark add:isSimilarTo ?mapsLandmark.
+            ?mapsLandmark add:isSimilarTo ?registersLandmark. 
     }}
 WHERE {
         GRAPH <http://data.ign.fr/plots/frommaps/> {
-            ?mapsLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+           ?mapsLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
         }
-    	
-        ?registersLandmark1 a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-        #récupérer des attributs de la même matrice
-        ?registersLandmark1 add:hasAttribute ?attrs.
-        ?attrs add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrsv1.
-        ?attrsv1 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
+        ?registersLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+        ?registersLandmark add:hasAttribute ?attr1.
+        ?attr1 add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrv1.
+        ?attrv1 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
     
-        ?registersLandmark2 a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-        #récupérer des attributs de la même matrice
-        ?registersLandmark2 add:hasAttribute ?attrss.
-        ?attrss add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrssv1.
-        ?attrssv1 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
-		
-        ?registersLandmark1 add:isSimilarTo ?mapsLandmark.
-        ?registersLandmark2 add:isSimilarTo ?mapsLandmark.
-        ?registersLandmark1 add:hasAttribute ?attr1.
-        ?registersLandmark2 add:hasAttribute ?attr2.
-        ?mapsLandmark add:hasAttribute ?attr3.
-        ?attr1 add:isAttributeType ?t.
-        ?attr2 add:isAttributeType ?t.
-        ?attr3 add:isAttributeType ?t.
+        MINUS {?registersLandmark add:isSimilarTo ?mapsLandmark}
+        MINUS {?mapsLandmark add:isSimilarTo ?registersLandmark}
+        ?mapsLandmark dcterms:identifier ?plotidm.
+        ?registersLandmark dcterms:identifier ?plotidr.
+        BIND(
+             IF(STRENDS(STR(?plotidr), "p"), 
+                SUBSTR(STR(?plotidr), 1, STRLEN(STR(?plotidr)) - 1), 
+                ?plotidr
+              ) AS ?plotid
+            )
+        filter(?plotidm = ?plotid)
 }
 ```
 
-## 3. Caractériser les évènements à l'aide des colonnes de reports de folios
+## 2. Caractériser les évènements à l'aide des colonnes de reports de folios
 
 | Condition                                             | Evènement concerné | Type d'évènement                                    |
 | ----------------------------------------------------- | ------------------ | --------------------------------------------------- |
