@@ -104,6 +104,8 @@ PREFIX source: <http://data.ign.fr/id/source/>
 INSERT{GRAPH <http://data.ign.fr/plots/cad2/> {
         ?changeStart1 add:isSimilarTo ?changeEnd2.
         ?changeEnd2 add:isSimilarTo ?changeStart1.
+        ?eventStart1 add:isSimilarTo ?eventEnd2.
+        ?eventEnd2 add:isSimilarTo ?eventStart1.
     }}
 WHERE {
     GRAPH <http://data.ign.fr/plots/frommaps/> {
