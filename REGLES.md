@@ -113,5 +113,5 @@ WHERE {
 | Tiré de = AdditionConstructionSV + 1 folio (= actuel) | Event Start        | BuiltPlotEvent                                      |
 | Tiré de = AdditionConstructionSV                      | Event Start        | BuiltPlotEvent                                      |
 | Tiré de = AugmentationSV                              | Event Start        | BuiltPlotEvent                                      |
-| Tiré de = Omission{{date}}                            |                    |                                                     |
+| Tiré de = Omission{{date}}                            | Event Start     |  Omission (? impacte sur les dates de validité ?)            |
 |
