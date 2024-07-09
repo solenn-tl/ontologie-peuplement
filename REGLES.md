@@ -343,7 +343,7 @@ INSERT {
     }
 }
 WHERE {
-  {SELECT ?plot ?plotid ?matrice ?folio ?cf ?rowid (COUNT(?tirede) AS ?previousfolios) ?timeStartY ?timeEndY ?eventEnd
+  {SELECT ?plot ?plotid ?matrice ?folio ?cf ?rowid ?timeStartY ?timeEndY ?eventEnd
   WHERE {
     ?plot a add:Landmark .
     ?plot add:isLandmarkType cad_ltype:Plot .
@@ -373,12 +373,12 @@ WHERE {
     ?eventEnd add:hasTime/add:timeStamp|add:hasLatestTimeInstant/add:timeStamp ?timeEnd.
     BIND(YEAR(?timeStart) AS ?timeStartY)
     BIND(YEAR(?timeEnd) AS ?timeEndY)
-    FILTER(?folio = ?portea)
+    FILTER(?folio = ?tirede)
     # Filters
     FILTER(?matrice = source:94_Gentilly_MAT_NB_1848)
   }
   GROUP BY ?plot ?plotid ?matrice ?folio ?cf ?rowid ?timeStartY ?timeEndY ?eventEnd
-  HAVING(COUNT(?portea) = 1)
+  HAVING(COUNT(?tirede) = 1)
   ORDER BY ?folio ?rowid
   }
 }
