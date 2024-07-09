@@ -116,3 +116,5 @@ WHERE {
 | Porté à = AdditionConstructionSV                      | Event End        | BuiltPlotEvent                                      |
 | Tiré de = AugmentationSV                              | Event Start        | BuiltPlotEvent                                      |
 | Tiré de = Omission{{date}}                            | Event Start     |  Omission (? impacte sur les dates de validité ?)            |
+
+Après : Créer les parcelles filles à partir des évènements qui impliquent la création de nouveau landmark (Merge et Split)
