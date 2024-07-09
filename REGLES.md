@@ -98,15 +98,20 @@ WHERE {
 }
 ```
 
-## 3. Caractériser les évènements
+## 3. Caractériser les évènements à l'aide des colonnes de reports de folios
 
-| Condition                              | Evènement concerné | Type d'évènement                                    |
-| -------------------------------------- | ------------------ | --------------------------------------------------- |
-| Tiré de = 1 folio (= au folio actuel)  | Event Start        | Mise à jour attributaire (à caractériser plus tard) |
-| Tiré de = 1 folio (!= du folio actuel) | Event Start        | Mutation de contribuable                            |
-| Porté à = 2..* folios                  | Event End          | Split (+ Création de 2 nouveaux landmarks)          |
-| Tiré de = 2..* folios                  | Event Start        | Merge (+ Création d'un nouveau landmark)            |
-| Tiré de = ResteSV                      | Event Start        | Split                                               |
-| Tiré de = ConstructionNouvelleSV       | Event Start        | Construction                                        |
-| Porté à = DemotitionSV                 | Event End          | Demotion                                            |
-| Porté à = VoiePubliqueSV               | Event End          | Split (+ ? Création nouveau landmark ?)             |
+| Condition                                             | Evènement concerné | Type d'évènement                                    |
+| ----------------------------------------------------- | ------------------ | --------------------------------------------------- |
+| Porté à = 2..* folios                                 | Event End          | Split (+ Création de 2 nouveaux landmarks)          |
+| Tiré de = 2..* folios                                 | Event Start        | Merge (+ Création d'un nouveau landmark)            |
+| Tiré de = 1 folio (= actuel)                          | Event Start        | Mise à jour attributaire (à caractériser plus tard) |
+| Tiré de = 1 folio (!= actuel)                         | Event Start        | Mutation de contribuable                            |
+| Tiré de = ResteSV                                     | Event Start        | Split                                               |
+| Tiré de = ConstructionNouvelleSV                      | Event Start        | Construction                                        |
+| Porté à = DemolitionSV                                | Event End          | Demotion                                            |
+| Porté à = VoiePubliqueSV                              | Event End          | Split (+ ? Création nouveau landmark ?)             |
+| Tiré de = AdditionConstructionSV + 1 folio (= actuel) | Event Start        | BuiltPlotEvent                                      |
+| Tiré de = AdditionConstructionSV                      | Event Start        | BuiltPlotEvent                                      |
+| Tiré de = AugmentationSV                              | Event Start        | BuiltPlotEvent                                      |
+| Tiré de = Omission{{date}}                            |                    |                                                     |
+|
