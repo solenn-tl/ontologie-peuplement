@@ -100,11 +100,13 @@ WHERE {
 
 ## 3. Caractériser les évènements
 
-| Condition                        | Evènement concerné | Type d'évènement                                  |
-| -------------------------------- | ------------------ | ------------------------------------------------- |
-| Porté à = 2..* folios            | Event End          | Landmark Split (+ Création d'un nouveau landmark) |
-| Tiré de = 2..* folios            | Event Start        | Landmark Merge (+ Création d'un nouveau landmark) |
-| Tiré de = ResteSV                | Event Start        | Landmark Split                                    |
-| Tiré de = ConstructionNouvelleSV | Event Start        | Construction                                      |
-| Porté à = DemolitionSV           | Event End          | Demotion                                          |
-|                                  |                    |                                                   |
+| Condition                              | Evènement concerné | Type d'évènement                                    |
+| -------------------------------------- | ------------------ | --------------------------------------------------- |
+| Tiré de = 1 folio (= au folio actuel)  | Event Start        | Mise à jour attributaire (à caractériser plus tard) |
+| Tiré de = 1 folio (!= du folio actuel) | Event Start        | Mutation de contribuable                            |
+| Porté à = 2..* folios                  | Event End          | Split (+ Création de 2 nouveaux landmarks)          |
+| Tiré de = 2..* folios                  | Event Start        | Merge (+ Création d'un nouveau landmark)            |
+| Tiré de = ResteSV                      | Event Start        | Split                                               |
+| Tiré de = ConstructionNouvelleSV       | Event Start        | Construction                                        |
+| Porté à = DemotitionSV                 | Event End          | Demotion                                            |
+| Porté à = VoiePubliqueSV               | Event End          | Split (+ ? Création nouveau landmark ?)             |
