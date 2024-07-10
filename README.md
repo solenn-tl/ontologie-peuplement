@@ -42,13 +42,10 @@ http://data.ign.fr/id/codes/cadastre/sourceType/
 http://data.ign.fr/id/codes/cadastre/mlClasse/
 ```
 ## Graphes nommés
+### Créés au départ
 * Ontologie (+ activités)
 ```sparql
 http://data.ign.fr/ontology/
-``` 
-* Parcelles (versionnées = graphe noyau)
-```sparql
-http://data.ign.fr/plots/
 ``` 
 * Parcelles (états initiaux créés à partir des plans)
 ```sparql
@@ -65,6 +62,10 @@ http://data.ign.fr/otherslandmarks/
 * Sources et propriétaires
 ```sparql
 http://data.ign.fr/sources_and_owners/
+``` 
+### Créés pendant le processus
+```sparql
+http://data.ign.fr//
 ``` 
 ## Installations
 ### Ollama

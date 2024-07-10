@@ -91,6 +91,6 @@ def remove_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,NAMED_GRAPHS):
 
 def update_sparql_query(GRAPHDB_HOST,GRAPHDB_REPO,QUERY):
   url = f"{GRAPHDB_HOST}/repositories/{GRAPHDB_REPO}/statements"
-  query_encoded = up.quote(query)
+  query_encoded = up.quote(QUERY)
   response = requests.request("POST", url, data=f"update={query_encoded}", headers={'Content-Type': 'application/x-www-form-urlencoded'})
   print(response, response.text)

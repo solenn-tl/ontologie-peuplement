@@ -1,6 +1,6 @@
 ## Création du graphe
 
-### 1. Lier les états de parcelles qui ont le même identifiant
+### 1.1 Lier les états de parcelles aux parcelles créées à partir du plan
 * Les états de parcelles issus des registres sont tous liés à la parcelle *Mère* créée à partir du plan.
 * Les parcelles XXX-p sont inclues à ce stade.
 
@@ -22,6 +22,8 @@ INSERT {
         GRAPH <http://data.ign.fr/plots/cad2/> {
             ?registersLandmark add:isSimilarTo ?mapsLandmark.
             ?mapsLandmark add:isSimilarTo ?registersLandmark. 
+            ?registersLandmark add:isSimilarTo ?regsitersLandmark2.
+            ?registersLandmark2 add:isSimilarTo ?registersLandmark.
     }}
 WHERE {
         GRAPH <http://data.ign.fr/plots/frommaps/> {
@@ -46,6 +48,56 @@ WHERE {
 }
 ```
 
+## 1.2 Lier les états de parcelles entre eux
+```
+PREFIX ltype: <http://rdf.geohistoricaldata.org/id/codes/address/landmarkType/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
+PREFIX cad: <http://data.ign.fr/def/cadastre#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_atype: <http://data.ign.fr/id/codes/cadastre/attributeType/>
+PREFIX cad_spval: <http://data.ign.fr/id/codes/cadastrenap/specialCellValue/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX source: <http://data.ign.fr/id/source/>
+
+INSERT {
+        GRAPH <http://data.ign.fr/plots/cad2/> {
+            ?registersLandmark add:isSimilarTo ?regsitersLandmark2.
+            ?registersLandmark2 add:isSimilarTo ?registersLandmark.
+    }}
+WHERE {
+        ?registersLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+        ?registersLandmark add:hasAttribute ?attr1.
+        ?attr1 add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrv1.
+        ?attrv1 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
+    
+        ?registersLandmark2 a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+        ?registersLandmark2 add:hasAttribute ?attr12.
+        ?attr12 add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrv12.
+        ?attrv12 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
+    
+        MINUS {?registersLandmark add:isSimilarTo ?registersLandmark2}
+        MINUS {?registersLandmark2 add:isSimilarTo ?registersLandmark}
+        ?registersLandmark dcterms:identifier ?plotidr1.
+        ?registersLandmark dcterms:identifier ?plotidr2.
+        BIND(
+             IF(STRENDS(STR(?plotidr1), "p"), 
+                SUBSTR(STR(?plotidr1), 1, STRLEN(STR(?plotidr1)) - 1), 
+                ?plotidr1
+              ) AS ?plotid
+            )
+        BIND(
+             IF(STRENDS(STR(?plotidr2), "p"), 
+                SUBSTR(STR(?plotidr2), 1, STRLEN(STR(?plotidr2)) - 1), 
+                ?plotidr2
+              ) AS ?plotid
+            )
+}
+```
+
 ## 2. Caractériser les évènements à l'aide des colonnes de reports de folios
 
 | Condition                                             | Evènement concerné | Type d'évènement                                    |
@@ -53,9 +105,9 @@ WHERE {
 | Porté à = 2..* folios                                 | Event End          | Split (+ Création de 2 nouveaux landmarks)          |
 | Tiré de = 2..* folios                                 | Event Start        | Merge (+ Création d'un nouveau landmark)            |
 | Porté à = 1 folio (= actuel)                          | Event End          | Mise à jour attributaire (à caractériser plus tard)                  |
-| Porté à = 1 folio (!= actuel)                          | Event End          | Mutation de contribuable                  |
-| Tiré de = 1 folio (= actuel)                          | Event Start        | Mise à jour attributaire (à caractériser plus tard) |
-| Tiré de = 1 folio (!= actuel)                         | Event Start        | Mutation de contribuable                            |
+| Porté à = 1 folio (!= actuel)                         | Event End          | Mutation de contribuable                  |
+| Tiré de = 1 folio (= actuel)                          | Event Start        | NSP : Mise à jour attributaire **et/ou division** (à caractériser plus tard) |
+| Tiré de = 1 folio (!= actuel)                         | Event Start        | NSP : Mutation de contribuable **et/ou** division                           |
 | Tiré de = ResteSV                                     | Event Start        | Split                                               |
 | Tiré de = ConstructionNouvelleSV                      | Event Start        | Construction                                        |
 | Porté à = DemolitionSV                                | Event End          | Demotion                                            |
@@ -132,7 +184,7 @@ WHERE {
 }
 ```
 
-## 2.2 Tiré de = 2..* folios 
+### 2.2 Tiré de = 2..* folios 
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
@@ -195,7 +247,7 @@ WHERE {
 }
 ```
 
-## 2.3 Porté à = 1 folio (= actuel)
+### 2.3 Porté à = 1 folio (= actuel)
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
