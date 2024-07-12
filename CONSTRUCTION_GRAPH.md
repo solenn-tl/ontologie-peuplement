@@ -123,7 +123,7 @@ HAVING ((count(?portea)) > 1)
 ORDER BY ?datefin
 ```
 ## 4.2 Création des changements et des évènements correspondants à des divisions de parcelles (registres) à partir du champ Tiré de (ResteSV)
-```
+```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
@@ -176,6 +176,6 @@ where {
 GROUP BY ?registerLandmark ?previousPlot ?datedebut
 ORDER BY ?datedebut}
 ```
-## 5. Création des changements et des évènements correspondants à des fusions de parcelles (registres)
+## 5. Réorganisation de la généalogie des parcelles à partir des divisions
 ```sparql
 ```
