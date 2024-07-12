@@ -1,38 +1,29 @@
 ## 1. Liens entre les parcelles des plans et des états de parcelles des registres
 ```sparql
-PREFIX ltype: <http://rdf.geohistoricaldata.org/id/codes/address/landmarkType/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/>
-PREFIX cad: <http://data.ign.fr/def/cadastre#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-PREFIX cad_atype: <http://data.ign.fr/id/codes/cadastre/attributeType/>
-PREFIX cad_spval: <http://data.ign.fr/id/codes/cadastrenap/specialCellValue/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX source: <http://data.ign.fr/id/source/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 INSERT {
-        GRAPH <http://data.ign.fr/plots/temporaire/> {
+        GRAPH <http://rdf.geohistoricaldata.org/id/test> {
             ?registersLandmark add:isSimilarTo ?mapsLandmark.
-            ?mapsLandmark add:isSimilarTo ?registersLandmark. 
-    }}
+            ?mapsLandmark add:isSimilarTo ?registersLandmark.
+   }}
 WHERE {
-        GRAPH <http://data.ign.fr/plots/frommaps/> {
+        GRAPH <http://rdf.geohistoricaldata.org/plots/frommaps> {
            ?mapsLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
         }
         ?registersLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
         ?registersLandmark add:hasAttribute ?attr1.
-        ?attr1 add:isAttributeType cad_atype:PlotMention; add:hasAttributeVersion ?attrv1.
-        ?attrv1 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn source:94_Gentilly_MAT_NB_1848 .
+        ?attr1 add:isAttributeType cad_atype:PlotMention.
     
         MINUS {?registersLandmark add:isSimilarTo ?mapsLandmark}
         MINUS {?mapsLandmark add:isSimilarTo ?registersLandmark}
         ?mapsLandmark dcterms:identifier ?plotidm.
         ?registersLandmark dcterms:identifier ?plotidr.
         BIND(
-             IF(STRENDS(STR(?plotidr), "p"), 
+        IF(STRENDS(STR(?plotidr), "p"), 
                 SUBSTR(STR(?plotidr), 1, STRLEN(STR(?plotidr)) - 1), 
                 ?plotidr
               ) AS ?plotid
@@ -41,14 +32,21 @@ WHERE {
 }
 ```
 
-## 2. Before/After
+## 2. Calcul des écarts temporels entre des parcelles (registres) étant liées au même objet initial
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
-CONSTRUCT{?mapsLandmark add:hasTimeGap [ add:hasValue ?ecart; add:isFirstRL ?registerLandmark; add:isSecondRL ?registerLandmark2]}
-    WHERE {
-    GRAPH <http://data.ign.fr/id/temporaire/> 
+
+#Export des écarts temporels entre les états des parcelles issus des matrices
+#CONSTRUCT {?mapsLandmark add:hasTimeGap [add:hasValue ?ecart; add:isFirstRL ?registerLandmark; add:isSecondRL ?registerLandmark2]}
+INSERT{
+    GRAPH <http://rdf.geohistoricaldata.org/id/temporaire>
+    {?mapsLandmark add:hasTimeGap [add:hasValue ?ecart; 
+                  add:isFirstRL ?registerLandmark; 
+                  add:isSecondRL ?registerLandmark2]}}
+WHERE {
+    GRAPH <http://rdf.geohistoricaldata.org/id/test> 
     {?mapsLandmark add:isSimilarTo ?registerLandmark.
     ?mapsLandmark add:isSimilarTo ?registerLandmark2.}
     ?registerLandmark add:hasTime/add:hasEnd/add:timeStamp ?fin.
@@ -57,19 +55,73 @@ BIND(ofn:asDays(?debut2 - ?fin) as ?ecart).
 FILTER ((?ecart > 0) && !(sameTerm(?registerLandmark,?registerLandmark2)))
 }
 ```
-
+## 3. Ajout de relations before/after entre les parcelles (registres) à l'aide des écarts temporels
 ```sparql
 #Calcul des relations d'ordre temporel relatif entre états de parcelles issus des matrices
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
-CONSTRUCT {?registerLandmark add:before ?registerLandmark2. ?registerLandmark2 add:after ?registerLandmark.}
-    WHERE {
-    GRAPH <http://data.ign.fr/id/temporaire/> 
+
+#CONSTRUCT {?registerLandmark add:before ?registerLandmark2. ?registerLandmark2 add:after ?registerLandmark.}
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/id/ordre>{?registerLandmark add:before ?registerLandmark2. ?registerLandmark2 add:after ?registerLandmark.}}
+WHERE {
+    GRAPH <http://rdf.geohistoricaldata.org/id/temporaire> 
     {?mapsLandmark add:hasTimeGap ?gap.
     ?gap add:hasValue ?ecart.
     ?gap add:isFirstRL ?registerLandmark.
-    ?gap add:isSecondRL ?registerLandmark2.
-FILTER (!sameTerm(?registerLandmark, ?registerLandmark2))
-    }} GROUP BY ?mapsLandmark ?registerLandmark ?registerLandmark2
+    ?gap add:isSecondRL ?registerLandmark2. 
+    FILTER (!sameTerm(?registerLandmark, ?registerLandmark2))}
+}
+#GROUP BY ?mapsLandmark ?registerLandmark ?registerLandmark2
+```
+
+## 4. Création des changements et des évènements correspondants à des divisions de parcelles (registres)
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+#Crée les changements et les événements entre des parcelles de registres qui se suivent et où la parcelle 1 a au moins deux folios dans la case Porté à
+construct {
+?registerLandmark add:changedBy ?change.
+?change a add:Change.
+?change add:appliedTo ?registerLandmark.
+?change add:isChangeType ctype:LandmarkDisappearance.
+?change add:dependsOn ?event.
+?nextPlot add:changedBy ?change2.
+?change2 a add:Change.
+?change2 add:appliedTo ?nextPlot.
+?change2 add:isChangeType ctype:LandmarkAppearance.
+?change2 add:dependsOn ?event.
+?event a add:Event.
+?event cad:isEventType cad_etype:Split.
+?event add:hasTime [ a add:TimeInstant; add:timeStamp ?datefin; add:timeCalendar time:Gregorian;
+add:timePrecision time:Year].
+}
+WHERE {
+select ?registerLandmark ?nextPlot ?portea ?datefin (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/", STRUUID())) AS ?change) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/", STRUUID())) AS ?change2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/", STRUUID())) AS ?event)
+where {
+    ?registerLandmark a add:Landmark.
+    ?registerLandmark add:hasTime/add:hasEnd/add:timeStamp ?datefin.
+    ?registerLandmark add:isLandmarkType cad_ltype:Plot. 
+    ?registerLandmark add:hasAttribute ?attrMention.
+    ?attrMention add:isAttributeType cad_atype:PlotMention.
+    ?attrMention add:hasAttributeVersion/cad:passedTo ?portea.
+    ?portea cad:isSourceType [skos:broader+ srctype:Folio]
+     
+    graph <http://rdf.geohistoricaldata.org/id/ordre>
+    {OPTIONAL{?registerLandmark add:after ?nextPlot. }}  
+}}
+GROUP BY ?registerLandmark ?nextPlot ?datefin
+HAVING ((count(?portea)) > 1)
+ORDER BY ?datefin
+```
+## 5. Création des changements et des évènements correspondants à des fusions de parcelles (registres)
+```sparql
 ```
