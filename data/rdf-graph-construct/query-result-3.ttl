@@ -1,0 +1,330 @@
+@prefix cad_etype: <http://data.ign.fr/id/codes/cadastre/eventType/> .
+@prefix cad_ltype: <http://data.ign.fr/id/codes/cadastre/landmarkType/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix add: <http://rdf.geohistoricaldata.org/def/address#> .
+@prefix cad_atype: <http://data.ign.fr/id/codes/cadastre/attributeType/> .
+@prefix cad: <http://data.ign.fr/def/cadastre#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix srctype: <http://data.ign.fr/id/codes/cadastre/sourceType/> .
+@prefix ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> .
+@prefix sesame: <http://www.openrdf.org/schema/sesame#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+
+<http://data.ign.fr/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/2b474ab3-f84e-4ea3-b751-cd651876eee5>,
+    <http://rdf.geohistoricaldata.org/id/change/db083727-6c93-4cb0-8748-1c27318312c4>,
+    <http://rdf.geohistoricaldata.org/id/change/6ee672cd-70e3-490a-9b9a-9ef2da19ada3>,
+    <http://rdf.geohistoricaldata.org/id/change/6377a8a9-d9e8-4226-82c6-999055223e91>,
+    <http://rdf.geohistoricaldata.org/id/change/5d7ede47-a984-4acd-a881-ea82b27fa7e7> .
+
+<http://rdf.geohistoricaldata.org/id/change/2b474ab3-f84e-4ea3-b751-cd651876eee5>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/3bae6812-b9ef-473f-a93e-1419f04c5b07> .
+
+<http://data.ign.fr/id/landmark/ff3c6579-a98e-4c16-af60-ccb887abdc1c> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/59d9ea21-0aa0-45cb-8d5c-3f363e9e9ece> .
+
+<http://rdf.geohistoricaldata.org/id/change/59d9ea21-0aa0-45cb-8d5c-3f363e9e9ece>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/ff3c6579-a98e-4c16-af60-ccb887abdc1c>;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/3bae6812-b9ef-473f-a93e-1419f04c5b07> .
+
+<http://rdf.geohistoricaldata.org/id/change/3bae6812-b9ef-473f-a93e-1419f04c5b07>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85077 .
+
+_:node85077 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://rdf.geohistoricaldata.org/id/change/db083727-6c93-4cb0-8748-1c27318312c4>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/bcc5d694-da33-419c-889c-8a158dba2a6e> .
+
+<http://data.ign.fr/id/landmark/4a3c200f-a504-4884-9830-436f6cafefba> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/4150e997-c2a4-4376-9d5d-93d0030f5a45> .
+
+<http://rdf.geohistoricaldata.org/id/change/4150e997-c2a4-4376-9d5d-93d0030f5a45>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/4a3c200f-a504-4884-9830-436f6cafefba>;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/bcc5d694-da33-419c-889c-8a158dba2a6e> .
+
+<http://rdf.geohistoricaldata.org/id/change/bcc5d694-da33-419c-889c-8a158dba2a6e>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85078 .
+
+_:node85078 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://rdf.geohistoricaldata.org/id/change/6ee672cd-70e3-490a-9b9a-9ef2da19ada3>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/b5387505-78f7-4e49-9ead-c5821f2bae3f> .
+
+<http://data.ign.fr/id/landmark/c43d9ac2-180b-4665-b748-b8ff09c6875c> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/2ec27925-dc85-4af8-9685-82ffe17da0c4> .
+
+<http://rdf.geohistoricaldata.org/id/change/2ec27925-dc85-4af8-9685-82ffe17da0c4>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/c43d9ac2-180b-4665-b748-b8ff09c6875c>;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/b5387505-78f7-4e49-9ead-c5821f2bae3f> .
+
+<http://rdf.geohistoricaldata.org/id/change/b5387505-78f7-4e49-9ead-c5821f2bae3f>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85079 .
+
+_:node85079 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://rdf.geohistoricaldata.org/id/change/6377a8a9-d9e8-4226-82c6-999055223e91>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/1f5f901d-b2ed-4ac9-a188-a955c46d4ab7> .
+
+<http://data.ign.fr/id/landmark/e89b09e9-45f6-46c9-a9ab-39e6c1f94e0f> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/e5c00506-3072-4ec2-aace-f8081138f796> .
+
+<http://rdf.geohistoricaldata.org/id/change/e5c00506-3072-4ec2-aace-f8081138f796>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/e89b09e9-45f6-46c9-a9ab-39e6c1f94e0f>;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/1f5f901d-b2ed-4ac9-a188-a955c46d4ab7> .
+
+<http://rdf.geohistoricaldata.org/id/change/1f5f901d-b2ed-4ac9-a188-a955c46d4ab7>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85080 .
+
+_:node85080 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://rdf.geohistoricaldata.org/id/change/5d7ede47-a984-4acd-a881-ea82b27fa7e7>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/f1a643aa-976f-4145-87fe-c49e2fd48515> .
+
+<http://data.ign.fr/id/landmark/aaf9e97d-fba9-44bb-8344-7e899213786d> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/a6ccc161-09cd-4c3c-98cc-2a26a21ee804> .
+
+<http://rdf.geohistoricaldata.org/id/change/a6ccc161-09cd-4c3c-98cc-2a26a21ee804>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/aaf9e97d-fba9-44bb-8344-7e899213786d>;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/f1a643aa-976f-4145-87fe-c49e2fd48515> .
+
+<http://rdf.geohistoricaldata.org/id/change/f1a643aa-976f-4145-87fe-c49e2fd48515>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85081 .
+
+_:node85081 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://data.ign.fr/id/landmark/e4fcc131-f424-4eb3-924f-ea6e20d558c6> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/68969507-3723-4432-bd72-d8ee16205148> .
+
+<http://rdf.geohistoricaldata.org/id/change/68969507-3723-4432-bd72-d8ee16205148>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/e4fcc131-f424-4eb3-924f-ea6e20d558c6>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/c56a5f8c-669d-42ad-8aaf-4a731840b836> .
+
+<http://rdf.geohistoricaldata.org/id/change/9987be38-1a0e-45c4-9fd4-e0ec0382d13a>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/c56a5f8c-669d-42ad-8aaf-4a731840b836> .
+
+<http://rdf.geohistoricaldata.org/id/change/c56a5f8c-669d-42ad-8aaf-4a731840b836>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85082 .
+
+_:node85082 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://data.ign.fr/id/landmark/8b5d94e7-e2b5-43d5-b2c0-5451eee7fecb> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/06a3df2a-c435-4a22-b758-1af79de62995> .
+
+<http://rdf.geohistoricaldata.org/id/change/06a3df2a-c435-4a22-b758-1af79de62995>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/8b5d94e7-e2b5-43d5-b2c0-5451eee7fecb>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/2b0aaa22-c3b2-431d-b78c-d9bca2e5c37c> .
+
+<http://rdf.geohistoricaldata.org/id/change/29820a1c-e19d-4f47-8eef-b557da848a87>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/2b0aaa22-c3b2-431d-b78c-d9bca2e5c37c> .
+
+<http://rdf.geohistoricaldata.org/id/change/2b0aaa22-c3b2-431d-b78c-d9bca2e5c37c>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85083 .
+
+_:node85083 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://data.ign.fr/id/landmark/670e8cfb-c09a-4857-9ce3-c0ea00591361> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/f68fb2e0-81c0-4994-aa67-1a68d0fe215d> .
+
+<http://rdf.geohistoricaldata.org/id/change/f68fb2e0-81c0-4994-aa67-1a68d0fe215d>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/670e8cfb-c09a-4857-9ce3-c0ea00591361>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/fef60bc8-5e43-455a-be30-d1c50eac17d7> .
+
+<http://rdf.geohistoricaldata.org/id/change/f8660867-d99a-4207-9547-5e04620aa70f>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/fef60bc8-5e43-455a-be30-d1c50eac17d7> .
+
+<http://rdf.geohistoricaldata.org/id/change/fef60bc8-5e43-455a-be30-d1c50eac17d7>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85084 .
+
+_:node85084 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://data.ign.fr/id/landmark/ec665849-c113-4c37-8131-5adbde42cd3d> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/85ff022c-1ee9-400c-ba09-6ca742be68a6> .
+
+<http://rdf.geohistoricaldata.org/id/change/85ff022c-1ee9-400c-ba09-6ca742be68a6>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/ec665849-c113-4c37-8131-5adbde42cd3d>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/248c6983-9cff-44b5-8ccd-99364a5b9fa0> .
+
+<http://data.ign.fr/id/landmark/4738f70b-3e2e-43a2-9e09-383e7e8a032e> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/a476fc83-bc85-4b87-84cb-37735d920c1e>,
+    <http://rdf.geohistoricaldata.org/id/change/ad5a5f7e-7525-47ee-9305-6b3e769e3f04> .
+
+<http://rdf.geohistoricaldata.org/id/change/a476fc83-bc85-4b87-84cb-37735d920c1e>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/4738f70b-3e2e-43a2-9e09-383e7e8a032e>;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/248c6983-9cff-44b5-8ccd-99364a5b9fa0> .
+
+<http://rdf.geohistoricaldata.org/id/change/248c6983-9cff-44b5-8ccd-99364a5b9fa0>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85085 .
+
+_:node85085 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://rdf.geohistoricaldata.org/id/change/ad5a5f7e-7525-47ee-9305-6b3e769e3f04>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/4738f70b-3e2e-43a2-9e09-383e7e8a032e>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/5ab7e9ea-499f-439c-8c02-6b5a930e4ed7> .
+
+<http://rdf.geohistoricaldata.org/id/change/cb18abb4-b7af-4164-8e24-772db1419c66>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/5ab7e9ea-499f-439c-8c02-6b5a930e4ed7> .
+
+<http://rdf.geohistoricaldata.org/id/change/5ab7e9ea-499f-439c-8c02-6b5a930e4ed7>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85086 .
+
+_:node85086 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://data.ign.fr/id/landmark/c242920f-ac4b-4102-bc56-2ce6e039365a> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/5fd381ab-48ef-4bd0-bcd6-33ff63d60b82> .
+
+<http://rdf.geohistoricaldata.org/id/change/5fd381ab-48ef-4bd0-bcd6-33ff63d60b82>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/c242920f-ac4b-4102-bc56-2ce6e039365a>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/09a700f8-a5df-45dd-9b2f-8eccace7009c> .
+
+<http://rdf.geohistoricaldata.org/id/change/ed51fdd2-52dc-485e-b7e2-7a7f6e261a5b>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/09a700f8-a5df-45dd-9b2f-8eccace7009c> .
+
+<http://rdf.geohistoricaldata.org/id/change/09a700f8-a5df-45dd-9b2f-8eccace7009c>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85087 .
+
+_:node85087 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://data.ign.fr/id/landmark/035d13a3-6627-4cf8-b17e-460ec9a23b5f> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/d644cb77-cd8a-4538-944c-77a2fbbe9bc9> .
+
+<http://rdf.geohistoricaldata.org/id/change/d644cb77-cd8a-4538-944c-77a2fbbe9bc9>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/035d13a3-6627-4cf8-b17e-460ec9a23b5f>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/f2aca6db-8368-4bec-9640-31f6b5c8f756> .
+
+<http://rdf.geohistoricaldata.org/id/change/a4e02a1f-58f4-433c-b4bf-8b20e8a2baf7>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/f2aca6db-8368-4bec-9640-31f6b5c8f756> .
+
+<http://rdf.geohistoricaldata.org/id/change/f2aca6db-8368-4bec-9640-31f6b5c8f756>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85088 .
+
+_:node85088 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .
+
+<http://data.ign.fr/id/landmark/5a4f7c48-d94e-4f59-b8b4-66c73a5278bd> add:changedBy
+    <http://rdf.geohistoricaldata.org/id/change/fc548e47-daa0-4d87-8ed1-76a7ed8a9a47> .
+
+<http://rdf.geohistoricaldata.org/id/change/fc548e47-daa0-4d87-8ed1-76a7ed8a9a47>
+  a add:Change;
+  add:appliedTo <http://data.ign.fr/id/landmark/5a4f7c48-d94e-4f59-b8b4-66c73a5278bd>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/97c9283c-7e00-48db-9aa2-59cd24a4baa8> .
+
+<http://rdf.geohistoricaldata.org/id/change/2747534b-09e9-406c-a38e-a47d52e422b5>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/change/97c9283c-7e00-48db-9aa2-59cd24a4baa8> .
+
+<http://rdf.geohistoricaldata.org/id/change/97c9283c-7e00-48db-9aa2-59cd24a4baa8>
+  a add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node85089 .
+
+_:node85089 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year .

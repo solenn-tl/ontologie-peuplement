@@ -6,6 +6,8 @@ import urllib.parse as up
 from rdflib import Graph, Namespace, Literal, BNode, URIRef
 from rdflib.namespace import RDF
 
+#MAIN_URI = "http://rdf.geohistoricaldata.org/"
+MAIN_URI = "http://data.ign.fr/"
 
 def get_repositories(graphdb_host):
     url = f"{graphdb_host}/rest/repositories"
@@ -30,7 +32,7 @@ def load_onto_into_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,ONTOLOGY_PATH,ONTOLOGY
     }
     #curl url
     url = f"{GRAPHDB_HOST}/repositories/{GRAPHDB_REPO}/statements"
-    named_graph = "http://data.ign.fr/ontology"
+    named_graph = MAIN_URI + "ontology"
     final_url = url + "?context=" + up.quote(URIRef(named_graph).n3())
     for m in ONTOLOGY_MODULES:
         m_path = ONTOLOGY_PATH + m
@@ -38,6 +40,20 @@ def load_onto_into_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,ONTOLOGY_PATH,ONTOLOGY
             data = f.read()
         response = requests.post(final_url, headers=headers, data=data)
         response
+
+def load_ttl_file_into_named_graph(GRAPHDB_HOST,GRAPHDB_REPO,NAMED_GRAPH,RDF_PATH):
+    headers = {
+        'Content-Type': 'application/x-turtle',
+    }
+    url = f"{GRAPHDB_HOST}/repositories/{GRAPHDB_REPO}/statements"
+    encoded_named_graph_uri = up.quote(URIRef(NAMED_GRAPH).n3())
+
+    with open(RDF_PATH, 'rb') as f:
+        data = f.read()
+
+    final_url = url + "?context=" + encoded_named_graph_uri
+    response = requests.post(final_url, headers=headers, data=data)
+    print(response.text)
 
 def load_ttl_into_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,TTL_PATH):
     #request headers
@@ -54,17 +70,17 @@ def load_ttl_into_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,TTL_PATH):
         print(elem)
         named_graph = ""
         if 'source' in elem:
-            named_graph = "http://data.ign.fr/sources_and_owners/"
+            named_graph = MAIN_URI + "sources/"
         elif 'owner' in elem:
-            named_graph = "http://data.ign.fr/sources_and_owners/"
+            named_graph = MAIN_URI + "plots/fromregisters/"
         elif 'initial' in elem:
-            named_graph = "http://data.ign.fr/plots/frommaps/"
+            named_graph = MAIN_URI + "plots/frommaps/"
         elif 'mentions' in elem:
-            named_graph = "http://data.ign.fr/plots/fromregisters/"
+            named_graph = MAIN_URI + "plots/fromregisters/"
         elif 'activities' in elem:
-            named_graph = "http://data.ign.fr/ontology"
+            named_graph = MAIN_URI + "ontology"
         elif 'landmarks' in elem:
-            named_graph = "http://data.ign.fr/otherslandmarks"
+            named_graph = MAIN_URI + "otherslandmarks"
 
         encoded_named_graph_uri = up.quote(URIRef(named_graph).n3())
 

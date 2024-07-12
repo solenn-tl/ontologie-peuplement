@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-07-11T13:13:32.436Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="-O8eqKPElVWneZUCIY8L" version="21.1.2" type="device" pages="2">
+<mxfile host="Electron" modified="2024-07-11T15:05:00.441Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="VWcARoiEE_x5lxA9k25A" version="21.1.2" type="device" pages="2">
   <diagram name="Graphe intermédiaire" id="jpN9OdEGh9gpxzROM_cH">
     <mxGraphModel dx="1963" dy="1346" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -895,6 +895,12 @@
         </mxCell>
         <mxCell id="BmtMc3iJjUXy_ICAYKoj-27" value="&lt;b&gt;OVERLAP&lt;/b&gt;&lt;br&gt;Début 1 &amp;lt; Début 2 &amp;amp; &lt;br&gt;Fin 1 &amp;gt; Début 2 &amp;amp;&lt;br&gt;Fin 1 &amp;lt;Fin 2" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="665" y="359" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="BmtMc3iJjUXy_ICAYKoj-28" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="480" as="sourcePoint" />
+            <mxPoint x="601" y="480" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
