@@ -1,9 +1,9 @@
-@prefix activity: <http://data.ign.fr/id/codes/cadastre/activity/> .
-@prefix cad: <http://data.ign.fr/def/cadastre#> .
-@prefix mlclasse: <http://data.ign.fr/id/codes/cadastre/mlClasse/> .
+@prefix activity: <http://rdf.geohistoricaldata.org/id/codes/cadastre/activity/> .
+@prefix cad: <http://rdf.geohistoricaldata.org/def/cadastre#> .
+@prefix mlclasse: <http://rdf.geohistoricaldata.org/id/codes/cadastre/mlClasse/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
-@prefix source: <http://data.ign.fr/id/source/> .
+@prefix source: <http://rdf.geohistoricaldata.org/id/source/> .
 
 activity:0002 prov:used source:94_Gentilly_FRAD094_3P_000255_01_0015,
         source:94_Gentilly_FRAD094_3P_000255_01_0032,

@@ -2,7 +2,7 @@ from rdflib import Namespace
 
 # Ontologies
 ## Main
-cad = Namespace("http://data.ign.fr/def/cadastre#")
+cad = Namespace("http://rdf.geohistoricaldata.org/def/cadastre#")
 add = Namespace("http://rdf.geohistoricaldata.org/def/address#")
 
 ## Others
@@ -15,22 +15,22 @@ geofla = Namespace("http://data.ign.fr/def/geofla#")
 pwikidata = Namespace("http://www.wikidata.org/wiki/Property:")
 
 #Objet URI
-landmarkuri = Namespace("http://data.ign.fr/id/landmark/")
-srcuri = Namespace("http://data.ign.fr/id/source/")
-owneruri = Namespace("http://data.ign.fr/id/taxpayer/")
-eventuri = Namespace("http://data.ign.fr/id/event/")
-changeuri = Namespace("http://data.ign.fr/id/change/")
+landmarkuri = Namespace("http://rdf.geohistoricaldata.org/id/landmark/")
+srcuri = Namespace("http://rdf.geohistoricaldata.org/id/source/")
+owneruri = Namespace("http://rdf.geohistoricaldata.org/id/taxpayer/")
+eventuri = Namespace("http://rdf.geohistoricaldata.org/id/event/")
+changeuri = Namespace("http://rdf.geohistoricaldata.org/id/change/")
 
 #SKOS URIs
 ## cadastre
-cad_atype = Namespace("http://data.ign.fr/id/codes/cadastre/attributeType/")
-cad_ltype = Namespace("http://data.ign.fr/id/codes/cadastre/landmarkType/")
-cad_etype = Namespace("http://data.ign.fr/id/codes/cadastre/eventType/")
-cad_spval = Namespace("http://data.ign.fr/id/codes/cadastrenap/specialCellValue/")
-activity = Namespace("http://data.ign.fr/id/codes/cadastre/activity/")
-srctype = Namespace("http://data.ign.fr/id/codes/cadastre/sourceType/")
-mlclasse = Namespace("http://data.ign.fr/id/codes/cadastre/mlClasse/")
-pnature = Namespace("http://data.ign.fr/id/codes/cadastre/plotNature/")
+cad_atype = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/")
+cad_ltype = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/")
+cad_etype = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/")
+cad_spval = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastrenap/specialCellValue/")
+activity = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastre/activity/")
+srctype = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/")
+mlclasse = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastre/mlClasse/")
+pnature = Namespace("http://rdf.geohistoricaldata.org/id/codes/cadastre/plotNature/")
 
 ## address
 atype = Namespace("http://rdf.geohistoricaldata.org/id/codes/address/attributeType/")

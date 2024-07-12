@@ -1,7 +1,7 @@
-@prefix cad: <http://data.ign.fr/def/cadastre#> .
+@prefix cad: <http://rdf.geohistoricaldata.org/def/cadastre#> .
 @prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
-@prefix source: <http://data.ign.fr/id/source/> .
-@prefix srctype: <http://data.ign.fr/id/codes/cadastre/sourceType/> .
+@prefix source: <http://rdf.geohistoricaldata.org/id/source/> .
+@prefix srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 source:94_Gentilly_MAT_B_NB_1813_107bis a rico:RecordPart ;
@@ -9,7 +9,7 @@ source:94_Gentilly_MAT_B_NB_1813_107bis a rico:RecordPart ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0125_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_B_NB_1813_107↑2↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_B_NB_1813_107↑2↓> a rico:RecordPart ;
     cad:hasNumFolio "107↑2↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati .
 
@@ -92,7 +92,7 @@ source:94_Gentilly_MAT_B_NB_1813_235bis a rico:RecordPart ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0278_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_B_NB_1813_235↑2↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_B_NB_1813_235↑2↓> a rico:RecordPart ;
     cad:hasNumFolio "235↑2↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati .
 
@@ -106,7 +106,7 @@ source:94_Gentilly_MAT_B_NB_1813_236ter a rico:RecordPart ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0281_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_B_NB_1813_236↑4↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_B_NB_1813_236↑4↓> a rico:RecordPart ;
     cad:hasNumFolio "236↑4↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0281_page .
@@ -149,16 +149,16 @@ source:94_Gentilly_MAT_B_NB_1813_268 a rico:RecordPart ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0324_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_B_NB_1813_269²> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_B_NB_1813_269²> a rico:RecordPart ;
     cad:hasNumFolio "269↑2↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0325_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_B_NB_1813_269↑2↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_B_NB_1813_269↑2↓> a rico:RecordPart ;
     cad:hasNumFolio "269↑2↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_B_NB_1813_274↑2↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_B_NB_1813_274↑2↓> a rico:RecordPart ;
     cad:hasNumFolio "274↑2↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati .
 
@@ -197,7 +197,7 @@ source:94_Gentilly_MAT_B_NB_1813_34ter a rico:RecordPart ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0044_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_B_NB_1813_351↑4↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_B_NB_1813_351↑4↓> a rico:RecordPart ;
     cad:hasNumFolio "351↑4↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000255_01_0414_page .
@@ -285,7 +285,7 @@ source:94_Gentilly_MAT_NB_1836_249 a rico:RecordPart ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000256_01_0302_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_NB_1836_249↑16↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_NB_1836_249↑16↓> a rico:RecordPart ;
     cad:hasNumFolio "249↑16↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati .
 
@@ -419,7 +419,7 @@ source:94_Gentilly_MAT_NB_1836_449 a rico:RecordPart ;
     cad:isSourceType srctype:FolioNonBati ;
     rico:isOrWasConstituentOf source:94_Gentilly_FRAD094_3P_000256_01_0502_page .
 
-<http://data.ign.fr/id/source/94_Gentilly_MAT_NB_1836_449↑1↓> a rico:RecordPart ;
+<http://rdf.geohistoricaldata.org/id/source/94_Gentilly_MAT_NB_1836_449↑1↓> a rico:RecordPart ;
     cad:hasNumFolio "449↑1↓"^^xsd:string ;
     cad:isSourceType srctype:FolioNonBati .
 
