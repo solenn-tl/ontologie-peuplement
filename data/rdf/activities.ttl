@@ -1,8 +1,8 @@
-@prefix activity: <http://data.ign.fr/id/codes/cadastre/activity/> .
+@prefix activity: <http://rdf.geohistoricaldata.org/id/codes/cadastre/activity/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix source: <http://data.ign.fr/id/source/> .
+@prefix source: <http://rdf.geohistoricaldata.org/id/source/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 activity:0001 a prov:Activity ;
