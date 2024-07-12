@@ -45,25 +45,21 @@ http://rdf.geohistoricaldata.org/id/codes/cadastre/mlClasse/
 ### Créés au départ
 * Ontologie (+ activités)
 ```sparql
-http://rdf.geohistoricaldata.org/ontology/
+http://rdf.geohistoricaldata.org/ontology
 ``` 
 * Parcelles (états initiaux créés à partir des plans)
 ```sparql
-http://rdf.geohistoricaldata.org/plots/frommaps/
+http://rdf.geohistoricaldata.org/plots/frommaps
 ``` 
 * Parcelles (états issus des articles de classement) et propriétaires
 ```sparql
-http://rdf.geohistoricaldata.org/plots/fromregisters/
+http://rdf.geohistoricaldata.org/plots/fromregisters
 ``` 
 * Autres landmarks (communes, sections, lieux-dits, etc.)
 ```sparql
-http://rdf.geohistoricaldata.org/otherslandmarks/
+http://rdf.geohistoricaldata.org/otherslandmarks
 ``` 
 * Sources (registres et images)
 ```sparql
-http://rdf.geohistoricaldata.org/sources/
+http://rdf.geohistoricaldata.org/sources
 ``` 
-### Créés pendant le processus
-```sparql
-http://rdf.geohistoricaldata.org//
-```
