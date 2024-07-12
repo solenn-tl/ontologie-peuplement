@@ -6,8 +6,8 @@ import urllib.parse as up
 from rdflib import Graph, Namespace, Literal, BNode, URIRef
 from rdflib.namespace import RDF
 
-#MAIN_URI = "http://rdf.geohistoricaldata.org/"
-MAIN_URI = "http://data.ign.fr/"
+MAIN_URI = "http://rdf.geohistoricaldata.org/"
+#MAIN_URI = "http://data.ign.fr/"
 
 def get_repositories(graphdb_host):
     url = f"{graphdb_host}/rest/repositories"
@@ -70,13 +70,13 @@ def load_ttl_into_named_graphs(GRAPHDB_HOST,GRAPHDB_REPO,TTL_PATH):
         print(elem)
         named_graph = ""
         if 'source' in elem:
-            named_graph = MAIN_URI + "sources/"
+            named_graph = MAIN_URI + "sources"
         elif 'owner' in elem:
-            named_graph = MAIN_URI + "plots/fromregisters/"
+            named_graph = MAIN_URI + "plots/fromregisters"
         elif 'initial' in elem:
-            named_graph = MAIN_URI + "plots/frommaps/"
+            named_graph = MAIN_URI + "plots/frommaps"
         elif 'mentions' in elem:
-            named_graph = MAIN_URI + "plots/fromregisters/"
+            named_graph = MAIN_URI + "plots/fromregisters"
         elif 'activities' in elem:
             named_graph = MAIN_URI + "ontology"
         elif 'landmarks' in elem:
