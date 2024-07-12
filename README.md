@@ -7,82 +7,63 @@ Données : [Google Sheet](https://docs.google.com/spreadsheets/d/1I5Iy_sSkPHP_hc
 ## URIs
 * Ontologie
 ```sparql
-http://data.ign.fr/def/cadastre#
+http://rdf.geohistoricaldata.org/def/cadastre#
 ``` 
 * Objets
 ```sparql
 # Landmark
-http://data.ign.fr/id/landmark/
+http://rdf.geohistoricaldata.org/id/landmark/
 # Source
-http://data.ign.fr/id/source/
+http://rdf.geohistoricaldata.org/id/source/
 # Contribuable (Taxpayer)
-http://data.ign.fr/id/taxpayer/
+http://rdf.geohistoricaldata.org/id/taxpayer/
 # Evenement (Event)
-http://data.ign.fr/id/event/
+http://rdf.geohistoricaldata.org/id/event/
 # Change
-http://data.ign.fr/id/change/
+http://rdf.geohistoricaldata.org/id/change/
 ```
 * Codes 
 ```sparql
 # Attributs specifiques au cadastre
-http://data.ign.fr/id/codes/cadastre/attributeType/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/
 # Landmarks spécifiques au cadastre
-http://data.ign.fr/id/codes/cadastre/landmarkType/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/
 # Types d'évènements
-http://data.ign.fr/id/codes/cadastre/eventType/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/
 # Valeurs spéciales mentionnées dans les documents
-http://data.ign.fr/id/codes/cadastrenap/specialCellValue/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/
 # Natures de parcelles
-http://data.ign.fr/id/codes/cadastre/plotNature/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/plotNature/
 # Processus
-http://data.ign.fr/id/codes/cadastre/activity/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/activity/
 # Types de sources
-http://data.ign.fr/id/codes/cadastre/sourceType/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/
 # Classes de machine learning
-http://data.ign.fr/id/codes/cadastre/mlClasse/
+http://rdf.geohistoricaldata.org/id/codes/cadastre/mlClasse/
 ```
 ## Graphes nommés
 ### Créés au départ
 * Ontologie (+ activités)
 ```sparql
-http://data.ign.fr/ontology/
+http://rdf.geohistoricaldata.org/ontology/
 ``` 
 * Parcelles (états initiaux créés à partir des plans)
 ```sparql
-http://data.ign.fr/plots/frommaps/
+http://rdf.geohistoricaldata.org/plots/frommaps/
 ``` 
-* Parcelles (états issus des articles de classement)
+* Parcelles (états issus des articles de classement) et propriétaires
 ```sparql
-http://data.ign.fr/plots/fromregisters/
+http://rdf.geohistoricaldata.org/plots/fromregisters/
 ``` 
 * Autres landmarks (communes, sections, lieux-dits, etc.)
 ```sparql
-http://data.ign.fr/otherslandmarks/
+http://rdf.geohistoricaldata.org/otherslandmarks/
 ``` 
-* Sources et propriétaires
+* Sources (registres et images)
 ```sparql
-http://data.ign.fr/sources_and_owners/
+http://rdf.geohistoricaldata.org/sources/
 ``` 
 ### Créés pendant le processus
 ```sparql
-http://data.ign.fr//
-``` 
-## Installations
-### Ollama
-* Installation
-```
-curl -fsSL https://ollama.com/install.sh | sh
-```
-* Paramétrer les variables HTTP_PROXY et HTTPS_PROXY
-* Lancer ollama
-```
-ollama serve
-```
-* Télécharger un modèle
-```
-ollama pull MODEL
-```
-* Liste des modèles téléchargés
-```
-ollama list
+http://rdf.geohistoricaldata.org//
 ```
