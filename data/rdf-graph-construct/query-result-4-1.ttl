@@ -1,0 +1,187 @@
+@prefix add: <http://rdf.geohistoricaldata.org/def/address#> .
+@prefix cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/> .
+@prefix cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/> .
+@prefix cad: <http://rdf.geohistoricaldata.org/def/cadastre#> .
+@prefix srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/> .
+@prefix ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> .
+@prefix sesame: <http://www.openrdf.org/schema/sesame#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+
+<http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439365 .
+
+<http://rdf.geohistoricaldata.org/id/change/1d62df57-1fef-4ec4-bf96-a81e5025e458>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/c242920f-ac4b-4102-bc56-2ce6e039365a> .
+
+_:node439365 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1836-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/c242920f-ac4b-4102-bc56-2ce6e039365a>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/1d62df57-1fef-4ec4-bf96-a81e5025e458> .
+
+<http://rdf.geohistoricaldata.org/id/event/7c8da2b0-ce3d-4594-8c71-0c6edb7de2c8> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439366 .
+
+<http://rdf.geohistoricaldata.org/id/change/bfcff027-8e6c-406d-9f25-0a71d9eb35b7>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/7c8da2b0-ce3d-4594-8c71-0c6edb7de2c8>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/8b5d94e7-e2b5-43d5-b2c0-5451eee7fecb> .
+
+_:node439366 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1837-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/8b5d94e7-e2b5-43d5-b2c0-5451eee7fecb>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/bfcff027-8e6c-406d-9f25-0a71d9eb35b7> .
+
+<http://rdf.geohistoricaldata.org/id/event/51c1b79a-6eef-4bc2-86e6-3df4fa82b599> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439367 .
+
+<http://rdf.geohistoricaldata.org/id/change/aa65e4fb-fffc-4679-aba2-6b1f9ce1122a>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/51c1b79a-6eef-4bc2-86e6-3df4fa82b599>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39> .
+
+_:node439367 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1837-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/11ec245b-df12-46da-b93e-874fe8223a39>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/aa65e4fb-fffc-4679-aba2-6b1f9ce1122a> .
+
+<http://rdf.geohistoricaldata.org/id/event/85f49833-08fd-4ff8-af7d-e90afd771207> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439368 .
+
+<http://rdf.geohistoricaldata.org/id/change/483f06cf-2442-4da2-b9ab-6b761d5c3fea>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/85f49833-08fd-4ff8-af7d-e90afd771207>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/035d13a3-6627-4cf8-b17e-460ec9a23b5f> .
+
+_:node439368 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1838-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/035d13a3-6627-4cf8-b17e-460ec9a23b5f>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/483f06cf-2442-4da2-b9ab-6b761d5c3fea> .
+
+<http://rdf.geohistoricaldata.org/id/event/aac0ced7-e9a3-431a-b142-93c43ee03ce8> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439369 .
+
+<http://rdf.geohistoricaldata.org/id/change/97ec75d1-6f0a-4309-8cc1-3a48c1519bf3>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/aac0ced7-e9a3-431a-b142-93c43ee03ce8>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/e4fcc131-f424-4eb3-924f-ea6e20d558c6> .
+
+_:node439369 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1839-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/e4fcc131-f424-4eb3-924f-ea6e20d558c6>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/97ec75d1-6f0a-4309-8cc1-3a48c1519bf3> .
+
+<http://rdf.geohistoricaldata.org/id/event/3e8ac08b-bc1a-466b-9e03-654baa2cb302> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439370 .
+
+<http://rdf.geohistoricaldata.org/id/change/062895fa-12d8-4730-903e-a258b00a03b3>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/3e8ac08b-bc1a-466b-9e03-654baa2cb302>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/670e8cfb-c09a-4857-9ce3-c0ea00591361> .
+
+_:node439370 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1840-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/670e8cfb-c09a-4857-9ce3-c0ea00591361>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/062895fa-12d8-4730-903e-a258b00a03b3> .
+
+<http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439371 .
+
+<http://rdf.geohistoricaldata.org/id/change/a0d4da8a-72d9-4fae-b840-cc3737fa5559>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/4738f70b-3e2e-43a2-9e09-383e7e8a032e> .
+
+_:node439371 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1854-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/4738f70b-3e2e-43a2-9e09-383e7e8a032e>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/a0d4da8a-72d9-4fae-b840-cc3737fa5559> .
+
+<http://rdf.geohistoricaldata.org/id/event/9c6ebe61-c7ad-4e6a-8c5e-816b3a1598bf> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439372 .
+
+<http://rdf.geohistoricaldata.org/id/change/00081ac8-76e1-47ef-8762-fbe7ab59e00f>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/9c6ebe61-c7ad-4e6a-8c5e-816b3a1598bf>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/5a4f7c48-d94e-4f59-b8b4-66c73a5278bd> .
+
+_:node439372 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1856-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/5a4f7c48-d94e-4f59-b8b4-66c73a5278bd>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/00081ac8-76e1-47ef-8762-fbe7ab59e00f> .
+
+<http://rdf.geohistoricaldata.org/id/event/3b05a42c-0078-4a8e-848d-0f96626018a5> a
+    add:Event;
+  cad:isEventType cad_etype:Split;
+  add:hasTime _:node439373 .
+
+<http://rdf.geohistoricaldata.org/id/change/93c05166-b67c-4be9-a36a-d563ea8bd6d5>
+  a add:Change;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/3b05a42c-0078-4a8e-848d-0f96626018a5>;
+  add:isChangeType ctype:LandmarkDisappearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/ec665849-c113-4c37-8131-5adbde42cd3d> .
+
+_:node439373 a add:TimeInstant;
+  add:timeCalendar time:Gregorian;
+  add:timePrecision time:Year;
+  add:timeStamp "1857-12-31T00:00:00"^^xsd:dateTimeStamp .
+
+<http://rdf.geohistoricaldata.org/id/landmark/ec665849-c113-4c37-8131-5adbde42cd3d>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/93c05166-b67c-4be9-a36a-d563ea8bd6d5> .

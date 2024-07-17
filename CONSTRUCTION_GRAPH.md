@@ -71,7 +71,7 @@ WHERE {
 #GROUP BY ?mapsLandmark ?registerLandmark ?registerLandmark2
 ```
 
-## 4.1 Création des changements et des évènements correspondants à des divisions de parcelles (registres) à partir du champ Porté à (2..* folios)
+## 4.1 Création des changements et des évènements "Disparition de landmark" faisant suite à des divisions de parcelles (registres) détectées à partir du champ Porté à (2..* folios)
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -91,19 +91,16 @@ construct {
     ?change2 add:dependsOn ?event.
     ?event cad:isEventType cad_etype:Split.
     ?change add:isChangeType ctype:LandmarkDisappearance.
-    ?change2 add:isChangeType ctype:LandmarkAppearance.
     ?event add:hasTime [a add:TimeInstant ;
            add:timeCalendar time:Gregorian ;
     	   add:timePrecision time:Year ;
            add:timeStamp ?datefin
     ].
     ?change add:appliedTo ?registerLandmark.
-    ?change2 add:appliedTo ?nextPlot.
     ?registerLandmark add:changedBy ?change.
-    ?nextPlot add:changedBy ?change2.
 }
 WHERE{
-SELECT ?registerLandmark ?plotid ?datefin (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+SELECT ?registerLandmark ?plotid ?datefin (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change) 
 WHERE {
     {?registerLandmark a add:Landmark.
     ?registerLandmark add:isLandmarkType cad_ltype:Plot. 
@@ -122,7 +119,46 @@ GROUP BY ?registerLandmark ?plotid ?datefin
 HAVING(count(?portea) > 1)
 ORDER BY ?datefin}
 ```
-## 4.2 Création des changements et des évènements correspondants à des divisions de parcelles (registres) à partir du champ Tiré de (ResteSV)
+## 4.2 Création des changements "Création de landmarks" faisant suite à une disparition ("Tiré de" = Reste ou Folio)
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+
+construct {
+    ?change2 a add:Change.
+    ?change2 add:isChangeType ctype:LandmarkAppearance.
+    ?change2 add:appliedTo ?nextplot.
+    ?nextplot add:changedBy ?change2.
+    ?change2 add:dependsOn ?event.
+}
+WHERE {
+    select ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2) ?nextplot
+    where { 
+        ?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+        ?plot add:changedBy ?change.
+        ?change a add:Change; add:isChangeType ctype:LandmarkDisappearance.
+        ?change add:dependsOn ?event.
+        ?event a add:Event ; cad:isEventType cad_etype:Split.
+        ?plot add:before ?nextplot.
+        
+        ?nextplot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+        ?nextplot add:hasAttribute ?attrM.
+        ?attrM add:isAttributeType cad_atype:PlotMention.
+        ?attrM add:hasAttributeVersion ?tirede.
+        {?tirede cad:takenFrom cad_spval:ResteSV } UNION {?tirede cad:takenFrom ?folio. ?folio cad:isSourceType srctype:FolioNonBati}
+    }
+    GROUP BY ?nextplot ?event
+}
+```
+
+## 4.3 TEST Création des changements et des évènements correspondants à des divisions de parcelles (registres) à partir du champ Tiré de (ResteSV)
+*En développement !!!*
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -177,6 +213,7 @@ GROUP BY ?registerLandmark ?previousPlot ?datedebut
 ORDER BY ?datedebut}
 ```
 ## 5. Réorganisation de la généalogie des parcelles à partir des divisions
+### 5.1 Similarité entre les parcelles produites par division et les états de parcelles suivants
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -184,26 +221,94 @@ PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeT
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
 
 #Récupérer toutes les parcelles qui sont add:after une nouvelle parcelle
 #Rattacher ces parcelles à la nouvelle parcelle
-construct {
-	?newPlot add:isSimilarTo ?registersLandmark2.
-    ?registersLandmark2 add:isSimilarTo ?newPlot.
+insert { graph <http://rdf.geohistoricaldata.org/issimilarnewplots> {
+#construct{
+	?newPlot add:isSimilarTo ?nextPlot.
+    ?nextPlot add:isSimilarTo ?newPlot.
+    }
 }
 where { 
      ?event a add:Event.
      ?event cad:isEventType cad_etype:Split.
+     ?event add:hasTime/add:timeStamp ?time.
      ?change add:dependsOn ?event.
-     ?change add:isChangeType ctype:LandmarkAppearance.
-     ?change add:appliedTo ?newPlot.
+     ?change2 add:dependsOn ?event.
+     ?change add:isChangeType ctype:LandmarkDisappearance.
+     ?change2 add:isChangeType ctype:LandmarkAppearance.
+     ?change add:appliedTo ?oldPlot.
+     ?change2 add:appliedTo ?newPlot.
     
-     ?registersLandmark2 a add:Landmark.
-     ?registersLandmark2 add:isLandmarkType cad_ltype:Plot.
-     ?registersLandmark2 add:hasAttribute ?attr.
-     #?attr add:isAttributeType cad_atype:PlotMention.
+     ?oldPlot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+     ?oldPlot add:hasAttribute ?attrM.
+     ?attrM add:isAttributeType cad_atype:PlotMention.
     
-    {?registersLandmark2 add:before ?newPlot} UNION {?newPlot add:after ?registersLandmark2}
+     ?newPlot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+     ?newPlot add:hasAttribute ?attrM2.
+     ?attrM2 add:isAttributeType cad_atype:PlotMention.
+     
+     ?nextPlot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+     ?nextPlot add:hasAttribute ?attrM3.
+     ?attrM3 add:isAttributeType cad_atype:PlotMention.
+     
+    ?oldPlot add:before ?newPlot.
+    ?newPlot add:before ?nextPlot
+    FILTER(!sameTerm(?newPlot,?nextPlot))
 }
 ```
-- Uniquement 4 résultats...
+### 5.2 Supression des liens add:isSimilarTo entre les parcelles mères et les parcelles filles et leurs descendantes + Ajouts de liens de parenté
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+
+DELETE { GRAPH <http://rdf.geohistoricaldata.org/issimilar>{
+	?mapsLandmark add:isSimilarTo ?newPlot.
+    ?mapsLandmark2 add:isSimilarTo ?nextPlot.
+    ?newPlot add:isSimilarTo ?mapsLandmark.
+    ?nextPlot add:isSimilarTo ?mapsLandmark2.
+    }}
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/parenting> 
+#CONSTRUCT
+{
+    ?mapsLandmark cad:isAncestorOf ?newPlot.
+    ?newPlot cad:isOffspringOf ?mapsLandmark.
+    ?mapsLandmark2 cad:isAncestorOf ?nextPlot.
+    ?nextPlot cad:isOffstringOf ?mapsLandmark2.
+}
+}
+WHERE { 
+     ?newPlot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+     ?newPlot add:hasAttribute ?attrM2.
+     ?attrM2 add:isAttributeType cad_atype:PlotMention.
+     
+     ?nextPlot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+     ?nextPlot add:hasAttribute ?attrM3.
+     ?attrM3 add:isAttributeType cad_atype:PlotMention.
+     
+    ?newPlot add:isSimilarTo ?nextPlot
+    FILTER(!sameTerm(?newPlot,?nextPlot))
+	
+    GRAPH <http://rdf.geohistoricaldata.org/plots/frommaps> {
+        ?mapsLandmark a add:Landmark.
+    }
+    GRAPH <http://rdf.geohistoricaldata.org/plots/frommaps> {
+        ?mapsLandmark2 a add:Landmark.
+    }
+    ?mapsLandmark add:isSimilarTo ?newPlot.
+    ?mapsLandmark2 add:isSimilarTo ?nextPlot
+}
+```

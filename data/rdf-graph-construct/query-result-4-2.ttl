@@ -1,13 +1,11 @@
 @prefix add: <http://rdf.geohistoricaldata.org/def/address#> .
 @prefix cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/> .
-@prefix cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/> .
-@prefix cad: <http://rdf.geohistoricaldata.org/def/cadastre#> .
-@prefix cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/> .
-@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
-@prefix srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/> .
 @prefix ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/> .
+@prefix cad: <http://rdf.geohistoricaldata.org/def/cadastre#> .
 @prefix cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/> .
-@prefix time: <http://www.w3.org/2006/time#> .
+@prefix cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/> .
+@prefix cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/> .
+@prefix srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf4j: <http://rdf4j.org/schema/rdf4j#> .
@@ -16,50 +14,251 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix fn: <http://www.w3.org/2005/xpath-functions#> .
 
+<http://rdf.geohistoricaldata.org/id/change/8a29e345-fb01-4b93-8b8e-f91122535fe4>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/7a66f440-d82f-49ac-93ba-0e82c4bc8487>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/7a66f440-d82f-49ac-93ba-0e82c4bc8487>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/8a29e345-fb01-4b93-8b8e-f91122535fe4> .
+
+<http://rdf.geohistoricaldata.org/id/change/5c8d0125-e084-48ee-b8ca-4860ff92bad3>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/a0708790-9e3d-43fb-aeba-44ac7a093ed9>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/a0708790-9e3d-43fb-aeba-44ac7a093ed9>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/5c8d0125-e084-48ee-b8ca-4860ff92bad3> .
+
+<http://rdf.geohistoricaldata.org/id/change/b8ac0e94-f9de-48fa-9e80-2529c038c6a8>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/416812e6-1570-4d74-a92f-170ff60774a5>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/416812e6-1570-4d74-a92f-170ff60774a5>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/b8ac0e94-f9de-48fa-9e80-2529c038c6a8> .
+
+<http://rdf.geohistoricaldata.org/id/change/58340b9a-c62f-4289-993a-c012e2296b1a>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/574f921c-7933-4d8e-a104-49eb7030743f>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/574f921c-7933-4d8e-a104-49eb7030743f>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/58340b9a-c62f-4289-993a-c012e2296b1a> .
+
+<http://rdf.geohistoricaldata.org/id/change/f1d9cec2-a553-4987-b344-4f0cb994f20e>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/7fdb52b4-a053-4df9-a75c-67fe4fb38f6f>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/7fdb52b4-a053-4df9-a75c-67fe4fb38f6f>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/f1d9cec2-a553-4987-b344-4f0cb994f20e> .
+
+<http://rdf.geohistoricaldata.org/id/change/389efb91-86ef-4455-8029-04cbc38a773f>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/0a2048d1-058b-415e-86af-923619fb2f6d>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/0a2048d1-058b-415e-86af-923619fb2f6d>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/389efb91-86ef-4455-8029-04cbc38a773f> .
+
+<http://rdf.geohistoricaldata.org/id/change/3862d3b4-36e7-4ca4-99f7-dc391e7e95cd>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/aa9ad4e5-cc57-44fe-8992-e3ad639acd52>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/aa9ad4e5-cc57-44fe-8992-e3ad639acd52>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/3862d3b4-36e7-4ca4-99f7-dc391e7e95cd> .
+
+<http://rdf.geohistoricaldata.org/id/change/abb95838-6ed3-44d1-906a-7d1eab653a25>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/f737bfc7-3e64-48a8-8565-6264faada6bb>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/f737bfc7-3e64-48a8-8565-6264faada6bb>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/abb95838-6ed3-44d1-906a-7d1eab653a25> .
+
+<http://rdf.geohistoricaldata.org/id/change/8f99ad20-0028-472c-b9c9-58392c8cf6b2>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/e853e630-e136-4f4f-9734-97e578cd8a6d>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/e853e630-e136-4f4f-9734-97e578cd8a6d>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/8f99ad20-0028-472c-b9c9-58392c8cf6b2> .
+
+<http://rdf.geohistoricaldata.org/id/change/ccde9c34-4581-4a84-b052-e22fc4dcf1d0>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/76d98310-dcef-4721-8993-6962067dd97b>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/76d98310-dcef-4721-8993-6962067dd97b>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/ccde9c34-4581-4a84-b052-e22fc4dcf1d0> .
+
+<http://rdf.geohistoricaldata.org/id/change/f6141d47-5db6-453b-bf25-d479674f1c4b>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/6282afc3-94e7-4025-91c3-b63d6ab9a77e>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/6282afc3-94e7-4025-91c3-b63d6ab9a77e>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/f6141d47-5db6-453b-bf25-d479674f1c4b> .
+
+<http://rdf.geohistoricaldata.org/id/change/d9f0d65b-dc93-4dd9-a572-aabc8b0bbc4d>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/44dc8af1-c83e-4519-a345-bc4b4f40cf8a>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/44dc8af1-c83e-4519-a345-bc4b4f40cf8a>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/d9f0d65b-dc93-4dd9-a572-aabc8b0bbc4d> .
+
+<http://rdf.geohistoricaldata.org/id/change/7e28146a-3be1-44e9-a06f-8932332de539>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/28ee01b7-02c4-4a3a-8254-ce46e07e0288>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/28ee01b7-02c4-4a3a-8254-ce46e07e0288>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/7e28146a-3be1-44e9-a06f-8932332de539> .
+
+<http://rdf.geohistoricaldata.org/id/change/ee228909-040b-4b11-89cf-50c27f52af25>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/abd839b8-7508-40f9-bc1f-c49e99aa8f95>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/abd839b8-7508-40f9-bc1f-c49e99aa8f95>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/ee228909-040b-4b11-89cf-50c27f52af25> .
+
+<http://rdf.geohistoricaldata.org/id/change/4220e0f0-164f-43e9-946e-f2be83a34763>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/9e329ec9-d279-482d-91ec-50f41003a1c8>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/9e329ec9-d279-482d-91ec-50f41003a1c8>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/4220e0f0-164f-43e9-946e-f2be83a34763> .
+
+<http://rdf.geohistoricaldata.org/id/change/78031dd6-c88e-4241-8f17-31c7442f16dc>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/b6aab6e6-d98c-462d-a24b-c8332258d7bf>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/b6aab6e6-d98c-462d-a24b-c8332258d7bf>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/78031dd6-c88e-4241-8f17-31c7442f16dc> .
+
+<http://rdf.geohistoricaldata.org/id/change/30a338f5-c102-4b63-9f60-b1fa9e581825>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/7c68cccb-6add-4898-9a6f-878c2008c14a>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b1b0fd5e-9eb6-4363-85a6-539c2b2c5d85> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/7c68cccb-6add-4898-9a6f-878c2008c14a>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/30a338f5-c102-4b63-9f60-b1fa9e581825> .
+
+<http://rdf.geohistoricaldata.org/id/change/fde87ca4-8d67-4901-b078-b8f18da329de>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/42f1fc14-0d54-4e25-85c4-6937691dedab>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/42f1fc14-0d54-4e25-85c4-6937691dedab>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/fde87ca4-8d67-4901-b078-b8f18da329de>,
+    <http://rdf.geohistoricaldata.org/id/change/003f678b-cba5-4666-8772-3ffb9876c09c> .
+
+<http://rdf.geohistoricaldata.org/id/change/ca69e623-20cb-4765-82da-fdb420ff891c>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/34d65f15-9847-4851-9315-0918a04bd63a>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/34d65f15-9847-4851-9315-0918a04bd63a>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/ca69e623-20cb-4765-82da-fdb420ff891c>,
+    <http://rdf.geohistoricaldata.org/id/change/2ebe1f8c-b281-401c-ba8e-9bfa72a58d9a>,
+    <http://rdf.geohistoricaldata.org/id/change/7409a213-e421-4aed-a6bc-81f2fd7cb736> .
+
+<http://rdf.geohistoricaldata.org/id/change/4b9afc81-5081-4091-b631-2d25f241c8e0>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/ec665849-c113-4c37-8131-5adbde42cd3d>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/ec665849-c113-4c37-8131-5adbde42cd3d>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/4b9afc81-5081-4091-b631-2d25f241c8e0> .
+
+<http://rdf.geohistoricaldata.org/id/change/4dd403cd-866c-42ab-b9e6-04c9d672f33f>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/3bbbc1fd-28f5-492e-8d6b-61af845f7a25>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/3bbbc1fd-28f5-492e-8d6b-61af845f7a25>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/4dd403cd-866c-42ab-b9e6-04c9d672f33f> .
+
+<http://rdf.geohistoricaldata.org/id/change/6eea9c7a-bdff-41e5-b40d-64405375bb52>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/eee14154-ff8e-43b7-91bc-adda433c6145>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c> .
+
+<http://rdf.geohistoricaldata.org/id/landmark/eee14154-ff8e-43b7-91bc-adda433c6145>
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/6eea9c7a-bdff-41e5-b40d-64405375bb52>,
+    <http://rdf.geohistoricaldata.org/id/change/b813a34c-dc78-4d38-8f86-68391219bb64>,
+    <http://rdf.geohistoricaldata.org/id/change/12a3aaad-d776-427f-950f-3e83f0e015e6> .
+
+<http://rdf.geohistoricaldata.org/id/change/fc68e0a1-b73f-4a94-b346-c56101360ca8>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/9cdc4827-e645-4369-9355-17c46829787b>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/f09cb724-a8d0-4b5f-adcd-0ab5e3fea24c> .
+
 <http://rdf.geohistoricaldata.org/id/landmark/9cdc4827-e645-4369-9355-17c46829787b>
-  add:changedBy <http://rdf.geohistoricaldata.org/id/change/7ce0cd88-a530-42e7-a4c8-59c3b47e9e3e>,
-    <http://rdf.geohistoricaldata.org/id/change/1f512e3f-6064-4785-9f52-0e3c60c4e069> .
+  add:changedBy <http://rdf.geohistoricaldata.org/id/change/fc68e0a1-b73f-4a94-b346-c56101360ca8>,
+    <http://rdf.geohistoricaldata.org/id/change/f4148ac0-1e61-494f-b5fe-90e372201f72> .
 
-<http://rdf.geohistoricaldata.org/id/change/7ce0cd88-a530-42e7-a4c8-59c3b47e9e3e>
+<http://rdf.geohistoricaldata.org/id/change/003f678b-cba5-4666-8772-3ffb9876c09c>
   a add:Change;
-  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/9cdc4827-e645-4369-9355-17c46829787b>;
   add:isChangeType ctype:LandmarkAppearance;
-  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/d2b441d6-9e32-4d90-96c4-5680ed484d7c> .
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/42f1fc14-0d54-4e25-85c4-6937691dedab>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/9c6ebe61-c7ad-4e6a-8c5e-816b3a1598bf> .
 
-<http://rdf.geohistoricaldata.org/id/change/190209e3-25c3-48fa-beb3-7db3ae9f253b>
+<http://rdf.geohistoricaldata.org/id/change/2ebe1f8c-b281-401c-ba8e-9bfa72a58d9a>
   a add:Change;
-  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/5a4f7c48-d94e-4f59-b8b4-66c73a5278bd>;
-  add:isChangeType ctype:LandmarkDisappearance;
-  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/d2b441d6-9e32-4d90-96c4-5680ed484d7c> .
-
-<http://rdf.geohistoricaldata.org/id/event/d2b441d6-9e32-4d90-96c4-5680ed484d7c> a
-    add:Event;
-  cad:isEventType cad_etype:Split;
-  add:hasTime _:node109139 .
-
-_:node109139 a add:TimeInstant;
-  add:timeStamp "1857-01-01T00:00:00"^^xsd:dateTimeStamp;
-  add:timeCalendar time:Gregorian;
-  add:timePrecision time:Year .
-
-<http://rdf.geohistoricaldata.org/id/change/1f512e3f-6064-4785-9f52-0e3c60c4e069>
-  a add:Change;
-  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/9cdc4827-e645-4369-9355-17c46829787b>;
   add:isChangeType ctype:LandmarkAppearance;
-  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b0c8da25-7466-4c97-a5c1-8a64c27fc630> .
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/34d65f15-9847-4851-9315-0918a04bd63a>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/9c6ebe61-c7ad-4e6a-8c5e-816b3a1598bf> .
 
-<http://rdf.geohistoricaldata.org/id/change/1472cb75-cb8c-4872-a86e-863cdf261636>
+<http://rdf.geohistoricaldata.org/id/change/b813a34c-dc78-4d38-8f86-68391219bb64>
   a add:Change;
-  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/4738f70b-3e2e-43a2-9e09-383e7e8a032e>;
-  add:isChangeType ctype:LandmarkDisappearance;
-  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/b0c8da25-7466-4c97-a5c1-8a64c27fc630> .
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/eee14154-ff8e-43b7-91bc-adda433c6145>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/9c6ebe61-c7ad-4e6a-8c5e-816b3a1598bf> .
 
-<http://rdf.geohistoricaldata.org/id/event/b0c8da25-7466-4c97-a5c1-8a64c27fc630> a
-    add:Event;
-  cad:isEventType cad_etype:Split;
-  add:hasTime _:node109140 .
+<http://rdf.geohistoricaldata.org/id/change/f4148ac0-1e61-494f-b5fe-90e372201f72>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/9cdc4827-e645-4369-9355-17c46829787b>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/9c6ebe61-c7ad-4e6a-8c5e-816b3a1598bf> .
 
-_:node109140 a add:TimeInstant;
-  add:timeStamp "1857-01-01T00:00:00"^^xsd:dateTimeStamp;
-  add:timeCalendar time:Gregorian;
-  add:timePrecision time:Year .
+<http://rdf.geohistoricaldata.org/id/change/7409a213-e421-4aed-a6bc-81f2fd7cb736>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/34d65f15-9847-4851-9315-0918a04bd63a>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/3b05a42c-0078-4a8e-848d-0f96626018a5> .
+
+<http://rdf.geohistoricaldata.org/id/change/12a3aaad-d776-427f-950f-3e83f0e015e6>
+  a add:Change;
+  add:isChangeType ctype:LandmarkAppearance;
+  add:appliedTo <http://rdf.geohistoricaldata.org/id/landmark/eee14154-ff8e-43b7-91bc-adda433c6145>;
+  add:dependsOn <http://rdf.geohistoricaldata.org/id/event/3b05a42c-0078-4a8e-848d-0f96626018a5> .
