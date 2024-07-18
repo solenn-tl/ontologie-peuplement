@@ -58,17 +58,18 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
-#CONSTRUCT {?registerLandmark add:before ?registerLandmark2. ?registerLandmark2 add:after ?registerLandmark.}
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/id/ordre>{?registerLandmark add:before ?registerLandmark2. ?registerLandmark2 add:after ?registerLandmark.}}
+CONSTRUCT {?registerLandmark add:before ?registerLandmark2. 
+    ?registerLandmark2 add:after ?registerLandmark.}
 WHERE {
-    GRAPH <http://rdf.geohistoricaldata.org/id/temporaire> 
+    
+    GRAPH <http://rdf.geohistoricaldata.org/temporaire> 
     {?mapsLandmark add:hasTimeGap ?gap.
     ?gap add:hasValue ?ecart.
     ?gap add:isFirstRL ?registerLandmark.
-    ?gap add:isSecondRL ?registerLandmark2. 
-    FILTER (!sameTerm(?registerLandmark, ?registerLandmark2))}
+    ?gap add:isSecondRL ?registerLandmark2. }
+    FILTER (!sameTerm(?registerLandmark, ?registerLandmark2))
 }
-#GROUP BY ?mapsLandmark ?registerLandmark ?registerLandmark2
+GROUP BY ?mapsLandmark ?registerLandmark ?registerLandmark2
 ```
 
 ## 4.1 Création des changements et des évènements "Disparition de landmark" faisant suite à des divisions de parcelles (registres) détectées à partir du champ Porté à (2..* folios)
@@ -157,61 +158,6 @@ WHERE {
 }
 ```
 
-## 4.3 TEST Création des changements et des évènements correspondants à des divisions de parcelles (registres) à partir du champ Tiré de (ResteSV)
-*En développement !!!*
-```sparql
-PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
-PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
-PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
-PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
-PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
-PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/Type/>
-PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
-PREFIX time: <http://www.w3.org/2006/time#>
-
-#Crée les changements et les événements entre des parcelles de registres qui se suivent et où ?tirede de ?registerLandmark est égal à Reste
-construct {
-?registerLandmark add:changedBy ?change.
-?change a add:Change.
-?change add:appliedTo ?registerLandmark.
-?change add:isChangeType ctype:LandmarkAppearance.
-?change add:dependsOn ?event.
-?nextPlot add:changedBy ?change2.
-?change2 a add:Change.
-?change2 add:appliedTo ?previousPlot.
-?change2 add:isChangeType ctype:LandmarkDisappearance.
-?change2 add:dependsOn ?event.
-?event a add:Event.
-?event cad:isEventType cad_etype:Split.
-?event add:hasTime [ a add:TimeInstant; add:timeStamp ?datedebut; add:timeCalendar time:Gregorian;
-add:timePrecision time:Year].
-}
-WHERE {
-select ?registerLandmark ?previousPlot ?datedebut (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/", STRUUID())) AS ?change) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/", STRUUID())) AS ?change2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event)
-where {
-    ?registerLandmark a add:Landmark.
-    ?registerLandmark add:hasTime/add:hasBeginning/add:timeStamp ?datedebut.
-    ?registerLandmark add:isLandmarkType cad_ltype:Plot. 
-    ?registerLandmark add:hasAttribute ?attrMention.
-    ?attrMention add:isAttributeType cad_atype:PlotMention.
-    ?attrMention add:hasAttributeVersion/cad:takenFrom cad_spval:ResteSV.
-    ?attrMention add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio.
-    ?folio cad:isSourceType srctype:FolioNonBati.
-     
-    ?previousPlot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-    ?previousPlot add:hasAttribute ?attrMention2.
-    ?attrMention2 add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folioPrevious.
-    ?folioPrevious2 cad:isSourceType srctype:FolioNonBati.
-    graph <http://rdf.geohistoricaldata.org/ordre>
-    {?registerLandmark add:after ?previousPlot.}
-    
-    FILTER(sameTerm(?folio,?folioPrevious))
-}
-GROUP BY ?registerLandmark ?previousPlot ?datedebut
-ORDER BY ?datedebut}
-```
 ## 5. Réorganisation de la généalogie des parcelles à partir des divisions
 ### 5.1 Similarité entre les parcelles produites par division et les états de parcelles suivants
 ```sparql
@@ -313,7 +259,7 @@ WHERE {
 }
 ```
 ### 5.3 Lien entre la première mention d'une parcelle dans la première matrice et l'objet du plan
-```
+```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
