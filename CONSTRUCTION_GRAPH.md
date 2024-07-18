@@ -6,8 +6,8 @@ PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkTy
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
 CONSTRUCT {
-    ?registersLandmark add:isSimilarTo ?mapsLandmark.
-    ?mapsLandmark add:isSimilarTo ?registersLandmark.
+    ?registersLandmark add:hasRootLandmark ?mapsLandmark.
+    ?mapsLandmark add:isRootLandmarkOf ?registersLandmark.
    }
 WHERE {
         GRAPH <http://rdf.geohistoricaldata.org/plots/frommaps> {
