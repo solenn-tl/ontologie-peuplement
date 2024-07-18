@@ -34,40 +34,57 @@ WHERE {
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 
-#Export des écarts temporels entre les états des parcelles issus des matrices
 CONSTRUCT {?mapsLandmark add:hasTimeGap [add:hasValue ?ecart; 
                          add:isFirstRL ?registerLandmark; 
                          add:isSecondRL ?registerLandmark2]}
 WHERE {
     GRAPH <http://rdf.geohistoricaldata.org/issimilar> 
-    {?mapsLandmark add:isSimilarTo ?registerLandmark.
-    ?mapsLandmark add:isSimilarTo ?registerLandmark2.}
+    {?mapsLandmark add:hasRootLandmark ?registerLandmark.
+    ?mapsLandmark add:hasRootLandmark ?registerLandmark2.}
     ?registerLandmark add:hasTime/add:hasEnd/add:timeStamp ?fin.
+    ?registerLandmark add:hasAttributeVersion/cad:passedTo ?folio.
     ?registerLandmark2 add:hasTime/add:hasBeginning/add:timeStamp ?debut2 .
+    ?registerLandmark2 add:hasAttribute ?attrM2.
+    ?attrM2 add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?folio.
+    ?folio cad:isSourceType srctype:FolioNonBati.
+    
 	BIND(ofn:asDays(?debut2 - ?fin) as ?ecart).
 	FILTER ((?ecart > 0) && !(sameTerm(?registerLandmark,?registerLandmark2)))
 }
 ```
 ## 3. Ajout de relations before/after entre les parcelles (registres) à l'aide des écarts temporels
 ```sparql
-#Calcul des relations d'ordre temporel relatif entre états de parcelles issus des matrices
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
-CONSTRUCT {?registerLandmark add:before ?registerLandmark2. 
-    ?registerLandmark2 add:after ?registerLandmark.}
-WHERE {
-    
-    GRAPH <http://rdf.geohistoricaldata.org/temporaire> 
-    {?mapsLandmark add:hasTimeGap ?gap.
-    ?gap add:hasValue ?ecart.
-    ?gap add:isFirstRL ?registerLandmark.
-    ?gap add:isSecondRL ?registerLandmark2. }
-    FILTER (!sameTerm(?registerLandmark, ?registerLandmark2))
+#SELECT ?registerLandmark ?registerLandmark2 ?ecart
+CONSTRUCT {?registerLandmark add:hasNext ?registerLandmark2.
+    ?registerLandmark2 add:hasPrevious ?registerLandmark.
 }
-GROUP BY ?mapsLandmark ?registerLandmark ?registerLandmark2
+WHERE {
+    #Requête principale pour récupérer les parcelles tn+1 dont l'écart avec tn est égal à l'écart minimal
+	GRAPH <http://rdf.geohistoricaldata.org/temporaire> {
+    	?mapsLandmark add:hasTimeGap ?gap.
+    	?gap add:hasValue ?ecart.
+        ?gap add:isFirstRL ?registerLandmark.
+        ?gap add:isSecondRL ?registerLandmark2} 
+    FILTER (!sameTerm(?registerLandmark, ?registerLandmark2))
+	FILTER(?ecart = ?minecart)
+    
+    # Sous-requête pour récupérer l'écart min lié à une parcelle
+    {SELECT ?registerLandmark (MIN(?ecart2) AS ?minecart)
+	WHERE {GRAPH <http://rdf.geohistoricaldata.org/temporaire> {
+    	?mapsLandmark add:hasTimeGap ?gap2.
+    	?gap2 add:hasValue ?ecart2.
+        ?gap2 add:isFirstRL ?registerLandmark.} 
+	}
+	GROUP BY ?registerLandmark
+    ORDER BY ?minecart}
+    # Fin sous-requête
+}
 ```
 
 ## 4.1 Création des changements et des évènements "Disparition de landmark" faisant suite à des divisions de parcelles (registres) détectées à partir du champ Porté à (2..* folios)
@@ -111,7 +128,7 @@ WHERE {
     ?portea cad:isSourceType srctype:FolioNonBati.}
     UNION {
             GRAPH <http://rdf.geohistoricaldata.org/ordre>{
-                ?registerLandmark add:before ?nextPlot}
+                ?registerLandmark add:hasNext ?nextPlot}
     }
 }
 GROUP BY ?registerLandmark ?plotid ?datefin
@@ -144,7 +161,7 @@ WHERE {
         ?change a add:Change; add:isChangeType ctype:LandmarkDisappearance.
         ?change add:dependsOn ?event.
         ?event a add:Event ; cad:isEventType cad_etype:Split.
-        ?plot add:before ?nextplot.
+        ?plot add:hasNext ?nextplot.
         
         ?nextplot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
         ?nextplot add:hasAttribute ?attrM.
@@ -172,10 +189,10 @@ PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCel
 
 #Récupérer toutes les parcelles qui sont add:after une nouvelle parcelle
 #Rattacher ces parcelles à la nouvelle parcelle
-insert { graph <http://rdf.geohistoricaldata.org/issimilarnewplots> {
+insert { graph <http://rdf.geohistoricaldata.org/issimilar> {
 #construct{
-	?newPlot add:isSimilarTo ?nextPlot.
-    ?nextPlot add:isSimilarTo ?newPlot.
+	?newPlot add:hasRootLandmark ?nextPlot.
+    ?nextPlot add:isRootLandmarkOf ?newPlot.
     }
 }
 where { 
@@ -201,8 +218,8 @@ where {
      ?nextPlot add:hasAttribute ?attrM3.
      ?attrM3 add:isAttributeType cad_atype:PlotMention.
      
-    ?oldPlot add:before ?newPlot.
-    ?newPlot add:before ?nextPlot
+    ?oldPlot add:hasNext ?newPlot.
+    ?newPlot add:hasNext ?nextPlot
     FILTER(!sameTerm(?newPlot,?nextPlot))
 }
 ```
@@ -220,19 +237,16 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
 
 DELETE { GRAPH <http://rdf.geohistoricaldata.org/issimilar>{
-	?mapsLandmark add:isSimilarTo ?newPlot.
-    ?mapsLandmark2 add:isSimilarTo ?nextPlot.
-    ?newPlot add:isSimilarTo ?mapsLandmark.
-    ?nextPlot add:isSimilarTo ?mapsLandmark2.
+	?mapsLandmark add:isRootLandmarkOf ?newPlot.
+    ?mapsLandmark2 add:isRootLandmarkOf ?nextPlot.
+    ?newPlot add:hasRootLandmark ?mapsLandmark.
+    ?nextPlot add:isRootLandmarkOf ?mapsLandmark2.
     }}
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/parenting> 
 #CONSTRUCT
 {
-    ?mapsLandmark cad:isParentOf ?newPlot.
-    ?newPlot cad:isChildrenOf ?mapsLandmark.
-    ?mapsLandmark2 cad:isAncestorOf ?nextPlot.
-    ?nextPlot cad:isOffstringOf ?mapsLandmark2.}
-}
+    ?mapsLandmark cad:hasNext ?newPlot.
+    ?newPlot cad:hasPrevious ?mapsLandmark.}
 }
 WHERE { 
      ?newPlot a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
@@ -252,11 +266,12 @@ WHERE {
     GRAPH <http://rdf.geohistoricaldata.org/plots/frommaps> {
         ?mapsLandmark2 a add:Landmark.
     }
-    ?mapsLandmark add:isSimilarTo ?newPlot.
-    ?mapsLandmark2 add:isSimilarTo ?nextPlot
+    ?mapsLandmark add:isRootLandmarkOf ?newPlot.
+    ?mapsLandmark2 add:isRootLandmarkOf ?nextPlot
 }
 ```
 ### 5.3 Lien entre la première mention d'une parcelle dans la première matrice et l'objet du plan
+Pas sur que ça serve...
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -267,13 +282,17 @@ PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
-construct {
-    ?mapsLandmark cad:previous ?registersLandmark.
-    ?registersLandmark cad:next ?mapsLandmark.
+#construct {
+INSERT { GRAPH <http://rdf.grohistoricaldata.org/parenting>{
+    ?mapsLandmark cad:hasNext ?registersLandmark.
+    ?registersLandmark cad:hasPrevious ?mapsLandmark.
 }
+}
+#select *
 where { 
     GRAPH <http://rdf.geohistoricaldata.org/plots/frommaps>{
 		?mapsLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot .
+        
     }
     
     GRAPH <http://rdf.geohistoricaldata.org/plots/fromregisters>{
