@@ -174,6 +174,7 @@ WHERE {
 ```
 
 ## 5. Réorganisation de la généalogie des parcelles à partir des divisions
+**Partie à revoir**
 ### 5.1 Similarité entre les parcelles produites par division et les états de parcelles suivants
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -191,8 +192,8 @@ PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCel
 #Rattacher ces parcelles à la nouvelle parcelle
 insert { graph <http://rdf.geohistoricaldata.org/issimilar> {
 #construct{
-	?newPlot add:hasRootLandmark ?nextPlot.
-    ?nextPlot add:isRootLandmarkOf ?newPlot.
+	?newPlot add:isRootLandmarkOf ?nextPlot.
+    ?nextPlot add:hasRootLandmark ?newPlot.
     }
 }
 where { 
@@ -224,6 +225,7 @@ where {
 }
 ```
 ### 5.2 Supression des liens add:isSimilarTo entre les parcelles mères et les parcelles filles et leurs descendantes + Ajouts de liens de parenté
+Pas sûr que ça soit toujours utile
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
