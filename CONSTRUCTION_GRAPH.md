@@ -17,8 +17,6 @@ WHERE {
         ?registersLandmark add:hasAttribute ?attr1.
         ?attr1 add:isAttributeType cad_atype:PlotMention.
     
-        MINUS {?registersLandmark add:isSimilarTo ?mapsLandmark}
-        MINUS {?mapsLandmark add:isSimilarTo ?registersLandmark}
         ?mapsLandmark dcterms:identifier ?plotidm.
         ?registersLandmark dcterms:identifier ?plotidr.
         BIND(
