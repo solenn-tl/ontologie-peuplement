@@ -284,10 +284,10 @@ DELETE { GRAPH <http://rdf.geohistoricaldata.org/issimilar>{
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/parenting> 
 #CONSTRUCT
 {
-    ?mapsLandmark cad:isAncestorOf ?newPlot.
-    ?newPlot cad:isOffspringOf ?mapsLandmark.
+    ?mapsLandmark cad:isParentOf ?newPlot.
+    ?newPlot cad:isChildrenOf ?mapsLandmark.
     ?mapsLandmark2 cad:isAncestorOf ?nextPlot.
-    ?nextPlot cad:isOffstringOf ?mapsLandmark2.
+    ?nextPlot cad:isOffstringOf ?mapsLandmark2.}
 }
 }
 WHERE { 
@@ -311,4 +311,45 @@ WHERE {
     ?mapsLandmark add:isSimilarTo ?newPlot.
     ?mapsLandmark2 add:isSimilarTo ?nextPlot
 }
+```
+### 5.3 Lien entre la première mention d'une parcelle dans la première matrice et l'objet du plan
+```
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+construct {
+    ?mapsLandmark cad:previous ?registersLandmark.
+    ?registersLandmark cad:next ?mapsLandmark.
+}
+where { 
+    GRAPH <http://rdf.geohistoricaldata.org/plots/frommaps>{
+		?mapsLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot .
+    }
+    
+    GRAPH <http://rdf.geohistoricaldata.org/plots/fromregisters>{
+        ?registersLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+        ?registersLandmark add:hasAttribute ?attrM.
+        ?registersLandmark add:hasTime/add:hasBeginning/add:timeStamp ?debut.
+        ?attrM add:isAttributeType cad_atype:PlotMention.
+        ?attrM add:hasAttributeVersion/cad:takenFrom cad_spval:CelluleVideSV.
+        ?attrM add:hasAttributeVersion/cad:isMentionnedIn ?classement.}
+        ?classement rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice.
+       FILTER(?matrice = source:94_Gentilly_MAT_NB_1848 || ?matrice = source:94_Gentilly_MAT_B_NB_1813)
+
+        ?mapsLandmark dcterms:identifier ?plotidm.
+        ?registersLandmark dcterms:identifier ?plotidr.
+        BIND(
+        IF(STRENDS(STR(?plotidr), "p"), 
+                SUBSTR(STR(?plotidr), 1, STRLEN(STR(?plotidr)) - 1), 
+                ?plotidr
+              ) AS ?plotid
+            )
+        filter(?plotidm = ?plotid)
+} 
 ```
