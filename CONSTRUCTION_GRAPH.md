@@ -101,12 +101,10 @@ PREFIX time: <http://www.w3.org/2006/time#>
 
 construct {
     ?event a add:Event.
-    ?change a add:Change.
-    ?change2 a add:Change.
-    ?change add:dependsOn ?event.
-    ?change2 add:dependsOn ?event.
     ?event cad:isEventType cad_etype:Split.
+    ?change a add:Change.
     ?change add:isChangeType ctype:LandmarkDisappearance.
+    ?change add:dependsOn ?event.
     ?event add:hasTime [a add:TimeInstant ;
            add:timeCalendar time:Gregorian ;
     	   add:timePrecision time:Year ;
@@ -127,7 +125,7 @@ WHERE {
     ?attrMention add:hasAttributeVersion/cad:passedTo ?portea.
     ?portea cad:isSourceType srctype:FolioNonBati.}
     UNION {
-            GRAPH <http://rdf.geohistoricaldata.org/ordre>{
+           GRAPH <http://rdf.geohistoricaldata.org/ordre> {
                 ?registerLandmark add:hasNext ?nextPlot}
     }
 }
