@@ -1,0 +1,45 @@
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+
+select ?relatedLandmark ?folio ?entree ?sortie ?disChange ?event ?j1 ?entree2 ?sortie2 ?nextLandmark
+where { 
+    ?relatedLandmark add:hasRootLandmark ?rootLandmark.
+    ?nextLandmark add:hasRootLandmark ?rootLandmark.
+    ?relatedLandmark (add:hasNext|add:hasOverlappingVersion) ?nextLandmark.
+    
+	?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot .
+    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?entree.
+    ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?sortie.
+    ?relatedLandmark add:hasAttribute ?attrMention.
+    ?attrMention add:isAttributeType cad_atype:PlotMention.
+    ?attrMention add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio.
+    ?folio cad:isSourceType srctype:FolioNonBati.
+    OPTIONAL{?relatedLandmark add:changedBy ?disChange.
+    ?disChange add:isChangeType ctype:LandmarkDisappearance.
+    ?disChange add:dependsOn ?event.}
+        
+    ?nextLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot .
+    ?nextLandmark add:hasTime/add:hasBeginning/add:timeStamp ?entree2.
+    ?nextLandmark add:hasTime/add:hasEnd/add:timeStamp ?sortie2.
+    ?nextLandmark add:hasAttribute ?attrMention2.
+    ?attrMention2 add:isAttributeType cad_atype:PlotMention.
+    
+    ?attrMention add:hasAttributeVersion/cad:passedTo ?j1.
+    ?attrMention2 add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?j1.
+    ?j1 cad:isSourceType srctype:FolioNonBati.
+    #Filter Construction/Augmentation versions
+    ?attrMention2 add:hasAttributeVersion/cad:takenFrom ?tirede2.
+    {?tirede2 cad:isSourceType srctype:FolioNonBati}UNION{FILTER(?tirede2 IN(cad_spval:CelluleVideSV,cad_spval:ResteSV))}
+
+    FILTER(!sameTerm(?relatedLandmark, ?nextLandmark))
+    FILTER(YEAR(?sortie) = YEAR(?entree2))
+	} 
+    ORDER BY ?rootLandmark ?entree ?sortie ?j1
