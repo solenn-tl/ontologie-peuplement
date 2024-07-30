@@ -299,8 +299,8 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
 WHERE{
     SELECT ?plot ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change)
     WHERE {
-        {select ?plot (count(distinct ?nextFolio) AS ?nextFoliosCount)
-    	where{
+        {SELECT ?plot (count(distinct ?nextFolio) AS ?nextFoliosCount)
+    	WHERE{
         	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
         	?plot add:hasAttribute [add:hasAttributeVersion/cad:passedTo ?nextFolio].
         	?nextFolio cad:isSourceType srctype:FolioNonBati.
