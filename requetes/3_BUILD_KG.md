@@ -29,7 +29,7 @@ WHERE {
                 ?plotidr
               ) AS ?plotid
             )
-        filter(?plotidm = ?plotid)
+        FILTER(?plotidm = ?plotid)
         ###### END
 }
 ```
@@ -84,7 +84,7 @@ WHERE {
     # End
 }
 ```
-* Then, delete the *http://rdf.geohistoricaldata.org/tmp* named graph.
+* Then, delete the *http://rdf.geohistoricaldata.org/tmp* named FILTER.
 
 ### 3.2 *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap and version have different start date
 ```sparql
@@ -191,7 +191,7 @@ PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 PREFIX time: <http://www.w3.org/2006/time#>
 
-#construct {
+#CONSTRUCT {
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events> {
     ?event a add:Event.
     ?event cad:isEventType cad_etype:Split.
@@ -244,8 +244,8 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
     ?change2 add:appliedTo ?nextLandmark.}
 }
 WHERE {
-	select ?nextLandmark ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
-	where { 
+	SELECT ?nextLandmark ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+	WHERE { 
     	?relatedLandmark add:hasRootLandmark ?rootLandmark.
     	?nextLandmark add:hasRootLandmark ?rootLandmark.
     	?relatedLandmark (add:hasNextVersion|add:hasOverlappingVersion) ?nextLandmark.
@@ -275,7 +275,7 @@ WHERE {
     ORDER BY ?rootLandmark ?sortie ?j1
 }
 ```
-### 4.3 Create FolioChange event (LeftFolio change)
+### 4.3 Create FolioChange event and LeaveFolio change
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -286,19 +286,19 @@ PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-INSERT { graph <http://rdf.geohistoricaldata.org/changes_events>{
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
     ?change a add:Change.
     ?change add:dependsOn ?event.
-    ?change add:isChangeType ctype:LeftFolio.
+    ?change add:isChangeType ctype:LeaveFolio.
     ?event a add:Event.
     ?event cad:isEventType cad_etype:FolioChange.
     ?event add:hasTime[add:timePrecision time:Year; add:timeCalendar time:Gregorian; add:timeStamp ?end].
-    ?plot add:changeBy ?change.
+    ?plot add:changedBy ?change.
     ?change add:appliedTo ?plot.
     }}
 WHERE{
-    select ?plot ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change)
-    where {
+    SELECT ?plot ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change)
+    WHERE {
         {select ?plot (count(distinct ?nextFolio) AS ?nextFoliosCount)
     	where{
         	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
@@ -317,8 +317,63 @@ WHERE{
     }
     ORDER BY ?plot
 }
-```
 
+```
+### 4.4 Create AppendInFolio change
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
+    ?change2 a add:Change.
+    ?change2 add:isChangeType ctype:AppendInFolio.
+    ?change2 add:dependsOn ?event.
+    ?nextPlot add:changedBy ?change2.
+    ?changed2 add:appliedTo ?nextPlot.
+    }}
+WHERE {SELECT DISTINCT ?plot ?folio1 ?portea ?folio ?tirede ?change ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+    WHERE { 
+    {SELECT DISTINCT ?plot ?portea ?folio1 ?end ?change ?event
+	WHERE {?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    	?plot add:changedBy ?change.
+    	?change add:isChangeType ctype:LeftFolio.
+        ?change add:dependsOn ?event.
+        ?plot add:hasAttribute[add:hasAttributeVersion/cad:passedTo ?portea].
+        ?plot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio1].
+        ?folio1 cad:isSourceType srctype:FolioNonBati.
+        ?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
+        BIND(YEAR(?end) AS ?endY)}}
+    
+    {SELECT distinct ?nextPlot ?folio ?classementid ?classement ?tirede
+     DISTINCT{?nextPlot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:takenFrom ?tirede].
+    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio].
+    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
+    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn ?classement].
+    ?classement dcterms:identifier ?classementid.
+    
+    FILTER NOT EXISTS {?nextPlot add:changedBy ?change2.
+    	?change2 add:isChangeType ctype:LandmarkAppearance.}     
+    	}
+    GROUP BY ?nextPlot ?folio ?classementid ?classement ?tirede
+    ORDER BY ?classementid
+    }
+    
+    ?plot add:hasRootLandmark ?root.
+    ?nextPlot add:hasRootLandmark ?root.
+    
+    FILTER(sameTerm(?portea,?folio))
+    FILTER(!sameTerm(?plot,?nextPlot))
+    FILTER(sameTerm(?folio1,?tirede))
+}
+ORDER BY ?plot ?endY}
+```
 ## 5. Precise relative order of landmark versions using document order and Appearance/Disappearance events
 
 ### 5.1 Order landmark versions with the same rootLandmark in the same Property Account
@@ -335,8 +390,8 @@ PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 #CONSTRUCT {?relatedLandmark add:hasNextVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:hasPreviousVersionInSRCOrder ?relatedLandmark}
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/doc_order>{ ?relatedLandmark add:hasNextVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:hasPreviousVersionInSRCOrder ?relatedLandmark}}
 WHERE {
-select ?relatedLandmark ?relatedLandmark2
-where { 
+SELECT ?relatedLandmark ?relatedLandmark2
+WHERE { 
     #Same root Landmark
     ?relatedLandmark add:hasRootLandmark ?rootLandmark.
     ?relatedLandmark2 add:hasRootLandmark ?rootLandmark.
@@ -376,8 +431,8 @@ PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 #CONSTRUCT{ ?relatedLandmark add:hasOverlappingVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:isOverlappedByVersionInSRCOrder ?relatedLandmark.}
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/doc_order>{?relatedLandmark add:hasOverlappingVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:isOverlappedByVersionInSRCOrder ?relatedLandmark.}}
 WHERE {
-	select ?relatedLandmark ?relatedLandmark2 
-    where { 
+	SELECT ?relatedLandmark ?relatedLandmark2 
+    WHERE { 
     #Same root Landmark
     ?relatedLandmark add:hasRootLandmark ?rootLandmark.
     ?relatedLandmark2 add:hasRootLandmark ?rootLandmark.
@@ -409,7 +464,7 @@ WHERE {
 
 ### 5.2 Order landmark versions with the same rootLandmark when there is a change of folio
 #### 5.2.1 Case when landmark versions have a *hasNextVersion* temporal relation
-```
+```sparql
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
@@ -496,8 +551,8 @@ PREFIX landmark: <http://rdf.geohistoricaldata.org/id/landmark/>
 PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 
-select distinct ?plot1 ?start1 ?end1 ?relatedLandmark ?startR ?endR
-where { 
+SELECT distinct ?plot1 ?start1 ?end1 ?relatedLandmark ?startR ?endR
+WHERE { 
 	?plot1 a add:Landmark; add:isLandmarkType cad_ltype:Plot .
     ?plot1 (add:hasOverlappingVersionInSRCOrder|add:hasNextVersionInSRCOrder)+ ?relatedLandmark.
     ?plot1 add:hasTime/add:hasBeginning/add:timeStamp ?start1.
