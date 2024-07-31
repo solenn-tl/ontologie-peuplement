@@ -82,3 +82,33 @@ where {
     ?cf add:hasTime/add:hasEnd/add:timeStamp ?end.
 }
 ```
+
+## 2. Link owners
+
+### 2.1 Create keys to compare owners names
+```sparql
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX jsfn: <http://www.ontotext.com/js#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+INSERT {GRAPH<http://rdf.geohistoricaldata.org/ownerskeys>{
+    ?taxpayer skos:hiddenLabel ?hiddenLabel}}
+where {
+    BIND(CONCAT(?labelWALower,?surnameEmpty,?statusEmpty) AS ?hiddenLabel)
+            
+	{select ?taxpayer ?label ?surname ?status ?labelWALower (COALESCE(?surnameWALower,"") AS ?surnameEmpty) (COALESCE(?statusWALower,"") AS ?statusEmpty)
+	where { 
+	    ?taxpayer a cad:Taxpayer .
+        ?taxpayer cad:isTaxpayerOf ?attrV.
+        ?taxpayer cad:taxpayerLabel ?label.
+        OPTIONAL{?taxpayer cad:taxpayerStatus ?status}.
+        OPTIONAL{?taxpayer cad:taxpayerFirstName ?surname}.
+        BIND(REPLACE(lcase(jsfn:replaceAccent(?label)),"[.*$^:;, ]+","") AS ?labelWALower)
+        BIND(jsfn:replaceSubwords(REPLACE(lcase(jsfn:replaceAccent(?surname)),"[.*$^:;, ]+","")) AS ?surnameWALower)
+        BIND(jsfn:replaceSubwords(REPLACE(lcase(jsfn:replaceAccent(?status)),"[.*$^:;, ]+","")) AS ?statusWALower)
+	}
+    }
+}
+```

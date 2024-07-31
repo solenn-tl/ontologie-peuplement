@@ -275,7 +275,7 @@ WHERE {
     ORDER BY ?rootLandmark ?sortie ?j1
 }
 ```
-### 4.3 Create FolioChange event and LeaveFolio change
+### 4.3 Create FolioChange event and LeftFolio change
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -289,7 +289,7 @@ PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
     ?change a add:Change.
     ?change add:dependsOn ?event.
-    ?change add:isChangeType ctype:LeaveFolio.
+    ?change add:isChangeType ctype:LeftFolio.
     ?event a add:Event.
     ?event cad:isEventType cad_etype:FolioChange.
     ?event add:hasTime[add:timePrecision time:Year; add:timeCalendar time:Gregorian; add:timeStamp ?end].
@@ -300,7 +300,7 @@ WHERE{
     SELECT ?plot ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change)
     WHERE {
         {SELECT ?plot (count(distinct ?nextFolio) AS ?nextFoliosCount)
-    	WHERE{
+    	WHERE {
         	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
         	?plot add:hasAttribute [add:hasAttributeVersion/cad:passedTo ?nextFolio].
         	?nextFolio cad:isSourceType srctype:FolioNonBati.
@@ -315,9 +315,7 @@ WHERE{
     ?next cad:isSourceType srctype:FolioNonBati.
     FILTER(!sameTerm(?folio,?next))
     }
-    ORDER BY ?plot
-}
-
+    ORDER BY ?plot}
 ```
 ### 4.4 Create AppendInFolio change
 ```sparql
@@ -331,14 +329,14 @@ PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
 PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
-    ?change2 a add:Change.
+	?change2 a add:Change.
     ?change2 add:isChangeType ctype:AppendInFolio.
     ?change2 add:dependsOn ?event.
     ?nextPlot add:changedBy ?change2.
-    ?changed2 add:appliedTo ?nextPlot.
-    }}
-WHERE {SELECT DISTINCT ?plot ?folio1 ?portea ?folio ?tirede ?change ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
-    WHERE { 
+    ?change2 add:appliedTo ?nextPlot.
+}}
+WHERE {SELECT DISTINCT ?nextPlot ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+	WHERE { 
     {SELECT DISTINCT ?plot ?portea ?folio1 ?end ?change ?event
 	WHERE {?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     	?plot add:changedBy ?change.
@@ -350,20 +348,19 @@ WHERE {SELECT DISTINCT ?plot ?folio1 ?portea ?folio ?tirede ?change ?event (IRI(
         ?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
         BIND(YEAR(?end) AS ?endY)}}
     
-    {SELECT distinct ?nextPlot ?folio ?classementid ?classement ?tirede
-     DISTINCT{?nextPlot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:takenFrom ?tirede].
-    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio].
-    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
-    ?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn ?classement].
-    ?classement dcterms:identifier ?classementid.
+    {SELECT DISTINCT ?nextPlot ?folio ?classementid ?classement ?tirede
+     WHERE{
+        ?nextPlot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:takenFrom ?tirede].
+    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio].
+    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
+    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn ?classement].
+    	?classement dcterms:identifier ?classementid.
     
-    FILTER NOT EXISTS {?nextPlot add:changedBy ?change2.
-    	?change2 add:isChangeType ctype:LandmarkAppearance.}     
+        FILTER NOT EXISTS {?nextPlot add:changedBy ?change3.
+            ?change3 add:isChangeType ctype:LandmarkAppearance.}     
+            }
     	}
-    GROUP BY ?nextPlot ?folio ?classementid ?classement ?tirede
-    ORDER BY ?classementid
-    }
     
     ?plot add:hasRootLandmark ?root.
     ?nextPlot add:hasRootLandmark ?root.
@@ -371,13 +368,36 @@ WHERE {SELECT DISTINCT ?plot ?folio1 ?portea ?folio ?tirede ?change ?event (IRI(
     FILTER(sameTerm(?portea,?folio))
     FILTER(!sameTerm(?plot,?nextPlot))
     FILTER(sameTerm(?folio1,?tirede))
-}
-ORDER BY ?plot ?endY}
+}}
 ```
 ## 5. Precise relative order of landmark versions using document order and Appearance/Disappearance events
 
-### 5.1 Order landmark versions with the same rootLandmark in the same Property Account
-#### 5.1.1 Landmark versions with a temporal relation *hasNextVersion*
+## 5.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioChange events
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/doc_order>
+    {?plot1 add:hasNextVersionInSRCOrder ?plot2.
+    ?plot2 add:hasPreviousVersionInSRCOrder ?plot1.
+    }}
+WHERE { 
+	?plot1 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot1 add:changedBy ?change1.
+    ?change1 add:isChangeType ctype:LeftFolio.
+    
+    ?plot2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot2 add:changedBy ?change2.
+    ?change2 add:isChangeType ctype:AppendInFolio.
+    
+    ?change1 add:dependsOn ?event.
+    ?change2 add:dependsOn ?event.
+} 
+```
+
+### 5.2 Order landmark versions with the same rootLandmark in the same Property Account
+#### 5.2.1 Landmark versions with a temporal relation *hasNextVersion*
 ```sparql
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
@@ -462,108 +482,121 @@ WHERE {
 }
 ```
 
-### 5.2 Order landmark versions with the same rootLandmark when there is a change of folio
-#### 5.2.1 Case when landmark versions have a *hasNextVersion* temporal relation
+## 6. Organise nodes relative to the same object (from first mutation registers)
+### 6.1 Nodes from plots created after the cadastre
 ```sparql
-PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
-PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/doc_order> {
-    ?relatedLandmark add:hasNextVersionInSRCOrder ?relatedLandmark2.
-    ?relatedLandmark2 add:hasPreviousVersionInSRCOrder ?relatedLandmark
-} }
-WHERE { 
-    #Same root Landmark
-    ?relatedLandmark add:hasRootLandmark ?rootLandmark.
-    ?relatedLandmark2 add:hasRootLandmark ?rootLandmark.
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
+    ?plot add:isSiblingOf ?relatedLandmark.
+    ?relatedLandmark add:isSiblingOf ?plot.}
+} WHERE { 
+	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot add:changedBy ?change.
+    ?change add:isChangeType ctype:LandmarkAppearance.
     
-	?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark add:hasAttribute ?attrM.
-    ?attrM add:hasAttributeVersion/cad:passedTo ?portea.
-    ?portea cad:isSourceType srctype:FolioNonBati.
-    
-    ?relatedLandmark2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark2 add:hasAttribute ?attrM2.
-    ?attrM2 add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio.
-    ?folio cad:isSourceType srctype:FolioNonBati.
-    
-    ?relatedLandmark add:hasNextVersion ?relatedLandmark2.
-    
+    ?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     FILTER NOT EXISTS {
-    ?relatedLandmark2 add:changedBy ?change .
-    ?change add:isChangeType ctype:LandmarkAppearance .
+    	?relatedLandmark add:changedBy ?change2 .
+    	?change2 add:isChangeType ctype:LandmarkAppearance .
     }
-    FILTER(!sameTerm(?relatedLandmark,?relatedLandmark2) && (sameTerm(?portea,?folio) || ?portea = cad_spval:CelluleVideSV))
-}
+    ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?relatedLandmark.
+} 
 ```
-#### 5.2.2 Case when landmark versions have a *hasOverlappingVersion* temporal relation
+### 6.2 Nodes from root objects
 ```sparql
-PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
-PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/doc_order> {
-    ?relatedLandmark add:hasOverlappingVersionInSRCOrder ?relatedLandmark2.
-    ?relatedLandmark2 add:isOverlappedByVersionInSRCOrder ?relatedLandmark.
-} }
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
+#CONSTRUCT{
+       ?plot add:isSiblingOf ?relatedLandmark.
+       ?relatedLandmark add:isSiblingOf ?plot.}}
 WHERE { 
-    #Same root Landmark
+    ?plot add:hasRootLandmark ?rootLandmark.
     ?relatedLandmark add:hasRootLandmark ?rootLandmark.
-    ?relatedLandmark2 add:hasRootLandmark ?rootLandmark.
-    
-	?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark add:hasAttribute ?attrM.
-    ?attrM add:hasAttributeVersion/cad:passedTo ?portea.
-    
-    ?relatedLandmark2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark2 add:hasAttribute ?attrM2.
-    ?attrM2 add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio.
-    ?folio cad:isSourceType srctype:FolioNonBati.
-    
-    ?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2.
-    ?relatedLandmark2 add:isOverlappedByVersion ?relatedLandmark.
-
+	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?relatedLandmark.
+    ?plot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice].
+    ?relatedLandmark add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice].
     FILTER NOT EXISTS {
-    ?relatedLandmark2 add:changedBy ?change .
-    ?change add:isChangeType ctype:LandmarkAppearance .
+		?plot (add:hasPreviousVersionInSRCOrder|add:isOverlappedByVersionInSRCOrder)+ ?other.
+    	?plot add:changedBy ?change2 .
+    	?change2 add:isChangeType ctype:LandmarkAppearance.
+        ?relatedLandmark add:changedBy ?change3.
+        ?change3 add:isChangeType ctype:LandmarkAppearance.
     }
-    FILTER(!sameTerm(?relatedLandmark,?relatedLandmark2) && (sameTerm(?portea,?folio) || ?portea = cad_spval:CelluleVideSV))
+    FILTER(sameTerm(?matrice,source:94_Gentilly_MAT_B_NB_1813)||sameTerm(?matrice,source:94_Gentilly_MAT_NB_1848))
+    FILTER(!sameTerm(?plot,?relatedLandmark))
+} 
 }
 ```
 
-## 6. Try to organise siblings
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
-PREFIX landmark: <http://rdf.geohistoricaldata.org/id/landmark/>
-PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
 
-SELECT distinct ?plot1 ?start1 ?end1 ?relatedLandmark ?startR ?endR
-WHERE { 
-	?plot1 a add:Landmark; add:isLandmarkType cad_ltype:Plot .
-    ?plot1 (add:hasOverlappingVersionInSRCOrder|add:hasNextVersionInSRCOrder)+ ?relatedLandmark.
-    ?plot1 add:hasTime/add:hasBeginning/add:timeStamp ?start1.
-    ?plot1 add:hasTime/add:hasEnd/add:timeStamp ?end1.
-    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?startR.
-    ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?endR.
-
-    FILTER NOT EXISTS((?plot1 add:hasPreviousInSRCOrder ?other))
-}
-ORDER BY ?plot1 ?start1 ?startR
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
+    ?plot add:isSiblingOf ?relatedLandmark.
+    ?relatedLandmark add:isSiblingOf ?plot.}
+} WHERE { 
+	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
+    ?plot add:hasAttribute[add:hasAttributeVersion/cad:takenFrom cad_spval:CelluleVideSV].
+    ?plot add:hasTime/add:hasBeginning/add:timeStamp ?start1.
+    ?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?relatedLandmark add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
+    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?start2.
+    FILTER NOT EXISTS {
+        ?plot add:changedBy ?change.
+        ?change add:isChangeType ctype:LandmarkAppearance.
+    	?relatedLandmark add:changedBy ?change2 .
+    	?change2 add:isChangeType ctype:LandmarkAppearance .
+    }
+    ?plot add:isOverlappedByVersion ?relatedLandmark.
+    FILTER(YEAR(?start1) = YEAR(?start2))
+} 
 ```
+
+### 6.4 Delete sibling relations that are wrong
+```sparql
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+
+DELETE {
+    ?s add:isSiblingOf ?t.
+    ?t add:isSiblingOf ?s
+}
+where {
+    OPTIONAL{?s add:isSiblingOf ?t}
+    
+    #Count number of parcel numers associated with the row ?s
+	{select ?s where { ?s dcterms:identifier ?id.}
+	group by ?s
+    having(count(?id) > 1)}
+	
+    #Count number of parcel numers associated with the row ?t
+	{select ?t where { ?t dcterms:identifier ?tid.}
+	group by ?t
+    having(count(?idt) = 1)}
+}
+```
+
+## 7. Links between folios
+### 7.1 Links folios from one mutation register to the following one
+* Create similarity links between taxpayers a *hiddenLabel* of taxpayers
+* Create links between CF
 
 ## TO DO ?
 - Create LandmarkAppearance changes and events of initial root landmarks
