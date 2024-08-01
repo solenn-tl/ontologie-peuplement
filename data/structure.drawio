@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-07-29T18:08:55.184Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="lgRj2Byh-apZQLXXtF9F" version="21.1.2" type="device" pages="2">
+<mxfile host="Electron" modified="2024-08-01T08:35:06.400Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="A4ub-5tboKbOtNgT1hSv" version="21.1.2" type="device" pages="2">
   <diagram name="Graphe intermédiaire" id="jpN9OdEGh9gpxzROM_cH">
     <mxGraphModel dx="1949" dy="1331" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -811,7 +811,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="aLbtNoXRF1U9CkWiqd6l" name="Temps">
-    <mxGraphModel dx="780" dy="504" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1040" dy="672" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -944,7 +944,7 @@
             <mxPoint x="395" y="388" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gc6hb_S2zMp1X30NPCn_-21" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#0000FF;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1" target="gc6hb_S2zMp1X30NPCn_-25">
+        <mxCell id="gc6hb_S2zMp1X30NPCn_-21" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#0000FF;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" target="gc6hb_S2zMp1X30NPCn_-25" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="203" y="408" as="sourcePoint" />
             <mxPoint x="430" y="408" as="targetPoint" />
@@ -1031,7 +1031,7 @@
         <mxCell id="gc6hb_S2zMp1X30NPCn_-44" value="&lt;b&gt;A hasOverlappingVersion B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="630" y="297" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gc6hb_S2zMp1X30NPCn_-45" value="&lt;b&gt;B isOverlappedVersionOf A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="gc6hb_S2zMp1X30NPCn_-45" value="&lt;b&gt;B&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;isOverlappedByVersion&amp;nbsp;&lt;/b&gt;&lt;b&gt;A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="629" y="320" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gc6hb_S2zMp1X30NPCn_-46" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -1040,7 +1040,7 @@
         <mxCell id="gc6hb_S2zMp1X30NPCn_-47" value="&lt;b&gt;A hasOverlappingVersion B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="627" y="462" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gc6hb_S2zMp1X30NPCn_-48" value="&lt;b&gt;B isOverlappedVersionOf A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="gc6hb_S2zMp1X30NPCn_-48" value="&lt;b&gt;B isOverlappedByVersion A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="627" y="489" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gc6hb_S2zMp1X30NPCn_-52" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -1049,7 +1049,7 @@
         <mxCell id="gc6hb_S2zMp1X30NPCn_-53" value="&lt;b&gt;A hasOverlappingVersion B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="625" y="545" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gc6hb_S2zMp1X30NPCn_-54" value="&lt;b&gt;B isOverlappedVersionOf A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="gc6hb_S2zMp1X30NPCn_-54" value="&lt;b&gt;B isOverlappedByVersion A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="625" y="572" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gc6hb_S2zMp1X30NPCn_-55" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
@@ -1097,7 +1097,7 @@
         <mxCell id="gc6hb_S2zMp1X30NPCn_-70" value="&lt;b&gt;A hasOverlappingVersion B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="625" y="637" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gc6hb_S2zMp1X30NPCn_-71" value="&lt;b&gt;B isOverlappedVersionOf A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="gc6hb_S2zMp1X30NPCn_-71" value="&lt;b&gt;B isOverlappedByVersion A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="625" y="650" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gc6hb_S2zMp1X30NPCn_-72" value="start(A)&amp;nbsp; = start(B) AND&lt;br&gt;end(A) = end(B)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;" parent="1" vertex="1">
@@ -1109,55 +1109,55 @@
         <mxCell id="gc6hb_S2zMp1X30NPCn_-77" value="&lt;b&gt;B hasOverlappingVersion A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="627.5" y="672" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gc6hb_S2zMp1X30NPCn_-78" value="&lt;b&gt;A isOverlappedVersionOf B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="gc6hb_S2zMp1X30NPCn_-78" value="&lt;b&gt;A isOverlappedByVersion B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="626.5" y="687" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="630.5" y="370" width="173" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-2" value="&lt;b&gt;B hasOverlappingVersion A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-2" value="&lt;b&gt;B hasOverlappingVersion A&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="626.5" y="375" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-3" value="&lt;b&gt;A isOverlappedVersionOf B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-3" value="&lt;b&gt;A isOverlappedByVersion&amp;nbsp;B&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="627.5" y="397" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-4" value="start(B) - end(A) &amp;gt;= 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#d6b656;fillColor=#fff2cc;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-4" value="start(B) - end(A) &amp;gt;= 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#d6b656;fillColor=#fff2cc;" parent="1" vertex="1">
           <mxGeometry x="1015" y="175" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-5" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="820" y="697" as="sourcePoint" />
             <mxPoint x="820" y="117" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-6" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1000" y="698" as="sourcePoint" />
             <mxPoint x="1000" y="118" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-7" value="par date" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-7" value="par date" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="875" y="82" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-8" value="par gap" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-8" value="par gap" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="1050" y="83" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-9" value="CALCUL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-9" value="CALCUL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="970" y="60" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-10" value="écart minimal associé à A" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-10" value="écart minimal associé à A" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1010" y="224" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-11" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) &amp;gt; 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-11" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) &amp;gt; 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
           <mxGeometry x="1010" y="281" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-12" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) &amp;gt; 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-12" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) &amp;gt; 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
           <mxGeometry x="1010" y="469" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-13" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) &amp;gt; 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-13" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) &amp;gt; 0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
           <mxGeometry x="1010" y="553" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="JVLZbDmzkYSxp3_kHxJY-14" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) = 0&amp;nbsp;&lt;br&gt;AND&lt;br&gt;end(B) - end(A) &amp;lt;0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="JVLZbDmzkYSxp3_kHxJY-14" value="start(B)&amp;nbsp; - end(A) &amp;lt; 0 &lt;br&gt;AND&lt;br&gt;start(B) - start(A) = 0&amp;nbsp;&lt;br&gt;AND&lt;br&gt;end(B) - end(A) &amp;lt;0" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="1005" y="355" width="150" height="90" as="geometry" />
         </mxCell>
       </root>
