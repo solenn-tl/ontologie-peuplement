@@ -143,7 +143,7 @@ WHERE { GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>
 ```
 #### 3.2.2 Case when A and B start at the same time
 
-<img src="./img/temporal_relations_3_3_2.png" style="display: block;margin-left: auto;
+<img src="./img/temporal_relations_3_3_1.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
 
 ```sparql
@@ -170,7 +170,7 @@ WHERE {
     FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin < 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-<img src="./img/temporal_relations_3_3_1.png" style="display: block;margin-left: auto;
+<img src="./img/temporal_relations_3_3_2.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
 
 ```sparql
