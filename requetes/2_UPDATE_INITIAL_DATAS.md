@@ -1,8 +1,8 @@
-# Update inittial data
+# Update initial data
 These requests are used to complete the initial data created from sources.
 
 ## 1. Property accounts and taxpayers
-### 1.1. Add hasTime property to each Property Account using min and max time in its ArticleDeClassement
+### 1.1. Add *hasTime* property to each *PropertyAccount* using min and max time in its *ArticleDeClassement*
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
@@ -39,6 +39,7 @@ PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX time: <http://www.w3.org/2006/time#>
 
 #CONSTRUCT {?event cad:isEventType cad_etype:OpenPropertyAccount. ?event add:hasTime [add:timePrecision time:Year; add:timeCalendar time:Gregorian; add:timeStamp ?start]}
+
 INSERT {
     GRAPH <http://rdf.geohistoricaldata.org/relatedlandmarks> {
     ?event cad:isEventType cad_etype:OpenPropertyAccount.
@@ -67,6 +68,7 @@ PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX time: <http://www.w3.org/2006/time#>
 
 #CONSTRUCT {?event cad:isEventType cad_etype:ClosePropertyAccount. ?event add:hasTime [add:timePrecision time:Year; add:timeCalendar time:Gregorian; add:timeStamp ?end]}
+
 INSERT {
     GRAPH <http://rdf.geohistoricaldata.org/relatedlandmarks> {
     ?event cad:isEventType cad_etype:ClosePropertyAccount.
@@ -93,7 +95,7 @@ PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 PREFIX jsfn: <http://www.ontotext.com/js#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-INSERT {GRAPH<http://rdf.geohistoricaldata.org/ownerskeys>{
+INSERT {GRAPH<http://rdf.geohistoricaldata.org/taxpayerkeys>{
     ?taxpayer skos:hiddenLabel ?hiddenLabel}}
 WHERE {
     BIND(CONCAT(?labelWALower,?surnameEmpty,?statusEmpty) AS ?hiddenLabel)

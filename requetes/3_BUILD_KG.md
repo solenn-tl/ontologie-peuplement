@@ -642,6 +642,8 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
 ```
 
 ### 6.4 Delete sibling relations that are wrong
+* Delete sibling relations when one landmark version have to plot IDs (meaning that it result from a merge of two other plots or parts of thoose plots)
+
 ```sparql
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -650,18 +652,18 @@ DELETE {
     ?s add:isSiblingOf ?t.
     ?t add:isSiblingOf ?s
 }
-where {
+WHERE {
     OPTIONAL{?s add:isSiblingOf ?t}
     
     #Count number of parcel numers associated with the row ?s
-	{select ?s where { ?s dcterms:identifier ?id.}
-	group by ?s
-    having(count(?id) > 1)}
+	{SELECT ?s WHERE { ?s dcterms:identifier ?id.}
+	GROUP BY ?s
+    HAVING (count(?id) > 1)}
 	
     #Count number of parcel numers associated with the row ?t
-	{select ?t where { ?t dcterms:identifier ?tid.}
-	group by ?t
-    having(count(?idt) = 1)}
+	{SELECT ?t WHERE { ?t dcterms:identifier ?tid.}
+	GROUP BY ?t
+    HAVING (COUNT(?idt) = 1)}
 }
 ```
 
