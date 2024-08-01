@@ -4,3 +4,4 @@
 ## SPARQL
 - [ ] Create LandmarkAppearance changes and events of initial root landmarks
 - [ ] Create LandmarkDisappearance changes of initial root landmarks
+- [ ] Renommer FolioChange en FolioMutation

@@ -227,13 +227,22 @@ WHERE {
     FILTER ((?ecartDeb = 0) && (?ecartFin = 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-## 4. Create changes and events relative to landmarks identity
-One of the most significant point about landmark versions in the mutation regiters is that plots ID never change, even in case of split or merge of plots that lead to creation of new landmarks and disappearance of the previous ones. 
+## 4. Create changes and events (#1)
+### 4.1 Create changes and events relative to landmarks identity
+In the mutation registers, plots ID never change even in case of split or merge of plots. These events lead to the appearance of new landmarks and the disappearance of the previous ones.
 
 In this part, we try to detect the changes and events about Splits.
-*NB : Merge will be treated later because all the necessary informations have not been created yet.*
 
-### 4.1 Create LandmarkDisappearance Changes linked to Split Events using "Porté à" >= (2 folios)
+*NB : Merge will be treated later because all the necessary informations to detect them have not been created yet.*
+
+#### 4.1.1 Create Landmark Disappearance Changes and Split Events
+To detect splits events, we choose to use the page reports that are used to link the property accounts changes in mutation registers tables. 
+
+More than one page number in a column "Next property account" means, in most of cases, that the plot has been split between multiple owners. 
+
+* Creation of an Event of type *Split*
+* Creation of a Change of type *Landmark Disappearance*
+
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -275,7 +284,13 @@ WHERE{
     HAVING(count(?portea) > 1)
 }
 ```
-### 4.2 Create LandmarkAppearance Changes linked to Split Events using "Tiré de" = ResteSV
+#### 4.1.2 Create LandmarkAppearance Changes linked to Split Events using "Tiré de" = ResteSV
+Now, we want to retrieve the first landmark version that follow a disappearance to create Landmark Appearance change.
+
+More than one page number in a column "Next property account" means, in most of cases, that the plot has been split between multiple owners. 
+
+* Creation of a Change of type *Landmark Appearance* linked to the previously create events.
+
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -328,7 +343,12 @@ WHERE {
 	}
 }
 ```
-### 4.3 Create FolioChange event and LeftFolio change
+### 4.2 Create changes and events relative to property account changes
+Now, we want to search for the events relative to plot transfert to one property account to another one. 
+
+*NB : In further steps, we will qualify in further details those changes that also might be a taxpayer change.*
+
+#### 4.2.1 Create FolioChange event and LeftFolio change
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -422,9 +442,10 @@ WHERE {SELECT DISTINCT ?nextPlot ?event (IRI(CONCAT("http://rdf.geohistoricaldat
     FILTER(sameTerm(?folio1,?tirede))
 }}
 ```
-## 5. Precise relative order of landmark versions using document order and Appearance/Disappearance events
+## 5. Precise relative order of landmark versions
+Using the temporal relations, the events and changes we have created, we are now going to precise the relations between landmark version using "Previous/Next property account" properties. 
 
-## 5.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioChange events
+### 5.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioChange events
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
