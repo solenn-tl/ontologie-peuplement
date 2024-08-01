@@ -109,8 +109,12 @@ WHERE {
 ```
 * Then, we can delete the *http://rdf.geohistoricaldata.org/tmp* (it will not be use anymore).
 
-### 3.2 *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap and version have different start date
+### 3.2 *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap
+In case when landmarks version are overlapping each others (B starts before the end of A), we create *hasOverlappingVersion* and *isOverlappedByVersion* properties.
+* *hasOverlappingVersion* means that version **A** starts before **B** 
+    * in the special case of two versions starting at the same time, it's the version that ends first that *hasOverlappingVersion*
 
+#### 3.2.1 Case when A starts before B
 <img src="./img/temporal_relations_3_2.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;
 }">
@@ -137,9 +141,9 @@ WHERE { GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>
     FILTER ((?ecart < 0) && (?ecartDeb > 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-### 3.3 *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap and version have same start date 
+#### 3.2.2 Case when A and B start at the same time
 
-<img src="./img/temporal_relations_3_3_1.png" style="display: block;margin-left: auto;
+<img src="./img/temporal_relations_3_3_2.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
 
 ```sparql
@@ -166,8 +170,9 @@ WHERE {
     FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin < 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-<img src="./img/temporal_relations_3_3_2.png" style="display: block;margin-left: auto;
+<img src="./img/temporal_relations_3_3_1.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
+
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -192,7 +197,7 @@ WHERE {
     FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin > 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-### 3.4 *hasOverlappingVersion* and *isOverlappedByVersion* (x2) in case of equal time interval
+#### 3.2.3 Case when A and B are equals
 
 <img src="./img/temporal_relations_3_4.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
@@ -222,7 +227,12 @@ WHERE {
     FILTER ((?ecartDeb = 0) && (?ecartFin = 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-## 4. Create changes and events
+## 4. Create changes and events relative to landmarks identity
+One of the most significant point about landmark versions in the mutation regiters is that plots ID never change, even in case of split or merge of plots that lead to creation of new landmarks and disappearance of the previous ones. 
+
+In this part, we try to detect the changes and events about Splits.
+*NB : Merge will be treated later because all the necessary informations have not been created yet.*
+
 ### 4.1 Create LandmarkDisappearance Changes linked to Split Events using "Porté à" >= (2 folios)
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
