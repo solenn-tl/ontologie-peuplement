@@ -18,3 +18,8 @@ ollama pull MODEL
 ```
 ollama list
 ```
+
+## Données
+* Gestion des divisions de parcelles qui interveinnent avant l'ouverture de la matrice
+* Divisions non détctable avec les "Porté à"
+* Fusions de parcelles avec le même ID dans un même compte foncier 

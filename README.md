@@ -49,11 +49,11 @@ http://rdf.geohistoricaldata.org/ontology
 ``` 
 * Parcelles (états initiaux créés à partir des plans)
 ```sparql
-http://rdf.geohistoricaldata.org/plots/frommaps
+http://rdf.geohistoricaldata.org/rootlandmarks
 ``` 
 * Parcelles (états issus des articles de classement) et propriétaires
 ```sparql
-http://rdf.geohistoricaldata.org/plots/fromregisters
+http://rdf.geohistoricaldata.org/relatedlandmarks
 ``` 
 * Autres landmarks (communes, sections, lieux-dits, etc.)
 ```sparql

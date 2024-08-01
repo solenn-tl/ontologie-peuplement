@@ -443,9 +443,11 @@ WHERE {SELECT DISTINCT ?nextPlot ?event (IRI(CONCAT("http://rdf.geohistoricaldat
 }}
 ```
 ## 5. Precise relative order of landmark versions
-Using the temporal relations, the events and changes we have created, we are now going to precise the relations between landmark version using "Previous/Next property account" properties. 
+Using the temporal relations and the events and changes we have created, we precise the relations between landmark version using "Previous/Next property account" attributes. 
 
 ### 5.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioChange events
+* Create links between landmark versions before and after event of type *FolioChange*.
+
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -471,6 +473,10 @@ WHERE {
 
 ### 5.2 Order landmark versions with the same rootLandmark in the same Property Account
 #### 5.2.1 Landmark versions with a temporal relation *hasNextVersion*
+* Create *hasPreviousVersionInSRCOrder / hasNextVersionInSRCOrder* : 
+    * A *hasNextVersion* B
+    * A in the same property account than B
+    * In the original table, row of B should be after row of A
 ```sparql
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
@@ -513,6 +519,10 @@ WHERE {
 }
 ```
 #### 5.1.2 Landmark versions with a temporal relation *hasOverlappingVersion*
+* Create *hasOverlappingVersionInSRCOrder / isOverlappedByVersionInSRCOrder* : 
+    * A *hasOverlappingVersion* B
+    * A in the same property account than B
+    * In the original table, row of B should be after row of A
 ```sparql
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
@@ -557,7 +567,14 @@ WHERE {
 ```
 
 ## 6. Organise nodes relative to the same object (from first mutation registers)
-### 6.1 Nodes from plots created after the cadastre
+With these resultats, we shuld be able to create links between landmark versions that might be the same.
+
+*NB1 : Except Merge situation have not been treated.*
+
+*NB2 : Without the correspondancies betwwen folios, we can't be shure of the things done in mutation registers that are not the frst one of a cadaster (here : register from 1836 to 1848 of the first cadastre).*
+
+### 6.1 Links between landmark versions of plots created after the cadastre
+First, we create the links betwwen landmark version of plots created after the creation of the first matrice.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -579,7 +596,7 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
     ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?relatedLandmark.
 } 
 ```
-### 6.2 Nodes from root objects
+### 6.2 Links between landmark versions that should be the same than than the one created at the creation of the cadastre
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -640,7 +657,6 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
     FILTER(YEAR(?start1) = YEAR(?start2))
 } 
 ```
-
 ### 6.4 Delete sibling relations that are wrong
 * Delete sibling relations when one landmark version have to plot IDs (meaning that it result from a merge of two other plots or parts of thoose plots)
 
@@ -667,8 +683,66 @@ WHERE {
 }
 ```
 
-## 7. Links between folios
-### 7.1 Links folios from one mutation register to the following one
-* Create similarity links between taxpayers a *hiddenLabel* of taxpayers
-* Create links between CF
+## 7. Links between property account and landmark versions in different mutation registers
+### 7.1 Create links between similar taxpayers
+*NB : This step should be upgraded with more precise string comparison tools.*
+```sparql
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX jsfn: <http://www.ontotext.com/js#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
+#CONSTRUCT {?taxpayer add:isSimilarTo ?taxpayer2 ?taxpayer2 add:isSimilarTo ?taxpayer.}
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/ownerskeys>{
+    ?taxpayer add:isSimilarTo ?taxpayer2.
+    ?taxpayer2 add:isSimilarTo ?taxpayer.
+}}
+WHERE {
+    ?taxpayer a cad:Taxpayer.
+    ?taxpayer skos:hiddenLabel ?hiddenLabel.
+
+    ?taxpayer2 a cad:Taxpayer.
+    ?taxpayer2 skos:hiddenLabel ?hiddenLabel2.
+    
+    BIND(jsfn:normalizedLevenshtein(?hiddenLabel,?hiddenLabel2) AS ?lev)
+    FILTER(!sameTerm(?taxpayer,?taxpayer2))
+    FILTER(?lev > 0.8)
+}
+```
+### 7.2 Links property accounts from different mutation registers when they have the same taxpayer
+* Create link if owners have a similarity link
+* NB : We could had more constraints.
+```sparql
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+
+# CONSTRUCT {?cf add:isSimilarTo ?cf2.?cf2 add:isSimilarTo ?cf}
+
+INSERT{GRAPH <http://rdf.geohistoricaldata.org/equivalentcf>{
+    ?cf add:isSimilarTo ?cf2.
+    ?cf2 add:isSimilarTo ?cf}}
+WHERE { 
+	?taxpayer a cad:Taxpayer.
+    ?taxpayer cad:taxpayerLabel ?label.
+    ?taxpayer cad:isTaxpayerOf ?attrV.
+    ?attrV add:isAttributeVersionOf/add:isAttributeOf ?mutation.
+    ?mutation rico:isOrWasConstituentOf ?cf.
+    ?mutation rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice.
+    FILTER(?matrice = source:94_Gentilly_MAT_B_NB_1813)
+    
+    ?taxpayer2 a cad:Taxpayer.
+    ?taxpayer2 cad:taxpayerLabel ?label2.
+    ?taxpayer2 cad:isTaxpayerOf ?attrV2.
+    ?attrV2 add:isAttributeVersionOf/add:isAttributeOf ?mutation2.
+    ?mutation2 rico:isOrWasConstituentOf ?cf2.
+    ?mutation2 rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice2.
+    FILTER(?matrice2 = source:94_Gentilly_MAT_NB_1836)
+    
+    ?taxpayer add:isSimilarTo ?taxpayer2
+}
+```

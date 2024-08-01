@@ -1,3 +1,12 @@
+### Enumerate JS functions in the triplestore
+```sparql
+PREFIX jsfn:<http://www.ontotext.com/js#>
+SELECT ?s ?o {
+    ?s jsfn:enum ?o
+}
+```
+##
+
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
