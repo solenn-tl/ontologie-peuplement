@@ -139,7 +139,7 @@ WHERE { GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>
 ```
 ### 3.3 *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap and version have same start date 
 
-<img src="./img/temporal_relations_3_3.png" style="display: block;margin-left: auto;
+<img src="./img/temporal_relations_3_3_1.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
 
 ```sparql
@@ -166,6 +166,8 @@ WHERE {
     FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin < 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
+<img src="./img/temporal_relations_3_3_2.png" style="display: block;margin-left: auto;
+margin-right: auto;width: 75%;">
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -637,6 +639,3 @@ where {
 * Create similarity links between taxpayers a *hiddenLabel* of taxpayers
 * Create links between CF
 
-## TO DO ?
-- Create LandmarkAppearance changes and events of initial root landmarks
-- Create LandmarkDisAppearance changes of initial root landmarks
