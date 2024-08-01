@@ -2,4 +2,5 @@
 - [X] Nettoyer les numéros de parcelles (exposants, bis, parties)
 
 ## SPARQL
-- [ ] Créer les changes et events associés à chaque version d'attribut pour le graphe des états de classements
+- [ ] Create LandmarkAppearance changes and events of initial root landmarks
+- [ ] Create LandmarkDisappearance changes of initial root landmarks

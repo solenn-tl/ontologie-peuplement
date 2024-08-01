@@ -71,7 +71,7 @@ INSERT {
     GRAPH <http://rdf.geohistoricaldata.org/relatedlandmarks> {
     ?event cad:isEventType cad_etype:ClosePropertyAccount.
     ?event add:hasTime [add:timePrecision time:Year; add:timeCalendar time:Gregorian; add:timeStamp ?end]}}
-where { 
+WHERE { 
 	?event a add:Event.
     ?event add:hasChange ?change.
     ?change add:appliedTo ?attr.
@@ -95,11 +95,11 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 INSERT {GRAPH<http://rdf.geohistoricaldata.org/ownerskeys>{
     ?taxpayer skos:hiddenLabel ?hiddenLabel}}
-where {
+WHERE {
     BIND(CONCAT(?labelWALower,?surnameEmpty,?statusEmpty) AS ?hiddenLabel)
             
-	{select ?taxpayer ?label ?surname ?status ?labelWALower (COALESCE(?surnameWALower,"") AS ?surnameEmpty) (COALESCE(?statusWALower,"") AS ?statusEmpty)
-	where { 
+	{SELECT ?taxpayer ?label ?surname ?status ?labelWALower (COALESCE(?surnameWALower,"") AS ?surnameEmpty) (COALESCE(?statusWALower,"") AS ?statusEmpty)
+	WHERE { 
 	    ?taxpayer a cad:Taxpayer .
         ?taxpayer cad:isTaxpayerOf ?attrV.
         ?taxpayer cad:taxpayerLabel ?label.
