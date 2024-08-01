@@ -1,7 +1,13 @@
 # Process to create the KG : use case of plots
 
-## 1. Links between root landmarks and their potential versions in other sources
-Create a relation between the root landmarks and the landmarks that seems to be versions of this landmark
+* In this implementation of our method, the landmarks are plots.
+
+## 1. Create links between root landmarks and their potential versions in other sources
+* Create a relation between a root landmarks and all the other landmark that seems to be versions of this root landmark.
+* In the case of plots :
+    * Root landmarks are the plots vectorized from the cadastral index map.
+    * Other landmarks are all the table line of the mutation registers (one line = 1 plot at a moment)
+    * The relation between root landmarks and other landmark versions is created using the ID of the plots. In the case of plots, IDs are not unique (plots keep the same ID in case or split or merge with other plots)
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
@@ -11,7 +17,9 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 #Create a relation between the root landmarks and the landmarks that seems to be versions of this landmark
 #CONSTRUCT {?relatedLandmark add:hasRootLandmark ?rootLandmark.?rootLandmark add:isRootLandmarkOf ?relatedLandmark.}
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>{?relatedLandmark add:hasRootLandmark ?rootLandmark.?rootLandmark add:isRootLandmarkOf ?relatedLandmark.}}
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>{
+    ?relatedLandmark add:hasRootLandmark ?rootLandmark.
+    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark.}}
 WHERE {
         GRAPH <http://rdf.geohistoricaldata.org/rootlandmarks> {
            ?rootLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
@@ -30,19 +38,25 @@ WHERE {
               ) AS ?plotid
             )
         FILTER(?plotidm = ?plotid)
-        ###### END
 }
 ```
 
 ## 2. Compute the temporal gap between two versions of a landmark
-* Keep only the positive or equal to 0 results
+* This step aims to compute temporal gaps between two versions of landmarks that have the same root landmark.
+* It's an intermediate steps to build temporal relations between versions of landmarks.
+* We keep only the positive or null gaps that will be usefull to compute *hasPreviousVersion/hasNextVersion* relations.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
+#Compute gaps between versions of landmarks (with the same root) and keep only positive or nul geps.
 #CONSTRUCT{?rootLandmark add:hasTimeGap [ add:hasValue ?gap; add:isFirstRL ?relatedLandmark; add:isSecondRL ?relatedLandmark2]}
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmp>{?rootLandmark add:hasTimeGap [ add:hasValue ?gap; add:isFirstRL ?relatedLandmark; add:isSecondRL ?relatedLandmark2]}}
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmp>{
+    ?rootLandmark add:hasTimeGap [ add:hasValue ?gap; 
+    add:isFirstRL ?relatedLandmark; 
+    add:isSecondRL ?relatedLandmark2]}}
 WHERE { 
     ?rootLandmark add:isRootLandmarkOf ?relatedLandmark.
     ?rootLandmark add:isRootLandmarkOf ?relatedLandmark2.
@@ -53,8 +67,11 @@ WHERE {
 }
 ```
 ## 3. Create temporal relations between versions of plots
+This third step aims to build the temporal relations between versions of plots.
 
 ### 3.1 *hasPreviousVersion* and *hasNextVersion* in case of null or positive gap
+* For each plot, we search for the minimal positive or null gap that is linked to it.
+* We create *hasPreviousVersion*/*hasNextVersion* between this landmark and the ones that have a gap equal to the minimal gap.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
@@ -63,7 +80,7 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{
         ?relatedLandmark add:hasNextVersion ?relatedLandmark2.
         ?relatedLandmark2 add:hasPreviousPrevious ?relatedLandmark.}}
 WHERE {
-    #Requête principale pour récupérer les parcelles tn+1 dont l'écart avec tn est égal à l'écart minimal
+    #Get landmarks that have a gap equal to minimal gap
 	GRAPH <http://rdf.geohistoricaldata.org/tmp> {
         ?rootLandmark add:hasTimeGap ?gap.
     	?gap add:hasValue ?ecart.
@@ -84,7 +101,7 @@ WHERE {
     # End
 }
 ```
-* Then, delete the *http://rdf.geohistoricaldata.org/tmp* named FILTER.
+* Then, we can delete the *http://rdf.geohistoricaldata.org/tmp* (it will not be use anymore).
 
 ### 3.2 *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap and version have different start date
 ```sparql
@@ -191,7 +208,6 @@ PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 PREFIX time: <http://www.w3.org/2006/time#>
 
-#CONSTRUCT {
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events> {
     ?event a add:Event.
     ?event cad:isEventType cad_etype:Split.

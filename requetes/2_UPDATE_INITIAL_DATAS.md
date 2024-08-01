@@ -1,7 +1,7 @@
 # Update inittial data
 These requests are used to complete the initial data created from sources.
 
-## 1. Property accounts and owners
+## 1. Property accounts and taxpayers
 ### 1.1. Add hasTime property to each Property Account using min and max time in its ArticleDeClassement
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -83,9 +83,9 @@ where {
 }
 ```
 
-## 2. Link owners
+## 2. Taxpayers
 
-### 2.1 Create keys to compare owners names
+### 2.1 Create keys to compare taxpayers names
 ```sparql
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>

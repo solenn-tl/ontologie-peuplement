@@ -13,7 +13,7 @@ select * where {
 } 
 ```
 
-## 2. Get next possible version using itme and document order
+## 2. Get next possible version using time and document order
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -31,6 +31,7 @@ select * where {
 ``` 
 
 ## 3. Check links between rows in the same cf
+```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -60,3 +61,4 @@ where {
     #FILTER(?plotid = "D-19" || ?plotid = "D-19p")
 }
 ORDER BY ?plot1 ?startR ?start1
+```
