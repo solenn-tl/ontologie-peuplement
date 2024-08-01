@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-08-01T08:46:15.377Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="fsJsHiH4FWw-8qgNVWw6" version="21.1.2" type="device" pages="2">
+<mxfile host="Electron" modified="2024-08-01T14:31:48.893Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="_wOc9DwPRGyXReLrYHys" version="21.1.2" type="device" pages="2">
   <diagram name="Graphe intermédiaire" id="jpN9OdEGh9gpxzROM_cH">
     <mxGraphModel dx="1949" dy="1331" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -13,11 +13,6 @@
             <Array as="points">
               <mxPoint x="497" y="370" />
             </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="IiNgyaG7gpd8RJR4Vh5d-22" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;" parent="NIv27GgVZ9wMKmO2YU1--1" source="NIv27GgVZ9wMKmO2YU1--8" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="660" y="450" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="NIv27GgVZ9wMKmO2YU1--8" value="Landmark" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
@@ -534,7 +529,7 @@
         <mxCell id="NIv27GgVZ9wMKmO2YU1--201" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="1080" y="599" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="NIv27GgVZ9wMKmO2YU1--202" value="hasCadastreAttribute" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-30;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
+        <mxCell id="NIv27GgVZ9wMKmO2YU1--202" value="hasAttribute" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-30;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="953" y="650" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="NIv27GgVZ9wMKmO2YU1--203" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" parent="NIv27GgVZ9wMKmO2YU1--1" source="NIv27GgVZ9wMKmO2YU1--204" target="NIv27GgVZ9wMKmO2YU1--201" edge="1">
@@ -558,9 +553,6 @@
         <mxCell id="NIv27GgVZ9wMKmO2YU1--209" value="TOUTES lES RECORDRESOURCES ont une Instanciation associée correspondant au résultat de l&#39;extraction" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="928" y="732" width="139" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gxVW9JF_HhGbJqzOAI2W-0" value="La source de ces propriétaires potentiels" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
-          <mxGeometry x="870" y="464" width="139" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="IiNgyaG7gpd8RJR4Vh5d-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="NIv27GgVZ9wMKmO2YU1--1" source="IiNgyaG7gpd8RJR4Vh5d-5" target="IiNgyaG7gpd8RJR4Vh5d-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -581,14 +573,11 @@
         <mxCell id="IiNgyaG7gpd8RJR4Vh5d-10" value="add:hasAttributeVersion" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=default;fontStyle=2;rotation=-10;opacity=50;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="516" y="646" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="IiNgyaG7gpd8RJR4Vh5d-12" value="hasCadastreAttribute" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=default;rotation=-15;opacity=80;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
+        <mxCell id="IiNgyaG7gpd8RJR4Vh5d-12" value="hasAttribute" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=default;rotation=-15;opacity=80;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="497" y="574" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="IiNgyaG7gpd8RJR4Vh5d-21" value="Les dates de l&#39;article de mutations (début et fin) sont les dates minimales et maximales rencontrées dans les articles de classement rencontrées (cases vides inclues)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="881" y="827" width="139" height="98" as="geometry" />
-        </mxCell>
-        <mxCell id="IiNgyaG7gpd8RJR4Vh5d-23" value="Initialiser l&#39;attribut de propriétaire même s&#39;il et vide ?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
-          <mxGeometry x="742" y="373" width="139" height="30" as="geometry" />
         </mxCell>
         <mxCell id="QvENrvDMQuPak5ZvLDox-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="NIv27GgVZ9wMKmO2YU1--1" source="QvENrvDMQuPak5ZvLDox-2" target="QvENrvDMQuPak5ZvLDox-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -792,17 +781,6 @@
         </mxCell>
         <mxCell id="rK8h62z6hYPuyN30HGeB-2" value="Plot&lt;br&gt;Mention" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="650.5" y="579" width="60" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="rK8h62z6hYPuyN30HGeB-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="NIv27GgVZ9wMKmO2YU1--1" source="rK8h62z6hYPuyN30HGeB-4" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="650" y="400" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="rK8h62z6hYPuyN30HGeB-4" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
-          <mxGeometry x="659.5" y="435" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="rK8h62z6hYPuyN30HGeB-6" value="Plot&lt;br&gt;Taxpayer" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
-          <mxGeometry x="599.5" y="350" width="60" height="60" as="geometry" />
         </mxCell>
         <mxCell id="WGYRZUDpnsmEFyfN2A1H-0" value="Date d&#39;entrée" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="NIv27GgVZ9wMKmO2YU1--1" vertex="1">
           <mxGeometry x="198" y="477" width="60" height="30" as="geometry" />

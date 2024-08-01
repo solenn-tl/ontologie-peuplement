@@ -746,3 +746,45 @@ WHERE {
     ?taxpayer add:isSimilarTo ?taxpayer2
 }
 ```
+### 7.3 Create links between landmark versions from different mutation registers
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/parenting2>{
+    ?plot add:isSiblingOf ?plot2.
+    ?plot2 add:isSiblingOf ?plot.}}
+WHERE { 
+	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot add:hasAttribute/add:hasAttributeVersion ?attr.
+    ?attr cad:passedTo cad_spval:CelluleVideSV.
+    ?attr cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice.
+    ?attr cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?cf.
+    ?cf cad:isSourceType srctype:CompteFoncier.
+    ?cf rico:hasOrHadConstituent/add:hasAttribute/add:hasAttributeVersion/cad:hasTaxpayer ?taxpayer.
+    ?taxpayer cad:isTaxpayerOf/add:isOutdatedBy [add:isChangeType ctype:AttributeVersionDisappearance].
+    FILTER(sameTerm(?matrice,source:94_Gentilly_MAT_B_NB_1813))
+    
+    ?plot2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot2 add:hasAttribute/add:hasAttributeVersion ?attr2.
+    ?attr2 cad:takenFrom cad_spval:CelluleVideSV.
+    ?attr2 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice2.
+    ?attr2 cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?cf2.
+    ?cf2 cad:isSourceType srctype:CompteFoncier.
+    ?cf2 rico:hasOrHadConstituent/add:hasAttribute/add:hasAttributeVersion/cad:hasTaxpayer ?taxpayer2.
+    ?taxpayer2 cad:isTaxpayerOf/add:isMadeEffectiveBy [add:isChangeType ctype:AttributeVersionAppearance].
+    
+    FILTER(sameTerm(?matrice2,source:94_Gentilly_MAT_NB_1836))
+    ?taxpayer add:isSimilarTo ?taxpayer2.
+    ?plot add:hasNextVersion ?plot2.
+}
+```
+
+## 8. Create a core landmark for each group of sibling landmark versions

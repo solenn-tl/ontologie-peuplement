@@ -104,3 +104,52 @@ where {
 }
 ORDER BY ?plot1 ?startR ?start1
 ```
+
+## Matching entre parcellles d'une matrice à une autre 
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
+PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+
+SELECT ?plot ?end ?taxpayer ?label (GROUP_CONCAT(?nature) AS ?natures) ?plot2 ?start2 ?taxpayer2 ?label2 (GROUP_CONCAT(?nature2) AS ?natures2)
+WHERE { 
+	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot dcterms:identifier ?plotid.
+    ?plot add:hasAttribute/add:hasAttributeVersion/cad:hasPlotNature ?nature.
+    ?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
+    ?plot add:hasAttribute/add:hasAttributeVersion ?attr.
+    ?attr cad:passedTo cad_spval:CelluleVideSV.
+    ?attr cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice.
+    ?attr cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?cf.
+    ?cf cad:isSourceType srctype:CompteFoncier.
+    ?cf rico:hasOrHadConstituent/add:hasAttribute/add:hasAttributeVersion/cad:hasTaxpayer ?taxpayer.
+    ?taxpayer cad:isTaxpayerOf/add:isOutdatedBy [add:isChangeType ctype:AttributeVersionDisappearance].
+    ?taxpayer cad:taxpayerLabel ?label.
+    FILTER(sameTerm(?matrice,source:94_Gentilly_MAT_B_NB_1813))
+    
+    ?plot2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot2 dcterms:identifier ?plotid2.
+    ?plot2 add:hasAttribute/add:hasAttributeVersion/cad:hasPlotNature ?nature2.
+    ?plot2 add:hasTime/add:hasBeginning/add:timeStamp ?start2.
+    ?plot2 add:hasAttribute/add:hasAttributeVersion ?attr2.
+    ?attr2 cad:takenFrom cad_spval:CelluleVideSV.
+    ?attr2 cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice2.
+    ?attr2 cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?cf2.
+    ?cf2 cad:isSourceType srctype:CompteFoncier.
+    ?cf2 rico:hasOrHadConstituent/add:hasAttribute/add:hasAttributeVersion/cad:hasTaxpayer ?taxpayer2.
+    ?taxpayer2 cad:isTaxpayerOf/add:isMadeEffectiveBy [add:isChangeType ctype:AttributeVersionAppearance].
+    ?taxpayer2 cad:taxpayerLabel ?label2.
+    FILTER(sameTerm(?matrice2,source:94_Gentilly_MAT_NB_1836))
+    
+    ?taxpayer add:isSimilarTo ?taxpayer2.
+    ?plot add:hasNextVersion ?plot2.
+}
+GROUP BY ?plot ?end ?label ?taxpayer ?plot2 ?start2 ?taxpayer2 ?label2
+ORDER BY ?plot
+```
