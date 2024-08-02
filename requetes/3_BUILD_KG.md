@@ -344,11 +344,15 @@ WHERE {
 }
 ```
 ### 4.2 Create changes and events relative to property account changes
-Now, we want to search for the events relative to plot transfert to one property account to another one. 
+Now, we want to search for the events relative to plot transfert to one property account to another one without split event. 
 
 *NB : In further steps, we will qualify in further details those changes that also might be a taxpayer change.*
 
-#### 4.2.1 Create FolioChange event and LeftFolio change
+#### 4.2.1 Create FolioMutation event and LeaveFolio change
+
+* Create *LeaveFolio* Change when "Porté à" is another folio than the current one
+* Create a *FolioMutation* Event connected to this *LeaveFolio* Change.
+
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -362,9 +366,9 @@ PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
     ?change a add:Change.
     ?change add:dependsOn ?event.
-    ?change add:isChangeType ctype:LeftFolio.
+    ?change add:isChangeType ctype:LeaveFolio.
     ?event a add:Event.
-    ?event cad:isEventType cad_etype:FolioChange.
+    ?event cad:isEventType cad_etype:FolioMutation.
     ?event add:hasTime[add:timePrecision time:Year; add:timeCalendar time:Gregorian; add:timeStamp ?end].
     ?plot add:changedBy ?change.
     ?change add:appliedTo ?plot.
@@ -390,6 +394,8 @@ WHERE{
     }}
 ```
 ### 4.4 Create AppendInFolio change
+* Create an *AppendInFolio* Change connected to an already created *FolioMutation* Event.
+
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -412,7 +418,7 @@ WHERE {SELECT DISTINCT ?nextPlot ?event (IRI(CONCAT("http://rdf.geohistoricaldat
     {SELECT DISTINCT ?plot ?portea ?folio1 ?end ?change ?event
 	WHERE {?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     	?plot add:changedBy ?change.
-    	?change add:isChangeType ctype:LeftFolio.
+    	?change add:isChangeType ctype:LeaveFolio.
         ?change add:dependsOn ?event.
         ?plot add:hasAttribute[add:hasAttributeVersion/cad:passedTo ?portea].
         ?plot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio1].
@@ -445,8 +451,8 @@ WHERE {SELECT DISTINCT ?nextPlot ?event (IRI(CONCAT("http://rdf.geohistoricaldat
 ## 5. Precise relative order of landmark versions
 Using the temporal relations and the events and changes we have created, we precise the relations between landmark version using "Previous/Next property account" attributes. 
 
-### 5.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioChange events
-* Create links between landmark versions before and after event of type *FolioChange*.
+### 5.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioMutation events
+* Create links between landmark versions that are before and after an event of type *FolioMutation*.
 
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -460,7 +466,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/doc_order>
 WHERE { 
 	?plot1 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     ?plot1 add:changedBy ?change1.
-    ?change1 add:isChangeType ctype:LeftFolio.
+    ?change1 add:isChangeType ctype:LeaveFolio.
     
     ?plot2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     ?plot2 add:changedBy ?change2.
@@ -567,14 +573,12 @@ WHERE {
 ```
 
 ## 6. Organise nodes relative to the same object (from first mutation registers)
-With these resultats, we shuld be able to create links between landmark versions that might be the same.
+* We create links between landmark versions that seems be the same object.
 
 *NB1 : Except Merge situation have not been treated.*
 
-*NB2 : Without the correspondancies betwwen folios, we can't be shure of the things done in mutation registers that are not the frst one of a cadaster (here : register from 1836 to 1848 of the first cadastre).*
-
 ### 6.1 Links between landmark versions of plots created after the cadastre
-First, we create the links betwwen landmark version of plots created after the creation of the first matrice.
+First, we create the links between landmark version of plots created after the creation of the first matrice.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -787,4 +791,22 @@ WHERE {
 }
 ```
 
-## 8. Create a core landmark for each group of sibling landmark versions
+## 8. TEST Create a core landmark for each group of sibling landmark versions
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+
+# This query identifies groups of sibling landmarks
+SELECT ?all
+WHERE {
+    {SELECT (GROUP_CONCAT(?sibling) AS ?siblings)
+    WHERE {
+            ?landmark add:isSiblingOf ?sibling .
+            ?landmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+            ?sibling a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    }
+    GROUP BY ?landmark
+    ORDER BY ?sibling}
+}
+```
