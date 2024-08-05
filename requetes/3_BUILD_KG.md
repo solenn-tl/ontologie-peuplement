@@ -825,6 +825,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>
     {?aggLandmark a add:Landmark . 
     ?aggLandmark add:isLandmarkType cad_ltype:Plot.
     ?aggLandmark add:isParentOf ?landmark .
+    ?aggLandmark dcterms:identifier ?id.
     ?landmark add:isChildrenOf ?aggLandmark}} 
 WHERE {    
     {        
@@ -833,7 +834,8 @@ WHERE {
             ?landmark add:hasAggregateLabel ?siblingLabel .}
     }    
     BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)   
-    ?landmark add:hasAggregateLabel ?siblingLabel .}
+    ?landmark add:hasAggregateLabel ?siblingLabel .
+    ?landmark dcterms:identifier ?id.}
 ```
 ### 8.2.2 Create a new landmark using landmark versions that have no siblings 
 ```sparql
@@ -843,6 +845,7 @@ PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkTy
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> 
     {?aggLandmark a add:Landmark . 
     ?aggLandmark add:isLandmarkType cad_ltype:Plot.
+    ?aggLandmark dcterms:identifier ?id.
     ?aggLandmark add:isParentOf ?landmark .
     ?aggLandmark add:isChildrenOf ?landmark .
 }} 
@@ -854,7 +857,8 @@ WHERE {
             ?landmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.}
         FILTER NOT EXISTS{?landmark add:isSiblingOf ?other.}}
     }    
-    BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)}
+    BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)
+    ?landmark dcterms:identifier ?id.}
 ```
 * We can delete *http://rdf.geohistoricaldata.org/tmpaggregatelabel*
 
@@ -874,5 +878,19 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{
 
 ### 8.4 Create the attribute versions
 ```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> {    
+    ?aggAttr add:hasAttributeVersion [a add:AttributeVersion; add:isRootOf ?attrVers] .}}
+WHERE {    {        
+    SELECT DISTINCT ?aggLandmark ?aggAttr ?aggAttrType 
+    WHERE {            
+        ?aggLandmark add:hasAttribute ?aggAttr  .            
+        ?attr add:isAttributeType ?aggAttrType .        
+        }    }    
+        ?aggLandmark add:isParentOf ?landmark .    
+        ?landmark add:hasAttribute ?attr .    
+    ?attr add:isAttributeType ?aggAttrType ; add:hasAttributeVersion ?attrVers.    }
 ```
+
+## 9. Create aggregate attribute versions for each landmark aggregation
