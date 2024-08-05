@@ -144,3 +144,32 @@ INSERT DATA {
     '''
 }
 ```
+
+## Sort a list of values
+3 parameters :
+- list of value (str)
+- order : *asc* or *desc*
+- separator
+Return the sorted list as a string with the same separator.
+```
+PREFIX extfn:<http://www.ontotext.com/js#>
+
+INSERT DATA {
+    [] <http://www.ontotext.com/js#register> '''
+        function sortList(str, order, separator) {
+            var list = str.split(separator);
+            list.sort(function(a, b) {
+                if (order === 'asc') {
+                    return a.localeCompare(b);
+                } else if (order === 'desc') {
+                    return b.localeCompare(a);
+                } else {
+                    throw new Error("Invalid order parameter. Use 'asc' or 'desc'.");
+                }
+            });
+            return list.join(separator);
+        }
+    '''
+}
+
+```

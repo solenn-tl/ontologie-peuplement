@@ -791,16 +791,23 @@ WHERE {
 }
 ```
 
-## 8. TEST Create a core landmark for each group of sibling landmark versions
+## 8. Create an aggregate landmark for each group of sibling landmark versions
+### 8.1 Create a common label between landmarks that are siblings
+Landmarks with the same label will be in the same aggregate.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX jsfn: <http://www.ontotext.com/js#>
 
 # This query identifies groups of sibling landmarks
-SELECT ?all
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmpaggregatelabel> {
+    ?landmark add:hasAggregateLabel ?all
+    }}
 WHERE {
-    {SELECT (GROUP_CONCAT(?sibling) AS ?siblings)
+    BIND(jsfn:sortList(CONCAT(?l,' ',?siblings),'asc',' ') AS ?all)
+    {SELECT (STR(GROUP_CONCAT(?sibling)) AS ?siblings) (STR(?landmark) AS ?l) ?landmark
     WHERE {
             ?landmark add:isSiblingOf ?sibling .
             ?landmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
@@ -809,4 +816,63 @@ WHERE {
     GROUP BY ?landmark
     ORDER BY ?sibling}
 }
+```
+### 8.2.1 Create a new landmark using siblings that have the same aggregation label
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> 
+    {?aggLandmark a add:Landmark . 
+    ?aggLandmark add:isLandmarkType cad_ltype:Plot.
+    ?aggLandmark add:isParentOf ?landmark .
+    ?landmark add:isChildrenOf ?aggLandmark}} 
+WHERE {    
+    {        
+    SELECT DISTINCT ?siblingLabel 
+        WHERE {
+            ?landmark add:hasAggregateLabel ?siblingLabel .}
+    }    
+    BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)   
+    ?landmark add:hasAggregateLabel ?siblingLabel .}
+```
+### 8.2.2 Create a new landmark using landmark versions that have no siblings 
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> 
+    {?aggLandmark a add:Landmark . 
+    ?aggLandmark add:isLandmarkType cad_ltype:Plot.
+    ?aggLandmark add:isParentOf ?landmark .
+    ?aggLandmark add:isChildrenOf ?landmark .
+}} 
+WHERE {    
+    {        
+    SELECT DISTINCT ?landmark
+    WHERE {
+        GRAPH <http://rdf.geohistoricaldata.org/relatedlandmarks>{
+            ?landmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.}
+        FILTER NOT EXISTS{?landmark add:isSiblingOf ?other.}}
+    }    
+    BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)}
+```
+* We can delete *http://rdf.geohistoricaldata.org/tmpaggregatelabel*
+
+### 8.3 Initialised the attributes of the aggregations using the attributes of the associated landmark versions
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ 
+    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType] . 
+}} WHERE {{ 
+    SELECT DISTINCT ?aggLandmark ?attrType 
+    WHERE { ?aggLandmark add:isParentOf ?landmark .
+            ?landmark add:hasAttribute ?attr .
+            ?attr add:isAttributeType ?attrType .}}
+}
+```
+
+### 8.4 Create the attribute versions
+```sparql
+
 ```
