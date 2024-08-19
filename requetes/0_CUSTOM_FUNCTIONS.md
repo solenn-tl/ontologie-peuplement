@@ -151,7 +151,7 @@ INSERT DATA {
 - order : *asc* or *desc*
 - separator
 Return the sorted list as a string with the same separator.
-```
+```sparql
 PREFIX extfn:<http://www.ontotext.com/js#>
 
 INSERT DATA {

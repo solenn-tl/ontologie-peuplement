@@ -1,4 +1,6 @@
-### Enumerate JS functions in the triplestore
+# Useful WIP requests
+
+## Enumerate JS functions in the triplestore
 ```sparql
 PREFIX jsfn:<http://www.ontotext.com/js#>
 SELECT ?s ?o {
