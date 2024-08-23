@@ -848,7 +848,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>
     ?aggLandmark add:isLandmarkType cad_ltype:Plot.
     ?aggLandmark dcterms:identifier ?id.
     ?aggLandmark add:isParentOf ?landmark .
-    ?aggLandmark add:isChildrenOf ?landmark .
+    ?landmark add:isChildrenOf ?aggLandmark .
 }} 
 WHERE {    
     {        
@@ -868,7 +868,7 @@ WHERE {
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ 
-    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType] . 
+    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ]. 
 }} WHERE {{ 
     SELECT DISTINCT ?aggLandmark ?attrType 
     WHERE { ?aggLandmark add:isParentOf ?landmark .
@@ -877,22 +877,107 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{
 }
 ```
 
-### 8.4 Create the attributes versions
+## 9. Create aggregate attribute versions for Nature Attribute for each landmark aggregation
+* In this step, we want to build aggregated attributes versions that are equals for each landmark aggregation.
+
+### 9.1 Match PlotNature attribute versions that have the same value
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> {    
-    ?aggAttr add:hasAttributeVersion [a add:AttributeVersion; add:isRootOf ?attrVers] .}}
-WHERE {    {        
-    SELECT DISTINCT ?aggLandmark ?aggAttr ?aggAttrType 
-    WHERE {            
-        ?aggLandmark add:hasAttribute ?aggAttr  .            
-        ?attr add:isAttributeType ?aggAttrType .        
-        }    }    
-        ?aggLandmark add:isParentOf ?landmark .    
-        ?landmark add:hasAttribute ?attr .    
-    ?attr add:isAttributeType ?aggAttrType ; add:hasAttributeVersion ?attrVers.    }
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpnatureattributeversions> {
+    ?natV1 cad:matchWithVersion ?natV1.
+    ?natV1 cad:matchWithVersion ?natV2.
+    ?natV2 cad:matchWithVersion ?natV1.
+    ?natV2 cad:matchWithVersion ?natV2.
+    }}
+WHERE {
+    
+    ?plot1 (add:hasNextVersion|add:hasOverlappingVersion|add:isOverlappedByVersion) ?plot2.
+    ?plotAGG add:isParentOf ?plot1.
+    ?plotAGG add:isParentOf ?plot2.
+
+    # Retrieve nature attributes for plot
+    ?plot1 add:hasAttribute ?nat1.
+    ?nat1 add:isAttributeType cad_atype:PlotNature.
+    ?nat1 add:hasAttributeVersion ?natV1.
+    ?natV1 cad:hasPlotNature ?natV1value.
+
+    # Retrieve nature attributes for plot2
+    ?plot2 add:hasAttribute ?nat2.
+    ?nat2 add:isAttributeType cad_atype:PlotNature.
+    ?nat2 add:hasAttributeVersion ?natV2.
+    ?natV2 cad:hasPlotNature ?natV2value.
+
+    # Comparison of the nature attributes
+    BIND(IF((?natV2value = ?natV1value), true, false) AS ?areEqual)
+    FILTER(?areEqual = True)
+}
+```
+### 9.2 Create the aggregated attributes versions of Nature attribute
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions>{ 
+    	?natVAGG a add:AttributeVersion.
+        ?natureAGG add:hasAttributeVersion ?natVAGG.}
+    GRAPH <http://rdf.geohistoricaldata/tmpnatureattributeversions> {
+    	?natVAGG add:hasMergedValue ?mergedValue}
+}
+WHERE {{
+        SELECT ?natureAGG ?natV1 (GROUP_CONCAT(?natV2) AS ?mergedValue) (UUID() AS ?natVAGG)
+    WHERE {
+        ?natV1 a add:AttributeVersion; 
+               cad:matchWithVersion+ ?natV2;
+               add:isAttributeVersionOf [add:isAttributeOf ?plot1].
+        ?natV2 add:isAttributeVersionOf [add:isAttributeOf ?plot2].
+
+        ?plotAGG add:isParentOf ?plot1.
+        ?plotAGG add:isParentOf ?plot2.
+        ?plotAGG add:hasAttribute ?natureAGG.
+        ?natureAGG add:isAttributeType cad_atype:PlotNature.
+    }
+    GROUP BY ?natV1 ?natureAGG
+    ORDER BY ?natV2
+}}
+```
+### 9.3 Cast add:hasMergedValue elements as URIs
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX spif: <http://spinrdf.org/spif#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions>{
+    ?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    ?attrV add:hasRootAttributeVersion ?attrVAGG.
+    }}
+WHERE {
+    SELECT ?attrVAGG ?attrV
+    WHERE {
+         ?attrV a add:AttributeVersion.
+         FILTER(STR(?attrV) = ?strbn)
+        {
+        SELECT ?attrVAGG ?strbn
+        WHERE { 
+            ?attrVAGG add:hasMergedValue ?concatstrbn .
+            ?strbn spif:split(?concatstrbn " ").
+        }}
+    }
+}
+```
+### 9.4 Create Beginning and End events and changes of each attribute version
+```sparql
+```
+### 10. Taxpayers
+```sparql
 ```
 
-## 9. Create aggregate attribute versions for each landmark aggregation
-* In this step, we want to build aggregated attributes versions for each landmark aggregation.
+### 11. Mentions
+```sparql
+```
