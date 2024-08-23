@@ -877,7 +877,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{
 }
 ```
 
-## 9. Create aggregate attribute versions for Nature Attribute for each landmark aggregation
+## 9. Create aggregate attribute versions for PlotNature Attribute for each landmark aggregation
 * In this step, we want to build aggregated attributes versions that are equals for each landmark aggregation.
 
 ### 9.1 Match PlotNature attribute versions that have the same value
@@ -895,18 +895,15 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpnatureattributeversions> {
     ?natV2 cad:matchWithVersion ?natV2.
     }}
 WHERE {
-    
     ?plot1 (add:hasNextVersion|add:hasOverlappingVersion|add:isOverlappedByVersion) ?plot2.
     ?plotAGG add:isParentOf ?plot1.
     ?plotAGG add:isParentOf ?plot2.
 
-    # Retrieve nature attributes for plot
     ?plot1 add:hasAttribute ?nat1.
     ?nat1 add:isAttributeType cad_atype:PlotNature.
     ?nat1 add:hasAttributeVersion ?natV1.
     ?natV1 cad:hasPlotNature ?natV1value.
 
-    # Retrieve nature attributes for plot2
     ?plot2 add:hasAttribute ?nat2.
     ?nat2 add:isAttributeType cad_atype:PlotNature.
     ?nat2 add:hasAttributeVersion ?natV2.
@@ -971,9 +968,63 @@ WHERE {
     }
 }
 ```
-### 9.4 Create Beginning and End events and changes of each attribute version
+### 9.4 Create events and changes of each PlotNature attribute version
 ```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
+    ?event1 a add:Event.
+    ?event1 cad:isEventType cad_etype:PlotNatureEvent.
+    ?event2 a add:Event.
+    ?event2 cad:isEventType cad_etype:PlotNatureEvent.
+    ?change1 a add:Change.
+    ?change1 add:isChangeType ctype:AttributeVersionAppearance.
+    ?change2 a add:Change.
+	?change2 add:isChangeType ctype:AttributeVersionDisappearance.
+    ?event1 add:hasTime[add:hasBeginning [add:timeStamp ?minBeginning; add:timeCalendar time:Gregorian; add:timePrecision time:Year]].
+    ?event2 add:hasTime[add:hasBeginning [add:timeStamp ?maxEnd; add:timeCalendar time:Gregorian; add:timePrecision time:Year]].
+    ?change1 add:dependsOn ?event1.
+    ?change2 add:dependsOn ?event2.
+    ?change1 add:appliedTo ?plotAGG.
+    ?change2 add:appliedTo ?plotAGG.
+    ?plotAGG add:changedBy ?change1.
+    ?plotAGG add:changedBy ?change2.
+}}
+WHERE {{
+     SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS 	?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+	WHERE { 
+        ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
+    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrV add:isAttributeVersionOf ?attr.
+    	?attr add:isAttributeOf ?plot.
+    	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
+    	?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
+		}
+    GROUP BY ?attrVAGG ?plotAGG}
+}
 ```
+### 9.5 Add cad:hasPlotNature to aggregated attributeversion
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
+    ?attrVAGG cad:hasPlotNature ?natureValue.
+    }}
+WHERE {{
+	SELECT DISTINCT ?attrVAGG ?natureValue 
+	WHERE { 
+		?attrVAGG a add:AttributeVersion.
+    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrV cad:hasPlotNature ?natureValue.
+	}}
+}
+```
+
 ### 10. Taxpayers
 ```sparql
 ```
