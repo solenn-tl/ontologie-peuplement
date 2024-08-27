@@ -6,12 +6,13 @@
  #appli {  
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr auto; 
     gap: 0px 0px; 
     grid-template-areas: 
       "map map controls"
       "map map controls"
-      "map map controls";
+      "map map controls"
+      "stats_ stats_ stats_";
   }
 
   #map { 
@@ -19,6 +20,21 @@
     width: 100%;
     height: 100vh;
  }
+
+ #stats_ {  
+    grid-area: stats_;
+    width: 100%;
+    height:auto;
+    font-family: Arial, sans-serif;
+    font-size: medium;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  #histogram {
+    width: 100%;
+  }
+  /* Style for the tooltip */
   
 /* Style for the tooltip */
 .leaflet-tooltip {

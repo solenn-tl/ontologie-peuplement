@@ -40,9 +40,78 @@ var query2_data =
 "?change2 add:dependsOn ?event2. " +
 "?event2 add:hasTime/add:timeStamp ?t2. "
 
+var query3_1_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>" +
+"PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>" +
+"select (count(distinct ?plot) AS ?numplot) where { " +
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{" +
+"?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot." +
+"}}"
+
+var query3_2_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>" +
+"PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>" +
+"select (count(distinct ?plot) AS ?numplot) where { " +
+"GRAPH <http://rdf.geohistoricaldata.org/rootlandmarks>{" +
+"?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot." +
+"}}"
+
+var query3_3_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>" +
+"PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>" +
+"select (count(distinct ?plot) AS ?numplot) where { " +
+"GRAPH <http://rdf.geohistoricaldata.org/relatedlandmarks>{" +
+"?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot." +
+"}}"
+
+var query3_4_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#> " +
+"PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/> " +
+"select (count(?change) AS ?numChangeApp) where { "+
+    "GRAPH <http://rdf.geohistoricaldata.org/changes_events>{"+
+        "?change a add:Change; add:isChangeType ctype:LandmarkAppearance.}}"
+
+var query3_5_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#> " +
+"PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/> " +
+"select (count(?change) AS ?numChangeDis) where { "+
+    "GRAPH <http://rdf.geohistoricaldata.org/changes_events>{"+
+        "?change a add:Change; add:isChangeType ctype:LandmarkDisappearance.}}"
+
+var query3_6_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#> " + 
+"PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/> " + 
+"PREFIX dcterms: <http://purl.org/dc/terms/> " + 
+"SELECT distinct ?plotid (count(?plot) AS ?numplot) WHERE {  " + 
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ " + 
+"?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot. " + 
+"?plot dcterms:identifier ?id. " + 
+"BIND(IF(STRENDS(STR(?id), 'p'), SUBSTR(STR(?id), 1, STRLEN(STR(?id)) - 1), ?id) AS ?plotid)}} " + 
+"GROUP BY ?plotid " + 
+"ORDER By ?numplot ?plotid "
+
+var query3_7_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#> " +
+"PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/> " +
+"PREFIX dcterms: <http://purl.org/dc/terms/> " +
+"PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#> " +
+"SELECT ?plotid ?numplot " +
+"WHERE {SELECT distinct ?plot ?plotid (count(distinct ?child) AS ?numplot) WHERE {  " +
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ " +
+"?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot. " +
+"?plot dcterms:identifier ?id. " +
+"?plot add:isParentOf ?child. " +
+"BIND(IF(STRENDS(STR(?id), 'p'), SUBSTR(STR(?id), 1, STRLEN(STR(?id)) - 1), ?id) AS ?plotid)}} " +
+"GROUP BY ?plot ?plotid " +
+"ORDER BY ?numplot}"
+
 /*************************************************
  ******************* FUNCTIONS *******************
  *************************************************/
+//Init load data on load page
+function onPageLoad(){
+    requestGeoJSONData();
+    requestCount(query3_2_stats,'numplot','stats','countRoot','Nombre de <i>Landmarks</i> sur les plans (1810 et 1845)');
+    requestCount(query3_3_stats,'numplot','stats','countVersion','Nombre de versions de <i>Landmarks</i> issues des matrices');
+    requestCount(query3_1_stats,'numplot','stats','countAgg','Nombre d\'aggrégations de <i>Landmarks</i>');
+    requestCount(query3_4_stats,'numChangeApp','stats','countChangeApp','Nombre d\'apparitions de <i>Landmarks</i>');
+    requestCount(query3_5_stats,'numChangeDis','stats','countChangeDis','Nombre de disparitions de <i>Landmarks</i>');
+    requestDataForHistogram(query3_6_stats,'stats','histogram','Nombre d\'aggrégation par numéros de parcelles','Numéros de parcelles','Effectif')
+}
+
  var extract = '';
 
  function createGeoJson(JSobject){
@@ -101,10 +170,7 @@ function onEachFeature(feature, layer) {
         }
     });
 }
-//Init load data on load page
-  function onPageLoad(){
-    requestGeoJSONData();
-  }
+
 
 // Function to be executed when radio button is changed
 function handleRadioChange() {
@@ -248,6 +314,72 @@ function requestFeatureData(id){
         console.log(promise)
         groupAndDisplayData(promise.results.bindings);
     })
+}
 
+
+async function requestCount(request,countname,divid,newdivid,newdivtext){
+
+    var parentDiv = document.getElementById(divid);
+    var newDiv = document.createElement('div');
+    finalquery = endpointURL + '?query=' + encodeURIComponent(request) + "&?application/json";
+
+    //AJAX REQUEST
+    $.ajax({
+        url: finalquery,
+        Accept: "application/sparql-results+json",
+        contentType:"application/sparql-results+json",
+        crossdomain:true,
+        dataType:"json",
+        data:''
+    }).done((promise) => {
+        
+        var count = promise.results.bindings[0][countname].value;
+        // Optionally, add some content or set attributes to the new div
+        newDiv.innerHTML = '<p>' + newdivtext + ' : ' + count + '</p>';
+        newDiv.id = newdivid; // Setting an ID
+        // Append the new div to the parent div
+        parentDiv.appendChild(newDiv);
+    })
+}
+
+function requestDataForHistogram(request,divid,newdivid,title,xaxis,yaxis){
+    finalquery = endpointURL + '?query=' + encodeURIComponent(request) + "&?application/json";
+
+    //AJAX REQUEST
+    $.ajax({
+        url: finalquery,
+        Accept: "application/sparql-results+json",
+        contentType:"application/sparql-results+json",
+        crossdomain:true,
+        dataType:"json",
+        data:''
+    }).done((promise) => {
+        var parentDiv = document.getElementById(divid);
+        var newDiv = document.createElement(newdivid);
+        parentDiv.appendChild(newDiv);
+        newDiv.id = newdivid; // Setting an ID
     
+       // Extract plotid and numplot values
+       var plotIds = promise.results.bindings.map(item => item.plotid.value);
+       var numPlots = promise.results.bindings.map(item => parseInt(item.numplot.value));
+   
+       // Define the data for Plotly
+       const trace = {
+           x: plotIds, // X-axis: plotid
+           y: numPlots, // Y-axis: numplot
+           type: 'bar'  // Type of chart: bar (for histogram)
+       };
+   
+       const layout = {
+           title: title,
+           xaxis: { title: xaxis },
+           yaxis: { title: yaxis },
+           margin: { t: 50, l: 50, r: 50, b: 100 }, // Optional: adjust margins
+           autosize: true
+       };
+       const config = { responsive: true };
+   
+       // Render the plot
+       Plotly.newPlot(newdivid, [trace], layout, config);
+    })
 }

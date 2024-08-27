@@ -976,7 +976,7 @@ WHERE {SELECT DISTINCT ?plotAGG ?natureAGG (GROUP_CONCAT(?natV2) AS ?mergedValue
     	GROUP BY ?plotAGG ?natV1 ?natureAGG 
     	ORDER BY ?plotAGG ?mergedValue}
 ```
-### 6.3.3 Cast add:hasMergedValue elements as URIs
+#### 6.3.3 Cast add:hasMergedValue elements as URIs
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX spif: <http://spinrdf.org/spif#>
@@ -999,7 +999,7 @@ WHERE {
     }
 }
 ```
-### 6.3.4 Create events and changes of each PlotNature attribute version
+#### 6.3.4 Create events and changes of each PlotNature attribute version
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX time: <http://www.w3.org/2006/time#>
@@ -1029,6 +1029,9 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
 WHERE {{
      SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
 	WHERE { 
+            GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{
+            ?plotAGG a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+         }
         ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
     	?attrVAGG add:isRootAttributeVersionOf ?attrV.
     	?attrV add:isAttributeVersionOf ?attr.
@@ -1039,7 +1042,7 @@ WHERE {{
     GROUP BY ?attrVAGG ?plotAGG}
 }
 ```
-### 6.3.5 Add cad:hasPlotNature to aggregated attributeversion
+#### 6.3.5 Add cad:hasPlotNature to aggregated attributeversion
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
@@ -1057,8 +1060,159 @@ WHERE {{
 }
 ```
 
-### 6.5. Addresses
+### 6.4. Addresses
+#### 6.4.1 Match PlotAddress attribute versions that have the same value
 ```sparql
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpaddressattributeversions> {
+    ?addV1 cad:matchWithVersion ?addV1.
+    ?addV1 cad:matchWithVersion ?addV2.
+    ?addV2 cad:matchWithVersion ?addV1.
+    ?addV2 cad:matchWithVersion ?addV2.
+    }}
+WHERE {
+    ?plot1 (add:hasNextVersion|add:hasOverlappingVersion|add:isOverlappedByVersion) ?plot2.
+    ?plotAGG add:isParentOf ?plot1.
+    ?plotAGG add:isParentOf ?plot2.
+
+    ?plot1 add:hasAttribute ?add1.
+    ?add1 add:isAttributeType cad_atype:PlotAddress.
+    ?add1 add:hasAttributeVersion ?addV1.
+    ?addV1 cad:hasPlotAddress/add:relatum ?addV1value.
+
+    ?plot2 add:hasAttribute ?add2.
+    ?add2 add:isAttributeType cad_atype:PlotAddress.
+    ?add2 add:hasAttributeVersion ?addV2.
+    ?addV2 cad:hasPlotAddress/add:relatum ?addV2value.
+
+    # Comparison of the nature attributes
+    BIND(IF((?addV2value = ?addV1value), true, false) AS ?areEqual)
+    FILTER(?areEqual = True)
+}
+```
+
+```sparql
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpaddressattributeversions> {
+    ?addV1 cad:matchWithVersion ?addV1.
+    }}
+WHERE {
+    ?plotAGG add:isParentOf ?plot1.
+    ?plot1 add:hasAttribute ?add1.
+    ?add1 add:isAttributeType cad_atype:PlotAddress.
+    ?add1 add:hasAttributeVersion ?addV1.
+}
+```
+#### 6.4.2 Create the aggregated versions of PlotAddress attribute
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/addressattributeversions>{ 
+    ?addAGG add:hasAttributeVersion [ a add:AttributeVersion;
+                                         add:hasMergedValue ?mergedValue].
+    }}
+WHERE {SELECT DISTINCT ?plotAGG ?addAGG (GROUP_CONCAT(?addV2) AS ?mergedValue)
+	WHERE {
+        ?addV1 a add:AttributeVersion; 
+               cad:matchWithVersion+ ?addV2;
+               add:isAttributeVersionOf [add:isAttributeOf ?plot1].
+        ?addV2 add:isAttributeVersionOf [add:isAttributeOf ?plot2].
+
+        ?plotAGG add:isParentOf ?plot1.
+        ?plotAGG add:isParentOf ?plot2.
+        ?plotAGG add:hasAttribute ?addAGG.
+        ?addAGG add:isAttributeType cad_atype:PlotAddress.
+    	}
+    	GROUP BY ?plotAGG ?addV1 ?addAGG 
+    	ORDER BY ?plotAGG ?mergedValue}
+```
+#### 6.4.3 Cast add:hasMergedValue elements as URIs
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX spif: <http://spinrdf.org/spif#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/addressattributeversions>{
+    ?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    ?attrV add:hasRootAttributeVersion ?attrVAGG.
+    }}
+WHERE {
+    SELECT ?attrVAGG ?attrV
+    WHERE {
+         ?attrV a add:AttributeVersion.
+         FILTER(STR(?attrV) = ?strbn)
+        {
+        SELECT ?attrVAGG ?strbn
+        WHERE { 
+            ?attrVAGG add:hasMergedValue ?concatstrbn .
+            ?strbn spif:split(?concatstrbn " ").
+        }}
+    }
+}
+```
+#### 6.4.4 Create events and changes of each PlotAddress attribute version
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/addressattributeversions> {
+    ?event1 a add:Event.
+    ?event1 cad:isEventType cad_etype:PlotAddressEvent.
+    ?event2 a add:Event.
+    ?event2 cad:isEventType cad_etype:PlotAddressEvent.
+    ?change1 a add:Change.
+    ?change1 add:isChangeType ctype:AttributeVersionAppearance.
+    ?change2 a add:Change.
+	?change2 add:isChangeType ctype:AttributeVersionDisappearance.
+    ?event1 add:hasTime[add:timeStamp ?minBeginning; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?event2 add:hasTime[add:timeStamp ?maxEnd; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?change1 add:dependsOn ?event1.
+    ?change2 add:dependsOn ?event2.
+    ?change1 add:appliedTo ?attrVAGG.
+    ?change2 add:appliedTo ?attrVAGG.
+    ?attrVAGG add:changedBy ?change1.
+    ?attrVAGG add:changedBy ?change2.
+}}
+WHERE {{
+     SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+	WHERE { 
+        ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
+    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrV add:isAttributeVersionOf ?attr.
+    	?attr add:isAttributeOf ?plot.
+    	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
+    	?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
+		}
+    GROUP BY ?attrVAGG ?plotAGG}
+}
+```
+#### 6.3.5 Add cad:hasPlotAddress to aggregated attributeversion
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
+    ?attrVAGG cad:hasPlotNature ?natureValue.
+    }}
+WHERE {{
+	SELECT DISTINCT ?attrVAGG ?natureValue 
+	WHERE { 
+		?attrVAGG a add:AttributeVersion.
+    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrV cad:hasPlotNature ?natureValue.
+	}}
+}
 ```
 
 ### 6.5. Taxpayers
