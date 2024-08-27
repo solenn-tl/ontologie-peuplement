@@ -45,6 +45,7 @@ WHERE {
 ### 2.1 Compute the temporal gap between two versions of a landmark
 * This step aims to compute temporal gaps between two versions of landmarks that have the same root landmark.
 * It's an intermediate step to build a temporal relations between versions of landmarks.
+* It's an intermediate step to build a temporal relations between versions of landmarks.
 * We keep only the positive or null gaps that will be usefull to compute *hasPreviousVersion/hasNextVersion* relations.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -851,6 +852,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>
     ?aggLandmark dcterms:identifier ?id.
     ?aggLandmark add:isParentOf ?landmark .
     ?landmark add:isChildrenOf ?aggLandmark .
+    ?landmark add:isChildrenOf ?aggLandmark .
 }} 
 WHERE {    
     {        
@@ -871,6 +873,7 @@ WHERE {
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ 
+    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ]. 
     ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ]. 
 }} WHERE {{ 
     SELECT DISTINCT ?aggLandmark ?attrType 
