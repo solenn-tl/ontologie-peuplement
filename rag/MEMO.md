@@ -1,0 +1,1 @@
+* Demande de tutoriel RAG OntoText : https://www.ontotext.com/training-graph-rag/?hsCtaTracking=882b0f79-f033-46b0-8ec9-1d4f39c43307%7Cf5efe8db-2872-43e6-a7d8-3b1168e992ce

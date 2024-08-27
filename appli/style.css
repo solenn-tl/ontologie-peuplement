@@ -1,0 +1,84 @@
+.body{
+    width: 100vw;
+    height: 100vh;
+  }
+
+ #appli {  
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "map map controls"
+      "map map controls"
+      "map map controls";
+  }
+
+  #map { 
+    grid-area: map;
+    width: 100%;
+    height: 100vh;
+ }
+  
+/* Style for the tooltip */
+.leaflet-tooltip {
+   background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+   border: 1px solid #ccc; /* Optional border */
+   border-radius: 4px; /* Rounded corners */
+   padding: 5px; /* Padding inside the tooltip */
+}
+
+  #controls {  
+    margin-left: 10px;
+    margin-right: 10px;
+    grid-area:controls;
+    height:100vh;
+    overflow-y: scroll;
+    font-family: Arial, sans-serif;
+    font-size: medium;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+    white-space: pre-wrap; /* Allows line breaks within cells */
+    word-wrap: break-word; /* Prevents overflow */
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+td {
+    color: #333;
+    font-size: 14px;
+}
+
+.legend-container {
+    margin: 0 auto;
+    max-width: 1200px;
+}

@@ -40,10 +40,11 @@ WHERE {
         FILTER(?plotidm = ?plotid)
 }
 ```
+## 2. Compute temporal relative order between leandmark versions
 
-## 2. Compute the temporal gap between two versions of a landmark
+### 2.1 Compute the temporal gap between two versions of a landmark
 * This step aims to compute temporal gaps between two versions of landmarks that have the same root landmark.
-* It's an intermediate steps to build temporal relations between versions of landmarks.
+* It's an intermediate step to build a temporal relations between versions of landmarks.
 * We keep only the positive or null gaps that will be usefull to compute *hasPreviousVersion/hasNextVersion* relations.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -66,10 +67,9 @@ WHERE {
 	FILTER ((?gap >= 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-## 3. Create temporal relations between versions of plots
-This third step aims to build the temporal relations between versions of plots.
+This step aims to build the temporal relations between versions of plots.
 
-### 3.1 *hasPreviousVersion* and *hasNextVersion* in case of null or positive gap
+### 2.2 Create *hasPreviousVersion* and *hasNextVersion* in case of null or positive gap
 * For each plot, we search for the minimal positive or null gap that is linked to it.
 * We create *hasPreviousVersion*/*hasNextVersion* between this landmark and the ones that have a gap equal to the minimal gap.
 
@@ -109,12 +109,12 @@ WHERE {
 ```
 * Then, we can delete the *http://rdf.geohistoricaldata.org/tmp* (it will not be use anymore).
 
-### 3.2 *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap
+### 2.3 Create *hasOverlappingVersion* and *isOverlappedByVersion* in case of negative gap
 In case when landmarks versions are overlapping each others (B starts before the end of A), we create *hasOverlappingVersion* and *isOverlappedByVersion* properties.
 * *hasOverlappingVersion* means that version **A** starts before **B** 
     * in the special case of two versions starting at the same time, it's the version that ends first that *hasOverlappingVersion*
 
-#### 3.2.1 Case when A starts before B
+#### 2.3.1 Case when A starts before B
 <img src="./img/temporal_relations_3_2.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;
 }">
@@ -141,7 +141,7 @@ WHERE { GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>
     FILTER ((?ecart < 0) && (?ecartDeb > 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-#### 3.2.2 Case when A and B start at the same time
+#### 2.3.2 Case when A and B start at the same time
 
 <img src="./img/temporal_relations_3_3_1.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
@@ -197,7 +197,7 @@ WHERE {
     FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin > 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-#### 3.2.3 Case when A and B are equals
+#### 2.2.3 Case when A and B are equals
 
 <img src="./img/temporal_relations_3_4.png" style="display: block;margin-left: auto;
 margin-right: auto;width: 75%;">
@@ -227,15 +227,15 @@ WHERE {
     FILTER ((?ecartDeb = 0) && (?ecartFin = 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
 }
 ```
-## 4. Create changes and events (#1)
-### 4.1 Create changes and events relative to landmarks identity
+## 3 and 4. Create changes and events (#1)
+### 3/4.1 Create changes and events relative to landmarks identity
 In the mutation registers, plots ID never change even in case of split or merge of plots. These events lead to the appearance of new landmarks and the disappearance of the previous ones.
 
 In this part, we try to detect the changes and events about Splits.
 
 *NB : Merge will be treated later because all the necessary informations to detect them have not been created yet.*
 
-#### 4.1.1 Create Landmark Disappearance Changes and Split Events
+#### 3/4.1.1 Create Landmark Disappearance Changes and Split Events
 To detect splits events, we choose to use the page reports that are used to link the property accounts changes in the mutation registers tables. 
 
 More than one page number in a column *Next property account* means, in most of cases, that the plot has been split between multiple taxpayers. 
@@ -284,7 +284,7 @@ WHERE{
     HAVING(count(?portea) > 1)
 }
 ```
-#### 4.1.2 Create LandmarkAppearance Changes linked to Split Events using "Tiré de" = ResteSV
+#### 3/4.1.2 Create LandmarkAppearance Changes linked to Split Events using "Tiré de" = ResteSV
 Now, we want to retrieve the first landmark version that follow a disappearance to create Landmark Appearance change.
 
 * Creation of a Change of type *Landmark Appearance* linked to the previously create events.
@@ -341,12 +341,12 @@ WHERE {
 	}
 }
 ```
-### 4.2 Create changes and events relative to property account changes
+### 3/4.2 Create changes and events relative to property account changes
 Now, we want to search for the events related to a plot transfert to one property account to another one without split event. 
 
 *NB : In further steps, we will qualify in further details those changes that also might be a taxpayer change.*
 
-#### 4.2.1 Create FolioMutation event and LeaveFolio change
+#### 3/4.2.1 Create FolioMutation event and LeaveFolio change
 
 * Create *LeaveFolio* Change when "Porté à" is another folio than the current one
 * Create a *FolioMutation* Event connected to this *LeaveFolio* Change.
@@ -391,7 +391,7 @@ WHERE{
     FILTER(!sameTerm(?folio,?next))
     }}
 ```
-### 4.4 Create AppendInFolio change
+### 3/4.2.2 Create AppendInFolio change
 * Create an *AppendInFolio* Change connected to an already created *FolioMutation* Event.
 
 ```sparql
@@ -446,10 +446,13 @@ WHERE {SELECT DISTINCT ?nextPlot ?event (IRI(CONCAT("http://rdf.geohistoricaldat
     FILTER(sameTerm(?folio1,?tirede))
 }}
 ```
-## 5. Precise relative order of landmark versions
+
+## 5. Aggregate landmarks versions that have the same identity
+
+### 5.1 [Additionnal step for cadastre] Precise relative order of landmarks versions using documents
 Using the temporal relations and the events and changes we have created, we precise the relations between landmarks versions using *Previous/Next property account* attributes. 
 
-### 5.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioMutation events
+#### 5.1.1 Add *hasPreviousVersionInSRCOrder* and *hasNextVersionInSRCOrder* using FolioMutation events
 * Create links between landmark versions that are before and after an event of type *FolioMutation*.
 
 ```sparql
@@ -475,8 +478,8 @@ WHERE {
 } 
 ```
 
-### 5.2 Order landmark versions with the same rootLandmark in the same Property Account
-#### 5.2.1 Landmark versions with a temporal relation *hasNextVersion*
+#### 5.1.2 Order landmark versions with the same rootLandmark in the same Property Account
+##### 5.1.2.1 Landmark versions with a temporal relation *hasNextVersion*
 * Create *hasPreviousVersionInSRCOrder / hasNextVersionInSRCOrder* : 
     * A *hasNextVersion* B
     * A in the same property account than B
@@ -522,7 +525,7 @@ WHERE {
 }
 }
 ```
-#### 5.1.2 Landmark versions with a temporal relation *hasOverlappingVersion*
+##### 5.1.2.2 Landmark versions with a temporal relation *hasOverlappingVersion*
 * Create *hasOverlappingVersionInSRCOrder / isOverlappedByVersionInSRCOrder* : 
     * A *hasOverlappingVersion* B
     * A in the same property account than B
@@ -566,16 +569,15 @@ WHERE {
     }
     BIND((?rowid2 - ?rowid) AS ?rowDistance)
     FILTER(!sameTerm(?relatedLandmark,?relatedLandmark2) && ?rowDistance > 0)
-}
-}
+}}
 ```
 
-## 6. Organise nodes relative to the same object (from first mutation registers)
+## 5.2. Create aggregation landmarks with landmarks versions that share the same identity
 * We create links between landmarks versions that seems be the same object.
 
-*NB1 : Except Merge situation have not been treated.*
+*NB1 : Merge events have not been treated for the moment*
 
-### 6.1 Links between landmark versions of plots created after the cadastre creation
+### 5.2.1 Links between landmark versions of plots created after the cadastre creation
 First, we create the links between landmark version of plots created after the creation of the first matrice.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -598,7 +600,7 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
     ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?relatedLandmark.
 } 
 ```
-### 6.2 Links between landmark versions that should be the same than the one created at the creation of the cadastre
+### 5.2.2 Links between landmark versions that seems to share the same identity
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -659,34 +661,34 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
     FILTER(YEAR(?start1) = YEAR(?start2))
 } 
 ```
-### 6.4 Delete sibling relations that are wrong
-* Delete sibling relations when one landmark version have to plot IDs (meaning that it result from a merge of two other plots or parts of thoose plots)
+### 5.2.3 Delete ambiguous sibling relations
+* Delete sibling relations when one landmark version have two plot IDs (meaning that it result from a merge of two other plots or parts of thoose plots)
 
 ```sparql
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-
 DELETE {
     ?s add:isSiblingOf ?t.
     ?t add:isSiblingOf ?s
 }
 WHERE {
-    OPTIONAL{?s add:isSiblingOf ?t}
-    
-    #Count number of parcel numers associated with the row ?s
-	{SELECT ?s WHERE { ?s dcterms:identifier ?id.}
-	GROUP BY ?s
-    HAVING (count(?id) > 1)}
-	
-    #Count number of parcel numers associated with the row ?t
-	{SELECT ?t WHERE { ?t dcterms:identifier ?tid.}
-	GROUP BY ?t
-    HAVING (COUNT(?idt) = 1)}
+    ?s add:isSiblingOf ?t
+    {SELECT ?s 
+    WHERE { 
+        ?s a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+        ?s dcterms:identifier ?ids.}
+        GROUP BY ?s
+    HAVING (count(?ids) > 1)}
+
+    {SELECT ?t
+    WHERE { 
+        ?t a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+        ?t dcterms:identifier ?idt.}
+        GROUP BY ?t
+    HAVING (count(?idt) = 1)}
 }
 ```
 
-## 7. Links between property accounts and landmarks versions that are discribed in several mutation registers
-### 7.1 Create links between similar taxpayers
+### 5.3 Links between property accounts and landmarks versions that are discribed in several mutation registers
+#### 5.3.1 Create links between similar taxpayers
 *NB : This step should be upgraded with more precise string comparison tools.*
 ```sparql
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
@@ -696,7 +698,7 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
 #CONSTRUCT {?taxpayer add:isSimilarTo ?taxpayer2 ?taxpayer2 add:isSimilarTo ?taxpayer.}
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/ownerskeys>{
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/taxpayerskeys>{
     ?taxpayer add:isSimilarTo ?taxpayer2.
     ?taxpayer2 add:isSimilarTo ?taxpayer.
 }}
@@ -712,7 +714,7 @@ WHERE {
     FILTER(?lev > 0.8)
 }
 ```
-### 7.2 Create links between property accounts from several mutation registers when they have the same taxpayer
+#### 5.3.2 Create links between property accounts from several mutation registers when they have the same taxpayer
 * Create link if taxpayers have a similarity link
 * *NB : We could had more constraints in future tests.*
 ```sparql
@@ -748,7 +750,7 @@ WHERE {
     ?taxpayer add:isSimilarTo ?taxpayer2
 }
 ```
-### 7.3 Create links between landmarks versions from several mutation registers
+#### 5.3.3 Create links between landmarks versions from several mutation registers
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -789,8 +791,8 @@ WHERE {
 }
 ```
 
-## 8. Create an aggregate landmark for each group of sibling landmarks versions
-### 8.1 Create a unique label between landmarks that are siblings
+### 5.4 Create an aggregate landmark for each group of sibling landmarks versions
+#### 5.4.1 Create a unique label between landmarks that are siblings
 * Landmarks with the same label will be in the same aggregate.
 * One landmark version might be in one or more aggregate.
 
@@ -817,7 +819,7 @@ WHERE {
     ORDER BY ?sibling}
 }
 ```
-### 8.2.1 Create a new landmark using siblings that have the same label (and are in the same aggregation)
+#### 5.4.2 Create a new landmark using siblings that have the same label (and are in the same aggregation)
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
@@ -837,7 +839,7 @@ WHERE {
     ?landmark add:hasAggregateLabel ?siblingLabel .
     ?landmark dcterms:identifier ?id.}
 ```
-### 8.2.2 Create landmarks for landmarks versions that have no siblings
+### 5.4.3 Create landmarks for landmarks versions that have no siblings
 * One landmark versions = one landmark (aggregation of one landmark version)
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -848,7 +850,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>
     ?aggLandmark add:isLandmarkType cad_ltype:Plot.
     ?aggLandmark dcterms:identifier ?id.
     ?aggLandmark add:isParentOf ?landmark .
-    ?aggLandmark add:isChildrenOf ?landmark .
+    ?landmark add:isChildrenOf ?aggLandmark .
 }} 
 WHERE {    
     {        
@@ -863,12 +865,13 @@ WHERE {
 ```
 * We can delete *http://rdf.geohistoricaldata.org/tmpaggregatelabel*
 
-### 8.3 Initialised the attributes of the aggregations using the list of attributes of the landmarks versions
+## 6. Inference of attributes and attributes versions of landmarks (aggregations)
+### 6.1 Initialised the attributes of the aggregations using the list of attributes of the landmarks versions
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ 
-    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType] . 
+    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ]. 
 }} WHERE {{ 
     SELECT DISTINCT ?aggLandmark ?attrType 
     WHERE { ?aggLandmark add:isParentOf ?landmark .
@@ -877,22 +880,188 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{
 }
 ```
 
-### 8.4 Create the attributes versions
+### 6.2 Link landmarks versions aggregation with root landmark
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> {    
-    ?aggAttr add:hasAttributeVersion [a add:AttributeVersion; add:isRootOf ?attrVers] .}}
-WHERE {    {        
-    SELECT DISTINCT ?aggLandmark ?aggAttr ?aggAttrType 
-    WHERE {            
-        ?aggLandmark add:hasAttribute ?aggAttr  .            
-        ?attr add:isAttributeType ?aggAttrType .        
-        }    }    
-        ?aggLandmark add:isParentOf ?landmark .    
-        ?landmark add:hasAttribute ?attr .    
-    ?attr add:isAttributeType ?aggAttrType ; add:hasAttributeVersion ?attrVers.    }
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> {
+    ?aggLandmark add:hasRootLandmark ?root.
+    ?root add:isRootLandmarkOf ?aggLandmark.
+    }}
+WHERE {
+    SELECT distinct ?aggLandmark ?root WHERE {
+        ?aggLandmark a add:Landmark .  
+        ?aggLandmark add:isParentOf ?otherLandmark .  
+        ?otherLandmark add:hasRootLandmark ?root . 
+    }
+    GROUP BY ?aggLandmark ?root}
+```
+### 6.3 Create aggregate attribute versions for PlotNature Attribute for each landmark aggregation
+* In this step, we want to build aggregated attributes versions that are equals for each landmark aggregation.
+
+#### 6.3.1 Match PlotNature attribute versions that should be aggregated
+1. Match PlotNature attribute versions of landmark versions that :
+    * have *hasNextVersion / hasOverlappingVersion / isOverlappedByVersion* temporal relation;
+    * have the same nature (*cad:hasPlotNature*);
+    * are part of the same landmark version aggregation.
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpnatureattributeversions> {
+    ?natV1 cad:matchWithVersion ?natV1.
+    ?natV1 cad:matchWithVersion ?natV2.
+    ?natV2 cad:matchWithVersion ?natV1.
+    ?natV2 cad:matchWithVersion ?natV2.
+    }}
+WHERE {
+    ?plot1 (add:hasNextVersion|add:hasOverlappingVersion|add:isOverlappedByVersion) ?plot2.
+    ?plotAGG add:isParentOf ?plot1.
+    ?plotAGG add:isParentOf ?plot2.
+
+    ?plot1 add:hasAttribute ?nat1.
+    ?nat1 add:isAttributeType cad_atype:PlotNature.
+    ?nat1 add:hasAttributeVersion ?natV1.
+    ?natV1 cad:hasPlotNature ?natV1value.
+
+    ?plot2 add:hasAttribute ?nat2.
+    ?nat2 add:isAttributeType cad_atype:PlotNature.
+    ?nat2 add:hasAttributeVersion ?natV2.
+    ?natV2 cad:hasPlotNature ?natV2value.
+
+    # Comparison of the nature attributes
+    BIND(IF((?natV2value = ?natV1value), true, false) AS ?areEqual)
+    FILTER(?areEqual = True)
+}
+```
+2. Match PlotNature attribute version with itself when the landmark version that have no *hasNextVersion / hasOverlappingVersion / isOverlappedByVersion* temporal relation with any other landmark version;.
+```sparql
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpnatureattributeversions> {
+        ?natV1 cad:matchWithVersion ?natV1.}}
+WHERE {
+    ?plotAGG add:isParentOf ?plot1.
+    ?plot1 add:hasAttribute ?nat1.
+    ?nat1 add:isAttributeType cad_atype:PlotNature.
+    ?nat1 add:hasAttributeVersion ?natV1.
+}
+```
+#### 6.3.2 Create the aggregated attributes versions of Nature attribute
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions>{ 
+    ?natureAGG add:hasAttributeVersion [ a add:AttributeVersion;
+                                         add:hasMergedValue ?mergedValue].
+    }}
+WHERE {SELECT DISTINCT ?plotAGG ?natureAGG (GROUP_CONCAT(?natV2) AS ?mergedValue)
+	WHERE {
+        ?natV1 a add:AttributeVersion; 
+               cad:matchWithVersion+ ?natV2;
+               add:isAttributeVersionOf [add:isAttributeOf ?plot1].
+        ?natV2 add:isAttributeVersionOf [add:isAttributeOf ?plot2].
+
+        ?plotAGG add:isParentOf ?plot1.
+        ?plotAGG add:isParentOf ?plot2.
+        ?plotAGG add:hasAttribute ?natureAGG.
+        ?natureAGG add:isAttributeType cad_atype:PlotNature.
+    	}
+    	GROUP BY ?plotAGG ?natV1 ?natureAGG 
+    	ORDER BY ?plotAGG ?mergedValue}
+```
+### 6.3.3 Cast add:hasMergedValue elements as URIs
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX spif: <http://spinrdf.org/spif#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions>{
+    ?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    ?attrV add:hasRootAttributeVersion ?attrVAGG.
+    }}
+WHERE {
+    SELECT ?attrVAGG ?attrV
+    WHERE {
+         ?attrV a add:AttributeVersion.
+         FILTER(STR(?attrV) = ?strbn)
+        {
+        SELECT ?attrVAGG ?strbn
+        WHERE { 
+            ?attrVAGG add:hasMergedValue ?concatstrbn .
+            ?strbn spif:split(?concatstrbn " ").
+        }}
+    }
+}
+```
+### 6.3.4 Create events and changes of each PlotNature attribute version
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
+    ?event1 a add:Event.
+    ?event1 cad:isEventType cad_etype:PlotNatureEvent.
+    ?event2 a add:Event.
+    ?event2 cad:isEventType cad_etype:PlotNatureEvent.
+    ?change1 a add:Change.
+    ?change1 add:isChangeType ctype:AttributeVersionAppearance.
+    ?change2 a add:Change.
+	?change2 add:isChangeType ctype:AttributeVersionDisappearance.
+    ?event1 add:hasTime[add:timeStamp ?minBeginning; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?event2 add:hasTime[add:timeStamp ?maxEnd; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?change1 add:dependsOn ?event1.
+    ?change2 add:dependsOn ?event2.
+    ?change1 add:appliedTo ?attrVAGG.
+    ?change2 add:appliedTo ?attrVAGG.
+    ?attrVAGG add:changedBy ?change1.
+    ?attrVAGG add:changedBy ?change2.
+}}
+WHERE {{
+     SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+	WHERE { 
+        ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
+    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrV add:isAttributeVersionOf ?attr.
+    	?attr add:isAttributeOf ?plot.
+    	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
+    	?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
+		}
+    GROUP BY ?attrVAGG ?plotAGG}
+}
+```
+### 6.3.5 Add cad:hasPlotNature to aggregated attributeversion
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
+    ?attrVAGG cad:hasPlotNature ?natureValue.
+    }}
+WHERE {{
+	SELECT DISTINCT ?attrVAGG ?natureValue 
+	WHERE { 
+		?attrVAGG a add:AttributeVersion.
+    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrV cad:hasPlotNature ?natureValue.
+	}}
+}
 ```
 
-## 9. Create aggregate attribute versions for each landmark aggregation
-* In this step, we want to build aggregated attributes versions for each landmark aggregation.
+### 6.5. Addresses
+```sparql
+```
+
+### 6.5. Taxpayers
+```sparql
+```
+
+### 6.6. Mentions
+```sparql
+```

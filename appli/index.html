@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution des parcelles de la Butte-aux-Cailles</title>
+    <!--Style-->
+    <link rel="stylesheet" href="libs/w3.css">
+    <link rel="stylesheet" href="style.css">
+        
+    <!--JQuery-->
+    <script src="./libs/jquery-3.6.1.min.js"></script>
+    <script src="./libs/jquery.geo.min.js"></script>
+
+    <!--Slider-->
+    <script src="./libs/wnumb-1.2.0/wNumb.min.js"></script>
+    <link rel="stylesheet" href="./libs/noUiSlider/nouislider.min.css" />
+    <script src="./libs/noUiSlider/nouislider.min.js"></script>
+
+    <!--Leaflet-->
+    <script>L_PREFER_CANVAS=true;</script>
+    <link rel="stylesheet" href="./libs/leaflet/leaflet.css" />
+    <script src="./libs/leaflet/leaflet.js"></script>
+
+    <!--Leaflet Full Screen-->
+    <link rel="stylesheet" href="./libs/leaflet.fullscreen-master/Control.FullScreen.css"/>
+    <script src="./libs/leaflet.fullscreen-master/Control.FullScreen.js"></script>
+
+    <!-- Leaflet Control Panel-->
+    <link rel="stylesheet" href="./libs/leaflet-panel-layers/src/leaflet-panel-layers.css">
+    <script src="./libs/leaflet-panel-layers/src/leaflet-panel-layers.js"></script>
+
+    <!--Timeline JS-->
+    <link title="timeline-styles" rel="stylesheet" href="./libs/timelineJS/timeline.css">
+    <script src="./libs/timelineJS/timeline.js"></script> 
+
+    <!--Plotly JS-->
+    <script src="./libs/plotly-latest.min.js"></script>
+
+    <script src="./libs/proj4.js"></script>
+</head>
+<body>
+    <div id="appli">
+    <div id="map"></div>
+    <div id="controls">
+
+        <div id="title"><h2>Evolution des parcelles, voies et adresses de la Butte-aux-Cailles</h2></div>
+        
+        <div id="selectcadastre">
+            <fieldset>
+            <form>
+                <label>
+                  <input id="cad-1810" type="radio" name="cadastre" value="1810" checked>
+                  Cadastre de 1810
+                </label>
+                <label>
+                  <input id="cad-1848" type="radio" name="cadastre" value="1848">
+                  Cadastre de 1845
+                </label>
+            </form>
+            <p style="text-align: justify; height: fit-content;"><small>❓ Informations sur les cadastres : </br>
+              <ul>
+                <li>Cadastre de 1810 : plan établi en 1810; matrice n°1 valide de 1813 à 1836; matrice n°2 valide de 1836 à 1848.</li>
+                <li>Cadastre de 1845 : plan établi en 1845; matrice n°1 valide de 1848 à 1860.</li></ul>
+            </small></p>
+            </fieldset>
+        </div>
+
+
+        <div id="info"><p>Cliquez sur une parcelle pour en savoir plus.</p></div>
+
+        <div id="time">
+            <fieldset>
+              <legend>Période</legend>
+              <div style="margin-right: auto; margin-left: auto; width: 95%; margin-bottom: 10px; text-align: center; height: fit-content;">
+              <input type="number" min='1813' max='1860' id="input-number">
+              <div id="slider" style="top: 0px; right: 1px; margin: 10px 20px;"></div><br>
+              <p id="loadedyear" style="text-align: justify; height: fit-content;"><small>❓ Le filtre temporel permet de visualiser la/les natures d'une parcelle au cours d'une année donnée.</small></p>
+            </fieldset>
+          </div>
+
+          <div id="legend" class="legend-container"></div>
+
+    </div>
+    </div>
+</body>
+<script src="parameters.js"></script>
+<script src="slider.js"></script>
+<script src="features-endpoint.js"></script>
+<script src="tiles.js"></script>
+<script src="map.js"></script>
+<script> window.onload = onPageLoad;</script>
+</html>
