@@ -20,7 +20,7 @@ var query2_data =
 "PREFIX dcterms: <http://purl.org/dc/terms/> " +
 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> " +
 "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> " +
-"SELECT ?root ?geom ?plot (GROUP_CONCAT(distinct ?id) AS ?ids) ?natureValue ?t1 ?t2 (count(distinct ?children) AS ?rows) WHERE { " +
+"SELECT ?root ?geom ?plot (GROUP_CONCAT(distinct ?id) AS ?ids) (GROUP_CONCAT(distinct ?natureValue; separator=', ') AS ?groupNatureValue) ?t1 ?t2 (count(distinct ?children) AS ?rows) WHERE { " +
 "GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> { " +
 "?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot. " +
 "?plot dcterms:identifier ?id. " +
@@ -273,7 +273,7 @@ function groupAndDisplayData(jsonData) {
             tableHTML += "<tr>";
             tableHTML += `<td><small><b>${replaceString(row.plot.value,"http://rdf.geohistoricaldata.org/id/landmark/")}</b> (${row.rows.value})</small></td>`;
             tableHTML += `<td>${row.ids.value}</td>`;
-            tableHTML += `<td>${replaceString(row.natureValue.value,"http://rdf.geohistoricaldata.org/id/codes/cadastre/plotNature/")}</td>`;
+            tableHTML += `<td>${replaceString(row.groupNatureValue.value,"http://rdf.geohistoricaldata.org/id/codes/cadastre/plotNature/")}</td>`;
             tableHTML += `<td>${keepFirstFourChars(row.t1.value)}</td>`;
             tableHTML += `<td>${keepFirstFourChars(row.t2.value)}</td>`;
             tableHTML += "</tr>";
@@ -290,15 +290,15 @@ function requestFeatureData(id){
     var year = document.getElementById('input-number').value
 
     var additional_part = "BIND(YEAR('" + year + "-01-01'^^xsd:dateTimeStamp) AS ?year) " +
-    "FILTER(regex(?id, '" + id +"[^0-9]*$')) " +
-    "FILTER(lang(?natureValue) = 'fr')" + 
+    "FILTER(regex(?id, '" + id +"p') || regex(?id, '" + id +"$')) " +
+    "FILTER(lang(?natureValue) = 'fr') " + 
     "FILTER(YEAR(?t1) <= ?year && YEAR(?t2) >= ?year )" +
     "} " +
-    "GROUP BY ?plot ?natureValue ?t1 ?t2 ?root ?geom " +
+    "GROUP BY ?plot ?t1 ?t2 ?root ?geom " +
     "ORDER BY ?ids ?plot";
 
     query2 = query2_data + additional_part
-    
+    console.log(query2)
     finalquery2 = endpointURL + '?query=' + encodeURIComponent(query2) + "&?application/json";
     //console.log(finalquery2)
 

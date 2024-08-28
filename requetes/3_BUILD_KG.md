@@ -15,22 +15,22 @@ PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkTy
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
 #Create a relation between the root landmarks and the landmarks that seems to be versions of this landmark
-#CONSTRUCT {?relatedLandmark add:hasRootLandmark ?rootLandmark.?rootLandmark add:isRootLandmarkOf ?relatedLandmark.}
+#CONSTRUCT {?landmarkversion add:hasRootLandmark ?rootLandmark.?rootLandmark add:isRootLandmarkOf ?landmarkversion.}
 
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>{
-    ?relatedLandmark add:hasRootLandmark ?rootLandmark.
-    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark.}}
+    ?landmarkversion add:hasRootLandmark ?rootLandmark.
+    ?rootLandmark add:isRootLandmarkOf ?landmarkversion.}}
 WHERE {
         GRAPH <http://rdf.geohistoricaldata.org/rootlandmarks> {
            ?rootLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
         }
-        ?relatedLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-        ?relatedLandmark add:hasAttribute ?attr1.
+        ?landmarkversion a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
+        ?landmarkversion add:hasAttribute ?attr1.
         ?attr1 add:isAttributeType cad_atype:PlotMention.
         
         ####### Pseudo-identity constraint (ex: plots)
         ?rootLandmark dcterms:identifier ?plotidm.
-        ?relatedLandmark dcterms:identifier ?plotidr.
+        ?landmarkversion dcterms:identifier ?plotidr.
         BIND(
         IF(STRENDS(STR(?plotidr), "p"), 
                 SUBSTR(STR(?plotidr), 1, STRLEN(STR(?plotidr)) - 1), 
@@ -53,19 +53,19 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
 #Compute gaps between versions of landmarks (with the same root) and keep only positive or nul geps.
-#CONSTRUCT{?rootLandmark add:hasTimeGap [ add:hasValue ?gap; add:isFirstRL ?relatedLandmark; add:isSecondRL ?relatedLandmark2]}
+#CONSTRUCT{?rootLandmark add:hasTimeGap [ add:hasValue ?gap; add:isFirstRL ?landmarkversion; add:isSecondRL ?landmarkversion2]}
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmp>{
     ?rootLandmark add:hasTimeGap [ add:hasValue ?gap; 
-    add:isFirstRL ?relatedLandmark; 
-    add:isSecondRL ?relatedLandmark2]}}
+    add:isFirstRL ?landmarkversion; 
+    add:isSecondRL ?landmarkversion2]}}
 WHERE { 
-    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark.
-    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark2.
-    ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?end.
-    ?relatedLandmark2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
+    ?rootLandmark add:isRootLandmarkOf ?landmarkversion.
+    ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.
+    ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
+    ?landmarkversion2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
 	BIND(ofn:asDays(?start2 - ?end) as ?gap).
-	FILTER ((?gap >= 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
+	FILTER ((?gap >= 0) && !(sameTerm(?landmarkversion,?landmarkversion2)))
 }
 ```
 This step aims to build the temporal relations between versions of plots.
@@ -81,29 +81,29 @@ margin-right: auto;width: 75%;">
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
 # Create hasPreviousVersion and hasNextVersion relations when positive or nul temporal gap between versions
-#CONSTRUCT {?relatedLandmark add:hasNextVersion ?relatedLandmark2. ?relatedLandmark2 add:hasPreviousVersion ?relatedLandmark.}
+#CONSTRUCT {?landmarkversion add:hasNextVersion ?landmarkversion2. ?landmarkversion2 add:hasPreviousVersion ?landmarkversion.}
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{
-        ?relatedLandmark add:hasNextVersion ?relatedLandmark2.
-        ?relatedLandmark2 add:hasPreviousPrevious ?relatedLandmark.}}
+        ?landmarkversion add:hasNextVersion ?landmarkversion2.
+        ?landmarkversion2 add:hasPreviousPrevious ?landmarkversion.}}
 WHERE {
     #Get landmarks that have a gap equal to minimal gap
 	GRAPH <http://rdf.geohistoricaldata.org/tmp> {
         ?rootLandmark add:hasTimeGap ?gap.
     	?gap add:hasValue ?ecart.
-        ?gap add:isFirstRL ?relatedLandmark.
-        ?gap add:isSecondRL ?relatedLandmark2
-    FILTER (?ecart = ?minecart && !sameTerm(?relatedLandmark, ?relatedLandmark2))}
+        ?gap add:isFirstRL ?landmarkversion.
+        ?gap add:isSecondRL ?landmarkversion2
+    FILTER (?ecart = ?minecart && !sameTerm(?landmarkversion, ?landmarkversion2))}
     
     # Search for minimal gap of each plot
-    {SELECT ?relatedLandmark (MIN(?ecart2) AS ?minecart)
+    {SELECT ?landmarkversion (MIN(?ecart2) AS ?minecart)
 	WHERE {GRAPH <http://rdf.geohistoricaldata.org/tmp> {
     	?rootLandmark add:hasTimeGap ?gap2.
     	?gap2 add:hasValue ?ecart2.
-        ?gap2 add:isFirstRL ?relatedLandmark.
+        ?gap2 add:isFirstRL ?landmarkversion.
         } 
 	}
-	GROUP BY ?relatedLandmark
+	GROUP BY ?landmarkversion
     ORDER BY ?minecart}
     # End
 }
@@ -125,21 +125,21 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
-# CONSTRUCT{?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2. ?relatedLandmark2 add:isOverlappedByVersion ?relatedLandmark.}
+# CONSTRUCT{?landmarkversion add:hasOverlappingVersion ?landmarkversion2. ?landmarkversion2 add:isOverlappedByVersion ?landmarkversion.}
 
 INSERT{ GRAPH <http://rdf.geohistoricaldata.org/order>{
-    ?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2. 
-    ?relatedLandmark2 add:isOverlappedByVersion ?relatedLandmark.}}
+    ?landmarkversion add:hasOverlappingVersion ?landmarkversion2. 
+    ?landmarkversion2 add:isOverlappedByVersion ?landmarkversion.}}
 WHERE { GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations> 
-    {?rootLandmark add:isRootLandmarkOf ?relatedLandmark.
-    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark2.}
-    ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?end.
-    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?start.
-    ?relatedLandmark2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
+    {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
+    ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
+    ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
+    ?landmarkversion add:hasTime/add:hasBeginning/add:timeStamp ?start.
+    ?landmarkversion2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
     
     BIND(ofn:asDays(?start2 - ?end) as ?ecart).
     BIND(ofn:asDays(?start2 - ?start) as ?ecartDeb).
-    FILTER ((?ecart < 0) && (?ecartDeb > 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
+    FILTER ((?ecart < 0) && (?ecartDeb > 0) && !(sameTerm(?landmarkversion,?landmarkversion2)))
 }
 ```
 #### 2.3.2 Case when A and B start at the same time
@@ -152,23 +152,23 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
-#CONSTRUCT{?relatedLandmark add:isOverlappedByVersion ?relatedLandmark2. ?relatedLandmark2 add:hasOverlappingVersion ?relatedLandmark.}
+#CONSTRUCT{?landmarkversion add:isOverlappedByVersion ?landmarkversion2. ?landmarkversion2 add:hasOverlappingVersion ?landmarkversion.}
 
 INSERT{ GRAPH <http://rdf.geohistoricaldata.org/order>{
-    ?relatedLandmark add:isOverlappedByVersion ?relatedLandmark2. 
-    ?relatedLandmark2 add:hasOverlappingVersion ?relatedLandmark.}}
+    ?landmarkversion add:isOverlappedByVersion ?landmarkversion2. 
+    ?landmarkversion2 add:hasOverlappingVersion ?landmarkversion.}}
 WHERE {
     GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations> 
-    {?rootLandmark add:isRootLandmarkOf ?relatedLandmark.
-    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark2.}
-    ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?end.
-    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?start.
-    ?relatedLandmark2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
-    ?relatedLandmark2 add:hasTime/add:hasEnd/add:timeStamp ?end2.
+    {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
+    ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
+    ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
+    ?landmarkversion add:hasTime/add:hasBeginning/add:timeStamp ?start.
+    ?landmarkversion2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
+    ?landmarkversion2 add:hasTime/add:hasEnd/add:timeStamp ?end2.
     BIND(ofn:asDays(?start2 - ?end) as ?ecart).
     BIND(ofn:asDays(?start2 - ?start) as ?ecartDeb).
     BIND(ofn:asDays(?end2 - ?end) as ?ecartFin).
-    FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin < 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
+    FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin < 0) && !(sameTerm(?landmarkversion,?landmarkversion2)))
 }
 ```
 <img src="./img/temporal_relations_3_3_2.png" style="display: block;margin-left: auto;
@@ -179,23 +179,23 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
-#CONSTRUCT{?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2. ?relatedLandmark2 add:isOverlappedByVersion  ?relatedLandmark.}
+#CONSTRUCT{?landmarkversion add:hasOverlappingVersion ?landmarkversion2. ?landmarkversion2 add:isOverlappedByVersion  ?landmarkversion.}
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{
-    ?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2. 
-    ?relatedLandmark2 add:isOverlappedByVersion  ?relatedLandmark.}}
+    ?landmarkversion add:hasOverlappingVersion ?landmarkversion2. 
+    ?landmarkversion2 add:isOverlappedByVersion  ?landmarkversion.}}
 WHERE {
     GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>  
-    {?rootLandmark add:isRootLandmarkOf ?relatedLandmark.
-    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark2.}
-    ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?end.
-    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?start.
-    ?relatedLandmark2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
-    ?relatedLandmark2 add:hasTime/add:hasEnd/add:timeStamp ?end2.
+    {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
+    ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
+    ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
+    ?landmarkversion add:hasTime/add:hasBeginning/add:timeStamp ?start.
+    ?landmarkversion2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
+    ?landmarkversion2 add:hasTime/add:hasEnd/add:timeStamp ?end2.
     BIND(ofn:asDays(?start2 - ?end) as ?ecart).
     BIND(ofn:asDays(?start2 - ?start) as ?ecartDeb).
     BIND(ofn:asDays(?end2 - ?end) as ?ecartFin).
-    FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin > 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
+    FILTER ((?ecart < 0) && (?ecartDeb = 0) && (?ecartFin > 0) && !(sameTerm(?landmarkversion,?landmarkversion2)))
 }
 ```
 #### 2.2.3 Case when A and B are equals
@@ -208,24 +208,24 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 
-#CONSTRUCT{?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2. ?relatedLandmark2 add:isOverlappedByVersion ?relatedLandmark.}
+#CONSTRUCT{?landmarkversion add:hasOverlappingVersion ?landmarkversion2. ?landmarkversion2 add:isOverlappedByVersion ?landmarkversion.}
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{
-    ?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2. 
-    ?relatedLandmark2 add:isOverlappedByVersion  ?relatedLandmark.
-    ?relatedLandmark2 add:hasOverlappingVersion ?relatedLandmark. 
-    ?relatedLandmark add:isOverlappedByVersion  ?relatedLandmark2.}}
+    ?landmarkversion add:hasOverlappingVersion ?landmarkversion2. 
+    ?landmarkversion2 add:isOverlappedByVersion  ?landmarkversion.
+    ?landmarkversion2 add:hasOverlappingVersion ?landmarkversion. 
+    ?landmarkversion add:isOverlappedByVersion  ?landmarkversion2.}}
 WHERE {
     GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>  
-    {?rootLandmark add:isRootLandmarkOf ?relatedLandmark.
-    ?rootLandmark add:isRootLandmarkOf ?relatedLandmark2.}
-    ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?end.
-    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?start.
-    ?relatedLandmark2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
-    ?relatedLandmark2 add:hasTime/add:hasEnd/add:timeStamp ?end2.
+    {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
+    ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
+    ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
+    ?landmarkversion add:hasTime/add:hasBeginning/add:timeStamp ?start.
+    ?landmarkversion2 add:hasTime/add:hasBeginning/add:timeStamp ?start2 .
+    ?landmarkversion2 add:hasTime/add:hasEnd/add:timeStamp ?end2.
     BIND(ofn:asDays(?start2 - ?start) as ?ecartDeb).
     BIND(ofn:asDays(?end2 - ?end) as ?ecartFin).
-    FILTER ((?ecartDeb = 0) && (?ecartFin = 0) && !(sameTerm(?relatedLandmark,?relatedLandmark2)))
+    FILTER ((?ecartDeb = 0) && (?ecartFin = 0) && !(sameTerm(?landmarkversion,?landmarkversion2)))
 }
 ```
 ## 3 and 4. Create changes and events (#1)
@@ -266,22 +266,22 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events> {
     	   add:timePrecision time:Year ;
            add:timeStamp ?end
     ].
-    ?change add:appliedTo ?relatedLandmark.
-    ?relatedLandmark add:changedBy ?change.
+    ?change add:appliedTo ?landmarkversion.
+    ?landmarkversion add:changedBy ?change.
     }
 }
 WHERE{
-    SELECT ?relatedLandmark ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change) 
+    SELECT ?landmarkversion ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change) 
     WHERE {
-        {?relatedLandmark a add:Landmark.
-        ?relatedLandmark add:isLandmarkType cad_ltype:Plot. 
-        ?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?end.
-        ?relatedLandmark add:hasAttribute ?attrMention.
+        {?landmarkversion a add:Landmark.
+        ?landmarkversion add:isLandmarkType cad_ltype:Plot. 
+        ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
+        ?landmarkversion add:hasAttribute ?attrMention.
         ?attrMention add:isAttributeType cad_atype:PlotMention.
         ?attrMention add:hasAttributeVersion/cad:passedTo ?portea.
         ?portea cad:isSourceType srctype:FolioNonBati.}
     }
-    GROUP BY ?relatedLandmark ?end
+    GROUP BY ?landmarkversion ?end
     HAVING(count(?portea) > 1)
 }
 ```
@@ -314,16 +314,16 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
 WHERE {
 	SELECT ?nextLandmark ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
 	WHERE { 
-    	?relatedLandmark add:hasRootLandmark ?rootLandmark.
+    	?landmarkversion add:hasRootLandmark ?rootLandmark.
     	?nextLandmark add:hasRootLandmark ?rootLandmark.
-    	?relatedLandmark (add:hasNextVersion|add:hasOverlappingVersion) ?nextLandmark.
+    	?landmarkversion (add:hasNextVersion|add:hasOverlappingVersion) ?nextLandmark.
     
-		?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot .
-    	?relatedLandmark add:hasTime/add:hasEnd/add:timeStamp ?sortie.
-    	?relatedLandmark add:hasAttribute ?attrMention.
+		?landmarkversion a add:Landmark; add:isLandmarkType cad_ltype:Plot .
+    	?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?sortie.
+    	?landmarkversion add:hasAttribute ?attrMention.
         ?attrMention add:hasAttributeVersion/cad:passedTo ?j1.
         
-    	?relatedLandmark add:changedBy ?disChange.
+    	?landmarkversion add:changedBy ?disChange.
     	?disChange add:isChangeType ctype:LandmarkDisappearance.
     	?disChange add:dependsOn ?event.
         
@@ -337,7 +337,7 @@ WHERE {
     	?attrMention2 add:hasAttributeVersion/cad:takenFrom ?tirede2.
     	{?tirede2 cad:isSourceType srctype:FolioNonBati} UNION {FILTER(?tirede2 IN(cad_spval:CelluleVideSV,cad_spval:ResteSV))}
 
-    	FILTER(!sameTerm(?relatedLandmark, ?nextLandmark))
+    	FILTER(!sameTerm(?landmarkversion, ?nextLandmark))
     	FILTER(YEAR(?sortie) = YEAR(?entree2))
 	}
 }
@@ -461,7 +461,7 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/doc_order>
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/order>
     {?plot1 add:hasNextVersionInSRCOrder ?plot2.
     ?plot2 add:hasPreviousVersionInSRCOrder ?plot1.
     }}
@@ -494,35 +494,35 @@ PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkTy
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-#CONSTRUCT {?relatedLandmark add:hasNextVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:hasPreviousVersionInSRCOrder ?relatedLandmark}
+#CONSTRUCT {?landmarkversion add:hasNextVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:hasPreviousVersionInSRCOrder ?landmarkversion}
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/doc_order>{ ?relatedLandmark add:hasNextVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:hasPreviousVersionInSRCOrder ?relatedLandmark}}
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{ ?landmarkversion add:hasNextVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:hasPreviousVersionInSRCOrder ?landmarkversion}}
 WHERE {
-    SELECT ?relatedLandmark ?relatedLandmark2
+    SELECT ?landmarkversion ?landmarkversion2
     WHERE { 
         #Same root Landmark
-        ?relatedLandmark add:hasRootLandmark ?rootLandmark.
-        ?relatedLandmark2 add:hasRootLandmark ?rootLandmark.
+        ?landmarkversion add:hasRootLandmark ?rootLandmark.
+        ?landmarkversion2 add:hasRootLandmark ?rootLandmark.
         
-        ?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-        ?relatedLandmark add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement].
+        ?landmarkversion a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+        ?landmarkversion add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement].
         ?classement dcterms:identifier ?rowid.
         
-        ?relatedLandmark2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-        ?relatedLandmark2 add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement2].
+        ?landmarkversion2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+        ?landmarkversion2 add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement2].
         ?classement2 dcterms:identifier ?rowid2.
         
         ?classement rico:isOrWasConstituentOf ?cf.
         ?classement2 rico:isOrWasConstituentOf ?cf.
         
-        ?relatedLandmark add:hasNextVersion ?relatedLandmark2.
+        ?landmarkversion add:hasNextVersion ?landmarkversion2.
         
         FILTER NOT EXISTS {
-            ?relatedLandmark2 add:changedBy ?change .
+            ?landmarkversion2 add:changedBy ?change .
             ?change add:isChangeType ctype:LandmarkAppearance .
         }
     BIND((?rowid2 - ?rowid) AS ?rowDistance)
-    FILTER(!sameTerm(?relatedLandmark,?relatedLandmark2) && ?rowDistance > 0)
+    FILTER(!sameTerm(?landmarkversion,?landmarkversion2) && ?rowDistance > 0)
 }
 }
 ```
@@ -540,36 +540,36 @@ PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkTy
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-#CONSTRUCT{ ?relatedLandmark add:hasOverlappingVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:isOverlappedByVersionInSRCOrder ?relatedLandmark.}
+#CONSTRUCT{ ?landmarkversion add:hasOverlappingVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:isOverlappedByVersionInSRCOrder ?landmarkversion.}
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/doc_order>{?relatedLandmark add:hasOverlappingVersionInSRCOrder ?relatedLandmark2. ?relatedLandmark2 add:isOverlappedByVersionInSRCOrder ?relatedLandmark.}}
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/order>{?landmarkversion add:hasOverlappingVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:isOverlappedByVersionInSRCOrder ?landmarkversion.}}
 WHERE {
-	SELECT ?relatedLandmark ?relatedLandmark2 
+	SELECT ?landmarkversion ?landmarkversion2 
     WHERE { 
-    ?relatedLandmark add:hasRootLandmark ?rootLandmark.
-    ?relatedLandmark2 add:hasRootLandmark ?rootLandmark.
+    ?landmarkversion add:hasRootLandmark ?rootLandmark.
+    ?landmarkversion2 add:hasRootLandmark ?rootLandmark.
     
-	?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement].
+	?landmarkversion a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?landmarkversion add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement].
     ?classement dcterms:identifier ?rowid.
     
-    ?relatedLandmark2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark2 add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement2].
+    ?landmarkversion2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?landmarkversion2 add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn ?classement2].
     ?classement2 dcterms:identifier ?rowid2.
     
     #In the same CF
     ?classement rico:isOrWasConstituentOf ?cf.
     ?classement2 rico:isOrWasConstituentOf ?cf.
     
-    ?relatedLandmark add:hasOverlappingVersion ?relatedLandmark2.
-    ?relatedLandmark2 add:isOverlappedByVersion ?relatedLandmark.
+    ?landmarkversion add:hasOverlappingVersion ?landmarkversion2.
+    ?landmarkversion2 add:isOverlappedByVersion ?landmarkversion.
     
     FILTER NOT EXISTS {
-    	?relatedLandmark2 add:changedBy ?change .
+    	?landmarkversion2 add:changedBy ?change .
     	?change add:isChangeType ctype:LandmarkAppearance .
     }
     BIND((?rowid2 - ?rowid) AS ?rowDistance)
-    FILTER(!sameTerm(?relatedLandmark,?relatedLandmark2) && ?rowDistance > 0)
+    FILTER(!sameTerm(?landmarkversion,?landmarkversion2) && ?rowDistance > 0)
 }}
 ```
 
@@ -585,20 +585,20 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
-    ?plot add:isSiblingOf ?relatedLandmark.
-    ?relatedLandmark add:isSiblingOf ?plot.}
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmp/siblings>{
+    ?plot add:isSiblingOf ?landmarkversion.
+    ?landmarkversion add:isSiblingOf ?plot.}
 } WHERE { 
 	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     ?plot add:changedBy ?change.
     ?change add:isChangeType ctype:LandmarkAppearance.
     
-    ?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?landmarkversion a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     FILTER NOT EXISTS {
-    	?relatedLandmark add:changedBy ?change2 .
+    	?landmarkversion add:changedBy ?change2 .
     	?change2 add:isChangeType ctype:LandmarkAppearance .
     }
-    ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?relatedLandmark.
+    ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?landmarkversion.
 } 
 ```
 ### 5.2.2 Links between landmark versions that seems to share the same identity
@@ -610,26 +610,26 @@ PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
-       ?plot add:isSiblingOf ?relatedLandmark.
-       ?relatedLandmark add:isSiblingOf ?plot.}}
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmp/siblings>{
+       ?plot add:isSiblingOf ?landmarkversion.
+       ?landmarkversion add:isSiblingOf ?plot.}}
 WHERE { 
     ?plot add:hasRootLandmark ?rootLandmark.
-    ?relatedLandmark add:hasRootLandmark ?rootLandmark.
+    ?landmarkversion add:hasRootLandmark ?rootLandmark.
 	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?relatedLandmark.
+    ?landmarkversion a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?plot (add:hasNextVersionInSRCOrder|add:hasOverlappingVersionInSRCOrder)+ ?landmarkversion.
     ?plot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice].
-    ?relatedLandmark add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice].
+    ?landmarkversion add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice].
     FILTER NOT EXISTS {
 		?plot (add:hasPreviousVersionInSRCOrder|add:isOverlappedByVersionInSRCOrder)+ ?other.
     	?plot add:changedBy ?change2 .
     	?change2 add:isChangeType ctype:LandmarkAppearance.
-        ?relatedLandmark add:changedBy ?change3.
+        ?landmarkversion add:changedBy ?change3.
         ?change3 add:isChangeType ctype:LandmarkAppearance.
     }
     FILTER(sameTerm(?matrice,source:94_Gentilly_MAT_B_NB_1813)||sameTerm(?matrice,source:94_Gentilly_MAT_NB_1848))
-    FILTER(!sameTerm(?plot,?relatedLandmark))
+    FILTER(!sameTerm(?plot,?landmarkversion))
 } 
 ```
 
@@ -641,24 +641,24 @@ PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/parenting>{
-    ?plot add:isSiblingOf ?relatedLandmark.
-    ?relatedLandmark add:isSiblingOf ?plot.}
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmp/siblings>{
+    ?plot add:isSiblingOf ?landmarkversion.
+    ?landmarkversion add:isSiblingOf ?plot.}
 } WHERE { 
 	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
     ?plot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
     ?plot add:hasAttribute[add:hasAttributeVersion/cad:takenFrom cad_spval:CelluleVideSV].
     ?plot add:hasTime/add:hasBeginning/add:timeStamp ?start1.
-    ?relatedLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?relatedLandmark add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
-    ?relatedLandmark add:hasTime/add:hasBeginning/add:timeStamp ?start2.
+    ?landmarkversion a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+    ?landmarkversion add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
+    ?landmarkversion add:hasTime/add:hasBeginning/add:timeStamp ?start2.
     FILTER NOT EXISTS {
         ?plot add:changedBy ?change.
         ?change add:isChangeType ctype:LandmarkAppearance.
-    	?relatedLandmark add:changedBy ?change2 .
+    	?landmarkversion add:changedBy ?change2 .
     	?change2 add:isChangeType ctype:LandmarkAppearance .
     }
-    ?plot add:isOverlappedByVersion ?relatedLandmark.
+    ?plot add:isOverlappedByVersion ?landmarkversion.
     FILTER(YEAR(?start1) = YEAR(?start2))
 } 
 ```
@@ -763,7 +763,7 @@ PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/parenting2>{
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/siblings>{
     ?plot add:isSiblingOf ?plot2.
     ?plot2 add:isSiblingOf ?plot.}}
 WHERE { 
@@ -805,7 +805,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX jsfn: <http://www.ontotext.com/js#>
 
 # This query identifies groups of sibling landmarks
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmpaggregatelabel> {
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/tmp/aggregatedlabel> {
     ?landmark add:hasAggregateLabel ?all
     }}
 WHERE {
@@ -824,18 +824,19 @@ WHERE {
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> 
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations> 
     {?aggLandmark a add:Landmark . 
     ?aggLandmark add:isLandmarkType cad_ltype:Plot.
-    ?aggLandmark add:isParentOf ?landmark .
+    ?aggLandmark add:hasTrace ?landmark .
     ?aggLandmark dcterms:identifier ?id.
-    ?landmark add:isChildrenOf ?aggLandmark}} 
+    ?landmark add:isTraceOf ?aggLandmark}} 
 WHERE {    
     {        
     SELECT DISTINCT ?siblingLabel 
         WHERE {
             ?landmark add:hasAggregateLabel ?siblingLabel .}
-    }    
+    }
+
     BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)   
     ?landmark add:hasAggregateLabel ?siblingLabel .
     ?landmark dcterms:identifier ?id.}
@@ -846,38 +847,35 @@ WHERE {
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> 
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations> 
     {?aggLandmark a add:Landmark . 
     ?aggLandmark add:isLandmarkType cad_ltype:Plot.
     ?aggLandmark dcterms:identifier ?id.
-    ?aggLandmark add:isParentOf ?landmark .
-    ?landmark add:isChildrenOf ?aggLandmark .
-    ?landmark add:isChildrenOf ?aggLandmark .
+    ?aggLandmark add:hasTrace ?landmark .
+    ?landmark add:isTraceOf ?aggLandmark .
 }} 
 WHERE {    
     {        
     SELECT DISTINCT ?landmark
     WHERE {
-        GRAPH <http://rdf.geohistoricaldata.org/relatedlandmarks>{
+        GRAPH <http://rdf.geohistoricaldata.org/landmarksversions>{
             ?landmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.}
         FILTER NOT EXISTS{?landmark add:isSiblingOf ?other.}}
     }    
     BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)
     ?landmark dcterms:identifier ?id.}
 ```
-* We can delete *http://rdf.geohistoricaldata.org/tmpaggregatelabel*
 
 ## 6. Inference of attributes and attributes versions of landmarks (aggregations)
 ### 6.1 Initialised the attributes of the aggregations using the list of attributes of the landmarks versions
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ 
-    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ]. 
-    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ]. 
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{ 
+    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ].  
 }} WHERE {{ 
     SELECT DISTINCT ?aggLandmark ?attrType 
-    WHERE { ?aggLandmark add:isParentOf ?landmark .
+    WHERE { ?aggLandmark add:hasTrace ?landmark .
             ?landmark add:hasAttribute ?attr .
             ?attr add:isAttributeType ?attrType .}}
 }
@@ -887,14 +885,16 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> {
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations> {
     ?aggLandmark add:hasRootLandmark ?root.
     ?root add:isRootLandmarkOf ?aggLandmark.
+    ?aggLandmark add:hasTrace ?root.
+    ?root add:isTraceOf ?aggLandmark.
     }}
 WHERE {
     SELECT distinct ?aggLandmark ?root WHERE {
         ?aggLandmark a add:Landmark .  
-        ?aggLandmark add:isParentOf ?otherLandmark .  
+        ?aggLandmark add:hasTrace ?otherLandmark .  
         ?otherLandmark add:hasRootLandmark ?root . 
     }
     GROUP BY ?aggLandmark ?root}
@@ -914,7 +914,7 @@ PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeT
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpnatureattributeversions> {
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/natureattributeversions> {
     ?natV1 cad:matchWithVersion ?natV1.
     ?natV1 cad:matchWithVersion ?natV2.
     ?natV2 cad:matchWithVersion ?natV1.
@@ -922,8 +922,8 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpnatureattributeversions> {
     }}
 WHERE {
     ?plot1 (add:hasNextVersion|add:hasOverlappingVersion|add:isOverlappedByVersion) ?plot2.
-    ?plotAGG add:isParentOf ?plot1.
-    ?plotAGG add:isParentOf ?plot2.
+    ?plotAGG add:hasTrace ?plot1.
+    ?plotAGG add:hasTrace ?plot2.
 
     ?plot1 add:hasAttribute ?nat1.
     ?nat1 add:isAttributeType cad_atype:PlotNature.
@@ -942,10 +942,10 @@ WHERE {
 ```
 2. Match PlotNature attribute version with itself when the landmark version that have no *hasNextVersion / hasOverlappingVersion / isOverlappedByVersion* temporal relation with any other landmark version;.
 ```sparql
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpnatureattributeversions> {
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/natureattributeversions> {
         ?natV1 cad:matchWithVersion ?natV1.}}
 WHERE {
-    ?plotAGG add:isParentOf ?plot1.
+    ?plotAGG add:hasTrace ?plot1.
     ?plot1 add:hasAttribute ?nat1.
     ?nat1 add:isAttributeType cad_atype:PlotNature.
     ?nat1 add:hasAttributeVersion ?natV1.
@@ -968,8 +968,8 @@ WHERE {SELECT DISTINCT ?plotAGG ?natureAGG (GROUP_CONCAT(?natV2) AS ?mergedValue
                add:isAttributeVersionOf [add:isAttributeOf ?plot1].
         ?natV2 add:isAttributeVersionOf [add:isAttributeOf ?plot2].
 
-        ?plotAGG add:isParentOf ?plot1.
-        ?plotAGG add:isParentOf ?plot2.
+        ?plotAGG add:hasTrace ?plot1.
+        ?plotAGG add:hasTrace ?plot2.
         ?plotAGG add:hasAttribute ?natureAGG.
         ?natureAGG add:isAttributeType cad_atype:PlotNature.
     	}
@@ -982,8 +982,8 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX spif: <http://spinrdf.org/spif#>
 
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions>{
-    ?attrVAGG add:isRootAttributeVersionOf ?attrV.
-    ?attrV add:hasRootAttributeVersion ?attrVAGG.
+    ?attrVAGG add:hasTrace ?attrV.
+    ?attrV add:isTraceOf ?attrVAGG.
     }}
 WHERE {
     SELECT ?attrVAGG ?attrV
@@ -1029,11 +1029,11 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
 WHERE {{
      SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
 	WHERE { 
-            GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{
+            GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{
             ?plotAGG a add:Landmark; add:isLandmarkType cad_ltype:Plot.
          }
         ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
-    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrVAGG add:hasTrace ?attrV.
     	?attrV add:isAttributeVersionOf ?attr.
     	?attr add:isAttributeOf ?plot.
     	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
@@ -1054,12 +1054,11 @@ WHERE {{
 	SELECT DISTINCT ?attrVAGG ?natureValue 
 	WHERE { 
 		?attrVAGG a add:AttributeVersion.
-    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrVAGG add:hasTrace ?attrV.
     	?attrV cad:hasPlotNature ?natureValue.
 	}}
 }
 ```
-
 ### 6.4. Addresses
 #### 6.4.1 Match PlotAddress attribute versions that have the same value
 ```sparql
@@ -1067,7 +1066,7 @@ PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeT
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpaddressattributeversions> {
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/addressattributeversions> {
     ?addV1 cad:matchWithVersion ?addV1.
     ?addV1 cad:matchWithVersion ?addV2.
     ?addV2 cad:matchWithVersion ?addV1.
@@ -1075,8 +1074,8 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpaddressattributeversions> {
     }}
 WHERE {
     ?plot1 (add:hasNextVersion|add:hasOverlappingVersion|add:isOverlappedByVersion) ?plot2.
-    ?plotAGG add:isParentOf ?plot1.
-    ?plotAGG add:isParentOf ?plot2.
+    ?plotAGG add:hasTrace ?plot1.
+    ?plotAGG add:hasTrace ?plot2.
 
     ?plot1 add:hasAttribute ?add1.
     ?add1 add:isAttributeType cad_atype:PlotAddress.
@@ -1099,11 +1098,11 @@ PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeT
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmpaddressattributeversions> {
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/addressattributeversions> {
     ?addV1 cad:matchWithVersion ?addV1.
     }}
 WHERE {
-    ?plotAGG add:isParentOf ?plot1.
+    ?plotAGG add:hasTrace ?plot1.
     ?plot1 add:hasAttribute ?add1.
     ?add1 add:isAttributeType cad_atype:PlotAddress.
     ?add1 add:hasAttributeVersion ?addV1.
@@ -1126,8 +1125,8 @@ WHERE {SELECT DISTINCT ?plotAGG ?addAGG (GROUP_CONCAT(?addV2) AS ?mergedValue)
                add:isAttributeVersionOf [add:isAttributeOf ?plot1].
         ?addV2 add:isAttributeVersionOf [add:isAttributeOf ?plot2].
 
-        ?plotAGG add:isParentOf ?plot1.
-        ?plotAGG add:isParentOf ?plot2.
+        ?plotAGG add:hasTrace ?plot1.
+        ?plotAGG add:hasTrace ?plot2.
         ?plotAGG add:hasAttribute ?addAGG.
         ?addAGG add:isAttributeType cad_atype:PlotAddress.
     	}
@@ -1140,8 +1139,8 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX spif: <http://spinrdf.org/spif#>
 
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/addressattributeversions>{
-    ?attrVAGG add:isRootAttributeVersionOf ?attrV.
-    ?attrV add:hasRootAttributeVersion ?attrVAGG.
+    ?attrVAGG add:hasTrace ?attrV.
+    ?attrV add:isTraceOf ?attrVAGG.
     }}
 WHERE {
     SELECT ?attrVAGG ?attrV
@@ -1188,7 +1187,7 @@ WHERE {{
      SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
 	WHERE { 
         ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
-    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
+    	?attrVAGG add:hasTrace ?attrV.
     	?attrV add:isAttributeVersionOf ?attr.
     	?attr add:isAttributeOf ?plot.
     	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
@@ -1202,15 +1201,15 @@ WHERE {{
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions> {
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/addressattributeversions> {
     ?attrVAGG cad:hasPlotNature ?natureValue.
     }}
 WHERE {{
 	SELECT DISTINCT ?attrVAGG ?natureValue 
 	WHERE { 
 		?attrVAGG a add:AttributeVersion.
-    	?attrVAGG add:isRootAttributeVersionOf ?attrV.
-    	?attrV cad:hasPlotNature ?natureValue.
+    	?attrVAGG add:hasTrace ?attrV.
+    	?attrV cad:hasPlotAddress ?natureValue.
 	}}
 }
 ```
@@ -1221,4 +1220,32 @@ WHERE {{
 
 ### 6.6. Mentions
 ```sparql
+```
+
+## 7. Clean knowledge graph
+### 7.1 Clean tmp properties related to landmarks
+* We can delete *http://rdf.geohistoricaldata.org/tmp/aggregatedlabel*
+* To be shure :
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+DELETE {
+    ?obj add:hasAggregateLabel ?obj2
+    }
+WHERE {
+    ?obj add:hasAggregateLabel ?obj2
+}
+```
+### 7.2 Clean tmp properties and named graphs related to attributes versions
+* Then delete *http://rdf.geohistoricaldata.org/tmp/natureattributeversions*
+* Then delete *http://rdf.geohistoricaldata.org/tmp/addressattributeversions*
+* Then delete *http://rdf.geohistoricaldata.org/tmp/taxpayerattributeversions*
+* Execute the following request : 
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+DELETE {
+    ?obj add:hasMergedValue ?obj2
+    }
+WHERE {
+    ?obj add:hasMergedValue ?obj2
+}
 ```
