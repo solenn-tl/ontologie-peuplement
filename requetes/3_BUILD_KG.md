@@ -1,32 +1,25 @@
 # Process to create the KG : use case of plots
 
-* In this implementation, landmarks are plots.
-
-## 1. Create links between root landmarks and their potential versions in other sources
+## 1. Create links between root landmarks and their versions in other sources
 * Create a relation between a root landmark and all the others landmarks that seem to be versions of this root landmark.
 * In the case of plots :
     * Root landmarks are the plots vectorized from the cadastral index map.
-    * Other landmarks are all the table line of the mutation registers (one line = 1 plot at a moment)
-    * The relation between root landmarks and other landmark versions is created using the ID of the plots. In the case of plots, IDs are not unique (plots keep the same ID in case or split or merge with others plots)
+    * Others versions of landmarks are all the resources built from each table line of the mutation registers (one line = 1 plot version)
+    * The relation between root landmarks and their landmark versions is created using the cadastral number plots. These numbers (=IDs) are not unique  : plots keep the same number in case or split in 2..n plots or merge with others plots.
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
-#Create a relation between the root landmarks and the landmarks that seems to be versions of this landmark
-#CONSTRUCT {?landmarkversion add:hasRootLandmark ?rootLandmark.?rootLandmark add:isRootLandmarkOf ?landmarkversion.}
-
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>{
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{
     ?landmarkversion add:hasRootLandmark ?rootLandmark.
     ?rootLandmark add:isRootLandmarkOf ?landmarkversion.}}
 WHERE {
         GRAPH <http://rdf.geohistoricaldata.org/rootlandmarks> {
-           ?rootLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-        }
-        ?landmarkversion a add:Landmark ; add:isLandmarkType cad_ltype:Plot.
-        ?landmarkversion add:hasAttribute ?attr1.
-        ?attr1 add:isAttributeType cad_atype:PlotMention.
+           ?rootLandmark a add:Landmark ; add:isLandmarkType cad_ltype:Plot.}
+        GRAPH <http://rdf.geohistoricaldata.org/landmarksversions> {
+        ?landmarkversion a add:Landmark ; add:isLandmarkType cad_ltype:Plot.}
         
         ####### Pseudo-identity constraint (ex: plots)
         ?rootLandmark dcterms:identifier ?plotidm.
@@ -85,7 +78,7 @@ PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{
         ?landmarkversion add:hasNextVersion ?landmarkversion2.
-        ?landmarkversion2 add:hasPreviousPrevious ?landmarkversion.}}
+        ?landmarkversion2 add:hasPreviousVersion ?landmarkversion.}}
 WHERE {
     #Get landmarks that have a gap equal to minimal gap
 	GRAPH <http://rdf.geohistoricaldata.org/tmp> {
@@ -130,7 +123,7 @@ PREFIX ofn: <http://www.ontotext.com/sparql/functions/>
 INSERT{ GRAPH <http://rdf.geohistoricaldata.org/order>{
     ?landmarkversion add:hasOverlappingVersion ?landmarkversion2. 
     ?landmarkversion2 add:isOverlappedByVersion ?landmarkversion.}}
-WHERE { GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations> 
+WHERE { GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations> 
     {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
     ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
     ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
@@ -158,7 +151,7 @@ INSERT{ GRAPH <http://rdf.geohistoricaldata.org/order>{
     ?landmarkversion add:isOverlappedByVersion ?landmarkversion2. 
     ?landmarkversion2 add:hasOverlappingVersion ?landmarkversion.}}
 WHERE {
-    GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations> 
+    GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations> 
     {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
     ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
     ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
@@ -185,7 +178,7 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{
     ?landmarkversion add:hasOverlappingVersion ?landmarkversion2. 
     ?landmarkversion2 add:isOverlappedByVersion  ?landmarkversion.}}
 WHERE {
-    GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>  
+    GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>  
     {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
     ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
     ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
@@ -216,7 +209,7 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{
     ?landmarkversion2 add:hasOverlappingVersion ?landmarkversion. 
     ?landmarkversion add:isOverlappedByVersion  ?landmarkversion2.}}
 WHERE {
-    GRAPH <http://rdf.geohistoricaldata.org/rootlandmarksrelations>  
+    GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>  
     {?rootLandmark add:isRootLandmarkOf ?landmarkversion.
     ?rootLandmark add:isRootLandmarkOf ?landmarkversion2.}
     ?landmarkversion add:hasTime/add:hasEnd/add:timeStamp ?end.
@@ -347,95 +340,97 @@ Now, we want to search for the events related to a plot transfert to one propert
 
 *NB : In further steps, we will qualify in further details those changes that also might be a taxpayer change.*
 
-#### 3/4.2.1 Create FolioMutation event and LeaveFolio change
+#### 3/4.2.1 Create FolioMutation event
 
-* Create *LeaveFolio* Change when "Porté à" is another folio than the current one
-* Create a *FolioMutation* Event connected to this *LeaveFolio* Change.
+* Create *AttributeVersionDisappearance* Change
+* Create a *FolioMutation* Event
 
 ```sparql
-PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
-PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
-PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
-PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
-PREFIX time: <http://www.w3.org/2006/time#>
-PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
-
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
     ?change a add:Change.
-    ?change add:dependsOn ?event.
-    ?change add:isChangeType ctype:LeaveFolio.
+    ?change add:isChangeType ctype:AttributeVersionDisappearance.
     ?event a add:Event.
     ?event cad:isEventType cad_etype:FolioMutation.
     ?event add:hasTime[add:timePrecision time:Year; add:timeCalendar time:Gregorian; add:timeStamp ?end].
-    ?plot add:changedBy ?change.
-    ?change add:appliedTo ?plot.
+    ?att add:changedBy ?change.
+    ?change add:appliedTo ?att.
+    ?change add:dependsOn ?event.
+    ?event add:hasChange ?change.
     }}
 WHERE{
-    SELECT ?plot ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change)
-    WHERE {
-        {SELECT ?plot (count(distinct ?nextFolio) AS ?nextFoliosCount)
-    	WHERE {
-        	?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-        	?plot add:hasAttribute [add:hasAttributeVersion/cad:passedTo ?nextFolio].
-        	?nextFolio cad:isSourceType srctype:FolioNonBati.
-    	}
-    GROUP BY ?plot 
-    HAVING(?nextFoliosCount = 1)}
-    
+    SELECT ?plot ?att ?attV ?end (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/", STRUUID())) AS ?event) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change)
+WHERE {
     ?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
-    ?plot add:hasAttribute [add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio].
+    ?plot add:hasAttribute ?att.
+    ?att add:hasAttributeVersion ?attV.
+    ?attV cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio.
     ?folio cad:isSourceType srctype:FolioNonBati.
-    ?plot add:hasAttribute [add:hasAttributeVersion/cad:passedTo ?next].
+    ?attV cad:passedTo ?next.
     ?next cad:isSourceType srctype:FolioNonBati.
     FILTER(!sameTerm(?folio,?next))
-    }}
+    
+        {SELECT ?plot (count(distinct ?nextFolio) AS ?nextFoliosCount)
+    	WHERE {?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+        	?plot add:hasAttribute [add:isAttributeType cad_atype:PlotMention;
+                 add:hasAttributeVersion/cad:passedTo ?nextFolio].
+        	?nextFolio cad:isSourceType srctype:FolioNonBati.}
+    	GROUP BY ?plot 
+    	HAVING(?nextFoliosCount = 1)
+		}
+	}
+}
 ```
-### 3/4.2.2 Create AppendInFolio change
-* Create an *AppendInFolio* Change connected to an already created *FolioMutation* Event.
+### 3/4.2.2 Create AttributeVersionAppearance change linked to a FolioMutation event
+* Create an *AttributeVersionAppearance* Change connected to an already created *FolioMutation* Event.
 
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
-PREFIX cad_spval: <http://rdf.geohistoricaldata.org/id/codes/cadastre/specialCellValue/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/changes_events>{
 	?change2 a add:Change.
-    ?change2 add:isChangeType ctype:AppendInFolio.
+    ?change2 add:isChangeType ctype:AttributeVersionAppearance.
     ?change2 add:dependsOn ?event.
-    ?nextPlot add:changedBy ?change2.
-    ?change2 add:appliedTo ?nextPlot.
+    ?event add:hasChange ?change.
+    ?attNext add:changedBy ?change2.
+    ?change2 add:appliedTo ?attNext.
 }}
-WHERE {SELECT DISTINCT ?nextPlot ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+WHERE {SELECT DISTINCT ?nextPlot ?attNext ?event (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
 	WHERE { 
     {SELECT DISTINCT ?plot ?portea ?folio1 ?end ?change ?event
 	WHERE {?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    	?plot add:changedBy ?change.
-    	?change add:isChangeType ctype:LeaveFolio.
-        ?change add:dependsOn ?event.
-        ?plot add:hasAttribute[add:hasAttributeVersion/cad:passedTo ?portea].
-        ?plot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio1].
-        ?folio1 cad:isSourceType srctype:FolioNonBati.
-        ?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
-        BIND(YEAR(?end) AS ?endY)}}
+           ?plot add:hasAttribute ?att.
+           ?att add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio1.
+           ?att add:hasAttributeVersion/cad:passedTo ?portea.
+           ?att add:isAttributeType cad_atype:PlotMention.
+    	   ?att add:changedBy ?change.
+    	   ?change add:isChangeType ctype:AttributeVersionDisappearance.
+           ?change add:dependsOn ?event.
+           ?event cad:isEventType cad_etype:FolioMutation.
+           ?folio1 cad:isSourceType srctype:FolioNonBati.
+           ?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
+        	BIND(YEAR(?end) AS ?endY)}}
     
-    {SELECT DISTINCT ?nextPlot ?folio ?classementid ?classement ?tirede
+    {SELECT DISTINCT ?nextPlot ?attNext ?folio ?classementid ?classement ?tirede
      WHERE{
         ?nextPlot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:takenFrom ?tirede].
-    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio].
-    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf].
-    	?nextPlot add:hasAttribute[add:hasAttributeVersion/cad:isMentionnedIn ?classement].
+    	?nextPlot add:hasAttribute ?attNext.
+        ?attNext add:isAttributeType cad_atype:PlotMention.
+        ?attNext add:hasAttributeVersion[cad:takenFrom ?tirede;
+    		cad:isMentionnedIn/rico:isOrWasConstituentOf+ ?folio;
+    		cad:isMentionnedIn/rico:isOrWasConstituentOf ?cf;
+            cad:isMentionnedIn ?classement].
     	?classement dcterms:identifier ?classementid.
     
         FILTER NOT EXISTS {?nextPlot add:changedBy ?change3.
-            ?change3 add:isChangeType ctype:LandmarkAppearance.}     
+            ?change3 add:isChangeType ctype:AttributeVersionAppearance.}     
             }
     	}
     
@@ -460,22 +455,26 @@ Using the temporal relations and the events and changes we have created, we prec
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/order>
-    {?plot1 add:hasNextVersionInSRCOrder ?plot2.
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/order>{
+    ?plot1 add:hasNextVersionInSRCOrder ?plot2.
     ?plot2 add:hasPreviousVersionInSRCOrder ?plot1.
     }}
 WHERE { 
 	?plot1 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?plot1 add:changedBy ?change1.
-    ?change1 add:isChangeType ctype:LeaveFolio.
+    ?plot1 add:hasAttribute[add:isAttributeType cad_atype:PlotMention;add:changedBy ?change1].
+    ?change1 add:isChangeType ctype:AttributeVersionDisappearance.
     
     ?plot2 a add:Landmark; add:isLandmarkType cad_ltype:Plot.
-    ?plot2 add:changedBy ?change2.
-    ?change2 add:isChangeType ctype:AppendInFolio.
+    ?plot2 add:hasAttribute[add:isAttributeType cad_atype:PlotMention;add:changedBy ?change2].
+    ?change2 add:isChangeType ctype:AttributeVersionAppearance.
     
     ?change1 add:dependsOn ?event.
     ?change2 add:dependsOn ?event.
+    ?event cad:isEventType cad_etype:FolioMutation
 } 
 ```
 
@@ -494,9 +493,9 @@ PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkTy
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-#CONSTRUCT {?landmarkversion add:hasNextVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:hasPreviousVersionInSRCOrder ?landmarkversion}
-
-INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{ ?landmarkversion add:hasNextVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:hasPreviousVersionInSRCOrder ?landmarkversion}}
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/order>{ 
+    ?landmarkversion add:hasNextVersionInSRCOrder ?landmarkversion2. 
+    ?landmarkversion2 add:hasPreviousVersionInSRCOrder ?landmarkversion}}
 WHERE {
     SELECT ?landmarkversion ?landmarkversion2
     WHERE { 
@@ -540,8 +539,6 @@ PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkTy
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
 
-#CONSTRUCT{ ?landmarkversion add:hasOverlappingVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:isOverlappedByVersionInSRCOrder ?landmarkversion.}
-
 INSERT {GRAPH <http://rdf.geohistoricaldata.org/order>{?landmarkversion add:hasOverlappingVersionInSRCOrder ?landmarkversion2. ?landmarkversion2 add:isOverlappedByVersionInSRCOrder ?landmarkversion.}}
 WHERE {
 	SELECT ?landmarkversion ?landmarkversion2 
@@ -581,6 +578,10 @@ WHERE {
 ### 5.2.1 Links between landmark versions of plots created after the cadastre creation
 First, we create the links between landmark version of plots created after the creation of the first matrice.
 ```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
@@ -630,7 +631,7 @@ WHERE {
     }
     FILTER(sameTerm(?matrice,source:94_Gentilly_MAT_B_NB_1813)||sameTerm(?matrice,source:94_Gentilly_MAT_NB_1848))
     FILTER(!sameTerm(?plot,?landmarkversion))
-} 
+}
 ```
 
 ```sparql
@@ -689,33 +690,8 @@ WHERE {
 ```
 
 ### 5.3 Links between property accounts and landmarks versions that are discribed in several mutation registers
-#### 5.3.1 Create links between similar taxpayers
-*NB : This step should be upgraded with more precise string comparison tools.*
-```sparql
-PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX jsfn: <http://www.ontotext.com/js#>
-PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-#CONSTRUCT {?taxpayer add:isSimilarTo ?taxpayer2 ?taxpayer2 add:isSimilarTo ?taxpayer.}
-
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/taxpayerskeys>{
-    ?taxpayer add:isSimilarTo ?taxpayer2.
-    ?taxpayer2 add:isSimilarTo ?taxpayer.
-}}
-WHERE {
-    ?taxpayer a cad:Taxpayer.
-    ?taxpayer skos:hiddenLabel ?hiddenLabel.
-
-    ?taxpayer2 a cad:Taxpayer.
-    ?taxpayer2 skos:hiddenLabel ?hiddenLabel2.
-    
-    BIND(jsfn:normalizedLevenshtein(?hiddenLabel,?hiddenLabel2) AS ?lev)
-    FILTER(!sameTerm(?taxpayer,?taxpayer2))
-    FILTER(?lev > 0.8)
-}
-```
-#### 5.3.2 Create links between property accounts from several mutation registers when they have the same taxpayer
+#### 5.3.1 Create links between property accounts from several mutation registers when they have the same taxpayer
 * Create link if taxpayers have a similarity link
 * *NB : We could had more constraints in future tests.*
 ```sparql
@@ -726,11 +702,11 @@ PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX source: <http://rdf.geohistoricaldata.org/id/source/>
 PREFIX srctype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/sourceType/>
 
-# CONSTRUCT {?cf add:isSimilarTo ?cf2.?cf2 add:isSimilarTo ?cf}
+# CONSTRUCT {?cf skos:exactMatch ?cf2.?cf2 skos:exactMatch ?cf}
 
-INSERT{GRAPH <http://rdf.geohistoricaldata.org/equivalentcf>{
-    ?cf add:isSimilarTo ?cf2.
-    ?cf2 add:isSimilarTo ?cf}}
+INSERT{GRAPH <http://rdf.geohistoricaldata.org/cfmatching>{
+    ?cf skos:exactMatch ?cf2.
+    ?cf2 skos:exactMatch ?cf.}}
 WHERE { 
 	?taxpayer a cad:Taxpayer.
     ?taxpayer cad:taxpayerLabel ?label.
@@ -748,10 +724,10 @@ WHERE {
     ?mutation2 rico:isOrWasConstituentOf+/rico:isOrWasIncludedIn ?matrice2.
     FILTER(?matrice2 = source:94_Gentilly_MAT_NB_1836)
     
-    ?taxpayer add:isSimilarTo ?taxpayer2
+    ?taxpayer skos:exactMatch ?taxpayer2
 }
 ```
-#### 5.3.3 Create links between landmarks versions from several mutation registers
+#### 5.3.2 Create links between landmarks versions from several mutation registers
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
@@ -787,15 +763,15 @@ WHERE {
     ?taxpayer2 cad:isTaxpayerOf/add:isMadeEffectiveBy [add:isChangeType ctype:AttributeVersionAppearance].
     
     FILTER(sameTerm(?matrice2,source:94_Gentilly_MAT_NB_1836))
-    ?taxpayer add:isSimilarTo ?taxpayer2.
+    ?taxpayer skos:exactMatch ?taxpayer2.
     ?plot add:hasNextVersion ?plot2.
 }
 ```
 
 ### 5.4 Create an aggregate landmark for each group of sibling landmarks versions
 #### 5.4.1 Create a unique label between landmarks that are siblings
-* Landmarks with the same label will be in the same aggregate.
-* One landmark version might be in one or more aggregate.
+* Landmarks with the same label will be traces of the same landmark aggregation.
+* One landmark aggregation have at least one trace.
 
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
@@ -865,23 +841,7 @@ WHERE {
     BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)
     ?landmark dcterms:identifier ?id.}
 ```
-
-## 6. Inference of attributes and attributes versions of landmarks (aggregations)
-### 6.1 Initialised the attributes of the aggregations using the list of attributes of the landmarks versions
-```sparql
-PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
-
-INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{ 
-    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ].  
-}} WHERE {{ 
-    SELECT DISTINCT ?aggLandmark ?attrType 
-    WHERE { ?aggLandmark add:hasTrace ?landmark .
-            ?landmark add:hasAttribute ?attr .
-            ?attr add:isAttributeType ?attrType .}}
-}
-```
-
-### 6.2 Link landmarks versions aggregation with root landmark
+### 5.5 Link landmarks versions aggregation with root landmark
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
@@ -893,13 +853,31 @@ INSERT { GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations> {
     }}
 WHERE {
     SELECT distinct ?aggLandmark ?root WHERE {
-        ?aggLandmark a add:Landmark .  
+        ?aggLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot .  
         ?aggLandmark add:hasTrace ?otherLandmark .  
         ?otherLandmark add:hasRootLandmark ?root . 
     }
     GROUP BY ?aggLandmark ?root}
 ```
-### 6.3 Create aggregate attribute versions for PlotNature Attribute for each landmark aggregation
+
+## 6. Inference of attributes and attributes versions of landmarks (aggregations)
+### 6.1 Initialised the attributes of the aggregations using the list of attributes of the landmarks versions
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{ 
+    ?aggLandmark add:hasAttribute [a add:Attribute ; add:isAttributeType ?attrType ].  
+}} WHERE {{ 
+    SELECT DISTINCT ?aggLandmark ?attrType 
+    WHERE { GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{ 
+        ?aggLandmark a add:Landmark; add:isLandmarkType cad_ltype:Plot.}
+        ?aggLandmark add:hasTrace ?landmark .
+        ?landmark add:hasAttribute ?attr .
+        ?attr add:isAttributeType ?attrType .}}
+}
+```
+
+### 6.2 Create aggregate attribute versions for PlotNature Attribute for each landmark aggregation
 * In this step, we want to build aggregated attributes versions that are equals for each landmark aggregation.
 
 #### 6.3.1 Match PlotNature attribute versions that should be aggregated
@@ -988,7 +966,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/natureattributeversions>{
 WHERE {
     SELECT ?attrVAGG ?attrV
     WHERE {
-         ?attrV a add:AttributeVersion.
+         ?attrV a add:AttributeVersion; add:isAttributeVersionOf[add:isAttributeType cad_atype:PlotNature].
          FILTER(STR(?attrV) = ?strbn)
         {
         SELECT ?attrVAGG ?strbn
@@ -1036,6 +1014,7 @@ WHERE {{
     	?attrVAGG add:hasTrace ?attrV.
     	?attrV add:isAttributeVersionOf ?attr.
     	?attr add:isAttributeOf ?plot.
+        ?attr add:isAttributeType cad_atype:PlotNature.
     	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
     	?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
 		}
@@ -1145,7 +1124,7 @@ INSERT {GRAPH <http://rdf.geohistoricaldata.org/addressattributeversions>{
 WHERE {
     SELECT ?attrVAGG ?attrV
     WHERE {
-         ?attrV a add:AttributeVersion.
+        ?attrV a add:AttributeVersion; add:isAttributeVersionOf[add:isAttributeType cad_atype:PlotAddress].
          FILTER(STR(?attrV) = ?strbn)
         {
         SELECT ?attrVAGG ?strbn
@@ -1155,6 +1134,7 @@ WHERE {
         }}
     }
 }
+
 ```
 #### 6.4.4 Create events and changes of each PlotAddress attribute version
 ```sparql
@@ -1189,6 +1169,7 @@ WHERE {{
         ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
     	?attrVAGG add:hasTrace ?attrV.
     	?attrV add:isAttributeVersionOf ?attr.
+        ?attr add:isAttributeType cad_atype:PlotAddress.
     	?attr add:isAttributeOf ?plot.
     	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
     	?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
@@ -1196,36 +1177,319 @@ WHERE {{
     GROUP BY ?attrVAGG ?plotAGG}
 }
 ```
-#### 6.3.5 Add cad:hasPlotAddress to aggregated attributeversion
+#### 6.4.5 Add cad:hasPlotAddress to aggregated attributeversion
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
 
 INSERT { GRAPH <http://rdf.geohistoricaldata.org/addressattributeversions> {
-    ?attrVAGG cad:hasPlotNature ?natureValue.
+    ?attrVAGG cad:hasPlotAddress ?addValue.
     }}
 WHERE {{
-	SELECT DISTINCT ?attrVAGG ?natureValue 
+	SELECT DISTINCT ?attrVAGG ?addValue 
 	WHERE { 
 		?attrVAGG a add:AttributeVersion.
     	?attrVAGG add:hasTrace ?attrV.
-    	?attrV cad:hasPlotAddress ?natureValue.
+    	?attrV cad:hasPlotAddress ?addValue.
 	}}
 }
 ```
 
 ### 6.5. Taxpayers
+#### 6.5.1 Match PlotTaxpayer attribute versions that have the same value
 ```sparql
-```
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
-### 6.6. Mentions
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/taxpayerattributeversions> {
+    ?taxV1 cad:matchWithVersion ?taxV1.
+    ?taxV1 cad:matchWithVersion ?taxV2.
+    ?taxV2 cad:matchWithVersion ?taxV1.
+    ?taxV2 cad:matchWithVersion ?taxV2.
+    }}
+WHERE {
+    ?plot1 (add:hasNextVersion|add:hasOverlappingVersion|add:isOverlappedByVersion) ?plot2.
+    ?plotAGG add:hasTrace ?plot1.
+    ?plotAGG add:hasTrace ?plot2.
+
+    ?plot1 add:hasAttribute ?tax1.
+    ?tax1 add:isAttributeType cad_atype:PlotTaxpayer.
+    ?tax1 add:hasAttributeVersion ?taxV1.
+    ?taxV1 cad:hasTaxpayer ?taxV1value.
+
+    ?plot2 add:hasAttribute ?tax2.
+    ?tax2 add:isAttributeType cad_atype:PlotTaxpayer.
+    ?tax2 add:hasAttributeVersion ?taxV2.
+    ?taxV2 cad:hasTaxpayer ?taxV2value.
+
+    # Comparison of the nature attributes
+    BIND(IF((?taxV2value = ?taxV1value), true, false) AS ?areEqual)
+    FILTER(?areEqual = True)
+}
+```
 ```sparql
-```
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/taxpayerattributeversions> {
+    ?taxV1 cad:matchWithVersion ?taxV1.
+    }}
+WHERE {
+    ?plotAGG add:hasTrace ?plot1.
+    ?plot1 add:hasAttribute ?tax1.
+    ?tax1 add:isAttributeType cad_atype:PlotTaxpayer.
+    ?tax1 add:hasAttributeVersion ?taxV1.
+}
+```
+#### 6.5.2 Create the aggregated versions of PlotTaxpayer attribute
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/taxpayerattributeversions>{ 
+    ?taxAGG add:hasAttributeVersion [ a add:AttributeVersion;
+                                         add:hasMergedValue ?mergedValue].
+    }}
+WHERE {SELECT DISTINCT ?plotAGG ?taxAGG (GROUP_CONCAT(?taxV2) AS ?mergedValue)
+	WHERE {
+        ?taxV1 a add:AttributeVersion; 
+               cad:matchWithVersion+ ?taxV2;
+               add:isAttributeVersionOf [add:isAttributeOf ?plot1].
+        ?taxV2 add:isAttributeVersionOf [add:isAttributeOf ?plot2].
+
+        ?plotAGG add:hasTrace ?plot1.
+        ?plotAGG add:hasTrace ?plot2.
+        ?plotAGG add:hasAttribute ?taxAGG.
+        ?taxAGG add:isAttributeType cad_atype:PlotTaxpayer.
+    	}
+    	GROUP BY ?plotAGG ?taxV1 ?taxAGG 
+    	ORDER BY ?plotAGG ?mergedValue}
+```
+#### 6.4.3 Cast add:hasMergedValue elements as URIs
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX spif: <http://spinrdf.org/spif#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/taxpayerattributeversions>{
+    ?attrVAGG add:hasTrace ?attrV.
+    ?attrV add:isTraceOf ?attrVAGG.
+    }}
+WHERE {
+    SELECT ?attrVAGG ?attrV
+    WHERE {
+        ?attrV a add:AttributeVersion; add:isAttributeVersionOf[add:isAttributeType cad_atype:PlotTaxpayer].
+         FILTER(STR(?attrV) = ?strbn)
+        {
+        SELECT ?attrVAGG ?strbn
+        WHERE { 
+            ?attrVAGG add:hasMergedValue ?concatstrbn .
+            ?strbn spif:split(?concatstrbn " ").
+        }}
+    }
+}
+```
+#### 6.5.4 Create events and changes of each PlotTaxpayer attribute version
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/taxpayerattributeversions> {
+    ?event1 a add:Event.
+    ?event1 cad:isEventType cad_etype:PlotTaxpayerEvent.
+    ?event2 a add:Event.
+    ?event2 cad:isEventType cad_etype:PlotTaxpayerEvent.
+    ?change1 a add:Change.
+    ?change1 add:isChangeType ctype:AttributeVersionAppearance.
+    ?change2 a add:Change.
+	?change2 add:isChangeType ctype:AttributeVersionDisappearance.
+    ?event1 add:hasTime[add:timeStamp ?minBeginning; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?event2 add:hasTime[add:timeStamp ?maxEnd; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?change1 add:dependsOn ?event1.
+    ?change2 add:dependsOn ?event2.
+    ?change1 add:appliedTo ?attrVAGG.
+    ?change2 add:appliedTo ?attrVAGG.
+    ?attrVAGG add:changedBy ?change1.
+    ?attrVAGG add:changedBy ?change2.
+}}
+WHERE {{
+     SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+	WHERE { 
+        ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
+    	?attrVAGG add:hasTrace ?attrV.
+    	?attrV add:isAttributeVersionOf ?attr.
+        ?attr add:isAttributeType cad_atype:PlotTaxpayer.
+    	?attr add:isAttributeOf ?plot.
+        ?attr add:changedBy ?change1.
+        ?change1 add:dependsOn ?event1.
+        ?change1 add:isChangeType ctype:AttributeVersionAppearance.
+    	?event1 add:hasTime/add:timeStamp ?beginning.
+        ?attr add:changedBy ?change2.
+        ?change2 add:isChangeType ctype:AttributeVersionDisappearance.
+        ?change2 add:dependsOn ?event2.
+    	?event2 add:hasTime/add:timeStamp ?end.
+		}
+    GROUP BY ?attrVAGG ?plotAGG}
+}
+```
+#### 6.5.5 Add *cad:hasTaxpayer* to aggregated attributeversion
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/taxpayerattributeversions> {
+    ?attrVAGG cad:hasTaxpayer ?addValue.
+    }}
+WHERE {{
+	SELECT DISTINCT ?attrVAGG ?addValue 
+	WHERE { 
+		?attrVAGG a add:AttributeVersion; add:isAttributeVersionOf[add:isAttributeType cad_atype:PlotTaxpayer].
+    	?attrVAGG add:hasTrace ?attrV.
+    	?attrV cad:hasTaxpayer ?addValue.
+	}}
+}
+```
+### 6.6. *cad:PlotMention*
+#### 6.6.1 Create *cad:matchWithVersion* links between same attribute version *PlotMention* attribute
+* Should create the same number of links that of landmarks versions.
+```sparql
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/tmp/mentionattributeversions> {   
+    ?mentionV1 cad:matchWithVersion ?mentionV1.
+}}
+WHERE {
+    ?plotAGG add:hasTrace ?plot1.
+    ?plot1 add:hasAttribute ?mention1.
+    ?mention1 add:isAttributeType cad_atype:PlotMention.
+    ?mention1 add:hasAttributeVersion ?mentionV1.
+    ?mentionV1 cad:isMentionnedIn ?mentionV1value.
+}
+```
+#### 6.6.2 Create the aggregated versions of PlotMention attribute
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/mentionattributeversions>{ 
+    ?mentionAGG add:hasAttributeVersion [ a add:AttributeVersion;
+                                         add:hasMergedValue ?mergedValue].
+    }}
+WHERE {SELECT DISTINCT ?plotAGG ?mentionAGG (GROUP_CONCAT(?mentionV2) AS ?mergedValue)
+	WHERE {
+        ?mentionV1 a add:AttributeVersion; 
+               cad:matchWithVersion+ ?mentionV2;
+               add:isAttributeVersionOf [add:isAttributeOf ?plot1].
+        ?mentionV2 add:isAttributeVersionOf [add:isAttributeOf ?plot2].
+
+        ?plotAGG add:hasTrace ?plot1.
+        ?plotAGG add:hasTrace ?plot2.
+        ?plotAGG add:hasAttribute ?mentionAGG.
+        ?mentionAGG add:isAttributeType cad_atype:PlotMention.
+    	}
+    	GROUP BY ?plotAGG ?mentionV1 ?mentionAGG 
+    	ORDER BY ?plotAGG ?mergedValue}
+```
+#### 6.6.3 Cast add:hasMergedValue elements as URIs
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX spif: <http://spinrdf.org/spif#>
+
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/mentionattributeversions>{
+    ?attrVAGG add:hasTrace ?attrV.
+    ?attrV add:isTraceOf ?attrVAGG.
+    }}
+WHERE {
+    SELECT ?attrVAGG ?attrV
+    WHERE {
+        ?attrV a add:AttributeVersion; add:isAttributeVersionOf[add:isAttributeType cad_atype:PlotMention].
+         FILTER(STR(?attrV) = ?strbn)
+        {
+        SELECT ?attrVAGG ?strbn
+        WHERE { 
+            ?attrVAGG add:hasMergedValue ?concatstrbn .
+            ?strbn spif:split(?concatstrbn " ").
+        }}
+    }
+}
+```
+#### 6.6.4 Create events and changes of each *PlotMention* attribute version
+```sparql
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX cad_etype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/eventType/>
+PREFIX ctype: <http://rdf.geohistoricaldata.org/id/codes/address/changeType/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/mentionattributeversions> {
+    ?event1 a add:Event.
+    ?event1 cad:isEventType cad_etype:PlotMentionEvent.
+    ?event2 a add:Event.
+    ?event2 cad:isEventType cad_etype:PlotMentionEvent.
+    ?change1 a add:Change.
+    ?change1 add:isChangeType ctype:AttributeVersionAppearance.
+    ?change2 a add:Change.
+	?change2 add:isChangeType ctype:AttributeVersionDisappearance.
+    ?event1 add:hasTime[add:timeStamp ?minBeginning; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?event2 add:hasTime[add:timeStamp ?maxEnd; add:timeCalendar time:Gregorian; add:timePrecision time:Year].
+    ?change1 add:dependsOn ?event1.
+    ?change2 add:dependsOn ?event2.
+    ?change1 add:appliedTo ?attrVAGG.
+    ?change2 add:appliedTo ?attrVAGG.
+    ?attrVAGG add:changedBy ?change1.
+    ?attrVAGG add:changedBy ?change2.
+}}
+WHERE {{
+     SELECT ?plotAGG ?attrVAGG (MIN(?beginning) AS ?minBeginning) (MAX(?end) AS ?maxEnd) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/event/",STRUUID())) AS ?event2) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change1) (IRI(CONCAT("http://rdf.geohistoricaldata.org/id/change/",STRUUID())) AS ?change2)
+	WHERE { 
+        ?attrVAGG add:isAttributeVersionOf/add:isAttributeOf ?plotAGG.
+    	?attrVAGG add:hasTrace ?attrV.
+    	?attrV add:isAttributeVersionOf ?attr.
+        ?attr add:isAttributeType cad_atype:PlotMention.
+    	?attr add:isAttributeOf ?plot.
+    	?plot add:hasTime/add:hasBeginning/add:timeStamp ?beginning.
+    	?plot add:hasTime/add:hasEnd/add:timeStamp ?end.
+		}
+    GROUP BY ?attrVAGG ?plotAGG}
+}
+```
+#### 6.5.5 Add *cad:isMentionnedIn*, *cad:takenFrom*, *cad:passedTo* to aggregated *PlotMention* attribute version
+```sparql
+PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_atype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/attributeType/>
+
+INSERT { GRAPH <http://rdf.geohistoricaldata.org/mentionattributeversions> {
+    ?attrVAGG cad:isMentionnedIn ?mention.
+    ?attrVAGG cad:takenFrom ?tirede.
+    ?attrVAGG cad:passedTo ?portea.
+}}
+WHERE {{
+	SELECT DISTINCT ?attrVAGG ?mention ?tirede ?portea
+	WHERE { 
+		?attrVAGG a add:AttributeVersion; add:isAttributeVersionOf[add:isAttributeType cad_atype:PlotMention].
+    	?attrVAGG add:hasTrace ?attrV.
+    	?attrV cad:isMentionnedIn ?mention.
+        ?attrV cad:takenFrom ?tirede.
+        ?attrV cad:passedTo ?portea.
+	}}
+}
+```
 ## 7. Clean knowledge graph
-### 7.1 Clean tmp properties related to landmarks
-* We can delete *http://rdf.geohistoricaldata.org/tmp/aggregatedlabel*
-* To be shure :
+### 7.1 Delete tmp named graphs related to attributes versions
+* We can delete all the *http://rdf.geohistoricaldata.org/tmp/XXXXX* named graphs :
+    * *http://rdf.geohistoricaldata.org/tmp/natureattributeversions*
+    * *http://rdf.geohistoricaldata.org/tmp/addressattributeversions*
+    * *http://rdf.geohistoricaldata.org/tmp/taxpayerattributeversions*
+    * *etc.*
+
+### 7.2 Clean tmp properties related to landmarks
+* To be shure
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 DELETE {
@@ -1235,10 +1499,6 @@ WHERE {
     ?obj add:hasAggregateLabel ?obj2
 }
 ```
-### 7.2 Clean tmp properties and named graphs related to attributes versions
-* Then delete *http://rdf.geohistoricaldata.org/tmp/natureattributeversions*
-* Then delete *http://rdf.geohistoricaldata.org/tmp/addressattributeversions*
-* Then delete *http://rdf.geohistoricaldata.org/tmp/taxpayerattributeversions*
 * Execute the following request : 
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>

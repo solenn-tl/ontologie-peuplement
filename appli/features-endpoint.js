@@ -11,6 +11,7 @@ var query1_geojson = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#
 "add:hasAttribute[add:hasAttributeVersion [add:versionValue ?geom_wkt]]. "+
 "BIND(IF(STRSTARTS(?id, 'B'),'1810','1848') AS ?cadastreVersionId)"//where staement is not closed
 
+//for a clicked geometry, return the attributes
 var query2_data = 
 "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#> " +
 "PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/> " +
@@ -21,12 +22,12 @@ var query2_data =
 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> " +
 "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> " +
 "SELECT ?root ?geom ?plot (GROUP_CONCAT(distinct ?id) AS ?ids) (GROUP_CONCAT(distinct ?natureValue; separator=', ') AS ?groupNatureValue) ?t1 ?t2 (count(distinct ?children) AS ?rows) WHERE { " +
-"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation> { " +
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations> { " +
 "?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot. " +
 "?plot dcterms:identifier ?id. " +
 "?plot add:hasRootLandmark ?root. " +
 "} " +
-"?plot add:isParentOf ?children. " +
+"?plot add:hasTrace ?children. " +
 "?plot add:hasAttribute ?nature. " +
 "?nature add:isAttributeType cad_atype:PlotNature. " +
 "?nature add:hasAttributeVersion ?natureV. " +
@@ -40,10 +41,11 @@ var query2_data =
 "?change2 add:dependsOn ?event2. " +
 "?event2 add:hasTime/add:timeStamp ?t2. "
 
+
 var query3_1_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>" +
 "PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>" +
 "select (count(distinct ?plot) AS ?numplot) where { " +
-"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{" +
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{" +
 "?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot." +
 "}}"
 
@@ -57,7 +59,7 @@ var query3_2_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#
 var query3_3_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>" +
 "PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>" +
 "select (count(distinct ?plot) AS ?numplot) where { " +
-"GRAPH <http://rdf.geohistoricaldata.org/relatedlandmarks>{" +
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksversions>{" +
 "?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot." +
 "}}"
 
@@ -77,12 +79,12 @@ var query3_6_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#
 "PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/> " + 
 "PREFIX dcterms: <http://purl.org/dc/terms/> " + 
 "SELECT distinct ?plotid (count(?plot) AS ?numplot) WHERE {  " + 
-"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ " + 
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{ " + 
 "?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot. " + 
 "?plot dcterms:identifier ?id. " + 
 "BIND(IF(STRENDS(STR(?id), 'p'), SUBSTR(STR(?id), 1, STRLEN(STR(?id)) - 1), ?id) AS ?plotid)}} " + 
 "GROUP BY ?plotid " + 
-"ORDER By ?numplot ?plotid "
+"ORDER By ?numplot ?plotid"
 
 var query3_7_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#> " +
 "PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/> " +
@@ -90,7 +92,7 @@ var query3_7_stats = "PREFIX add: <http://rdf.geohistoricaldata.org/def/address#
 "PREFIX cad: <http://rdf.geohistoricaldata.org/def/cadastre#> " +
 "SELECT ?plotid ?numplot " +
 "WHERE {SELECT distinct ?plot ?plotid (count(distinct ?child) AS ?numplot) WHERE {  " +
-"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregation>{ " +
+"GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{ " +
 "?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot. " +
 "?plot dcterms:identifier ?id. " +
 "?plot add:isParentOf ?child. " +
