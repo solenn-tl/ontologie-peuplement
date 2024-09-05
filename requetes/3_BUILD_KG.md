@@ -841,7 +841,8 @@ WHERE {
     BIND(URI(CONCAT('http://rdf.geohistoricaldata.org/id/landmark/AGG_', STRUUID())) AS ?aggLandmark)
     ?landmark dcterms:identifier ?id.}
 ```
-### 5.5 Link landmarks versions aggregation with root landmark
+### 5.5 Link landmarks versions aggregation with their root landmark
+* Create the link
 ```sparql
 PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
 
@@ -859,7 +860,29 @@ WHERE {
     }
     GROUP BY ?aggLandmark ?root}
 ```
+* Create landmark relation with cadastral section
+```sparql
+PREFIX lrtype: <http://rdf.geohistoricaldata.org/id/codes/address/landmarkRelationType/>
+PREFIX add: <http://rdf.geohistoricaldata.org/def/address#>
+PREFIX cad_ltype: <http://rdf.geohistoricaldata.org/id/codes/cadastre/landmarkType/>
 
+INSERT {GRAPH <http://rdf.geohistoricaldata.org/landmarksaggregations>{
+    ?lrAGG a add:LandmarkRelation.
+    ?lrAGG add:isLandmarkRelationType lrtype:Within.
+    ?lrAGG add:locatum ?plotAGG.
+    ?lrAGG add:relatum ?relatum
+    }}
+WHERE {SELECT ?plot ?plotAGG ?relatum (UUID() AS ?lrAGG)
+	WHERE {
+    graph <http://rdf.geohistoricaldata.org/rootlandmarks> {
+        ?plot a add:Landmark; add:isLandmarkType cad_ltype:Plot.
+		?lr add:locatum ?plot.
+        ?lr add:relatum ?relatum.}
+    graph <http://rdf.geohistoricaldata.org/landmarksaggregations> {
+        ?plotAGG a add:Landmark; add:isLandmarkType cad_ltype:Plot.	}
+	?plot add:isRootLandmarkOf ?plotAGG
+    }}
+```
 ## 6. Inference of attributes and attributes versions of landmarks (aggregations)
 ### 6.1 Initialised the attributes of the aggregations using the list of attributes of the landmarks versions
 ```sparql
