@@ -62,7 +62,7 @@ INSERT DATA {
 }
 ```
 
-## String similarity bigrams
+## [NOT USED] String similarity bigrams
 ```sparql
 PREFIX extfn:<http://www.ontotext.com/js#>
 
